@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupAgentic — Unified AI Toolkit</title>
+    <meta name="description" content="SupAgentic — 20 powerful open-source AI tools unified under one roof. Agent orchestration, LLM security, fine-tuning, image generation, and more.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg-primary: #0a0a0f; --bg-secondary: #12121a; --bg-card: #16161f; --bg-card-hover: #1c1c28;
+            --border: rgba(255,255,255,0.06); --border-hover: rgba(255,255,255,0.12);
+            --text-primary: #f0f0f5; --text-secondary: #8888a0; --text-muted: #5a5a72;
+            --radius: 16px; --radius-sm: 10px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; overflow-x: hidden; }
+
+        .bg-effects { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+        .bg-orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.3; animation: orbFloat 20s ease-in-out infinite; }
+        .bg-orb:nth-child(1) { width: 600px; height: 600px; background: #6366f1; top: -200px; left: -100px; }
+        .bg-orb:nth-child(2) { width: 500px; height: 500px; background: #ec4899; bottom: -150px; right: -100px; animation-delay: -7s; }
+        .bg-orb:nth-child(3) { width: 400px; height: 400px; background: #14b8a6; top: 40%; left: 50%; animation-delay: -14s; }
+        @keyframes orbFloat { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(30px,-40px) scale(1.05); } 66% { transform: translate(-20px,20px) scale(0.95); } }
+
+        .container { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 40px 24px 80px; }
+
+        .header { text-align: center; margin-bottom: 56px; padding-top: 40px; }
+        .header-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.2); padding: 6px 16px; border-radius: 100px; font-size: 13px; font-weight: 500; color: #6366f1; margin-bottom: 24px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .header-badge .pulse { width: 8px; height: 8px; background: #14b8a6; border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%,100% { opacity:1; transform: scale(1); } 50% { opacity:.5; transform: scale(0.8); } }
+        .header h1 { font-size: clamp(48px,8vw,80px); font-weight: 900; letter-spacing: -2px; line-height: 1; background: linear-gradient(135deg,#fff 0%,#6366f1 50%,#ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 20px; }
+        .header p { font-size: 18px; color: var(--text-secondary); max-width: 640px; margin: 0 auto; line-height: 1.6; font-weight: 300; }
+
+        .stats-bar { display: flex; justify-content: center; gap: 48px; margin-bottom: 48px; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 32px; font-weight: 800; font-family: 'JetBrains Mono', monospace; background: linear-gradient(135deg,#6366f1,#8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; font-weight: 500; }
+
+        /* Category sections */
+        .category-section { margin-bottom: 48px; }
+        .category-title { font-size: 16px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; padding-left: 4px; display: flex; align-items: center; gap: 10px; }
+        .category-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; transition: var(--transition); position: relative; overflow: hidden; cursor: pointer; opacity: 0; transform: translateY(16px); animation: cardIn 0.4s ease forwards; }
+        .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; opacity: 0; transition: var(--transition); }
+        .card:hover { background: var(--bg-card-hover); border-color: var(--border-hover); transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,0,0,0.3); }
+        .card:hover::before { opacity: 1; }
+        @keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
+
+        .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .card-icon { width: 42px; height: 42px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+        .card-title { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+        .card-category { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-top: 2px; }
+        .card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px; }
+        .card-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .card-tag { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text-muted); background: rgba(255,255,255,0.04); padding: 3px 8px; border-radius: 5px; border: 1px solid var(--border); }
+        .card-link { font-size: 11px; font-weight: 600; color: var(--text-secondary); text-decoration: none; display: flex; align-items: center; gap: 4px; margin-left: auto; transition: var(--transition); }
+        .card-link:hover { color: var(--text-primary); }
+        .card-link svg { width: 12px; height: 12px; }
+
+        /* Color themes per card */
+        .card[data-c="indigo"] .card-icon { background: rgba(99,102,241,0.12); color: #6366f1; }
+        .card[data-c="indigo"]::before { background: linear-gradient(90deg,#6366f1,#818cf8); }
+        .card[data-c="violet"] .card-icon { background: rgba(139,92,246,0.12); color: #8b5cf6; }
+        .card[data-c="violet"]::before { background: linear-gradient(90deg,#8b5cf6,#a78bfa); }
+        .card[data-c="pink"] .card-icon { background: rgba(236,72,153,0.12); color: #ec4899; }
+        .card[data-c="pink"]::before { background: linear-gradient(90deg,#ec4899,#f472b6); }
+        .card[data-c="teal"] .card-icon { background: rgba(20,184,166,0.12); color: #14b8a6; }
+        .card[data-c="teal"]::before { background: linear-gradient(90deg,#14b8a6,#2dd4bf); }
+        .card[data-c="amber"] .card-icon { background: rgba(245,158,11,0.12); color: #f59e0b; }
+        .card[data-c="amber"]::before { background: linear-gradient(90deg,#f59e0b,#fbbf24); }
+        .card[data-c="red"] .card-icon { background: rgba(239,68,68,0.12); color: #ef4444; }
+        .card[data-c="red"]::before { background: linear-gradient(90deg,#ef4444,#f87171); }
+        .card[data-c="blue"] .card-icon { background: rgba(59,130,246,0.12); color: #3b82f6; }
+        .card[data-c="blue"]::before { background: linear-gradient(90deg,#3b82f6,#60a5fa); }
+        .card[data-c="emerald"] .card-icon { background: rgba(16,185,129,0.12); color: #10b981; }
+        .card[data-c="emerald"]::before { background: linear-gradient(90deg,#10b981,#34d399); }
+        .card[data-c="cyan"] .card-icon { background: rgba(6,182,212,0.12); color: #06b6d4; }
+        .card[data-c="cyan"]::before { background: linear-gradient(90deg,#06b6d4,#22d3ee); }
+        .card[data-c="rose"] .card-icon { background: rgba(244,63,94,0.12); color: #f43f5e; }
+        .card[data-c="rose"]::before { background: linear-gradient(90deg,#f43f5e,#fb7185); }
+        .card[data-c="lime"] .card-icon { background: rgba(132,204,22,0.12); color: #84cc16; }
+        .card[data-c="lime"]::before { background: linear-gradient(90deg,#84cc16,#a3e635); }
+        .card[data-c="sky"] .card-icon { background: rgba(14,165,233,0.12); color: #0ea5e9; }
+        .card[data-c="sky"]::before { background: linear-gradient(90deg,#0ea5e9,#38bdf8); }
+
+        /* Prompt Library */
+        .prompts-section { margin-top: 16px; }
+        .prompt-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; transition: var(--transition); }
+        .prompt-card:hover { background: var(--bg-card-hover); border-color: var(--border-hover); }
+        .prompt-header { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+        .prompt-icon { font-size: 28px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; background: rgba(245,158,11,0.12); border-radius: var(--radius-sm); }
+        .prompt-name { font-size: 18px; font-weight: 700; }
+        .prompt-file { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text-muted); margin-top: 2px; }
+        .prompt-body { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px; }
+        .prompt-tags { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+        .footer { text-align: center; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--border); }
+        .footer p { font-size: 13px; color: var(--text-muted); }
+        .footer a { color: #6366f1; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 480px) { .cards-grid { grid-template-columns: 1fr; } .stats-bar { gap: 24px; } }
+    </style>
+</head>
+<body>
+    <div class="bg-effects"><div class="bg-orb"></div><div class="bg-orb"></div><div class="bg-orb"></div></div>
+
+    <div class="container">
+        <header class="header">
+            <div class="header-badge"><span class="pulse"></span> Open Source AI Arsenal</div>
+            <h1>SupAgentic</h1>
+            <p>20 powerful open-source AI tools — unified under one roof. From agent orchestration to image generation to LLM training from scratch.</p>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat"><div class="stat-value">20</div><div class="stat-label">Tools</div></div>
+            <div class="stat"><div class="stat-value">10</div><div class="stat-label">Categories</div></div>
+            <div class="stat"><div class="stat-value">5</div><div class="stat-label">Languages</div></div>
+            <div class="stat"><div class="stat-value">∞</div><div class="stat-label">Possibilities</div></div>
+        </div>
+
+        <!-- ═══ AGENT FRAMEWORKS ═══ -->
+        <div class="category-section">
+            <div class="category-title">🤖 Agent Frameworks</div>
+            <div class="cards-grid">
+                <div class="card" data-c="indigo" onclick="window.open('https://github.com/msitarzewski/agency-agents','_blank')">
+                    <div class="card-header"><div class="card-icon">🤖</div><div><div class="card-title">The Agency</div><div class="card-category">Agent Personalities</div></div></div>
+                    <div class="card-desc">Personality-driven AI agents — Frontend Dev, Backend Architect, Growth Hacker & more. Designed to act like a real dev team.</div>
+                    <div class="card-meta"><span class="card-tag">LLM Prompts</span><span class="card-tag">Multi-Agent</span><a class="card-link" href="tools/agency-agents/" target="_blank">Open →</a></div>
+                </div>
+                <div class="card" data-c="violet" onclick="window.open('https://github.com/crewAIInc/crewAI','_blank')">
+                    <div class="card-header"><div class="card-icon">👥</div><div><div class="card-title">CrewAI</div><div class="card-category">Role-Based Orchestration</div></div></div>
+                    <div class="card-desc">Orchestrate role-playing, autonomous AI agents for collaborative tasks. 44k+ GitHub stars, used by 60% of Fortune 500.</div>
+                    <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">44k ⭐</span><a class="card-link" href="tools/crewai/" target="_blank">Open →</a></div>
+                </div>
+                <div class="card" data-c="blue" onclick="window.open('https://github.com/microsoft/autogen','_blank')">
+                    <div class="card-header"><div class="card-icon">🔷</div><div><div class="card-title">AutoGen</div><div class="card-category">Microsoft Research</div></div></div>
+                    <div class="card-desc">Multi-agent conversation framework by Microsoft. Handles hundreds of concurrent agents with async communication and Docker sandboxing.</div>
+                    <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">54k ⭐</span><a class="card-link" href="tools/autogen/" target="_blank">Open →</a></div>
+                </div>
+                <div class="card" data-c="emerald" onclick="window.open('https://github.com/langchain-ai/langgraph','_blank')">
+                    <div class="card-header"><div class="card-icon">🔗</div><div><div class="card-title">LangGraph</div><div class="card-category">Stateful Agent Workflows</div></div></div>
+                    <div class="card-desc">Graph-based agent framework from LangChain. State machines, cycles, conditional branching. Fastest benchmarks, lowest latency.</div>
+                    <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">24k ⭐</span><a class="card-link" href="tools/langgraph/" target="_blank">Open →</a></div>
+                </div>
+                <div class="card" data-c="cyan" onclick="window.open('https://github.com/langgenius/dify','_blank')">
+                    <div class="card-header"><div class="card-icon">✨</div><div><div class="card-title">Dify</div><div class="card-category">AI App Builder</div></div></div>
+                    <div class="card-desc">Open-source platform for building generative AI apps with visual workflows, built-in RAG, and multi-model support. 129k+ stars.</div>
+                    <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">TypeScript</span><span class="card-tag">129k ⭐</span><a class="card-link" href="tools/dify/" target="_blank">Open →</a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ LLM TOOLS & SECURITY ═══ -->
+        <div class="category-section">
+            <div class="category-title">🛡️ LLM Security & Evaluation</div>
+            <div class="cards-grid">
+                <div class="card" data-c="violet" onclick="window.open('https://github.com/promptfoo/promptfoo','_blank')">
+                    <div class="card-header"><div class="card-icon">🛡️</div><div><div class="card-title">Promptfoo</div><div class="card-category">Red-Teaming CLI</div></div></div>
+                    <div class="card-desc">Systematically evaluate and red-team LLM apps. Tests OWASP LLM Top 10 & NIST AI RMF for prompt injection, PII leaks & more.</div>
+                    <div class="card-meta"><span class="card-tag">TypeScript</span><span class="card-tag">CLI</span><a class="card-link" href="tools/promptfoo/" target="_blank">Open →</a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ CODING ASSISTANTS ═══ -->
+        <div class="category-section">
+            <div class="category-title">💻 AI Coding Assistants</div>
+            <div class="cards-grid">
+                <div class="card" data-c="teal" onclick="window.open('https://github.com/pbakaus/impeccable','_blank')">
+                    <div class="card-header"><div class="card-icon">🎨</div><div><div class="card-title">Impeccable</div><div class="card-category">UI Design Prompting</div></div></div>
+                    <div class="card-desc">Design skill for Claude that fights "AI slop" — 17 commands and curated anti-patterns to force unique frontend code instead of generic UIs.</div>
+                    <div class="card-meta"><span class="card-tag">Claude Skill</span><span class="card-tag">Design System</span><a class="card-link" href="tools/impeccable/" target="_blank">Open →</a></div>
+                </div>
+                <div class="card" data-c="lime" onclick="window.open('https://github.com/Aider-AI/aider','_blank')">
+                    <div class="card-header"><div class="card-icon">⌨️</div><div><div class="card-title">Aider</div><div class="card-category">AI Pair Programming</div></div></div>
+                    <div class="card-desc">Terminal-based AI pair programmer with deep Git integration. Auto-commits changes with descriptive messages. 100+ language support.</div>
+                    <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">Git</span><a class="card-link" href="tools/aider/" target="_blank">Open →</a></div>
+                </div>
+                <div class="card" data-c="sky" onclick="window.open('https://github.com/OpenInterpreter/open-interpreter','_blank')">
+                    <div class="card-header"><div class="card-icon">🖥️</div><div><div class="card-title">Open Interpreter</div><div class="card-category">Local Code Execution</div></div></div>
+                    <div class="card-desc">Let LLMs run code (Python, JS, Shell) locally. Natural-language terminal interface — create files, control browsers, analyze data.</div>
+                    <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">Terminal</span><a class="card-link" href="tools/open-interpreter/" target="_blank">Open →</a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ RAG & RETRIEVAL ═══ -->
+        <div class="category-section">
+            <div class="category-title">📚 RAG & Retrieval</div>
+            <div class="cards-grid">
+                <div class="card" data-c="amber" onclick="window.open('https://github.com/run-llama/llama_index','_blank')">
+                    <div class="card-header"><div class="card-icon">🦙</div><div><div class="card-title">LlamaIndex</div><div class="card-category">Data Framework for LLMs</div></div></div>
+                    <div class="card-desc">Data-centric RAG framework — connect PDFs, databases, APIs to LLMs. Index, query, and retrieve from any data source.</div>
+                    <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">125k ⭐</span><a class="card-link" href="tools/llama-index/" target="_blank">Open →</a></div>
+                </div>
+                <div class="card" data-c="rose" onclick="window.open('https://github.com/infiniflow/ragflow','_blank')">
+                    <div class="card-header"><div class="card-icon">🌊</div><div><div class="card-title">RAGFlow</div><div class="card-category">End-to-End RAG Engine</div></div></div>
+                    <div class="card-desc">Production-ready RAG engine with deep document understanding, built-in agent capabilities, and one of GitHub's fastest-growing projects.</div>
+                    <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">TypeScript</span><a class="card-link" href="tools/ragflow/" target="_blank">Open →</a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ CONTEXT & MEMORY ═══ -->
+        <div class="category-section">
+            <div class="category-title">🧠 Agent Context & Memory</div>
+            <div class="cards-grid">
+                <div class="card" data-c="amber" onclick="window.open('https://github.com/volcengine/OpenViking','_blank')">
+                    <div class="card-header"><div class="card-icon">🧠</div><div><div class="card-title">OpenViking</div><div class="card-category">Context Database</div></div></div>
+                    <div class="card-desc">Unified context DB for AI agents with hierarchical retrieval (L0→L1→L2). File-system memory via <code>viking://</code> protocol.</div>
+                    <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">ByteDance</span><a class="card-link" href="tools/openviking/" target="_blank">Open →</a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SWARM & PREDICTION ═══ -->
+        <div class="category-section">
+            <div class="category-title">🐟 Swarm Intelligence</div>
+            <div class="cards-grid">
+                <div class="card" data-c="pink" onclick="window.open('https://github.com/666ghj/MiroFish','_blank')">
+                    <div class="card-header"><div class="card-icon">🐟</div><div><div class="card-title">MiroFish</div><div class="card-category">Prediction Engine</div></div></div>
+                    <div class="card-desc">Knowledge graphs + multi-agent swarm simulation to forecast real-world scenarios — from policy outcomes to market trends.</div>
+                    <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">Vue</span><span class="card-tag">GraphRAG</span><a class="card-link" href="tools/mirofish/" target="_blank">Open →</a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ LOCAL LLM ═══ -->
+        <div class="category-section">
+            <div class="category-title">🏠 Local LLM Inference</div>
+            <div class="cards-grid">
+                <div class="card" data-c="emerald" onclick="window.open('https://github.com/ollama/ollama','_blank')">
+                    <div class="card-header"><div class="card-icon">🦙</div><div><div class="card-title">Ollama</div><div class="card-category">Local Model Runner</div></div></div>
+                    <div class="card-desc">Run LLMs locally with one command. Supports Llama, Mistral, Gemma & more. OpenAI-compatible API, cross-platform desktop apps.</div>
+                    <div class="card-meta"><span class="card-tag">Go</span><span class="card-tag">CLI</span><a class="card-link" href="tools/ollama/" target="_blank">Open →</a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ FINE-TUNING & TRAINING ═══ -->
+        <div class="category-section">
+            <div class="category-title">🔧 Fine-Tuning & Training</div>
+            <div class="cards-grid">
+                <div class="card" data-c="red" onclick="window.open('https://github.com/unslothai/unsloth','_blank')">
+                    <div class="card-header"><div class="card-icon">🦥</div><div><div class="card-title">Unsloth</div><div class="card-category">Fast Fine-Tuning</div></div></div>
+                    <div class="card-desc">2-5x faster LLM fine-tuning with 70-80% less VRAM. Custom CUDA kernels, no accuracy loss. Supports Llama, Mistral, DeepSeek.</div>
+                    <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">CUDA</span><a class="card-link" href="tools/unsloth/" target="_blank">Open →</a></div>
+                </div>
+                <div class="card" data-c="blue" onclick="window.open('https://github.com/karpathy/nanochat','_blank')">
+                    <div class="card-header"><div class="card-icon">📚</div><div><div class="card-title">NanoChat</div><div class="card-category">Build LLMs From Scratch</div></div></div>
+                    <div class="card-desc">Karpathy's minimal framework — train a GPT-2 level model for ~$100 in 4 hours. Full stack: tokenizer, pretraining, chat UI.</div>
+                    <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">PyTorch</span><a class="card-link" href="tools/nanochat/" target="_blank">Open →</a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ MODEL MODIFICATION ═══ -->
+        <div class="category-section">
+            <div class="category-title">⚡ Model Modification</div>
+            <div class="cards-grid">
+                <div class="card" data-c="red" onclick="window.open('https://github.com/p-e-w/heretic','_blank')">
+                    <div class="card-header"><div class="card-icon">⚡</div><div><div class="card-title">Heretic</div><div class="card-category">Abliteration Tool</div></div></div>
+                    <div class="card-desc">Automated directional ablation — mathematically suppresses refusal vectors in local LLMs, removing safety alignment while preserving intelligence.</div>
+                    <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">Transformers</span><a class="card-link" href="tools/heretic/" target="_blank">Open →</a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ IMAGE & MEDIA GENERATION ═══ -->
+        <div class="category-section">
+            <div class="category-title">🎨 Image & Media Generation</div>
+            <div class="cards-grid">
+                <div class="card" data-c="pink" onclick="window.open('https://github.com/comfyanonymous/ComfyUI','_blank')">
+                    <div class="card-header"><div class="card-icon">🖼️</div><div><div class="card-title">ComfyUI</div><div class="card-category">Node-Based AI Art</div></div></div>
+                    <div class="card-desc">100% open-source node-based workflow for AI image, video, 3D & audio generation. Supports Flux, SDXL, and custom pipelines.</div>
+                    <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">Node Graph</span><a class="card-link" href="tools/comfyui/" target="_blank">Open →</a></div>
+                </div>
+                <div class="card" data-c="cyan" onclick="window.open('https://github.com/hexgrad/kokoro','_blank')">
+                    <div class="card-header"><div class="card-icon">🗣️</div><div><div class="card-title">Kokoro TTS</div><div class="card-category">Text-to-Speech</div></div></div>
+                    <div class="card-desc">82M parameter open-weight TTS model. Natural-sounding speech in English, French, Korean, Japanese & Mandarin. Apache licensed.</div>
+                    <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">82M Params</span><a class="card-link" href="tools/kokoro-tts/" target="_blank">Open →</a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ TUTORIALS ═══ -->
+        <div class="category-section">
+            <div class="category-title">🧪 Tutorials & Reference</div>
+            <div class="cards-grid">
+                <div class="card" data-c="emerald" onclick="window.open('https://github.com/alawalmuazu/ai-engineering-hub','_blank')">
+                    <div class="card-header"><div class="card-icon">🧪</div><div><div class="card-title">AI Engineering Hub</div><div class="card-category">100+ Projects</div></div></div>
+                    <div class="card-desc">Hands-on AI engineering tutorials — RAG pipelines, multi-agent systems, MCP servers, fine-tuning, podcast gen, OCR & more.</div>
+                    <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">100+ Projects</span><a class="card-link" href="tools/ai-engineering-hub/" target="_blank">Open →</a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROMPT LIBRARY -->
+        <div class="category-section prompts-section">
+            <div class="category-title">💬 Prompt Library</div>
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <span class="prompt-icon">📊</span>
+                    <div><div class="prompt-name">Claude Deck Builder</div><div class="prompt-file">prompts/Claude prompt.txt</div></div>
+                </div>
+                <div class="prompt-body">A killer presentation prompt for Claude — paste it in, answer MCQ-style questions, and auto-generate a structured pitch deck via Gamma in 3 steps.</div>
+                <div class="prompt-tags">
+                    <span class="card-tag">Claude</span><span class="card-tag">Gamma</span><span class="card-tag">Presentations</span>
+                    <a class="card-link" href="prompts/Claude%20prompt.txt" target="_blank">View Prompt <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg></a>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>SupAgentic — 20 open-source AI tools. Curated from <a href="https://www.youtube.com/@Fireship" target="_blank">Fireship</a> & the AI engineering ecosystem. Each tool retains its original license.</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+# Cloned tool repositories (too large for this repo)
+tools/
+
+# OS files
+.DS_Store
+Thumbs.db
