@@ -1,0 +1,98 @@
+name: SupAgentic Tool Health Check
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'  # Every Monday at 9am UTC
+  workflow_dispatch:      # Manual trigger
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check tool repos
+        id: check
+        run: |
+          STALE_TOOLS=""
+          THRESHOLD_DAYS=180
+
+          # Tool repos and their GitHub URLs
+          declare -A TOOLS=(
+            ["The Agency"]="msitarzewski/agency-agents"
+            ["CrewAI"]="crewAIInc/crewAI"
+            ["AutoGen"]="microsoft/autogen"
+            ["LangGraph"]="langchain-ai/langgraph"
+            ["Dify"]="langgenius/dify"
+            ["Promptfoo"]="promptfoo/promptfoo"
+            ["Impeccable"]="pbakaus/impeccable"
+            ["Aider"]="Aider-AI/aider"
+            ["Open Interpreter"]="OpenInterpreter/open-interpreter"
+            ["LlamaIndex"]="run-llama/llama_index"
+            ["RAGFlow"]="infiniflow/ragflow"
+            ["OpenViking"]="volcengine/OpenViking"
+            ["MiroFish"]="666ghj/MiroFish"
+            ["Ollama"]="ollama/ollama"
+            ["Unsloth"]="unslothai/unsloth"
+            ["NanoChat"]="karpathy/nanochat"
+            ["Heretic"]="p-e-w/heretic"
+            ["ComfyUI"]="comfyanonymous/ComfyUI"
+            ["Kokoro TTS"]="hexgrad/kokoro"
+            ["AI Engineering Hub"]="alawalmuazu/ai-engineering-hub"
+            ["LLaMA-Factory"]="hiyouga/LLaMA-Factory"
+            ["Fabric"]="danielmiessler/fabric"
+            ["Anything-LLM"]="Mintplex-Labs/anything-llm"
+            ["Tabby"]="TabbyML/tabby"
+            ["Claude Engineer"]="Doriandarko/claude-engineer"
+          )
+
+          echo "## 🏥 SupAgentic Tool Health Report" > report.md
+          echo "" >> report.md
+          echo "| Tool | Last Push | Days Ago | Status |" >> report.md
+          echo "|------|-----------|----------|--------|" >> report.md
+
+          for tool in "${!TOOLS[@]}"; do
+            repo="${TOOLS[$tool]}"
+            last_push=$(curl -s "https://api.github.com/repos/$repo" | jq -r '.pushed_at // "unknown"')
+
+            if [ "$last_push" != "unknown" ] && [ "$last_push" != "null" ]; then
+              push_epoch=$(date -d "$last_push" +%s 2>/dev/null || echo 0)
+              now_epoch=$(date +%s)
+              days_ago=$(( (now_epoch - push_epoch) / 86400 ))
+
+              if [ $days_ago -gt $THRESHOLD_DAYS ]; then
+                status="🔴 Stale"
+                STALE_TOOLS="$STALE_TOOLS\n- **$tool** ($repo) — $days_ago days since last push"
+              elif [ $days_ago -gt 90 ]; then
+                status="🟡 Aging"
+              else
+                status="🟢 Fresh"
+              fi
+              echo "| $tool | ${last_push:0:10} | $days_ago | $status |" >> report.md
+            else
+              echo "| $tool | N/A | N/A | ⚠️ Error |" >> report.md
+            fi
+          done
+
+          echo "" >> report.md
+
+          if [ -n "$STALE_TOOLS" ]; then
+            echo "has_stale=true" >> $GITHUB_OUTPUT
+            echo -e "$STALE_TOOLS" > stale_tools.txt
+          else
+            echo "has_stale=false" >> $GITHUB_OUTPUT
+          fi
+
+          cat report.md
+
+      - name: Create issue for stale tools
+        if: steps.check.outputs.has_stale == 'true'
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: "🔴 Stale tools detected — weekly health check"
+          content-filepath: report.md
+          labels: health-check,maintenance

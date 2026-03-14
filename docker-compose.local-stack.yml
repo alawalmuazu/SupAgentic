@@ -1,0 +1,84 @@
+# SupAgentic — Local AI Stack
+# Spins up Dify + RAGFlow + Ollama together
+# Usage: docker compose -f docker-compose.local-stack.yml up -d
+
+version: '3.8'
+
+services:
+  # ═══ Ollama — Local LLM Inference ═══
+  ollama:
+    image: ollama/ollama:latest
+    container_name: supagentic-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: unless-stopped
+
+  # ═══ Pull a default model on startup ═══
+  ollama-init:
+    image: ollama/ollama:latest
+    container_name: supagentic-ollama-init
+    depends_on:
+      - ollama
+    entrypoint: >
+      sh -c "
+        sleep 10 &&
+        ollama pull llama3.1:8b &&
+        echo 'Model pulled successfully'
+      "
+    environment:
+      - OLLAMA_HOST=ollama:11434
+
+  # ═══ RAGFlow — RAG Engine ═══
+  ragflow-server:
+    image: infiniflow/ragflow:latest
+    container_name: supagentic-ragflow
+    ports:
+      - "9380:9380"  # API
+      - "8080:80"    # Web UI
+    volumes:
+      - ragflow_data:/ragflow/data
+    environment:
+      - LLM_BASE_URL=http://ollama:11434/v1
+      - LLM_API_KEY=ollama
+      - LLM_MODEL=llama3.1:8b
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+  # ═══ Dify — AI App Builder ═══
+  # NOTE: Dify has its own docker-compose with many services.
+  # For full Dify setup, use: cd tools/dify/docker && docker compose up -d
+  # This entry provides a reminder and docs link.
+
+volumes:
+  ollama_data:
+    driver: local
+  ragflow_data:
+    driver: local
+
+# ═══════════════════════════════════════════════════════════════
+# QUICK START:
+#   docker compose -f docker-compose.local-stack.yml up -d
+#
+# SERVICES:
+#   Ollama API:    http://localhost:11434
+#   RAGFlow UI:    http://localhost:8080
+#   RAGFlow API:   http://localhost:9380
+#
+# For Dify (separate compose):
+#   cd tools/dify/docker && docker compose up -d
+#   Dify UI:       http://localhost/install
+#
+# CONNECT DIFY TO OLLAMA:
+#   In Dify Settings > Model Providers > Add Ollama
+#   URL: http://host.docker.internal:11434
+# ═══════════════════════════════════════════════════════════════
