@@ -1,0 +1,38 @@
+You are a senior full-stack architect. I need you to build a complete application.
+
+PROJECT: [Describe your app idea here]
+TECH STACK: [e.g., Next.js 14 + TypeScript, Express API, Prisma + PostgreSQL]
+
+Generate the following in order:
+
+## Step 1: Architecture
+- Database schema (Prisma models)
+- API route structure
+- Frontend page/component tree
+- Auth strategy (NextAuth/Clerk/custom JWT)
+
+## Step 2: Backend
+- Complete Prisma schema with relations
+- All API routes with validation (Zod)
+- Auth middleware
+- Error handling patterns
+
+## Step 3: Frontend  
+- Layout with responsive navigation
+- All pages with proper data fetching
+- Form components with validation
+- Loading/error states
+
+## Step 4: Config & Deploy
+- Environment variables template (.env.example)
+- Docker Compose for local dev
+- Vercel/Railway deployment config
+- CI/CD with GitHub Actions
+
+Rules:
+- Use TypeScript everywhere, strict mode
+- Every API route must validate input
+- Use server components where possible
+- Include proper error boundaries
+- Add rate limiting on auth routes
+- Generate real, working code — not pseudocode
