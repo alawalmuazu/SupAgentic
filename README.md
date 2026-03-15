@@ -1,9 +1,9 @@
 # 🚀 SupAgentic
 
-> A unified collection of **26 powerful open-source AI tools** + **7 curated prompts** — from agent orchestration to image generation to LLM training from scratch.
+> A unified collection of **34 powerful open-source AI tools** + **7 curated prompts** — from agent orchestration to image generation to LLM training from scratch.
 
 [![GitHub Pages](https://img.shields.io/badge/Dashboard-Live-6366f1?style=for-the-badge)](https://alawalmuazu.github.io/SupAgentic)
-[![Tools](https://img.shields.io/badge/Tools-26-14b8a6?style=for-the-badge)](.)
+[![Tools](https://img.shields.io/badge/Tools-34-14b8a6?style=for-the-badge)](.)
 [![Prompts](https://img.shields.io/badge/Prompts-7-ec4899?style=for-the-badge)](prompts/)
 
 ---
@@ -79,6 +79,14 @@
 |---|------|-----------|-------------|
 | 25 | **AI Engineering Hub** | `tools/ai-engineering-hub/` | 100+ hands-on AI tutorials |
 | 26 | **AI Project Gallery** | `tools/ai-project-gallery/` | ML, Deep Learning & GenAI projects |
+| 27 | **500 AI/ML Projects** | `tools/500-ai-ml-projects/` | 500+ real-world projects with code |
+| 28 | **E2E GenAI Projects** | `tools/end-to-end-genai-projects/` | Production GenAI with LLMs, RAG, agents |
+| 29 | **GenAI Projects** | `tools/genai-projects/` | GenAI portfolio: images, code, text |
+| 30 | **100 AI/ML Projects** | `tools/100-ai-ml-projects/` | 100 curated CNN/RNN/GAN/CV/NLP projects |
+| 31 | **Awesome Deep Learning** | `tools/awesome-deep-learning/` | 23k⭐ DL tutorials, projects & books |
+| 32 | **Awesome ML** | `tools/awesome-machine-learning/` | 66k⭐ Definitive ML frameworks list |
+| 33 | **Awesome Project Ideas** | `tools/awesome-project-ideas/` | ML/NLP/CV project ideas for portfolios |
+| 34 | **Awesome GenAI Guide** | `tools/awesome-genai-guide/` | Comprehensive GenAI resource hub |
 
 ---
 
