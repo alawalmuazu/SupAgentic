@@ -1,9 +1,9 @@
 # 🚀 SupAgentic
 
-> A unified collection of **25 powerful open-source AI tools** + **7 curated prompts** — from agent orchestration to image generation to LLM training from scratch.
+> A unified collection of **26 powerful open-source AI tools** + **7 curated prompts** — from agent orchestration to image generation to LLM training from scratch.
 
 [![GitHub Pages](https://img.shields.io/badge/Dashboard-Live-6366f1?style=for-the-badge)](https://alawalmuazu.github.io/SupAgentic)
-[![Tools](https://img.shields.io/badge/Tools-25-14b8a6?style=for-the-badge)](.)
+[![Tools](https://img.shields.io/badge/Tools-26-14b8a6?style=for-the-badge)](.)
 [![Prompts](https://img.shields.io/badge/Prompts-7-ec4899?style=for-the-badge)](prompts/)
 
 ---
@@ -78,6 +78,7 @@
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
 | 25 | **AI Engineering Hub** | `tools/ai-engineering-hub/` | 100+ hands-on AI tutorials |
+| 26 | **AI Project Gallery** | `tools/ai-project-gallery/` | ML, Deep Learning & GenAI projects |
 
 ---
 
