@@ -50,34 +50,39 @@
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
 | 17 | **MiroFish** | `tools/mirofish/` | Prediction engine using knowledge graphs |
+| 18 | **OASIS** | `tools/oasis/` | Social simulation engine — scales to 1M agents (CAMEL-AI) |
+| 19 | **Generative Agents** | `tools/generative-agents/` | Stanford Smallville — believable AI agent society (18k ⭐) |
+| 20 | **AgentVerse** | `tools/agentverse/` | Multi-agent simulation platform (OpenBMB) |
+| 21 | **TwinMarket** | `tools/twinmarket/` | Financial market simulation with LLM agents (NeurIPS 2025) |
+| 22 | **Swarms** | `tools/swarms/` | Enterprise multi-agent swarm orchestration framework |
 
 ### 🏠 Local LLM Inference
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
-| 18 | **Ollama** | `tools/ollama/` | Run LLMs locally with one command |
+| 23 | **Ollama** | `tools/ollama/` | Run LLMs locally with one command |
 
 ### 🔧 Fine-Tuning & Training
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
-| 19 | **Unsloth** | `tools/unsloth/` | 2-5x faster fine-tuning, 70% less VRAM |
-| 20 | **NanoChat** | `tools/nanochat/` | Karpathy's minimal LLM-from-scratch framework |
-| 21 | **LLaMA-Factory** | `tools/llama-factory/` | All-in-one fine-tuning with web GUI |
+| 24 | **Unsloth** | `tools/unsloth/` | 2-5x faster fine-tuning, 70% less VRAM |
+| 25 | **NanoChat** | `tools/nanochat/` | Karpathy's minimal LLM-from-scratch framework |
+| 26 | **LLaMA-Factory** | `tools/llama-factory/` | All-in-one fine-tuning with web GUI |
 
 ### ⚡ Model Modification
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
-| 22 | **Heretic** | `tools/heretic/` | Automated abliteration for local LLMs |
+| 27 | **Heretic** | `tools/heretic/` | Automated abliteration for local LLMs |
 
 ### 🎨 Image & Media Generation
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
-| 23 | **ComfyUI** | `tools/comfyui/` | Node-based AI image/video/3D generation |
-| 24 | **Kokoro TTS** | `tools/kokoro-tts/` | 82M param multilingual text-to-speech |
+| 28 | **ComfyUI** | `tools/comfyui/` | Node-based AI image/video/3D generation |
+| 29 | **Kokoro TTS** | `tools/kokoro-tts/` | 82M param multilingual text-to-speech |
 
 ### 🧪 Tutorials
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
-| 25 | **AI Engineering Hub** | `tools/ai-engineering-hub/` | 100+ hands-on AI tutorials |
+| 30 | **AI Engineering Hub** | `tools/ai-engineering-hub/` | 100+ hands-on AI tutorials |
 | 26 | **AI Project Gallery** | `tools/ai-project-gallery/` | ML, Deep Learning & GenAI projects |
 | 27 | **500 AI/ML Projects** | `tools/500-ai-ml-projects/` | 500+ real-world projects with code |
 | 28 | **E2E GenAI Projects** | `tools/end-to-end-genai-projects/` | Production GenAI with LLMs, RAG, agents |
