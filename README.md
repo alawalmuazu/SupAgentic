@@ -1,9 +1,10 @@
 # 🚀 SupAgentic
 
-> A unified collection of **34 powerful open-source AI tools** + **7 curated prompts** — from agent orchestration to image generation to LLM training from scratch.
+> A unified collection of **35 powerful open-source AI tools** + **7 curated prompts** — from agent orchestration to swarm simulation to voice cloning to model serving.
 
-[![GitHub Pages](https://img.shields.io/badge/Dashboard-Live-6366f1?style=for-the-badge)](https://alawalmuazu.github.io/SupAgentic)
-[![Tools](https://img.shields.io/badge/Tools-34-14b8a6?style=for-the-badge)](.)
+[![Dashboard](https://img.shields.io/badge/Dashboard-Live-6366f1?style=for-the-badge)](https://alawalmuazu.github.io/SupAgentic)
+[![Tools](https://img.shields.io/badge/Tools-35-14b8a6?style=for-the-badge)](.)
+[![Categories](https://img.shields.io/badge/Categories-13-f59e0b?style=for-the-badge)](.)
 [![Prompts](https://img.shields.io/badge/Prompts-7-ec4899?style=for-the-badge)](prompts/)
 
 ---
@@ -11,100 +12,209 @@
 ## 📦 Tools by Category
 
 ### 🤖 Agent Frameworks
-| # | Tool | Directory | Stars | Description |
-|---|------|-----------|-------|-------------|
-| 1 | **The Agency** | `tools/agency-agents/` | — | Personality-driven AI agent collection |
-| 2 | **CrewAI** | `tools/crewai/` | 44k ⭐ | Role-based multi-agent orchestration |
-| 3 | **AutoGen** | `tools/autogen/` | 54k ⭐ | Microsoft's multi-agent conversation framework |
-| 4 | **LangGraph** | `tools/langgraph/` | 24k ⭐ | Stateful agent workflows with graph execution |
-| 5 | **Dify** | `tools/dify/` | 129k ⭐ | Visual AI app builder with built-in RAG |
+| # | Tool | Directory | Description |
+|---|------|-----------|-------------|
+| 1 | **The Agency** | `tools/agency-agents/` | Personality-driven AI agent collection |
+| 2 | **CrewAI** | `tools/crewai/` | Role-based multi-agent orchestration (44k ⭐) |
+| 3 | **AutoGen** | `tools/autogen/` | Microsoft's multi-agent conversation framework (54k ⭐) |
+| 4 | **LangGraph** | `tools/langgraph/` | Stateful agent workflows with graph execution |
+| 5 | **Dify** | `tools/dify/` | Visual AI app builder with built-in RAG (129k ⭐) |
+| 6 | **Langflow** | `tools/langflow/` | Visual drag-and-drop agent & RAG builder (140k ⭐) |
 
 ### 🛡️ LLM Security
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
-| 6 | **Promptfoo** | `tools/promptfoo/` | LLM evaluation & red-teaming CLI |
+| 7 | **Promptfoo** | `tools/promptfoo/` | LLM evaluation & red-teaming CLI |
 
 ### 💻 AI Coding Assistants
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
-| 7 | **Impeccable** | `tools/impeccable/` | Claude design skill to fight "AI slop" |
-| 8 | **Aider** | `tools/aider/` | Terminal AI pair programmer with Git integration |
-| 9 | **Open Interpreter** | `tools/open-interpreter/` | Let LLMs run code locally |
-| 10 | **Fabric** | `tools/fabric/` | 100+ curated AI prompt patterns |
-| 11 | **Tabby** | `tools/tabby/` | Self-hosted GitHub Copilot replacement |
-| 12 | **Claude Engineer** | `tools/claude-engineer/` | Autonomous coding agent for Claude |
+| 8 | **Impeccable** | `tools/impeccable/` | Claude design skill to fight "AI slop" |
+| 9 | **Aider** | `tools/aider/` | Terminal AI pair programmer with Git integration |
+| 10 | **Open Interpreter** | `tools/open-interpreter/` | Let LLMs run code locally |
+| 11 | **Fabric** | `tools/fabric/` | 100+ curated AI prompt patterns |
+| 12 | **Tabby** | `tools/tabby/` | Self-hosted GitHub Copilot replacement |
+| 13 | **Claude Engineer** | `tools/claude-engineer/` | Autonomous coding agent for Claude |
 
 ### 📚 RAG & Retrieval
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
-| 13 | **LlamaIndex** | `tools/llama-index/` | Data framework for LLM applications |
-| 14 | **RAGFlow** | `tools/ragflow/` | End-to-end production RAG engine |
-| 15 | **Anything-LLM** | `tools/anything-llm/` | All-in-one RAG desktop app |
+| 14 | **LlamaIndex** | `tools/llama-index/` | Data framework for LLM applications |
+| 15 | **RAGFlow** | `tools/ragflow/` | End-to-end production RAG engine |
+| 16 | **Anything-LLM** | `tools/anything-llm/` | All-in-one RAG desktop app |
 
 ### 🧠 Context & Memory
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
-| 16 | **OpenViking** | `tools/openviking/` | Context database with `viking://` protocol |
+| 17 | **OpenViking** | `tools/openviking/` | Context database with `viking://` protocol |
 
 ### 🐟 Swarm Intelligence
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
-| 17 | **MiroFish** | `tools/mirofish/` | Prediction engine using knowledge graphs |
-| 18 | **OASIS** | `tools/oasis/` | Social simulation engine — scales to 1M agents (CAMEL-AI) |
-| 19 | **Generative Agents** | `tools/generative-agents/` | Stanford Smallville — believable AI agent society (18k ⭐) |
-| 20 | **AgentVerse** | `tools/agentverse/` | Multi-agent simulation platform (OpenBMB) |
-| 21 | **TwinMarket** | `tools/twinmarket/` | Financial market simulation with LLM agents (NeurIPS 2025) |
-| 22 | **Swarms** | `tools/swarms/` | Enterprise multi-agent swarm orchestration framework |
+| 18 | **MiroFish** | `tools/mirofish/` | Prediction engine using knowledge graphs & swarm agents |
+| 19 | **OASIS** | `tools/oasis/` | Social simulation engine — scales to 1M agents (CAMEL-AI) |
+| 20 | **Swarms** | `tools/swarms/` | Enterprise multi-agent swarm orchestration framework |
+
+### 🎭 Simulation
+| # | Tool | Directory | Description |
+|---|------|-----------|-------------|
+| 21 | **Generative Agents** | `tools/generative-agents/` | Stanford Smallville — believable AI agent society (18k ⭐) |
+| 22 | **AgentVerse** | `tools/agentverse/` | Multi-agent simulation platform (OpenBMB) |
+| 23 | **TwinMarket** | `tools/twinmarket/` | Financial market simulation with LLM agents (NeurIPS 2025) |
 
 ### 🏠 Local LLM Inference
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
-| 23 | **Ollama** | `tools/ollama/` | Run LLMs locally with one command |
+| 24 | **Ollama** | `tools/ollama/` | Run LLMs locally with one command |
 
 ### 🔧 Fine-Tuning & Training
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
-| 24 | **Unsloth** | `tools/unsloth/` | 2-5x faster fine-tuning, 70% less VRAM |
-| 25 | **NanoChat** | `tools/nanochat/` | Karpathy's minimal LLM-from-scratch framework |
-| 26 | **LLaMA-Factory** | `tools/llama-factory/` | All-in-one fine-tuning with web GUI |
+| 25 | **Unsloth** | `tools/unsloth/` | 2-5x faster fine-tuning, 70% less VRAM |
+| 26 | **NanoChat** | `tools/nanochat/` | Karpathy's minimal LLM-from-scratch framework |
+| 27 | **LLaMA-Factory** | `tools/llama-factory/` | All-in-one fine-tuning with web GUI |
 
 ### ⚡ Model Modification
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
-| 27 | **Heretic** | `tools/heretic/` | Automated abliteration for local LLMs |
+| 28 | **Heretic** | `tools/heretic/` | Automated abliteration for local LLMs |
 
 ### 🎨 Image & Media Generation
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
-| 28 | **ComfyUI** | `tools/comfyui/` | Node-based AI image/video/3D generation |
-| 29 | **Kokoro TTS** | `tools/kokoro-tts/` | 82M param multilingual text-to-speech |
-| 30 | **Fish Speech** | `tools/fish-speech/` | Ultra-realistic voice cloning from 10-30s audio (26k ⭐) |
+| 29 | **ComfyUI** | `tools/comfyui/` | Node-based AI image/video/3D generation |
+| 30 | **Kokoro TTS** | `tools/kokoro-tts/` | 82M param multilingual text-to-speech |
+| 31 | **Fish Speech** | `tools/fish-speech/` | Ultra-realistic voice cloning from 10-30s audio (26k ⭐) |
 
 ### 🦀 Automation & Browser
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
-| 31 | **OpenClaw** | `tools/openclaw/` | Personal AI assistant — runs locally, browses web, controls devices (250k ⭐) |
-| 32 | **Browser-Use** | `tools/browser-use/` | Make websites accessible for AI agents — browser automation |
-| 33 | **Langflow** | `tools/langflow/` | Visual drag-and-drop agent & RAG builder on LangChain (140k ⭐) |
+| 32 | **OpenClaw** | `tools/openclaw/` | Personal AI assistant — runs locally, browses web, writes own skills (250k ⭐) |
+| 33 | **Browser-Use** | `tools/browser-use/` | Make websites accessible for AI agents — browser automation |
 
 ### 🚀 Model Serving
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
 | 34 | **vLLM** | `tools/vllm/` | High-throughput LLM inference engine — PagedAttention, continuous batching |
 
-### 🧪 Tutorials
+### 🧪 Tutorials & Collections
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
-| 30 | **AI Engineering Hub** | `tools/ai-engineering-hub/` | 100+ hands-on AI tutorials |
-| 26 | **AI Project Gallery** | `tools/ai-project-gallery/` | ML, Deep Learning & GenAI projects |
-| 27 | **500 AI/ML Projects** | `tools/500-ai-ml-projects/` | 500+ real-world projects with code |
-| 28 | **E2E GenAI Projects** | `tools/end-to-end-genai-projects/` | Production GenAI with LLMs, RAG, agents |
-| 29 | **GenAI Projects** | `tools/genai-projects/` | GenAI portfolio: images, code, text |
-| 30 | **100 AI/ML Projects** | `tools/100-ai-ml-projects/` | 100 curated CNN/RNN/GAN/CV/NLP projects |
-| 31 | **Awesome Deep Learning** | `tools/awesome-deep-learning/` | 23k⭐ DL tutorials, projects & books |
-| 32 | **Awesome ML** | `tools/awesome-machine-learning/` | 66k⭐ Definitive ML frameworks list |
-| 33 | **Awesome Project Ideas** | `tools/awesome-project-ideas/` | ML/NLP/CV project ideas for portfolios |
-| 34 | **Awesome GenAI Guide** | `tools/awesome-genai-guide/` | Comprehensive GenAI resource hub |
+| 35 | **AI Engineering Hub** | `tools/ai-engineering-hub/` | 100+ hands-on AI tutorials |
+| — | **AI Project Gallery** | `tools/ai-project-gallery/` | ML, Deep Learning & GenAI projects |
+| — | **500 AI/ML Projects** | `tools/500-ai-ml-projects/` | 500+ real-world projects with code |
+| — | **E2E GenAI Projects** | `tools/end-to-end-genai-projects/` | Production GenAI with LLMs, RAG, agents |
+| — | **GenAI Projects** | `tools/genai-projects/` | GenAI portfolio: images, code, text |
+| — | **100 AI/ML Projects** | `tools/100-ai-ml-projects/` | 100 curated CNN/RNN/GAN/CV/NLP projects |
+| — | **Awesome Deep Learning** | `tools/awesome-deep-learning/` | 23k⭐ DL tutorials, projects & books |
+| — | **Awesome ML** | `tools/awesome-machine-learning/` | 66k⭐ Definitive ML frameworks list |
+| — | **Awesome Project Ideas** | `tools/awesome-project-ideas/` | ML/NLP/CV project ideas for portfolios |
+| — | **Awesome GenAI Guide** | `tools/awesome-genai-guide/` | Comprehensive GenAI resource hub |
+
+---
+
+## 🖥️ CLI Reference
+
+SupAgentic includes a full-featured command-line interface with **11 commands**:
+
+```bash
+python supagentic.py <command> [args]
+```
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `list` | List all 35 tools by category | `python supagentic.py list` |
+| `search <query>` | Search by name/category/language | `python supagentic.py search swarm` |
+| `info <tool>` | Show tool details, repo, & README | `python supagentic.py info mirofish` |
+| `health` | Check repo freshness (days since commit) | `python supagentic.py health` |
+| `update [tool]` | Git pull one or all tools | `python supagentic.py update mirofish` |
+| `run <tool>` | Start a tool (auto-detect npm/python/docker) | `python supagentic.py run mirofish` |
+| `deps [tool]` | Show dependency map with ports | `python supagentic.py deps` |
+| `pipeline [name]` | Show/run orchestration pipelines | `python supagentic.py pipeline` |
+| `mcp [--json]` | MCP server manifest / JSON export | `python supagentic.py mcp --json` |
+| `serve [port]` | Start dashboard HTTP server | `python supagentic.py serve 8899` |
+| `open <tool>` | Open tool directory in file manager | `python supagentic.py open aider` |
+
+---
+
+## 🔗 Orchestration Pipelines
+
+Chain tools together for end-to-end workflows:
+
+### `scrape-predict-narrate`
+> Scrape web → Simulate prediction → Voice narrate the report
+
+1. **Browser-Use** → Scrape target URL and extract data
+2. **MiroFish** → Build knowledge graph → Run multi-agent simulation → Generate report
+3. **Fish Speech** → Convert report to natural speech audio
+
+### `train-serve-deploy`
+> Fine-tune model → Serve with vLLM → Connect to agents
+
+1. **Unsloth** → Fine-tune base model with LoRA/QLoRA
+2. **vLLM** → Deploy model with OpenAI-compatible API
+3. **Langflow** → Build agent workflow using served model
+
+### `research-simulate-report`
+> RAG retrieval → Agent simulation → Automated analysis
+
+1. **RAGFlow** → Ingest documents and build RAG pipeline
+2. **AgentVerse** → Run multi-agent debate/analysis on findings
+3. **MiroFish** → Generate comprehensive prediction report
+
+---
+
+## 🗺️ Dependency Map
+
+Tools with known startup commands, ports, and dependencies:
+
+| Tool | Start Command | Port(s) | Depends On |
+|------|--------------|---------|------------|
+| MiroFish | `npm run dev` | 3000, 5001 | OASIS |
+| OASIS | `python -m oasis` | — | — |
+| Langflow | `python -m langflow run` | 7860 | — |
+| OpenClaw | `npm run dev` | 3000 | Ollama |
+| Fish Speech | `python tools/webui/app.py` | 7862 | — |
+| vLLM | `python -m vllm.entrypoints.openai.api_server` | 8000 | — |
+| Ollama | `ollama serve` | 11434 | — |
+| ComfyUI | `python main.py` | 8188 | — |
+| RAGFlow | `docker compose up -d` | 9380 | — |
+| Dify | `docker compose up -d` | 3000 | — |
+
+---
+
+## 🐋 Docker Compose
+
+Spin up multiple tools together with the local stack:
+
+```bash
+# Start core services (Ollama, RAGFlow, Langflow, Dashboard)
+docker compose -f docker-compose.local-stack.yml up -d
+
+# Start GPU-accelerated services (vLLM, ComfyUI)
+docker compose -f docker-compose.local-stack.yml --profile gpu up -d
+```
+
+Services included: Ollama, vLLM, RAGFlow, Dify, Langflow, ComfyUI, Dashboard
+
+---
+
+## 🔌 MCP Server
+
+Export the full toolkit manifest for Model Context Protocol integration:
+
+```bash
+# View manifest summary
+python supagentic.py mcp
+
+# Export JSON for MCP consumption
+python supagentic.py mcp --json
+
+# Pipe directly to an MCP server
+python supagentic.py mcp --json | mcp-server
+```
+
+The manifest includes all 35 tools, 13 categories, 3 pipelines, dependency info, ports, and start commands.
 
 ---
 
@@ -125,20 +235,23 @@
 ## ⚡ Quick Start
 
 ```bash
-# View the dashboard
-python -m http.server 8899
-# Open http://localhost:8899
+# Clone the toolkit
+git clone https://github.com/alawalmuazu/SupAgentic.git
+cd SupAgentic
 
-# Use the CLI
-python supagentic.py list       # List all tools
-python supagentic.py search rag # Search by category
-python supagentic.py health     # Check repo freshness
-python supagentic.py serve      # Launch dashboard
+# List all tools
+python supagentic.py list
 
-# Install tool dependencies
-.\setup.ps1                     # Interactive installer
+# Start a tool
+python supagentic.py run mirofish
 
-# Spin up local AI stack (Docker)
+# View orchestration pipelines
+python supagentic.py pipeline
+
+# Launch the dashboard
+python supagentic.py serve
+
+# Spin up Docker stack
 docker compose -f docker-compose.local-stack.yml up -d
 ```
 
@@ -146,11 +259,11 @@ docker compose -f docker-compose.local-stack.yml up -d
 
 ## 📚 More
 
+- **[Dashboard](https://alawalmuazu.github.io/SupAgentic)** — Live dashboard with search & filters
 - **[INTEGRATIONS.md](INTEGRATIONS.md)** — 5 recipes for combining tools
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** — How to suggest & add tools
-- **[setup.ps1](setup.ps1)** — Interactive dependency installer
-- **[health.ps1](health.ps1)** — Repo freshness checker
-- **[supagentic.py](supagentic.py)** — CLI tool
+- **[supagentic.py](supagentic.py)** — CLI (11 commands)
+- **[docker-compose.local-stack.yml](docker-compose.local-stack.yml)** — Multi-tool Docker stack
 
 ---
 
