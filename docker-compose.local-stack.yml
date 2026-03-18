@@ -1,18 +1,17 @@
-# SupAgentic — Local AI Stack
-# Spins up Dify + RAGFlow + Ollama together
-# Usage: docker compose -f docker-compose.local-stack.yml up -d
-
 version: '3.8'
 
+# SupAgentic Local Stack — Spin up multiple AI tools together
+# Usage: docker compose -f docker-compose.local-stack.yml up -d
+
 services:
-  # ═══ Ollama — Local LLM Inference ═══
+  # ═══ Local LLM ═══
   ollama:
     image: ollama/ollama:latest
-    container_name: supagentic-ollama
+    container_name: sup-ollama
     ports:
       - "11434:11434"
     volumes:
-      - ollama_data:/root/.ollama
+      - ollama-data:/root/.ollama
     deploy:
       resources:
         reservations:
@@ -22,63 +21,87 @@ services:
               capabilities: [gpu]
     restart: unless-stopped
 
-  # ═══ Pull a default model on startup ═══
-  ollama-init:
-    image: ollama/ollama:latest
-    container_name: supagentic-ollama-init
-    depends_on:
-      - ollama
-    entrypoint: >
-      sh -c "
-        sleep 10 &&
-        ollama pull llama3.1:8b &&
-        echo 'Model pulled successfully'
-      "
-    environment:
-      - OLLAMA_HOST=ollama:11434
-
-  # ═══ RAGFlow — RAG Engine ═══
-  ragflow-server:
-    image: infiniflow/ragflow:latest
-    container_name: supagentic-ragflow
+  # ═══ Model Serving ═══
+  vllm:
+    image: vllm/vllm-openai:latest
+    container_name: sup-vllm
     ports:
-      - "9380:9380"  # API
-      - "8080:80"    # Web UI
+      - "8000:8000"
     volumes:
-      - ragflow_data:/ragflow/data
+      - vllm-models:/root/.cache
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
     environment:
-      - LLM_BASE_URL=http://ollama:11434/v1
-      - LLM_API_KEY=ollama
-      - LLM_MODEL=llama3.1:8b
-    depends_on:
-      - ollama
+      - MODEL_NAME=meta-llama/Llama-3.1-8B-Instruct
+    command: --model ${MODEL_NAME:-meta-llama/Llama-3.1-8B-Instruct} --host 0.0.0.0
+    profiles: [gpu]
+
+  # ═══ RAG ═══
+  ragflow:
+    image: infiniflow/ragflow:latest
+    container_name: sup-ragflow
+    ports:
+      - "9380:9380"
+    volumes:
+      - ragflow-data:/ragflow/data
     restart: unless-stopped
 
-  # ═══ Dify — AI App Builder ═══
-  # NOTE: Dify has its own docker-compose with many services.
-  # For full Dify setup, use: cd tools/dify/docker && docker compose up -d
-  # This entry provides a reminder and docs link.
+  # ═══ Agents ═══
+  dify:
+    image: langgenius/dify-web:latest
+    container_name: sup-dify
+    ports:
+      - "3100:3000"
+    environment:
+      - CONSOLE_API_URL=http://localhost:5001
+    restart: unless-stopped
+
+  langflow:
+    image: langflowai/langflow:latest
+    container_name: sup-langflow
+    ports:
+      - "7860:7860"
+    environment:
+      - LANGFLOW_AUTO_LOGIN=true
+    restart: unless-stopped
+
+  # ═══ Media ═══
+  comfyui:
+    image: comfyanonymous/comfyui:latest
+    container_name: sup-comfyui
+    ports:
+      - "8188:8188"
+    volumes:
+      - comfyui-models:/comfyui/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    profiles: [gpu]
+    restart: unless-stopped
+
+  # ═══ Dashboard ═══
+  dashboard:
+    image: python:3.12-slim
+    container_name: sup-dashboard
+    ports:
+      - "8899:8899"
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: python -m http.server 8899
+    restart: unless-stopped
 
 volumes:
-  ollama_data:
-    driver: local
-  ragflow_data:
-    driver: local
-
-# ═══════════════════════════════════════════════════════════════
-# QUICK START:
-#   docker compose -f docker-compose.local-stack.yml up -d
-#
-# SERVICES:
-#   Ollama API:    http://localhost:11434
-#   RAGFlow UI:    http://localhost:8080
-#   RAGFlow API:   http://localhost:9380
-#
-# For Dify (separate compose):
-#   cd tools/dify/docker && docker compose up -d
-#   Dify UI:       http://localhost/install
-#
-# CONNECT DIFY TO OLLAMA:
-#   In Dify Settings > Model Providers > Add Ollama
-#   URL: http://host.docker.internal:11434
-# ═══════════════════════════════════════════════════════════════
+  ollama-data:
+  vllm-models:
+  ragflow-data:
+  comfyui-models:

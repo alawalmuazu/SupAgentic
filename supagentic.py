@@ -235,6 +235,214 @@ def cmd_open(args):
     else:
         print(f"  {C.RED}Tool '{query}' not found{C.END}")
 
+# ═══ Dependency Map ═══
+DEPS = {
+    "mirofish":  {"needs": ["oasis"], "ports": "3000/5001", "start": "npm run dev"},
+    "oasis":     {"needs": [], "ports": None, "start": "python -m oasis"},
+    "langflow":  {"needs": [], "ports": "7860", "start": "python -m langflow run"},
+    "openclaw":  {"needs": ["ollama"], "ports": "3000", "start": "npm run dev"},
+    "browser-use": {"needs": [], "ports": None, "start": "python -m browser_use"},
+    "fish-speech": {"needs": [], "ports": "7862", "start": "python tools/webui/app.py"},
+    "vllm":      {"needs": [], "ports": "8000", "start": "python -m vllm.entrypoints.openai.api_server"},
+    "ollama":    {"needs": [], "ports": "11434", "start": "ollama serve"},
+    "comfyui":   {"needs": [], "ports": "8188", "start": "python main.py"},
+    "ragflow":   {"needs": [], "ports": "9380", "start": "docker compose up -d"},
+    "dify":      {"needs": [], "ports": "3000", "start": "docker compose up -d"},
+}
+
+# ═══ Orchestration Pipelines ═══
+PIPELINES = {
+    "scrape-predict-narrate": {
+        "desc": "Scrape web → Simulate prediction → Voice narrate the report",
+        "steps": [
+            {"tool": "browser-use", "action": "Scrape target URL and extract data"},
+            {"tool": "mirofish", "action": "Build knowledge graph → Run multi-agent simulation → Generate report"},
+            {"tool": "fish-speech", "action": "Convert report to natural speech audio"},
+        ]
+    },
+    "train-serve-deploy": {
+        "desc": "Fine-tune model → Serve with vLLM → Connect to agents",
+        "steps": [
+            {"tool": "unsloth", "action": "Fine-tune base model with LoRA/QLoRA"},
+            {"tool": "vllm", "action": "Deploy model with OpenAI-compatible API"},
+            {"tool": "langflow", "action": "Build agent workflow using served model"},
+        ]
+    },
+    "research-simulate-report": {
+        "desc": "RAG retrieval → Agent simulation → Automated analysis",
+        "steps": [
+            {"tool": "ragflow", "action": "Ingest documents and build RAG pipeline"},
+            {"tool": "agentverse", "action": "Run multi-agent debate/analysis on findings"},
+            {"tool": "mirofish", "action": "Generate comprehensive prediction report"},
+        ]
+    },
+}
+
+def cmd_run(args):
+    """Start a tool with auto-detected startup method"""
+    if not args:
+        print(f"  {C.YELLOW}Usage: supagentic run <tool-name>{C.END}")
+        print(f"  {C.DIM}Example: supagentic run mirofish{C.END}")
+        return
+
+    query = " ".join(args).lower()
+    tool = next((t for t in TOOLS if query in t["name"].lower() or query == t["dir"]), None)
+    if not tool:
+        print(f"  {C.RED}Tool '{query}' not found{C.END}")
+        return
+
+    path = TOOLS_DIR / tool["dir"]
+    if not path.exists():
+        print(f"  {C.RED}Tool not installed. Run: git clone https://github.com/{tool['repo']}.git {path}{C.END}")
+        return
+
+    dep_info = DEPS.get(tool["dir"], {})
+    ports = dep_info.get("ports", "")
+    custom_start = dep_info.get("start", "")
+
+    # Check dependencies
+    needs = dep_info.get("needs", [])
+    if needs:
+        print(f"  {C.YELLOW}⚠ Dependencies: {', '.join(needs)}{C.END}")
+
+    # Auto-detect startup
+    if custom_start:
+        cmd = custom_start
+    elif (path / "package.json").exists():
+        cmd = "npm run dev"
+    elif (path / "docker-compose.yml").exists() or (path / "docker-compose.yaml").exists():
+        cmd = "docker compose up -d"
+    elif (path / "main.py").exists():
+        cmd = f"{sys.executable} main.py"
+    elif (path / "run.py").exists():
+        cmd = f"{sys.executable} run.py"
+    elif (path / "app.py").exists():
+        cmd = f"{sys.executable} app.py"
+    else:
+        print(f"  {C.YELLOW}No auto-start method detected. Check the tool's README.{C.END}")
+        return
+
+    print(f"\n  {C.BOLD}{C.CYAN}🚀 Starting {tool['name']}{C.END}")
+    if ports:
+        print(f"  {C.DIM}Ports: {ports}{C.END}")
+    print(f"  {C.DIM}Command: {cmd}{C.END}")
+    print(f"  {C.DIM}Working dir: {path}{C.END}\n")
+
+    try:
+        subprocess.run(cmd, shell=True, cwd=str(path))
+    except KeyboardInterrupt:
+        print(f"\n  {C.YELLOW}Stopped {tool['name']}{C.END}")
+
+def cmd_deps(args):
+    """Show dependency tree for a tool"""
+    banner()
+    if not args:
+        print(f"  {C.BOLD}Tool Dependency Map{C.END}\n")
+        for name, info in DEPS.items():
+            tool = next((t for t in TOOLS if t["dir"] == name), None)
+            if not tool:
+                continue
+            needs = info.get("needs", [])
+            ports = info.get("ports", "")
+            start = info.get("start", "")
+            deps_str = f" → {', '.join(needs)}" if needs else ""
+            port_str = f" [:{ports}]" if ports else ""
+            print(f"  {C.CYAN}{tool['name']:<20}{C.END}{deps_str}{C.DIM}{port_str}{C.END}")
+        print()
+        return
+
+    query = " ".join(args).lower()
+    tool = next((t for t in TOOLS if query in t["name"].lower() or query == t["dir"]), None)
+    if not tool:
+        print(f"  {C.RED}Tool '{query}' not found{C.END}")
+        return
+
+    info = DEPS.get(tool["dir"], {})
+    print(f"  {C.BOLD}{tool['name']}{C.END}")
+    print(f"  {C.DIM}Category:{C.END} {tool['cat']}")
+    print(f"  {C.DIM}Start:{C.END}    {info.get('start', 'N/A')}")
+    print(f"  {C.DIM}Ports:{C.END}    {info.get('ports', 'None')}")
+    needs = info.get("needs", [])
+    if needs:
+        print(f"  {C.DIM}Needs:{C.END}    {', '.join(needs)}")
+        for n in needs:
+            ni = DEPS.get(n, {})
+            print(f"    └─ {n} → {ni.get('start', '?')} [:{ni.get('ports', '?')}]")
+    print()
+
+def cmd_pipeline(args):
+    """Show or run orchestration pipelines"""
+    banner()
+    if not args:
+        print(f"  {C.BOLD}Orchestration Pipelines{C.END}\n")
+        for name, pipe in PIPELINES.items():
+            print(f"  {C.CYAN}{name}{C.END}")
+            print(f"  {C.DIM}{pipe['desc']}{C.END}")
+            for i, step in enumerate(pipe["steps"], 1):
+                tool = next((t for t in TOOLS if t["dir"] == step["tool"]), {"name": step["tool"]})
+                print(f"    {i}. {C.BOLD}{tool['name']}{C.END} → {step['action']}")
+            print()
+        print(f"  {C.DIM}Run: supagentic pipeline <name>{C.END}\n")
+        return
+
+    name = " ".join(args).lower().replace(" ", "-")
+    pipe = PIPELINES.get(name)
+    if not pipe:
+        print(f"  {C.RED}Pipeline '{name}' not found{C.END}")
+        return
+
+    print(f"\n  {C.BOLD}{C.CYAN}▶ Running pipeline: {name}{C.END}")
+    print(f"  {C.DIM}{pipe['desc']}{C.END}\n")
+    for i, step in enumerate(pipe["steps"], 1):
+        tool = next((t for t in TOOLS if t["dir"] == step["tool"]), {"name": step["tool"], "dir": step["tool"]})
+        path = TOOLS_DIR / tool["dir"] if isinstance(tool, dict) and "dir" in tool else None
+        installed = path and path.exists() if path else False
+        status = f"{C.GREEN}✅{C.END}" if installed else f"{C.RED}❌ not installed{C.END}"
+        print(f"  Step {i}: {C.BOLD}{tool['name']}{C.END} {status}")
+        print(f"  {C.DIM}  → {step['action']}{C.END}\n")
+
+def cmd_mcp(args):
+    """Start MCP (Model Context Protocol) server for tool discovery"""
+    import json as js
+
+    tools_manifest = []
+    for t in TOOLS:
+        path = TOOLS_DIR / t["dir"]
+        dep_info = DEPS.get(t["dir"], {})
+        tools_manifest.append({
+            "name": t["name"],
+            "directory": t["dir"],
+            "category": t["cat"],
+            "language": t["lang"],
+            "repository": f"https://github.com/{t['repo']}",
+            "installed": path.exists(),
+            "start_command": dep_info.get("start", None),
+            "ports": dep_info.get("ports", None),
+            "dependencies": dep_info.get("needs", []),
+        })
+
+    manifest = {
+        "name": "supagentic",
+        "version": "1.0.0",
+        "description": "SupAgentic AI Toolkit — 35 tools across 13 categories",
+        "tools_count": len(tools_manifest),
+        "categories": sorted(set(t["cat"] for t in TOOLS)),
+        "tools": tools_manifest,
+        "pipelines": {n: {"description": p["desc"], "steps": [s["tool"] for s in p["steps"]]} for n, p in PIPELINES.items()},
+    }
+
+    if args and args[0] == "--json":
+        print(js.dumps(manifest, indent=2))
+    else:
+        banner()
+        print(f"  {C.BOLD}MCP Server Manifest{C.END}\n")
+        print(f"  {C.DIM}Tools:{C.END}      {manifest['tools_count']}")
+        print(f"  {C.DIM}Categories:{C.END} {', '.join(manifest['categories'])}")
+        print(f"  {C.DIM}Pipelines:{C.END}  {', '.join(manifest['pipelines'].keys())}")
+        print(f"\n  {C.CYAN}Export JSON:  python supagentic.py mcp --json{C.END}")
+        print(f"  {C.CYAN}Pipe to MCP:  python supagentic.py mcp --json | mcp-server{C.END}")
+        print()
+
 # ═══ Command Router ═══
 COMMANDS = {
     "list": cmd_list, "ls": cmd_list,
@@ -244,6 +452,10 @@ COMMANDS = {
     "update": cmd_update, "pull": cmd_update,
     "serve": cmd_serve, "dashboard": cmd_serve,
     "open": cmd_open,
+    "run": cmd_run, "start": cmd_run,
+    "deps": cmd_deps, "dependencies": cmd_deps,
+    "pipeline": cmd_pipeline, "pipe": cmd_pipeline,
+    "mcp": cmd_mcp,
 }
 
 def main():
@@ -255,6 +467,10 @@ def main():
         print(f"    {C.CYAN}info <tool>{C.END}       Show tool details")
         print(f"    {C.CYAN}health{C.END}            Check repo freshness")
         print(f"    {C.CYAN}update [tool]{C.END}     Git pull tool(s)")
+        print(f"    {C.CYAN}run <tool>{C.END}         Start a tool (auto-detect startup)")
+        print(f"    {C.CYAN}deps [tool]{C.END}        Show dependency map")
+        print(f"    {C.CYAN}pipeline [name]{C.END}    Show/run orchestration pipelines")
+        print(f"    {C.CYAN}mcp [--json]{C.END}       MCP server manifest / JSON export")
         print(f"    {C.CYAN}serve [port]{C.END}      Start dashboard server")
         print(f"    {C.CYAN}open <tool>{C.END}       Open tool directory")
         print()
