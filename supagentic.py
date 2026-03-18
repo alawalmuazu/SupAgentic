@@ -63,6 +63,11 @@ TOOLS = [
     {"name": "Anything-LLM",     "dir": "anything-llm",      "cat": "RAG",         "repo": "Mintplex-Labs/anything-llm",         "lang": "JavaScript"},
     {"name": "Tabby",            "dir": "tabby",             "cat": "Coding",      "repo": "TabbyML/tabby",                      "lang": "Rust"},
     {"name": "Claude Engineer",  "dir": "claude-engineer",   "cat": "Coding",      "repo": "Doriandarko/claude-engineer",        "lang": "Python"},
+    {"name": "OpenClaw",         "dir": "openclaw",           "cat": "Automation",  "repo": "openclaw/openclaw",                  "lang": "TypeScript"},
+    {"name": "Browser-Use",      "dir": "browser-use",        "cat": "Browser",     "repo": "browser-use/browser-use",            "lang": "Python"},
+    {"name": "Langflow",         "dir": "langflow",           "cat": "Agents",      "repo": "langflow-ai/langflow",               "lang": "Python"},
+    {"name": "Fish Speech",      "dir": "fish-speech",        "cat": "Media",       "repo": "fishaudio/fish-speech",              "lang": "Python"},
+    {"name": "vLLM",             "dir": "vllm",               "cat": "Serving",     "repo": "vllm-project/vllm",                  "lang": "Python"},
 ]
 
 # ═══ Colors ═══

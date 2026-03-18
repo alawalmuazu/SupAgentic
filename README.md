@@ -78,6 +78,19 @@
 |---|------|-----------|-------------|
 | 28 | **ComfyUI** | `tools/comfyui/` | Node-based AI image/video/3D generation |
 | 29 | **Kokoro TTS** | `tools/kokoro-tts/` | 82M param multilingual text-to-speech |
+| 30 | **Fish Speech** | `tools/fish-speech/` | Ultra-realistic voice cloning from 10-30s audio (26k ⭐) |
+
+### 🦀 Automation & Browser
+| # | Tool | Directory | Description |
+|---|------|-----------|-------------|
+| 31 | **OpenClaw** | `tools/openclaw/` | Personal AI assistant — runs locally, browses web, controls devices (250k ⭐) |
+| 32 | **Browser-Use** | `tools/browser-use/` | Make websites accessible for AI agents — browser automation |
+| 33 | **Langflow** | `tools/langflow/` | Visual drag-and-drop agent & RAG builder on LangChain (140k ⭐) |
+
+### 🚀 Model Serving
+| # | Tool | Directory | Description |
+|---|------|-----------|-------------|
+| 34 | **vLLM** | `tools/vllm/` | High-throughput LLM inference engine — PagedAttention, continuous batching |
 
 ### 🧪 Tutorials
 | # | Tool | Directory | Description |
