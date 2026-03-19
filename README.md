@@ -142,7 +142,7 @@
 
 ## 🖥️ CLI Reference
 
-SupAgentic includes a full-featured command-line interface with **12 commands**:
+SupAgentic includes a full-featured command-line interface with **18 commands**:
 
 ```bash
 python supagentic.py <command> [args]
@@ -150,18 +150,24 @@ python supagentic.py <command> [args]
 
 | Command | Description | Example |
 |---------|-------------|---------|
-| `list` | List all 35 tools by category | `python supagentic.py list` |
-| `search <query>` | Search by name/category/language | `python supagentic.py search swarm` |
-| `info <tool>` | Show tool details, repo, & README | `python supagentic.py info mirofish` |
-| `health` | Check repo freshness (days since commit) | `python supagentic.py health` |
-| `update [tool]` | Git pull one or all tools | `python supagentic.py update mirofish` |
-| `run <tool>` | Start a tool (auto-detect npm/python/docker) | `python supagentic.py run mirofish` |
-| `setup <tool>` | Auto-install tool dependencies | `python supagentic.py setup langflow` |
-| `deps [tool]` | Show dependency map with ports | `python supagentic.py deps` |
-| `pipeline [name]` | Show/run orchestration pipelines | `python supagentic.py pipeline` |
-| `mcp [--json]` | MCP server manifest / JSON export | `python supagentic.py mcp --json` |
-| `serve [port]` | Start dashboard HTTP server | `python supagentic.py serve 8899` |
-| `open <tool>` | Open tool directory in file manager | `python supagentic.py open aider` |
+| `list` | List all 54 tools by category | `supagentic list` |
+| `search <query>` | Search by name/category/language | `supagentic search swarm` |
+| `info <tool>` | Show tool details, repo, & README | `supagentic info mirofish` |
+| `health` | Check repo freshness (days since commit) | `supagentic health` |
+| `update [tool]` | Git pull one or all tools | `supagentic update` |
+| `clone <tool>` | Install a tool on-demand from GitHub | `supagentic clone mirofish` |
+| `run <tool>` | Start a tool (auto-detect npm/python/docker) | `supagentic run langflow` |
+| `setup <tool>` | Auto-install tool dependencies | `supagentic setup langflow` |
+| `stats [query]` | Live GitHub stars/forks/issues via API | `supagentic stats agents` |
+| `create <args>` | Scaffold a new tool entry | `supagentic create MyTool user/repo Agents Python` |
+| `deps [tool]` | Show dependency map with ports | `supagentic deps` |
+| `pipeline [name]` | Show/run orchestration pipelines | `supagentic pipeline` |
+| `tui` | Interactive tool browser (rich tables) | `supagentic tui` |
+| `mcp [--json]` | MCP manifest / JSON export | `supagentic mcp --json` |
+| `mcp-serve` | Launch MCP server (stdio or `--sse`) | `supagentic mcp-serve --sse` |
+| `mcp-register` | Auto-register with Claude Desktop / Cursor | `supagentic mcp-register` |
+| `serve [port]` | Start dashboard HTTP server | `supagentic serve 8899` |
+| `open <tool>` | Open tool directory in file manager | `supagentic open aider` |
 
 ---
 
@@ -229,20 +235,42 @@ Services included: Ollama, vLLM, RAGFlow, Dify, Langflow, ComfyUI, Dashboard
 
 ## 🔌 MCP Server
 
-Export the full toolkit manifest for Model Context Protocol integration:
+Full [Model Context Protocol](https://modelcontextprotocol.io/) server — any AI agent can discover and use all 54 tools:
 
 ```bash
-# View manifest summary
-python supagentic.py mcp
+# stdio mode (for Claude Desktop, Cursor, Trae, Codex)
+python mcp_server.py
 
-# Export JSON for MCP consumption
-python supagentic.py mcp --json
+# HTTP/SSE mode (for remote/web access)
+python mcp_server.py --sse --port 8765
 
-# Pipe directly to an MCP server
-python supagentic.py mcp --json | mcp-server
+# Auto-register with Claude Desktop + Cursor
+python supagentic.py mcp-register
+
+# Health check
+python mcp_server.py --health
 ```
 
-The manifest includes all 35 tools, 13 categories, 3 pipelines, dependency info, ports, and start commands.
+### Capabilities
+| Feature | Count | Details |
+|---------|-------|---------|
+| **tools/call** | 55 | All tools + search + pipeline — with real action execution |
+| **resources** | 14 | README, INTEGRATIONS, CHANGELOG, 7 prompts, 3 pipelines |
+| **prompts** | 7 | Prompt templates with argument substitution |
+
+### Connect from Claude Desktop
+```json
+{
+  "mcpServers": {
+    "supagentic": {
+      "command": "python",
+      "args": ["path/to/SupAgentic/mcp_server.py"]
+    }
+  }
+}
+```
+
+Pre-configured for: **Claude Desktop**, **Cursor**, **Trae**, **Antigravity/Gemini**, **Codex**
 
 ---
 
@@ -270,17 +298,31 @@ cd SupAgentic
 # List all tools
 python supagentic.py list
 
-# Start a tool
+# Install a single tool on-demand
+python supagentic.py clone mirofish
+
+# Install dependencies & start
+python supagentic.py setup mirofish
 python supagentic.py run mirofish
 
-# View orchestration pipelines
-python supagentic.py pipeline
+# Live GitHub stats
+python supagentic.py stats
+
+# Interactive browser
+python supagentic.py tui
+
+# Connect to AI agents via MCP
+python supagentic.py mcp-register
 
 # Launch the dashboard
 python supagentic.py serve
 
 # Spin up Docker stack
 docker compose -f docker-compose.local-stack.yml up -d
+
+# Install as a system command
+pip install -e .
+supagentic list
 ```
 
 ---
@@ -291,7 +333,9 @@ docker compose -f docker-compose.local-stack.yml up -d
 - **[CHANGELOG.md](CHANGELOG.md)** — Version history & release notes
 - **[INTEGRATIONS.md](INTEGRATIONS.md)** — 5 recipes for combining tools
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** — How to suggest & add tools
-- **[supagentic.py](supagentic.py)** — CLI (11 commands)
+- **[supagentic.py](supagentic.py)** — CLI (18 commands)
+- **[mcp_server.py](mcp_server.py)** — Full MCP server (stdio + SSE)
+- **[pyproject.toml](pyproject.toml)** — PyPI package config
 - **[docker-compose.local-stack.yml](docker-compose.local-stack.yml)** — Multi-tool Docker stack
 
 ---

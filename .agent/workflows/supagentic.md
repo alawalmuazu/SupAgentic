@@ -1,31 +1,35 @@
 ---
-description: Access the SupAgentic AI toolkit — 43 tools for agents, security, RAG, training, media, automation, simulation, and more. List, search, run, setup, and orchestrate tools via the CLI.
+description: Access the SupAgentic AI toolkit — 54 tools for agents, security, RAG, training, media, data, automation, simulation, and more. List, search, run, setup, clone, browse, and orchestrate tools via the CLI or MCP server.
 ---
 
 # SupAgentic Toolkit — Unified AI Tool Management
 
-Use this workflow to interact with the SupAgentic collection of 43 open-source AI tools.
+Use this workflow to interact with the SupAgentic collection of 54 open-source AI tools.
 
 ## Toolkit Location
 - **Root**: `C:\Users\OMEN\Documents\SupAgentic`
-- **Tools**: `C:\Users\OMEN\Documents\SupAgentic\tools\` (43 subdirectories)
+- **Tools**: `C:\Users\OMEN\Documents\SupAgentic\tools\` (54 subdirectories)
 - **CLI**: `C:\Users\OMEN\Documents\SupAgentic\supagentic.py`
+- **MCP Server**: `C:\Users\OMEN\Documents\SupAgentic\mcp_server.py`
 - **Prompts**: `C:\Users\OMEN\Documents\SupAgentic\prompts\` (7 prompt files)
 - **Dashboard**: https://alawalmuazu.github.io/SupAgentic
 
-## Available Tools (43) — 13 Categories
+## Available Tools (54) — 15 Categories
 
 ### Agent Frameworks
-- CrewAI, AutoGen, LangGraph, Dify, Langflow, MetaGPT, AutoGPT, LangChain, The Agency
+- CrewAI, AutoGen, LangGraph, Dify, Langflow, MetaGPT, AutoGPT, LangChain, Chainlit, Phidata, The Agency
 
 ### LLM Security
 - Promptfoo (red-teaming, evaluation)
 
 ### AI Coding
-- Aider, Open Interpreter, Fabric, Tabby, Claude Engineer, Gemini CLI, Claude Code, Impeccable
+- Aider, Open Interpreter, Fabric, Tabby, Claude Engineer, Gemini CLI, Claude Code, Impeccable, Cursor Rules, SWE-Agent, Bolt.new
 
 ### RAG & Retrieval
-- LlamaIndex, RAGFlow, Anything-LLM
+- LlamaIndex, RAGFlow, Anything-LLM, Haystack
+
+### Context & Memory
+- OpenViking, Mem0
 
 ### Swarm Intelligence
 - MiroFish, OASIS, Swarms
@@ -45,13 +49,19 @@ Use this workflow to interact with the SupAgentic collection of 43 open-source A
 ### Automation & Browser
 - OpenClaw, Browser-Use, n8n
 
+### Data & Analytics
+- PandasAI, Dataherald
+
+### Security & Pentesting
+- Nuclei, Caido
+
 ### Model Serving
 - vLLM
 
 ### Other
-- OpenViking (memory), Heretic (modding), AI Engineering Hub (tutorials)
+- Heretic (modding), AI Engineering Hub (tutorials)
 
-## CLI Commands (12)
+## CLI Commands (18)
 
 // turbo-all
 
@@ -80,40 +90,76 @@ python C:\Users\OMEN\Documents\SupAgentic\supagentic.py health
 python C:\Users\OMEN\Documents\SupAgentic\supagentic.py update [tool-name]
 ```
 
-6. Run a tool:
+6. Clone a tool on-demand:
+```powershell
+python C:\Users\OMEN\Documents\SupAgentic\supagentic.py clone <tool-name>
+```
+
+7. Run a tool:
 ```powershell
 python C:\Users\OMEN\Documents\SupAgentic\supagentic.py run <tool-name>
 ```
 
-7. Install dependencies:
+8. Install dependencies:
 ```powershell
 python C:\Users\OMEN\Documents\SupAgentic\supagentic.py setup <tool-name>
 ```
 
-8. Show dependency map:
+9. Live GitHub stats:
+```powershell
+python C:\Users\OMEN\Documents\SupAgentic\supagentic.py stats [query]
+```
+
+10. Scaffold new tool:
+```powershell
+python C:\Users\OMEN\Documents\SupAgentic\supagentic.py create <name> <repo> <category> <language>
+```
+
+11. Show dependency map:
 ```powershell
 python C:\Users\OMEN\Documents\SupAgentic\supagentic.py deps [tool-name]
 ```
 
-9. View orchestration pipelines:
+12. View orchestration pipelines:
 ```powershell
 python C:\Users\OMEN\Documents\SupAgentic\supagentic.py pipeline [name]
 ```
 
-10. MCP manifest:
+13. Interactive TUI browser:
+```powershell
+python C:\Users\OMEN\Documents\SupAgentic\supagentic.py tui
+```
+
+14. MCP manifest:
 ```powershell
 python C:\Users\OMEN\Documents\SupAgentic\supagentic.py mcp --json
 ```
 
-11. Start dashboard:
+15. Launch MCP server:
+```powershell
+python C:\Users\OMEN\Documents\SupAgentic\supagentic.py mcp-serve [--sse --port 8765]
+```
+
+16. Register MCP with AI clients:
+```powershell
+python C:\Users\OMEN\Documents\SupAgentic\supagentic.py mcp-register
+```
+
+17. Start dashboard:
 ```powershell
 python C:\Users\OMEN\Documents\SupAgentic\supagentic.py serve
 ```
 
-12. Open tool directory:
+18. Open tool directory:
 ```powershell
 python C:\Users\OMEN\Documents\SupAgentic\supagentic.py open <tool-name>
 ```
+
+## MCP Server
+- **stdio**: `python mcp_server.py` (for Claude Desktop, Cursor, Trae, Codex)
+- **SSE**: `python mcp_server.py --sse --port 8765` (for remote access)
+- **Register**: `python supagentic.py mcp-register` (auto-configure clients)
+- **Capabilities**: 55 tools, 14 resources, 7 prompts
 
 ## Orchestration Pipelines
 - `scrape-predict-narrate`: Browser-Use → MiroFish → Fish Speech

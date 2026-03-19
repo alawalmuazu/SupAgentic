@@ -2,6 +2,31 @@
 
 All notable changes to SupAgentic are documented here.
 
+## [2.0.0] — 2026-03-19
+
+### MCP Server (Full Protocol)
+- `mcp_server.py` — standalone MCP server (380 lines)
+- **tools/call** — real action execution (clone, run, setup, update, open)
+- **resources** — 14 resources: README, INTEGRATIONS, CHANGELOG, 7 prompts, 3 pipelines
+- **prompts** — 7 AI prompt templates with argument substitution
+- **SSE transport** — `--sse` flag for HTTP/SSE remote access
+- **Auto-register** — `mcp-register` for Claude Desktop, Cursor, Trae, Codex
+
+### Documentation
+- README fully updated: 18 commands, MCP capabilities table, expanded Quick Start
+- Workflow updated: 54 tools, 18 commands, MCP registration
+
+### New Tools (54 total)
+- PandasAI, Dataherald (Data/Analytics category)
+- Nuclei, Caido (Security/Pentesting category)
+
+### Infrastructure
+- `scripts/create-tool-issues.py` — auto-generate GitHub Issues per tool
+- `.github/workflows/health-check.yml` — CI on push + weekly
+- MCP configs for 5 clients: `.cursor/`, `.trae/`, `.gemini/`, `.codex/`, Claude Desktop
+
+---
+
 ## [1.5.0] — 2026-03-19
 
 ### New Commands
