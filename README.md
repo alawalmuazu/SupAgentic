@@ -1,10 +1,10 @@
 # 🚀 SupAgentic
 
-> A unified collection of **50 powerful open-source AI tools** + **7 curated prompts** — from agent orchestration to swarm simulation to voice cloning to model serving.
+> A unified collection of **54 powerful open-source AI tools** + **7 curated prompts** — from agent orchestration to swarm simulation to voice cloning to model serving.
 
 [![Dashboard](https://img.shields.io/badge/Dashboard-Live-6366f1?style=for-the-badge)](https://alawalmuazu.github.io/SupAgentic)
-[![Tools](https://img.shields.io/badge/Tools-50-14b8a6?style=for-the-badge)](.)
-[![Categories](https://img.shields.io/badge/Categories-13-f59e0b?style=for-the-badge)](.)
+[![Tools](https://img.shields.io/badge/Tools-54-14b8a6?style=for-the-badge)](.)
+[![Categories](https://img.shields.io/badge/Categories-15-f59e0b?style=for-the-badge)](.)
 [![Prompts](https://img.shields.io/badge/Prompts-7-ec4899?style=for-the-badge)](prompts/)
 
 ---
@@ -106,6 +106,18 @@
 | 32 | **OpenClaw** | `tools/openclaw/` | Personal AI assistant — runs locally, browses web, writes own skills (250k ⭐) |
 | 33 | **Browser-Use** | `tools/browser-use/` | Make websites accessible for AI agents — browser automation |
 | 34 | **n8n** | `tools/n8n/` | Workflow automation with AI, 400+ integrations (160k ⭐) |
+
+### 📊 Data & Analytics
+| # | Tool | Directory | Description |
+|---|------|-----------|-------------|
+| 35 | **PandasAI** | `tools/pandas-ai/` | Chat with databases/DataFrames in natural language (15k ⭐) |
+| 36 | **Dataherald** | `tools/dataherald/` | Enterprise NL-to-SQL engine |
+
+### 🔒 Security & Pentesting
+| # | Tool | Directory | Description |
+|---|------|-----------|-------------|
+| 37 | **Nuclei** | `tools/nuclei/` | Template-based vulnerability scanner (23k ⭐) |
+| 38 | **Caido** | `tools/caido/` | Lightweight Burp Suite alternative |
 
 ### 🚀 Model Serving
 | # | Tool | Directory | Description |

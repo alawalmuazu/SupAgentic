@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SupAgentic — Unified AI Toolkit</title>
-    <meta name="description" content="SupAgentic — 50 powerful open-source AI tools unified under one roof. Agent orchestration, swarm simulation, browser automation, voice cloning, model serving, and more.">
+    <meta name="description" content="SupAgentic — 54 powerful open-source AI tools unified under one roof. Agent orchestration, swarm simulation, browser automation, voice cloning, model serving, and more.">
     <meta property="og:title" content="SupAgentic — Unified AI Toolkit">
-    <meta property="og:description" content="50 open-source AI tools + 7 curated prompts. Agents, RAG, swarm simulation, browser automation, model serving & more.">
+    <meta property="og:description" content="54 open-source AI tools + 7 curated prompts. Agents, RAG, swarm simulation, browser automation, model serving & more.">
     <meta property="og:image" content="https://alawalmuazu.github.io/SupAgentic/assets/social-preview.png">
     <meta property="og:url" content="https://alawalmuazu.github.io/SupAgentic">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SupAgentic — 50 AI Tools Unified">
+    <meta name="twitter:title" content="SupAgentic — 54 AI Tools Unified">
     <meta name="twitter:description" content="Open-source AI toolkit: agents, RAG, coding, training, media generation & more.">
     <meta name="twitter:image" content="https://alawalmuazu.github.io/SupAgentic/assets/social-preview.png">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
@@ -173,12 +173,12 @@
         <header class="header">
             <div class="header-badge"><span class="pulse"></span> Open Source AI Arsenal</div>
             <h1>SupAgentic</h1>
-            <p>50 powerful open-source AI tools — unified under one roof. From agent orchestration to swarm simulation to voice cloning to model serving.</p>
+            <p>54 powerful open-source AI tools — unified under one roof. From agent orchestration to swarm simulation to voice cloning to model serving.</p>
         </header>
 
         <div class="stats-bar">
-            <div class="stat"><div class="stat-value">50</div><div class="stat-label">Tools</div></div>
-            <div class="stat"><div class="stat-value">13</div><div class="stat-label">Categories</div></div>
+            <div class="stat"><div class="stat-value">54</div><div class="stat-label">Tools</div></div>
+            <div class="stat"><div class="stat-value">15</div><div class="stat-label">Categories</div></div>
             <div class="stat"><div class="stat-value">7</div><div class="stat-label">Languages</div></div>
             <div class="stat"><div class="stat-value">∞</div><div class="stat-label">Possibilities</div></div>
         </div>
@@ -206,6 +206,8 @@
                 <button class="filter-btn" data-filter="automation">🦀 Automation</button>
                 <button class="filter-btn" data-filter="browser">🌐 Browser</button>
                 <button class="filter-btn" data-filter="serving">🚀 Serving</button>
+            <button class="filter-btn" data-filter="data">📊 Data</button>
+            <button class="filter-btn" data-filter="security">🔒 Security</button>
             </div>
         </div>
 
@@ -521,6 +523,32 @@
                 <div class="card-header"><div class="card-icon">⚡</div><div><div class="card-title">Bolt.new</div><div class="card-category">AI App Builder</div></div></div>
                 <div class="card-desc">Prompt, run, edit, and deploy full-stack web apps — AI-powered development in the browser with StackBlitz. 28k+ ⭐.</div>
                 <div class="card-meta"><span class="card-tag">TypeScript</span><span class="card-tag">28k ⭐</span><a class="card-link" href="tools/bolt-new/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <!-- DATA/ANALYTICS -->
+            <div class="card" data-c="lime" data-cat="data" data-search="pandasai pandas ai chat data analysis dataframe sql natural language python" onclick="window.open('https://github.com/Sinaptik-AI/pandas-ai','_blank')">
+                <div class="card-header"><div class="card-icon">📊</div><div><div class="card-title">PandasAI</div><div class="card-category">Chat with Data</div></div></div>
+                <div class="card-desc">Chat with your database or DataFrame using natural language. SQL generation, data visualization, and smart analysis. 15k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">15k ⭐</span><a class="card-link" href="tools/pandas-ai/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="sky" data-cat="data" data-search="dataherald natural language sql database analytics enterprise python" onclick="window.open('https://github.com/Dataherald/dataherald','_blank')">
+                <div class="card-header"><div class="card-icon">🗂️</div><div><div class="card-title">Dataherald</div><div class="card-category">NL-to-SQL Engine</div></div></div>
+                <div class="card-desc">Enterprise natural language to SQL engine — connect databases and query them in plain English with high accuracy.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">Enterprise</span><a class="card-link" href="tools/dataherald/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <!-- SECURITY/PENTESTING -->
+            <div class="card" data-c="red" data-cat="security" data-search="nuclei vulnerability scanner pentesting security templates fast go projectdiscovery 23k stars" onclick="window.open('https://github.com/projectdiscovery/nuclei','_blank')">
+                <div class="card-header"><div class="card-icon">☢️</div><div><div class="card-title">Nuclei</div><div class="card-category">Vuln Scanner</div></div></div>
+                <div class="card-desc">Fast, template-based vulnerability scanner. 8000+ community templates for CVEs, misconfigs, and exposed panels. 23k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Go</span><span class="card-tag">23k ⭐</span><a class="card-link" href="tools/nuclei/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="amber" data-cat="security" data-search="caido web security testing proxy intercept http burp alternative lightweight rust" onclick="window.open('https://github.com/caido/caido','_blank')">
+                <div class="card-header"><div class="card-icon">🛡️</div><div><div class="card-title">Caido</div><div class="card-category">Web Security Proxy</div></div></div>
+                <div class="card-desc">Lightweight web security testing toolkit — modern Burp Suite alternative. Fast, extensible, with built-in AI assistance.</div>
+                <div class="card-meta"><span class="card-tag">Rust</span><span class="card-tag">Pentesting</span><a class="card-link" href="tools/caido/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
             </div>
 
             <!-- TUTORIALS -->

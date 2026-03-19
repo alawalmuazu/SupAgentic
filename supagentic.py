@@ -83,6 +83,10 @@ TOOLS = [
     {"name": "Phidata",          "dir": "phidata",             "cat": "Agents",      "repo": "phidatahq/phidata",                  "lang": "Python"},
     {"name": "SWE-Agent",        "dir": "swe-agent",           "cat": "Coding",      "repo": "princeton-nlp/SWE-agent",            "lang": "Python"},
     {"name": "Bolt.new",         "dir": "bolt-new",            "cat": "Coding",      "repo": "stackblitz/bolt.new",                "lang": "TypeScript"},
+    {"name": "PandasAI",         "dir": "pandas-ai",           "cat": "Data",        "repo": "Sinaptik-AI/pandas-ai",              "lang": "Python"},
+    {"name": "Dataherald",       "dir": "dataherald",           "cat": "Data",        "repo": "Dataherald/dataherald",              "lang": "Python"},
+    {"name": "Nuclei",           "dir": "nuclei",               "cat": "Security",    "repo": "projectdiscovery/nuclei",            "lang": "Go"},
+    {"name": "Caido",            "dir": "caido",                "cat": "Security",    "repo": "caido/caido",                        "lang": "Rust"},
 ]
 
 # ═══ Colors ═══
