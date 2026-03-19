@@ -72,6 +72,10 @@ TOOLS = [
     {"name": "DeepSeek-V3",      "dir": "deepseek",            "cat": "Local LLM",   "repo": "deepseek-ai/DeepSeek-V3",            "lang": "Python"},
     {"name": "Gemini CLI",       "dir": "gemini-cli",          "cat": "Coding",      "repo": "google-gemini/gemini-cli",           "lang": "TypeScript"},
     {"name": "Claude Code",      "dir": "claude-code",         "cat": "Coding",      "repo": "anthropics/claude-code",             "lang": "TypeScript"},
+    {"name": "n8n",              "dir": "n8n",                 "cat": "Automation",  "repo": "n8n-io/n8n",                         "lang": "TypeScript"},
+    {"name": "MetaGPT",          "dir": "metagpt",             "cat": "Agents",      "repo": "geekan/MetaGPT",                     "lang": "Python"},
+    {"name": "AutoGPT",          "dir": "autogpt",             "cat": "Agents",      "repo": "Significant-Gravitas/AutoGPT",       "lang": "Python"},
+    {"name": "LangChain",        "dir": "langchain",           "cat": "Agents",      "repo": "langchain-ai/langchain",             "lang": "Python"},
 ]
 
 # ═══ Colors ═══
