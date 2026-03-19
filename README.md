@@ -1,9 +1,9 @@
 # 🚀 SupAgentic
 
-> A unified collection of **43 powerful open-source AI tools** + **7 curated prompts** — from agent orchestration to swarm simulation to voice cloning to model serving.
+> A unified collection of **50 powerful open-source AI tools** + **7 curated prompts** — from agent orchestration to swarm simulation to voice cloning to model serving.
 
 [![Dashboard](https://img.shields.io/badge/Dashboard-Live-6366f1?style=for-the-badge)](https://alawalmuazu.github.io/SupAgentic)
-[![Tools](https://img.shields.io/badge/Tools-43-14b8a6?style=for-the-badge)](.)
+[![Tools](https://img.shields.io/badge/Tools-50-14b8a6?style=for-the-badge)](.)
 [![Categories](https://img.shields.io/badge/Categories-13-f59e0b?style=for-the-badge)](.)
 [![Prompts](https://img.shields.io/badge/Prompts-7-ec4899?style=for-the-badge)](prompts/)
 
@@ -23,6 +23,8 @@
 | 7 | **MetaGPT** | `tools/metagpt/` | Multi-agent software company — PM, Architect, Engineer (62k ⭐) |
 | 8 | **AutoGPT** | `tools/autogpt/` | The OG autonomous agent platform (175k ⭐) |
 | 9 | **LangChain** | `tools/langchain/` | Foundational LLM framework — chains, agents, tools (123k ⭐) |
+| 10 | **Chainlit** | `tools/chainlit/` | Build production-ready conversational AI chat UIs (8k ⭐) |
+| 11 | **Phidata** | `tools/phidata/` | Multi-modal agents with memory, knowledge, and reasoning (20k ⭐) |
 
 ### 🛡️ LLM Security
 | # | Tool | Directory | Description |
@@ -40,6 +42,9 @@
 | 13 | **Claude Engineer** | `tools/claude-engineer/` | Autonomous coding agent for Claude |
 | 14 | **Gemini CLI** | `tools/gemini-cli/` | Google's Gemini multimodal model in your terminal (87k ⭐) |
 | 15 | **Claude Code** | `tools/claude-code/` | Anthropic's privacy-first on-device coding assistant (46k ⭐) |
+| 16 | **Cursor Rules** | `tools/cursor-rules/` | Community-curated .cursorrules library for AI IDEs (10k ⭐) |
+| 17 | **SWE-Agent** | `tools/swe-agent/` | Princeton's autonomous software engineer (18k ⭐) |
+| 18 | **Bolt.new** | `tools/bolt-new/` | AI full-stack web app builder by StackBlitz (28k ⭐) |
 
 ### 📚 RAG & Retrieval
 | # | Tool | Directory | Description |
@@ -47,11 +52,13 @@
 | 14 | **LlamaIndex** | `tools/llama-index/` | Data framework for LLM applications |
 | 15 | **RAGFlow** | `tools/ragflow/` | End-to-end production RAG engine |
 | 16 | **Anything-LLM** | `tools/anything-llm/` | All-in-one RAG desktop app |
+| 19 | **Haystack** | `tools/haystack/` | Deepset's production-ready RAG & NLP pipeline framework (42k ⭐) |
 
 ### 🧠 Context & Memory
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
 | 17 | **OpenViking** | `tools/openviking/` | Context database with `viking://` protocol |
+| 20 | **Mem0** | `tools/mem0/` | Self-improving memory layer for personalized AI (25k ⭐) |
 
 ### 🐟 Swarm Intelligence
 | # | Tool | Directory | Description |

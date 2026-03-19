@@ -76,6 +76,13 @@ TOOLS = [
     {"name": "MetaGPT",          "dir": "metagpt",             "cat": "Agents",      "repo": "geekan/MetaGPT",                     "lang": "Python"},
     {"name": "AutoGPT",          "dir": "autogpt",             "cat": "Agents",      "repo": "Significant-Gravitas/AutoGPT",       "lang": "Python"},
     {"name": "LangChain",        "dir": "langchain",           "cat": "Agents",      "repo": "langchain-ai/langchain",             "lang": "Python"},
+    {"name": "Cursor Rules",     "dir": "cursor-rules",        "cat": "Coding",      "repo": "PatrickJS/awesome-cursorrules",      "lang": "Markdown"},
+    {"name": "Haystack",         "dir": "haystack",            "cat": "RAG",         "repo": "deepset-ai/haystack",                "lang": "Python"},
+    {"name": "Chainlit",         "dir": "chainlit",            "cat": "Agents",      "repo": "Chainlit/chainlit",                  "lang": "Python/TS"},
+    {"name": "Mem0",             "dir": "mem0",                "cat": "Memory",      "repo": "mem0ai/mem0",                        "lang": "Python"},
+    {"name": "Phidata",          "dir": "phidata",             "cat": "Agents",      "repo": "phidatahq/phidata",                  "lang": "Python"},
+    {"name": "SWE-Agent",        "dir": "swe-agent",           "cat": "Coding",      "repo": "princeton-nlp/SWE-agent",            "lang": "Python"},
+    {"name": "Bolt.new",         "dir": "bolt-new",            "cat": "Coding",      "repo": "stackblitz/bolt.new",                "lang": "TypeScript"},
 ]
 
 # ═══ Colors ═══

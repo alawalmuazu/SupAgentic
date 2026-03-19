@@ -2,6 +2,20 @@
 
 All notable changes to SupAgentic are documented here.
 
+## [1.4.0] — 2026-03-19 🎯 **50-TOOL MILESTONE**
+
+### Added
+- **Cursor Rules** — community-curated .cursorrules library (10k ⭐)
+- **Haystack** — Deepset's RAG & NLP pipeline framework (42k ⭐)
+- **Chainlit** — build production-ready chat UIs for AI (8k ⭐)
+- **Mem0** — self-improving memory layer for agents (25k ⭐)
+- **Phidata** — multi-modal agent toolkit with function calling (20k ⭐)
+- **SWE-Agent** — Princeton's autonomous software engineer (18k ⭐)
+- **Bolt.new** — AI full-stack web app builder by StackBlitz (28k ⭐)
+- Toolkit now at **50 tools** across **13 categories** 🎉
+
+---
+
 ## [1.3.0] — 2026-03-19
 
 ### Added
