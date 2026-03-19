@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "supagentic": {
+      "command": "C:\\Users\\OMEN\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+      "args": ["C:\\Users\\OMEN\\Documents\\SupAgentic\\mcp_server.py"]
+    }
+  }
+}
