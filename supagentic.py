@@ -68,6 +68,10 @@ TOOLS = [
     {"name": "Langflow",         "dir": "langflow",           "cat": "Agents",      "repo": "langflow-ai/langflow",               "lang": "Python"},
     {"name": "Fish Speech",      "dir": "fish-speech",        "cat": "Media",       "repo": "fishaudio/fish-speech",              "lang": "Python"},
     {"name": "vLLM",             "dir": "vllm",               "cat": "Serving",     "repo": "vllm-project/vllm",                  "lang": "Python"},
+    {"name": "Open WebUI",       "dir": "open-webui",          "cat": "Local LLM",   "repo": "open-webui/open-webui",              "lang": "Python/Svelte"},
+    {"name": "DeepSeek-V3",      "dir": "deepseek",            "cat": "Local LLM",   "repo": "deepseek-ai/DeepSeek-V3",            "lang": "Python"},
+    {"name": "Gemini CLI",       "dir": "gemini-cli",          "cat": "Coding",      "repo": "google-gemini/gemini-cli",           "lang": "TypeScript"},
+    {"name": "Claude Code",      "dir": "claude-code",         "cat": "Coding",      "repo": "anthropics/claude-code",             "lang": "TypeScript"},
 ]
 
 # ═══ Colors ═══
@@ -248,6 +252,9 @@ DEPS = {
     "comfyui":   {"needs": [], "ports": "8188", "start": "python main.py"},
     "ragflow":   {"needs": [], "ports": "9380", "start": "docker compose up -d"},
     "dify":      {"needs": [], "ports": "3000", "start": "docker compose up -d"},
+    "open-webui": {"needs": ["ollama"], "ports": "3000", "start": "docker compose up -d"},
+    "gemini-cli": {"needs": [], "ports": None, "start": "npx @anthropic-ai/claude-code"},
+    "claude-code": {"needs": [], "ports": None, "start": "npx @anthropic-ai/claude-code"},
 }
 
 # ═══ Orchestration Pipelines ═══
@@ -332,6 +339,76 @@ def cmd_run(args):
         subprocess.run(cmd, shell=True, cwd=str(path))
     except KeyboardInterrupt:
         print(f"\n  {C.YELLOW}Stopped {tool['name']}{C.END}")
+
+def cmd_setup(args):
+    """Auto-install dependencies for a tool"""
+    if not args:
+        print(f"  {C.YELLOW}Usage: supagentic setup <tool-name>{C.END}")
+        print(f"  {C.DIM}Detects requirements.txt, package.json, pyproject.toml, etc.{C.END}")
+        return
+
+    query = " ".join(args).lower()
+    tool = next((t for t in TOOLS if query in t["name"].lower() or query == t["dir"]), None)
+    if not tool:
+        print(f"  {C.RED}Tool '{query}' not found{C.END}")
+        return
+
+    path = TOOLS_DIR / tool["dir"]
+    if not path.exists():
+        print(f"  {C.RED}Tool not installed locally{C.END}")
+        return
+
+    print(f"\n  {C.BOLD}{C.CYAN}📦 Setting up {tool['name']}{C.END}")
+    print(f"  {C.DIM}Scanning {path} for dependency files...{C.END}\n")
+
+    found = False
+
+    # Python: pyproject.toml (uv or pip)
+    if (path / "pyproject.toml").exists():
+        found = True
+        print(f"  {C.GREEN}Found pyproject.toml{C.END} — installing with uv...")
+        try:
+            subprocess.run(["uv", "sync"], cwd=str(path), timeout=120)
+        except FileNotFoundError:
+            print(f"  {C.YELLOW}uv not found, trying pip...{C.END}")
+            subprocess.run([sys.executable, "-m", "pip", "install", "-e", "."], cwd=str(path), timeout=120)
+
+    # Python: requirements.txt
+    if (path / "requirements.txt").exists():
+        found = True
+        print(f"  {C.GREEN}Found requirements.txt{C.END} — installing...")
+        subprocess.run([sys.executable, "-m", "pip", "install", "-r", "requirements.txt"], cwd=str(path), timeout=120)
+
+    # Node: package.json
+    if (path / "package.json").exists():
+        found = True
+        print(f"  {C.GREEN}Found package.json{C.END} — installing with npm...")
+        subprocess.run(["npm", "install"], cwd=str(path), shell=True, timeout=120)
+
+    # Python: setup.py
+    if (path / "setup.py").exists() and not (path / "pyproject.toml").exists():
+        found = True
+        print(f"  {C.GREEN}Found setup.py{C.END} — installing...")
+        subprocess.run([sys.executable, "-m", "pip", "install", "-e", "."], cwd=str(path), timeout=120)
+
+    # Python: Pipfile
+    if (path / "Pipfile").exists():
+        found = True
+        print(f"  {C.GREEN}Found Pipfile{C.END} — installing with pipenv...")
+        try:
+            subprocess.run(["pipenv", "install"], cwd=str(path), timeout=120)
+        except FileNotFoundError:
+            print(f"  {C.YELLOW}pipenv not found. Install with: pip install pipenv{C.END}")
+
+    # Docker
+    if (path / "docker-compose.yml").exists() or (path / "docker-compose.yaml").exists() or (path / "compose.yaml").exists():
+        found = True
+        print(f"  {C.GREEN}Found Docker Compose{C.END} — run: docker compose up -d")
+
+    if not found:
+        print(f"  {C.YELLOW}No dependency files detected. Check the tool's README for setup instructions.{C.END}")
+    else:
+        print(f"\n  {C.GREEN}✅ Setup complete for {tool['name']}{C.END}\n")
 
 def cmd_deps(args):
     """Show dependency tree for a tool"""
@@ -453,6 +530,7 @@ COMMANDS = {
     "serve": cmd_serve, "dashboard": cmd_serve,
     "open": cmd_open,
     "run": cmd_run, "start": cmd_run,
+    "setup": cmd_setup, "install": cmd_setup,
     "deps": cmd_deps, "dependencies": cmd_deps,
     "pipeline": cmd_pipeline, "pipe": cmd_pipeline,
     "mcp": cmd_mcp,
@@ -468,6 +546,7 @@ def main():
         print(f"    {C.CYAN}health{C.END}            Check repo freshness")
         print(f"    {C.CYAN}update [tool]{C.END}     Git pull tool(s)")
         print(f"    {C.CYAN}run <tool>{C.END}         Start a tool (auto-detect startup)")
+        print(f"    {C.CYAN}setup <tool>{C.END}       Install dependencies for a tool")
         print(f"    {C.CYAN}deps [tool]{C.END}        Show dependency map")
         print(f"    {C.CYAN}pipeline [name]{C.END}    Show/run orchestration pipelines")
         print(f"    {C.CYAN}mcp [--json]{C.END}       MCP server manifest / JSON export")

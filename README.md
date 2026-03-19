@@ -1,9 +1,9 @@
 # 🚀 SupAgentic
 
-> A unified collection of **35 powerful open-source AI tools** + **7 curated prompts** — from agent orchestration to swarm simulation to voice cloning to model serving.
+> A unified collection of **39 powerful open-source AI tools** + **7 curated prompts** — from agent orchestration to swarm simulation to voice cloning to model serving.
 
 [![Dashboard](https://img.shields.io/badge/Dashboard-Live-6366f1?style=for-the-badge)](https://alawalmuazu.github.io/SupAgentic)
-[![Tools](https://img.shields.io/badge/Tools-35-14b8a6?style=for-the-badge)](.)
+[![Tools](https://img.shields.io/badge/Tools-39-14b8a6?style=for-the-badge)](.)
 [![Categories](https://img.shields.io/badge/Categories-13-f59e0b?style=for-the-badge)](.)
 [![Prompts](https://img.shields.io/badge/Prompts-7-ec4899?style=for-the-badge)](prompts/)
 
@@ -35,6 +35,8 @@
 | 11 | **Fabric** | `tools/fabric/` | 100+ curated AI prompt patterns |
 | 12 | **Tabby** | `tools/tabby/` | Self-hosted GitHub Copilot replacement |
 | 13 | **Claude Engineer** | `tools/claude-engineer/` | Autonomous coding agent for Claude |
+| 14 | **Gemini CLI** | `tools/gemini-cli/` | Google's Gemini multimodal model in your terminal (87k ⭐) |
+| 15 | **Claude Code** | `tools/claude-code/` | Anthropic's privacy-first on-device coding assistant (46k ⭐) |
 
 ### 📚 RAG & Retrieval
 | # | Tool | Directory | Description |
@@ -66,6 +68,8 @@
 | # | Tool | Directory | Description |
 |---|------|-----------|-------------|
 | 24 | **Ollama** | `tools/ollama/` | Run LLMs locally with one command |
+| 25 | **Open WebUI** | `tools/open-webui/` | Self-hosted ChatGPT-style UI for Ollama & OpenAI APIs (80k ⭐) |
+| 26 | **DeepSeek-V3** | `tools/deepseek/` | GPT-4-class open model, 671B MoE architecture (100k ⭐) |
 
 ### 🔧 Fine-Tuning & Training
 | # | Tool | Directory | Description |
@@ -115,7 +119,7 @@
 
 ## 🖥️ CLI Reference
 
-SupAgentic includes a full-featured command-line interface with **11 commands**:
+SupAgentic includes a full-featured command-line interface with **12 commands**:
 
 ```bash
 python supagentic.py <command> [args]
@@ -129,6 +133,7 @@ python supagentic.py <command> [args]
 | `health` | Check repo freshness (days since commit) | `python supagentic.py health` |
 | `update [tool]` | Git pull one or all tools | `python supagentic.py update mirofish` |
 | `run <tool>` | Start a tool (auto-detect npm/python/docker) | `python supagentic.py run mirofish` |
+| `setup <tool>` | Auto-install tool dependencies | `python supagentic.py setup langflow` |
 | `deps [tool]` | Show dependency map with ports | `python supagentic.py deps` |
 | `pipeline [name]` | Show/run orchestration pipelines | `python supagentic.py pipeline` |
 | `mcp [--json]` | MCP server manifest / JSON export | `python supagentic.py mcp --json` |
