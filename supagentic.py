@@ -756,88 +756,23 @@ def cmd_tui(args):
                 cmd_open([t["dir"]])
 
 def cmd_mcp_serve(args):
-    """Real MCP server — JSON-RPC over stdio"""
-    import json as js
+    """Launch the full MCP server"""
+    server_path = SCRIPT_DIR / "mcp_server.py"
+    cmd_args = [sys.executable, str(server_path)]
+    if "--sse" in args:
+        cmd_args.append("--sse")
+        for i, a in enumerate(args):
+            if a == "--port" and i + 1 < len(args):
+                cmd_args.extend(["--port", args[i + 1]])
+    try:
+        subprocess.run(cmd_args)
+    except KeyboardInterrupt:
+        print(f"\n  {C.YELLOW}MCP server stopped{C.END}")
 
-    tools_for_mcp = []
-    for t in TOOLS:
-        if t["cat"] == "Tutorials":
-            continue
-        path = TOOLS_DIR / t["dir"]
-        dep_info = DEPS.get(t["dir"], {})
-        tools_for_mcp.append({
-            "name": f"supagentic_{t['dir'].replace('-', '_')}",
-            "description": f"{t['name']} — {t['cat']} tool ({t['lang']})",
-            "inputSchema": {
-                "type": "object",
-                "properties": {
-                    "action": {"type": "string", "enum": ["info", "run", "setup", "clone", "update"]},
-                },
-                "required": ["action"]
-            }
-        })
-
-    # Send server info on startup
-    sys.stderr.write(f"SupAgentic MCP Server — {len(tools_for_mcp)} tools\n")
-    sys.stderr.flush()
-
-    while True:
-        try:
-            line = sys.stdin.readline()
-            if not line:
-                break
-
-            request = js.loads(line.strip())
-            req_id = request.get("id")
-            method = request.get("method", "")
-
-            if method == "initialize":
-                response = {"jsonrpc": "2.0", "id": req_id, "result": {
-                    "protocolVersion": "2024-11-05",
-                    "serverInfo": {"name": "supagentic", "version": "1.4.0"},
-                    "capabilities": {"tools": {"listChanged": False}}
-                }}
-            elif method == "tools/list":
-                response = {"jsonrpc": "2.0", "id": req_id, "result": {"tools": tools_for_mcp}}
-            elif method == "tools/call":
-                params = request.get("params", {})
-                tool_name = params.get("name", "")
-                tool_args = params.get("arguments", {})
-                action = tool_args.get("action", "info")
-
-                # Find tool
-                dir_name = tool_name.replace("supagentic_", "").replace("_", "-")
-                tool = next((t for t in TOOLS if t["dir"] == dir_name), None)
-
-                if tool:
-                    path = TOOLS_DIR / tool["dir"]
-                    dep = DEPS.get(tool["dir"], {})
-                    result_text = (
-                        f"Tool: {tool['name']}\n"
-                        f"Category: {tool['cat']}\n"
-                        f"Language: {tool['lang']}\n"
-                        f"Repository: https://github.com/{tool['repo']}\n"
-                        f"Installed: {path.exists()}\n"
-                        f"Start: {dep.get('start', 'N/A')}\n"
-                        f"Ports: {dep.get('ports', 'None')}\n"
-                        f"Dependencies: {', '.join(dep.get('needs', []))}"
-                    )
-                else:
-                    result_text = f"Tool not found: {tool_name}"
-
-                response = {"jsonrpc": "2.0", "id": req_id, "result": {
-                    "content": [{"type": "text", "text": result_text}]
-                }}
-            else:
-                response = {"jsonrpc": "2.0", "id": req_id, "result": {}}
-
-            sys.stdout.write(js.dumps(response) + "\n")
-            sys.stdout.flush()
-
-        except (json.JSONDecodeError, KeyError):
-            continue
-        except EOFError:
-            break
+def cmd_mcp_register(args):
+    """Register MCP server with Claude Desktop / Cursor"""
+    server_path = SCRIPT_DIR / "mcp_server.py"
+    subprocess.run([sys.executable, str(server_path), "--register"])
 
 # ═══ Command Router ═══
 COMMANDS = {
@@ -856,6 +791,7 @@ COMMANDS = {
     "tui": cmd_tui, "browse": cmd_tui,
     "mcp": cmd_mcp,
     "mcp-serve": cmd_mcp_serve,
+    "mcp-register": cmd_mcp_register,
     "deps": cmd_deps, "dependencies": cmd_deps,
     "pipeline": cmd_pipeline, "pipe": cmd_pipeline,
 }
@@ -878,7 +814,8 @@ def main():
         print(f"    {C.CYAN}pipeline [name]{C.END}   Show/run orchestration pipelines")
         print(f"    {C.CYAN}tui{C.END}               Interactive tool browser (rich)")
         print(f"    {C.CYAN}mcp [--json]{C.END}      MCP manifest / JSON export")
-        print(f"    {C.CYAN}mcp-serve{C.END}         Start real MCP server (stdio JSON-RPC)")
+        print(f"    {C.CYAN}mcp-serve{C.END}         Launch MCP server (stdio or --sse)")
+        print(f"    {C.CYAN}mcp-register{C.END}      Register with Claude Desktop / Cursor")
         print(f"    {C.CYAN}serve [port]{C.END}      Start dashboard server")
         print(f"    {C.CYAN}open <tool>{C.END}       Open tool directory")
         print()
