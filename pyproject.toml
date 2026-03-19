@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "supagentic"
+version = "1.4.0"
+description = "Unified CLI for managing 50+ open-source AI tools"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [
+    {name = "Alwal Amuazu", email = "alawalmuazu@gmail.com"}
+]
+keywords = ["ai", "tools", "agents", "rag", "llm", "cli", "mcp"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[project.optional-dependencies]
+tui = ["rich>=13.0"]
+
+[project.scripts]
+supagentic = "supagentic:main"
+
+[project.urls]
+Homepage = "https://github.com/alawalmuazu/SupAgentic"
+Dashboard = "https://alawalmuazu.github.io/SupAgentic"
+Repository = "https://github.com/alawalmuazu/SupAgentic"
+Changelog = "https://github.com/alawalmuazu/SupAgentic/blob/main/CHANGELOG.md"

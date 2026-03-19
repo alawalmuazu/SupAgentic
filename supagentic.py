@@ -531,6 +531,310 @@ def cmd_mcp(args):
         print(f"  {C.CYAN}Pipe to MCP:  python supagentic.py mcp --json | mcp-server{C.END}")
         print()
 
+def cmd_clone(args):
+    """Clone a tool from GitHub on-demand"""
+    if not args:
+        print(f"  {C.YELLOW}Usage: supagentic clone <tool-name>{C.END}")
+        print(f"  {C.DIM}Example: supagentic clone mirofish{C.END}")
+        print(f"\n  {C.DIM}Not installed:{C.END}")
+        for t in TOOLS:
+            if t["cat"] == "Tutorials":
+                continue
+            path = TOOLS_DIR / t["dir"]
+            if not path.exists():
+                print(f"    {C.RED}✗{C.END} {t['name']} ({t['cat']})")
+        print()
+        return
+
+    query = " ".join(args).lower()
+    tool = next((t for t in TOOLS if query in t["name"].lower() or query == t["dir"]), None)
+    if not tool:
+        print(f"  {C.RED}Tool '{query}' not found{C.END}")
+        return
+
+    path = TOOLS_DIR / tool["dir"]
+    if path.exists():
+        print(f"  {C.GREEN}✅ {tool['name']} already installed at {path}{C.END}")
+        return
+
+    url = f"https://github.com/{tool['repo']}.git"
+    print(f"\n  {C.BOLD}{C.CYAN}📥 Cloning {tool['name']}{C.END}")
+    print(f"  {C.DIM}{url} → {path}{C.END}\n")
+
+    try:
+        subprocess.run(["git", "clone", "--depth", "1", url, str(path)], timeout=120)
+        print(f"\n  {C.GREEN}✅ {tool['name']} installed!{C.END}")
+        print(f"  {C.DIM}Run: supagentic setup {tool['dir']}{C.END}")
+        print(f"  {C.DIM}     supagentic run {tool['dir']}{C.END}\n")
+    except Exception as e:
+        print(f"  {C.RED}Clone failed: {e}{C.END}")
+
+def cmd_stats(args):
+    """Fetch live GitHub stats for tools"""
+    import urllib.request
+
+    banner()
+    print(f"  {C.BOLD}GitHub Stats (Live){C.END}\n")
+
+    tools_to_check = TOOLS
+    if args:
+        query = " ".join(args).lower()
+        tools_to_check = [t for t in TOOLS if query in t["name"].lower() or query == t["dir"] or query == t["cat"].lower()]
+
+    for t in tools_to_check:
+        if t["cat"] == "Tutorials":
+            continue
+        try:
+            url = f"https://api.github.com/repos/{t['repo']}"
+            req = urllib.request.Request(url, headers={"User-Agent": "SupAgentic-CLI/1.0"})
+            with urllib.request.urlopen(req, timeout=5) as resp:
+                data = json.loads(resp.read().decode())
+                stars = data.get("stargazers_count", 0)
+                forks = data.get("forks_count", 0)
+                issues = data.get("open_issues_count", 0)
+
+                if stars >= 100000:
+                    star_str = f"{C.GREEN}{stars//1000}k ⭐{C.END}"
+                elif stars >= 10000:
+                    star_str = f"{C.CYAN}{stars//1000}k ⭐{C.END}"
+                else:
+                    star_str = f"{stars//1000}k ⭐"
+
+                print(f"  {t['name']:<22} {star_str:>16}  {forks:>5} forks  {issues:>4} issues")
+        except Exception:
+            print(f"  {t['name']:<22} {C.DIM}(offline){C.END}")
+
+    print()
+
+def cmd_create(args):
+    """Scaffold a new tool entry"""
+    if not args:
+        print(f"  {C.YELLOW}Usage: supagentic create <name> <github-repo> <category> <language>{C.END}")
+        print(f"  {C.DIM}Example: supagentic create MyTool user/repo Agents Python{C.END}")
+        return
+
+    if len(args) < 4:
+        print(f"  {C.RED}Need 4 args: name, repo, category, language{C.END}")
+        return
+
+    name, repo, cat, lang = args[0], args[1], args[2], " ".join(args[3:])
+    dir_name = name.lower().replace(" ", "-")
+
+    # Check if already exists
+    if any(t["dir"] == dir_name for t in TOOLS):
+        print(f"  {C.RED}Tool '{name}' already registered{C.END}")
+        return
+
+    # Create directory structure
+    path = TOOLS_DIR / dir_name
+    path.mkdir(parents=True, exist_ok=True)
+
+    # Create README
+    readme = path / "README.md"
+    readme.write_text(f"# {name}\n\n> Added via `supagentic create`\n\n"
+                      f"- **Category**: {cat}\n- **Language**: {lang}\n"
+                      f"- **Repository**: https://github.com/{repo}\n", encoding="utf-8")
+
+    # Show what to add to registry
+    entry = f'    {{"name": "{name}", "dir": "{dir_name}", "cat": "{cat}", "repo": "{repo}", "lang": "{lang}"}},'
+    print(f"\n  {C.GREEN}✅ Scaffolded {name} at {path}{C.END}")
+    print(f"  {C.DIM}Created README.md{C.END}")
+    print(f"\n  {C.YELLOW}Add this line to TOOLS in supagentic.py:{C.END}")
+    print(f"  {C.CYAN}{entry}{C.END}")
+
+    # Optionally clone
+    print(f"\n  {C.DIM}Clone: supagentic clone {dir_name}{C.END}\n")
+
+def cmd_tui(args):
+    """Interactive TUI for browsing tools"""
+    try:
+        from rich.console import Console
+        from rich.table import Table
+        from rich.panel import Panel
+        from rich.prompt import Prompt
+        from rich import box
+    except ImportError:
+        print(f"  {C.YELLOW}Installing rich...{C.END}")
+        subprocess.run([sys.executable, "-m", "pip", "install", "rich", "-q"])
+        from rich.console import Console
+        from rich.table import Table
+        from rich.panel import Panel
+        from rich.prompt import Prompt
+        from rich import box
+
+    console = Console()
+
+    while True:
+        console.clear()
+
+        # Header
+        console.print(Panel.fit(
+            "[bold cyan]SupAgentic[/] — [dim]Interactive Tool Browser[/]",
+            border_style="cyan", box=box.DOUBLE
+        ))
+
+        # Category list
+        cats = {}
+        for t in TOOLS:
+            if t["cat"] == "Tutorials":
+                continue
+            cats.setdefault(t["cat"], []).append(t)
+
+        cat_names = sorted(cats.keys())
+        console.print("\n[bold yellow]Categories:[/]")
+        for i, cat in enumerate(cat_names, 1):
+            count = len(cats[cat])
+            console.print(f"  [cyan]{i:>2}.[/] {cat} [dim]({count} tools)[/]")
+
+        console.print(f"\n[dim]Type a category number, tool name, 'all', or 'q' to quit[/]")
+        choice = Prompt.ask("\n[bold]>>", default="all")
+
+        if choice.lower() in ("q", "quit", "exit"):
+            break
+
+        # Build tool list based on choice
+        if choice == "all":
+            show_tools = [t for t in TOOLS if t["cat"] != "Tutorials"]
+            title = "All Tools"
+        elif choice.isdigit() and 1 <= int(choice) <= len(cat_names):
+            cat = cat_names[int(choice) - 1]
+            show_tools = cats[cat]
+            title = cat
+        else:
+            show_tools = [t for t in TOOLS if choice.lower() in t["name"].lower() and t["cat"] != "Tutorials"]
+            title = f"Search: {choice}"
+
+        if not show_tools:
+            console.print(f"[red]No tools found[/]")
+            Prompt.ask("[dim]Press Enter to continue[/]")
+            continue
+
+        # Display table
+        table = Table(title=title, box=box.ROUNDED, border_style="cyan")
+        table.add_column("#", style="dim", width=3)
+        table.add_column("Tool", style="bold white")
+        table.add_column("Category", style="yellow")
+        table.add_column("Language", style="cyan")
+        table.add_column("Status", justify="center")
+
+        for i, t in enumerate(show_tools, 1):
+            installed = (TOOLS_DIR / t["dir"]).exists()
+            status = "[green]✅[/]" if installed else "[red]✗[/]"
+            table.add_row(str(i), t["name"], t["cat"], t["lang"], status)
+
+        console.print()
+        console.print(table)
+
+        # Actions
+        console.print(f"\n[dim]Enter tool number for actions, or press Enter to go back[/]")
+        pick = Prompt.ask("[bold]>>", default="")
+
+        if pick.isdigit() and 1 <= int(pick) <= len(show_tools):
+            t = show_tools[int(pick) - 1]
+            console.print(f"\n[bold cyan]{t['name']}[/]")
+            console.print(f"  [dim]Category:[/]  {t['cat']}")
+            console.print(f"  [dim]Language:[/]  {t['lang']}")
+            console.print(f"  [dim]Repo:[/]      https://github.com/{t['repo']}")
+            console.print(f"  [dim]Dir:[/]       tools/{t['dir']}/")
+            installed = (TOOLS_DIR / t["dir"]).exists()
+            console.print(f"  [dim]Status:[/]    {'[green]Installed[/]' if installed else '[red]Not installed[/]'}")
+
+            console.print(f"\n  [cyan]r[/]=run  [cyan]s[/]=setup  [cyan]c[/]=clone  [cyan]o[/]=open  [cyan]Enter[/]=back")
+            action = Prompt.ask("[bold]>>", default="")
+
+            if action == "r" and installed:
+                cmd_run([t["dir"]])
+            elif action == "s" and installed:
+                cmd_setup([t["dir"]])
+            elif action == "c" and not installed:
+                cmd_clone([t["dir"]])
+            elif action == "o" and installed:
+                cmd_open([t["dir"]])
+
+def cmd_mcp_serve(args):
+    """Real MCP server — JSON-RPC over stdio"""
+    import json as js
+
+    tools_for_mcp = []
+    for t in TOOLS:
+        if t["cat"] == "Tutorials":
+            continue
+        path = TOOLS_DIR / t["dir"]
+        dep_info = DEPS.get(t["dir"], {})
+        tools_for_mcp.append({
+            "name": f"supagentic_{t['dir'].replace('-', '_')}",
+            "description": f"{t['name']} — {t['cat']} tool ({t['lang']})",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "action": {"type": "string", "enum": ["info", "run", "setup", "clone", "update"]},
+                },
+                "required": ["action"]
+            }
+        })
+
+    # Send server info on startup
+    sys.stderr.write(f"SupAgentic MCP Server — {len(tools_for_mcp)} tools\n")
+    sys.stderr.flush()
+
+    while True:
+        try:
+            line = sys.stdin.readline()
+            if not line:
+                break
+
+            request = js.loads(line.strip())
+            req_id = request.get("id")
+            method = request.get("method", "")
+
+            if method == "initialize":
+                response = {"jsonrpc": "2.0", "id": req_id, "result": {
+                    "protocolVersion": "2024-11-05",
+                    "serverInfo": {"name": "supagentic", "version": "1.4.0"},
+                    "capabilities": {"tools": {"listChanged": False}}
+                }}
+            elif method == "tools/list":
+                response = {"jsonrpc": "2.0", "id": req_id, "result": {"tools": tools_for_mcp}}
+            elif method == "tools/call":
+                params = request.get("params", {})
+                tool_name = params.get("name", "")
+                tool_args = params.get("arguments", {})
+                action = tool_args.get("action", "info")
+
+                # Find tool
+                dir_name = tool_name.replace("supagentic_", "").replace("_", "-")
+                tool = next((t for t in TOOLS if t["dir"] == dir_name), None)
+
+                if tool:
+                    path = TOOLS_DIR / tool["dir"]
+                    dep = DEPS.get(tool["dir"], {})
+                    result_text = (
+                        f"Tool: {tool['name']}\n"
+                        f"Category: {tool['cat']}\n"
+                        f"Language: {tool['lang']}\n"
+                        f"Repository: https://github.com/{tool['repo']}\n"
+                        f"Installed: {path.exists()}\n"
+                        f"Start: {dep.get('start', 'N/A')}\n"
+                        f"Ports: {dep.get('ports', 'None')}\n"
+                        f"Dependencies: {', '.join(dep.get('needs', []))}"
+                    )
+                else:
+                    result_text = f"Tool not found: {tool_name}"
+
+                response = {"jsonrpc": "2.0", "id": req_id, "result": {
+                    "content": [{"type": "text", "text": result_text}]
+                }}
+            else:
+                response = {"jsonrpc": "2.0", "id": req_id, "result": {}}
+
+            sys.stdout.write(js.dumps(response) + "\n")
+            sys.stdout.flush()
+
+        except (json.JSONDecodeError, KeyError):
+            continue
+        except EOFError:
+            break
+
 # ═══ Command Router ═══
 COMMANDS = {
     "list": cmd_list, "ls": cmd_list,
@@ -542,9 +846,14 @@ COMMANDS = {
     "open": cmd_open,
     "run": cmd_run, "start": cmd_run,
     "setup": cmd_setup, "install": cmd_setup,
+    "clone": cmd_clone, "get": cmd_clone,
+    "stats": cmd_stats,
+    "create": cmd_create, "new": cmd_create,
+    "tui": cmd_tui, "browse": cmd_tui,
+    "mcp": cmd_mcp,
+    "mcp-serve": cmd_mcp_serve,
     "deps": cmd_deps, "dependencies": cmd_deps,
     "pipeline": cmd_pipeline, "pipe": cmd_pipeline,
-    "mcp": cmd_mcp,
 }
 
 def main():
@@ -556,11 +865,16 @@ def main():
         print(f"    {C.CYAN}info <tool>{C.END}       Show tool details")
         print(f"    {C.CYAN}health{C.END}            Check repo freshness")
         print(f"    {C.CYAN}update [tool]{C.END}     Git pull tool(s)")
-        print(f"    {C.CYAN}run <tool>{C.END}         Start a tool (auto-detect startup)")
-        print(f"    {C.CYAN}setup <tool>{C.END}       Install dependencies for a tool")
-        print(f"    {C.CYAN}deps [tool]{C.END}        Show dependency map")
-        print(f"    {C.CYAN}pipeline [name]{C.END}    Show/run orchestration pipelines")
-        print(f"    {C.CYAN}mcp [--json]{C.END}       MCP server manifest / JSON export")
+        print(f"    {C.CYAN}clone <tool>{C.END}      Install a tool on-demand from GitHub")
+        print(f"    {C.CYAN}run <tool>{C.END}        Start a tool (auto-detect startup)")
+        print(f"    {C.CYAN}setup <tool>{C.END}      Install dependencies for a tool")
+        print(f"    {C.CYAN}stats [query]{C.END}     Live GitHub stars/forks/issues")
+        print(f"    {C.CYAN}create <args>{C.END}     Scaffold a new tool entry")
+        print(f"    {C.CYAN}deps [tool]{C.END}       Show dependency map")
+        print(f"    {C.CYAN}pipeline [name]{C.END}   Show/run orchestration pipelines")
+        print(f"    {C.CYAN}tui{C.END}               Interactive tool browser (rich)")
+        print(f"    {C.CYAN}mcp [--json]{C.END}      MCP manifest / JSON export")
+        print(f"    {C.CYAN}mcp-serve{C.END}         Start real MCP server (stdio JSON-RPC)")
         print(f"    {C.CYAN}serve [port]{C.END}      Start dashboard server")
         print(f"    {C.CYAN}open <tool>{C.END}       Open tool directory")
         print()

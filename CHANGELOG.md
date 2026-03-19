@@ -2,6 +2,22 @@
 
 All notable changes to SupAgentic are documented here.
 
+## [1.5.0] — 2026-03-19
+
+### New Commands
+- `clone <tool>` — install any tool on-demand from GitHub
+- `stats [query]` — live GitHub stars/forks/issues via API
+- `create <name> <repo> <cat> <lang>` — scaffold new tool entries
+- `tui` / `browse` — interactive tool browser using rich tables
+- `mcp-serve` — real MCP server with stdio JSON-RPC protocol
+
+### Infrastructure
+- `pyproject.toml` — PyPI-ready packaging (`pip install supagentic`)
+- CLI now has **17 commands** (up from 12)
+- Tutorials pruned from tool count display and stats
+
+---
+
 ## [1.4.0] — 2026-03-19 🎯 **50-TOOL MILESTONE**
 
 ### Added
