@@ -659,11 +659,6 @@
             <div class="prompt-card">
                 <div class="prompt-header">
                     <span class="prompt-icon">📊</span>
-                    <div><div class="prompt-name">Data Analysis Expert</div><div class="prompt-file">prompts/data-analysis.txt</div></div>
-                </div>
-                <div class="prompt-body">Comprehensive data analysis — overview, statistics, quality issues, key insights, visualization recommendations, and action items.</div>
-                <div class="prompt-tags"><span class="card-tag">Data Science</span><span class="card-tag">Any LLM</span><a class="card-link" href="prompts/data-analysis.txt" target="_blank">View →</a></div>
-            </div>
             <div class="prompt-card">
                 <div class="prompt-header">
                     <span class="prompt-icon">📄</span>
@@ -674,8 +669,114 @@
             </div>
         </div>
 
+        <!-- ═══ MCP SERVER ═══ -->
+        <div class="section-divider"><span>🔌 MCP Server</span></div>
+        <div style="max-width:900px;margin:0 auto 2rem;padding:0 1rem;">
+            <p style="text-align:center;color:#94a3b8;margin-bottom:2rem;font-size:1.05rem;">
+                Full <a href="https://modelcontextprotocol.io/" target="_blank" style="color:#6366f1;">Model Context Protocol</a> server — any AI agent can discover and use all 54 tools.
+            </p>
+
+            <!-- What is MCP -->
+            <div style="background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;">
+                <h3 style="color:#a5b4fc;margin:0 0 0.75rem;font-size:1.1rem;">🤔 What is MCP?</h3>
+                <p style="color:#cbd5e1;margin:0;line-height:1.6;">
+                    The <strong style="color:#e2e8f0;">Model Context Protocol</strong> is an open standard that lets AI assistants (Claude, Cursor, Codex, etc.) 
+                    connect to external tools and data sources. SupAgentic's MCP server exposes all 54 tools so any AI agent can 
+                    <strong style="color:#6366f1;">search</strong>, <strong style="color:#14b8a6;">clone</strong>, 
+                    <strong style="color:#f59e0b;">run</strong>, <strong style="color:#ec4899;">setup</strong>, and 
+                    <strong style="color:#22c55e;">update</strong> your tools — just by asking in natural language.
+                </p>
+            </div>
+
+            <!-- Capabilities -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-bottom:1.5rem;">
+                <div style="background:rgba(20,184,166,0.08);border:1px solid rgba(20,184,166,0.2);border-radius:12px;padding:1.25rem;">
+                    <div style="font-size:1.5rem;margin-bottom:0.5rem;">🛠️</div>
+                    <h4 style="color:#5eead4;margin:0 0 0.5rem;">55 Tools</h4>
+                    <p style="color:#94a3b8;margin:0;font-size:0.9rem;">Every tool as a callable action — with real execution. Clone, run, setup, update, open from any AI assistant.</p>
+                </div>
+                <div style="background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);border-radius:12px;padding:1.25rem;">
+                    <div style="font-size:1.5rem;margin-bottom:0.5rem;">📄</div>
+                    <h4 style="color:#a5b4fc;margin:0 0 0.5rem;">14 Resources</h4>
+                    <p style="color:#94a3b8;margin:0;font-size:0.9rem;">README, INTEGRATIONS, CHANGELOG, all 7 prompt files, and 3 orchestration pipelines — all readable by AI agents.</p>
+                </div>
+                <div style="background:rgba(236,72,153,0.08);border:1px solid rgba(236,72,153,0.2);border-radius:12px;padding:1.25rem;">
+                    <div style="font-size:1.5rem;margin-bottom:0.5rem;">💬</div>
+                    <h4 style="color:#f9a8d4;margin:0 0 0.5rem;">7 Prompts</h4>
+                    <p style="color:#94a3b8;margin:0;font-size:0.9rem;">AI prompt templates with argument substitution — chain-of-thought, code review, data analysis, resume builder, and more.</p>
+                </div>
+            </div>
+
+            <!-- Transports -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem;">
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:1.25rem;">
+                    <h4 style="color:#e2e8f0;margin:0 0 0.75rem;">⚡ stdio Transport <span style="color:#22c55e;font-size:0.8rem;font-weight:normal;">(recommended)</span></h4>
+                    <pre style="background:#0a0a1a;border-radius:8px;padding:1rem;margin:0;overflow-x:auto;font-size:0.85rem;color:#94a3b8;"><code>python mcp_server.py</code></pre>
+                    <p style="color:#64748b;margin:0.5rem 0 0;font-size:0.8rem;">Direct stdin/stdout — for Claude Desktop, Cursor, Trae, Codex</p>
+                </div>
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:1.25rem;">
+                    <h4 style="color:#e2e8f0;margin:0 0 0.75rem;">🌐 SSE/HTTP Transport</h4>
+                    <pre style="background:#0a0a1a;border-radius:8px;padding:1rem;margin:0;overflow-x:auto;font-size:0.85rem;color:#94a3b8;"><code>python mcp_server.py --sse --port 8765</code></pre>
+                    <p style="color:#64748b;margin:0.5rem 0 0;font-size:0.8rem;">HTTP/SSE — for remote access, web apps, multi-client setups</p>
+                </div>
+            </div>
+
+            <!-- Client Configs -->
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;">
+                <h3 style="color:#e2e8f0;margin:0 0 1rem;font-size:1.1rem;">🔗 Connect Your AI Client</h3>
+                <p style="color:#94a3b8;margin:0 0 1rem;font-size:0.9rem;">Auto-register with one command:</p>
+                <pre style="background:#0a0a1a;border-radius:8px;padding:1rem;margin:0 0 1rem;overflow-x:auto;font-size:0.85rem;color:#94a3b8;"><code>python supagentic.py mcp-register</code></pre>
+                <p style="color:#94a3b8;margin:0 0 0.75rem;font-size:0.9rem;">Or add manually to your client's config:</p>
+                <pre style="background:#0a0a1a;border-radius:8px;padding:1rem;margin:0 0 1rem;overflow-x:auto;font-size:0.85rem;color:#94a3b8;"><code>{
+  "mcpServers": {
+    "supagentic": {
+      "command": "python",
+      "args": ["path/to/SupAgentic/mcp_server.py"]
+    }
+  }
+}</code></pre>
+
+                <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+                    <span style="background:rgba(99,102,241,0.15);color:#a5b4fc;padding:0.3rem 0.75rem;border-radius:6px;font-size:0.8rem;">✅ Claude Desktop</span>
+                    <span style="background:rgba(20,184,166,0.15);color:#5eead4;padding:0.3rem 0.75rem;border-radius:6px;font-size:0.8rem;">✅ Cursor</span>
+                    <span style="background:rgba(245,158,11,0.15);color:#fbbf24;padding:0.3rem 0.75rem;border-radius:6px;font-size:0.8rem;">✅ Trae</span>
+                    <span style="background:rgba(236,72,153,0.15);color:#f9a8d4;padding:0.3rem 0.75rem;border-radius:6px;font-size:0.8rem;">✅ Antigravity / Gemini</span>
+                    <span style="background:rgba(34,197,94,0.15);color:#86efac;padding:0.3rem 0.75rem;border-radius:6px;font-size:0.8rem;">✅ Codex</span>
+                    <span style="background:rgba(148,163,184,0.1);color:#94a3b8;padding:0.3rem 0.75rem;border-radius:6px;font-size:0.8rem;">Any MCP client</span>
+                </div>
+            </div>
+
+            <!-- How It Works -->
+            <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);border-radius:12px;padding:1.5rem;">
+                <h3 style="color:#fbbf24;margin:0 0 1rem;font-size:1.1rem;">💡 How It Works</h3>
+                <div style="display:grid;gap:1rem;">
+                    <div style="display:flex;gap:1rem;align-items:flex-start;">
+                        <span style="background:rgba(99,102,241,0.2);color:#a5b4fc;min-width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:bold;">1</span>
+                        <div>
+                            <strong style="color:#e2e8f0;">Register</strong>
+                            <p style="color:#94a3b8;margin:0.25rem 0 0;font-size:0.9rem;">Run <code style="background:rgba(255,255,255,0.06);padding:0.15rem 0.4rem;border-radius:4px;">supagentic mcp-register</code> → automatically configures your AI client.</p>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:1rem;align-items:flex-start;">
+                        <span style="background:rgba(20,184,166,0.2);color:#5eead4;min-width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:bold;">2</span>
+                        <div>
+                            <strong style="color:#e2e8f0;">Restart Your Client</strong>
+                            <p style="color:#94a3b8;margin:0.25rem 0 0;font-size:0.9rem;">Restart Claude Desktop, Cursor, or Trae. SupAgentic appears as a connected tool source.</p>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:1rem;align-items:flex-start;">
+                        <span style="background:rgba(245,158,11,0.2);color:#fbbf24;min-width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:bold;">3</span>
+                        <div>
+                            <strong style="color:#e2e8f0;">Ask Naturally</strong>
+                            <p style="color:#94a3b8;margin:0.25rem 0 0;font-size:0.9rem;">"What tools do you have for RAG?" → agents see all tools. "Clone and set up Langflow" → it actually runs <code style="background:rgba(255,255,255,0.06);padding:0.15rem 0.4rem;border-radius:4px;">clone</code> + <code style="background:rgba(255,255,255,0.06);padding:0.15rem 0.4rem;border-radius:4px;">setup</code>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <footer class="footer">
-            <p>SupAgentic — 34 open-source AI tools & 7 prompts. Curated from <a href="https://www.youtube.com/@Fireship" target="_blank">Fireship</a> & the AI engineering ecosystem. <a href="https://github.com/alawalmuazu/SupAgentic" target="_blank">GitHub</a> · <a href="CONTRIBUTING.md" target="_blank">Contribute</a></p>
+            <p>SupAgentic — 54 open-source AI tools, 7 prompts &amp; full MCP server. Curated from <a href="https://www.youtube.com/@Fireship" target="_blank">Fireship</a> &amp; the AI engineering ecosystem. <a href="https://github.com/alawalmuazu/SupAgentic" target="_blank">GitHub</a> · <a href="CONTRIBUTING.md" target="_blank">Contribute</a> · <a href="mcp_server.py" target="_blank">MCP Server</a></p>
         </footer>
     </div>
 
