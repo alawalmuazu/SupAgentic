@@ -87,6 +87,7 @@ TOOLS = [
     {"name": "Dataherald",       "dir": "dataherald",           "cat": "Data",        "repo": "Dataherald/dataherald",              "lang": "Python"},
     {"name": "Nuclei",           "dir": "nuclei",               "cat": "Security",    "repo": "projectdiscovery/nuclei",            "lang": "Go"},
     {"name": "Caido",            "dir": "caido",                "cat": "Security",    "repo": "caido/caido",                        "lang": "Rust"},
+    {"name": "OpenMAIC",          "dir": "openmaic",             "cat": "Simulation",  "repo": "THU-MAIC/OpenMAIC",                  "lang": "TypeScript"},
 ]
 
 # ═══ Colors ═══
