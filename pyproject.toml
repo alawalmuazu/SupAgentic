@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "supagentic"
-version = "1.4.0"
-description = "Unified CLI for managing 50+ open-source AI tools"
+version = "2.0.0"
+description = "Unified CLI + MCP server for managing 55 open-source AI tools"
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.9"
@@ -39,3 +39,6 @@ Homepage = "https://github.com/alawalmuazu/SupAgentic"
 Dashboard = "https://alawalmuazu.github.io/SupAgentic"
 Repository = "https://github.com/alawalmuazu/SupAgentic"
 Changelog = "https://github.com/alawalmuazu/SupAgentic/blob/main/CHANGELOG.md"
+
+[tool.setuptools]
+py-modules = ["supagentic", "mcp_server"]

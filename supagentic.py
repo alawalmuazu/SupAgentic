@@ -98,7 +98,7 @@ class C:
 
 def banner():
     print(f"\n{C.CYAN}{C.BOLD}  ╔═══════════════════════════════════════╗")
-    print(f"  ║        SupAgentic CLI v1.0.0          ║")
+    print(f"  ║        SupAgentic CLI v2.0.0          ║")
     print(f"  ╚═══════════════════════════════════════╝{C.END}\n")
 
 def cmd_list(args):
@@ -115,9 +115,10 @@ def cmd_list(args):
             print(f"    {installed} {t['name']:<22} {C.DIM}[{t['lang']}]{C.END}")
         print()
 
-    total = len(TOOLS)
-    installed = sum(1 for t in TOOLS if (TOOLS_DIR / t["dir"]).exists())
-    print(f"  {C.CYAN}{installed}/{total} tools installed{C.END}\n")
+    total_tools = len([t for t in TOOLS if t['cat'] != 'Tutorials'])
+    total_tutorials = len([t for t in TOOLS if t['cat'] == 'Tutorials'])
+    installed = sum(1 for t in TOOLS if (TOOLS_DIR / t["dir"]).exists() and t['cat'] != 'Tutorials')
+    print(f"  {C.CYAN}{installed}/{total_tools} tools installed{C.END} {C.DIM}(+ {total_tutorials} tutorial collections){C.END}\n")
 
 def cmd_search(args):
     """Search tools by name, category or language"""

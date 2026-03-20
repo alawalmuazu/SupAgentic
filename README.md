@@ -6,6 +6,11 @@
 [![Tools](https://img.shields.io/badge/Tools-54-14b8a6?style=for-the-badge)](.)
 [![Categories](https://img.shields.io/badge/Categories-15-f59e0b?style=for-the-badge)](.)
 [![Prompts](https://img.shields.io/badge/Prompts-7-ec4899?style=for-the-badge)](prompts/)
+[![PyPI](https://img.shields.io/badge/PyPI-v2.0.0-blue?style=for-the-badge)](https://pypi.org/project/supagentic/)
+
+<p align="center">
+  <img src="assets/cli-demo.png" alt="SupAgentic CLI Demo" width="700">
+</p>
 
 ---
 

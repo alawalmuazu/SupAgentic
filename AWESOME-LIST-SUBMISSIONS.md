@@ -1,84 +1,44 @@
-# SupAgentic — Awesome List Submissions
+# Awesome List Submissions
 
-> Ready-to-submit entries for popular awesome lists. Copy-paste these into GitHub Issues or PRs.
+Submit SupAgentic to these curated lists for maximum visibility:
 
----
+## Ready to Submit
 
-## 1. awesome-llm
-**Repo:** [jxzhangjhu/Awesome-LLM](https://github.com/jxzhangjhu/Awesome-LLM)
+### awesome-mcp-servers
+- **URL**: https://github.com/punkpeye/awesome-mcp-servers
+- **Why**: SupAgentic has a full MCP server with 56 tools, 14 resources, 7 prompts, stdio + SSE
+- **PR Title**: `Add SupAgentic — 55 AI tool MCP server`
+- **Description**: Unified MCP server exposing 55 open-source AI tools with real action execution (clone, run, setup, update). Supports stdio + SSE transports, 14 resources, 7 prompt templates.
 
-### PR/Issue Title:
-`Add SupAgentic — Unified AI Toolkit (25 tools + 7 prompts)`
+### awesome-ai-agents
+- **URL**: https://github.com/e2b-dev/awesome-ai-agents
+- **PR Title**: `Add SupAgentic — Unified CLI for 55 AI agent tools`
+- **Description**: CLI toolkit managing 55 AI tools across 15 categories (agents, RAG, coding, simulation, security). Includes MCP server, orchestration pipelines, and interactive TUI.
 
-### Entry:
+### awesome-generative-ai-guide
+- **URL**: https://github.com/aishwaryanr/awesome-generative-ai-guide
+- **PR Title**: `Add SupAgentic`
+- **Description**: Curated collection of 55 open-source AI tools with unified CLI management.
+
+### awesome-llm
+- **URL**: https://github.com/Hannibal046/Awesome-LLM
+- **PR Title**: `Add SupAgentic toolkit`
+- **Description**: Unified manager for 55 LLM-related tools — agent frameworks, RAG, fine-tuning, inference, coding assistants.
+
+### awesome-self-hosted
+- **URL**: https://github.com/awesome-selfhosted/awesome-selfhosted
+- **PR Title**: `Add SupAgentic`
+- **Category**: Software Development > AI
+- **Description**: Unified CLI + MCP server for managing 55 self-hosted AI tools. Docker compose included.
+
+## Submission Template
+
 ```markdown
-- [SupAgentic](https://github.com/alawalmuazu/SupAgentic) — A unified collection of 25 open-source AI tools (agents, RAG, coding assistants, fine-tuning, media gen) with a visual dashboard, CLI tool, and 7 curated prompts. ![GitHub stars](https://img.shields.io/github/stars/alawalmuazu/SupAgentic)
+### [SupAgentic](https://github.com/alawalmuazu/SupAgentic)
+
+Unified CLI + MCP server for 55 open-source AI tools. Manage agent frameworks, RAG pipelines, coding assistants, LLM inference, and more from one interface. Features: 18 CLI commands, interactive TUI, 3 orchestration pipelines, Docker stack, full MCP protocol (stdio + SSE).
+
+- 🔗 [Dashboard](https://alawalmuazu.github.io/SupAgentic)
+- 📦 `pip install supagentic`
+- 🔌 MCP: `python mcp_server.py`
 ```
-
----
-
-## 2. awesome-ai-tools
-**Repo:** [mahseema/awesome-ai-tools](https://github.com/mahseema/awesome-ai-tools)
-
-### PR/Issue Title:
-`Add SupAgentic — 25 Open-Source AI Tools Unified`
-
-### Entry:
-```markdown
-- [SupAgentic](https://alawalmuazu.github.io/SupAgentic) — Curated dashboard of 25 AI tools spanning agents (CrewAI, AutoGen, LangGraph), RAG (LlamaIndex, RAGFlow), coding (Aider, Tabby), fine-tuning (Unsloth, LLaMA-Factory), and media generation (ComfyUI, Kokoro TTS). Includes a CLI tool, Docker Compose stack, and 7 prompt templates.
-```
-
----
-
-## 3. awesome-generative-ai
-**Repo:** [steven2358/awesome-generative-ai](https://github.com/steven2358/awesome-generative-ai)
-
-### PR/Issue Title:
-`Add SupAgentic — Unified Open-Source AI Toolkit`
-
-### Entry:
-```markdown
-- [SupAgentic](https://github.com/alawalmuazu/SupAgentic) — 25 open-source AI tools under one dashboard. Agent frameworks, RAG engines, coding assistants, fine-tuning tools, and media generators. Live dashboard at [alawalmuazu.github.io/SupAgentic](https://alawalmuazu.github.io/SupAgentic).
-```
-
----
-
-## 4. awesome-langchain
-**Repo:** [kyrolabs/awesome-langchain](https://github.com/kyrolabs/awesome-langchain)
-
-### PR/Issue Title:
-`Add SupAgentic — Includes LangGraph, LlamaIndex, and RAGFlow`
-
-### Entry:
-```markdown
-- [SupAgentic](https://github.com/alawalmuazu/SupAgentic) — Unified toolkit featuring LangGraph alongside 24 other AI tools. Includes searchable dashboard, CLI, and integration guides for combining LangGraph with Ollama and CrewAI.
-```
-
----
-
-## 5. awesome-open-source
-**Repo:** [corneliusio/awesome-open-source](https://github.com/corneliusio/awesome-open-source) (or similar)
-
-### PR/Issue Title:
-`Add SupAgentic — 25 AI Tools + Dashboard + CLI`
-
-### Entry:
-```markdown
-- [SupAgentic](https://github.com/alawalmuazu/SupAgentic) — Open-source AI toolkit that unifies 25 projects (AutoGen, CrewAI, Ollama, ComfyUI, etc.) with a searchable dashboard, Python CLI, Docker stack, GitHub Actions CI/CD, and 7 curated prompt templates.
-```
-
----
-
-## How to Submit
-
-1. **Go to each repo** above
-2. **Fork it** and clone locally (or use GitHub web editor)
-3. **Add the entry** in the appropriate section of their README
-4. **Create a PR** with the title and entry above
-5. **Wait for review** — most list maintainers respond within a week
-
-Alternatively, open an **Issue** on each repo with the title and entry text.
-
----
-
-*Note: Star counts and descriptions should be updated before submitting to reflect current numbers.*
