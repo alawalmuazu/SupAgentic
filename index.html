@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SupAgentic — Unified AI Toolkit</title>
-    <meta name="description" content="SupAgentic — 59 powerful open-source AI tools unified under one roof. Agent orchestration, swarm simulation, browser automation, voice cloning, model serving, and more.">
+    <meta name="description" content="SupAgentic — 67 powerful open-source AI tools unified under one roof. Agent orchestration, swarm simulation, browser automation, voice cloning, model serving, and more.">
     <meta property="og:title" content="SupAgentic — Unified AI Toolkit">
-    <meta property="og:description" content="59 open-source AI tools + 7 curated prompts. Agents, RAG, swarm simulation, browser automation, model serving & more.">
+    <meta property="og:description" content="67 open-source AI tools + 7 curated prompts. Agents, RAG, swarm simulation, browser automation, model serving & more.">
     <meta property="og:image" content="https://alawalmuazu.github.io/SupAgentic/assets/social-preview.png">
     <meta property="og:url" content="https://alawalmuazu.github.io/SupAgentic">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SupAgentic — 59 AI Tools Unified">
+    <meta name="twitter:title" content="SupAgentic — 67 AI Tools Unified">
     <meta name="twitter:description" content="Open-source AI toolkit: agents, RAG, coding, training, media generation & more.">
     <meta name="twitter:image" content="https://alawalmuazu.github.io/SupAgentic/assets/social-preview.png">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
@@ -173,12 +173,12 @@
         <header class="header">
             <div class="header-badge"><span class="pulse"></span> Open Source AI Arsenal</div>
             <h1>SupAgentic</h1>
-            <p>59 powerful open-source AI tools — unified under one roof. From agent orchestration to swarm simulation to voice cloning to model serving.</p>
+            <p>67 powerful open-source AI tools — unified under one roof. From agent orchestration to swarm simulation to voice cloning to model serving.</p>
         </header>
 
         <div class="stats-bar">
-            <div class="stat"><div class="stat-value">59</div><div class="stat-label">Tools</div></div>
-            <div class="stat"><div class="stat-value">16</div><div class="stat-label">Categories</div></div>
+            <div class="stat"><div class="stat-value">67</div><div class="stat-label">Tools</div></div>
+            <div class="stat"><div class="stat-value">18</div><div class="stat-label">Categories</div></div>
             <div class="stat"><div class="stat-value">7</div><div class="stat-label">Languages</div></div>
             <div class="stat"><div class="stat-value">∞</div><div class="stat-label">Possibilities</div></div>
         </div>
@@ -209,6 +209,8 @@
             <button class="filter-btn" data-filter="data">📊 Data</button>
             <button class="filter-btn" data-filter="security">🔒 Security</button>
             <button class="filter-btn" data-filter="math">🧮 Math</button>
+            <button class="filter-btn" data-filter="robotics">🤖 Robotics</button>
+            <button class="filter-btn" data-filter="voice">🎙️ Voice</button>
             </div>
         </div>
 
@@ -582,6 +584,57 @@
                 <div class="card-header"><div class="card-icon">📊</div><div><div class="card-title">AI Math Olympiad</div><div class="card-category">Kaggle Solutions</div></div></div>
                 <div class="card-desc">AIMO Kaggle competition solutions — notebooks, fine-tuning recipes, and evaluation pipelines for mathematical reasoning.</div>
                 <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">Kaggle</span><a class="card-link" href="tools/ai-math-olympiad/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <!-- MORE MATH -->
+            <div class="card" data-c="sky" data-cat="math" data-search="lean4 lean prover theorem proving formal verification functional programming" onclick="window.open('https://github.com/leanprover/lean4','_blank')">
+                <div class="card-header"><div class="card-icon">📐</div><div><div class="card-title">Lean4</div><div class="card-category">Theorem Prover</div></div></div>
+                <div class="card-desc">Interactive theorem prover and programming language — the backbone of AI-assisted mathematical proof (used by AlphaProof). 8k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Lean</span><span class="card-tag">Proofs</span><a class="card-link" href="tools/lean4/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="indigo" data-cat="math" data-search="mathlib4 math library lean formalized mathematics algebra analysis topology" onclick="window.open('https://github.com/leanprover-community/mathlib4','_blank')">
+                <div class="card-header"><div class="card-icon">📚</div><div><div class="card-title">Mathlib4</div><div class="card-category">Math Library</div></div></div>
+                <div class="card-desc">The largest formalized mathematics library — 1M+ lines covering algebra, analysis, topology, number theory. Foundation for AI math proving.</div>
+                <div class="card-meta"><span class="card-tag">Lean</span><span class="card-tag">4k+ ⭐</span><a class="card-link" href="tools/mathlib4/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <!-- ROBOTICS -->
+            <div class="card" data-c="teal" data-cat="robotics" data-search="lerobot huggingface robotics ai embodied learning manipulation locomotion python" onclick="window.open('https://github.com/huggingface/lerobot','_blank')">
+                <div class="card-header"><div class="card-icon">🤖</div><div><div class="card-title">LeRobot</div><div class="card-category">HuggingFace Robotics</div></div></div>
+                <div class="card-desc">HuggingFace's open-source robotics platform — real-world AI for manipulation, locomotion, and embodied learning. 8k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">8k+ ⭐</span><a class="card-link" href="tools/lerobot/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="green" data-cat="robotics" data-search="isaac lab nvidia isaac sim robotics simulation reinforcement learning gym python" onclick="window.open('https://github.com/isaac-sim/IsaacLab','_blank')">
+                <div class="card-header"><div class="card-icon">🏭</div><div><div class="card-title">Isaac Lab</div><div class="card-category">NVIDIA Robot Sim</div></div></div>
+                <div class="card-desc">NVIDIA's robot learning framework built on Isaac Sim — GPU-accelerated physics, RL training, sim-to-real transfer. 3k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">NVIDIA</span><a class="card-link" href="tools/isaac-lab/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="orange" data-cat="robotics" data-search="openvla vision language action model robot manipulation stanford google python" onclick="window.open('https://github.com/openvla/openvla','_blank')">
+                <div class="card-header"><div class="card-icon">🦾</div><div><div class="card-title">OpenVLA</div><div class="card-category">Vision-Language-Action</div></div></div>
+                <div class="card-desc">Open vision-language-action model for robot manipulation — 7B param generalist agent from Stanford & Google DeepMind. 2k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">Stanford</span><a class="card-link" href="tools/openvla/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <!-- VOICE/AUDIO -->
+            <div class="card" data-c="rose" data-cat="voice" data-search="whisper openai speech recognition transcription translation audio multilingual python" onclick="window.open('https://github.com/openai/whisper','_blank')">
+                <div class="card-header"><div class="card-icon">🎤</div><div><div class="card-title">Whisper</div><div class="card-category">Speech Recognition</div></div></div>
+                <div class="card-desc">OpenAI's robust speech recognition — multilingual transcription & translation. The gold standard for speech-to-text. 75k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">75k+ ⭐</span><a class="card-link" href="tools/whisper/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="violet" data-cat="voice" data-search="bark suno ai text to speech voice generation music audio transformer python" onclick="window.open('https://github.com/suno-ai/bark','_blank')">
+                <div class="card-header"><div class="card-icon">🔊</div><div><div class="card-title">Bark</div><div class="card-category">Voice Generation</div></div></div>
+                <div class="card-desc">Suno's transformer-based text-to-audio — generates realistic speech, music, sound effects, and non-verbal cues. 37k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">37k+ ⭐</span><a class="card-link" href="tools/bark/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="cyan" data-cat="voice" data-search="piper fast local neural text to speech tts voice onnx c++ rhasspy" onclick="window.open('https://github.com/rhasspy/piper','_blank')">
+                <div class="card-header"><div class="card-icon">🗣️</div><div><div class="card-title">Piper</div><div class="card-category">Local TTS Engine</div></div></div>
+                <div class="card-desc">Fast local neural text-to-speech — runs on Raspberry Pi, 30+ languages, ONNX runtime. Perfect for offline voice assistants. 8k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">C++</span><span class="card-tag">Offline</span><a class="card-link" href="tools/piper/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
             </div>
 
             <!-- TUTORIALS -->

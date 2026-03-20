@@ -92,6 +92,14 @@ TOOLS = [
     {"name": "IMO25",             "dir": "imo25",                "cat": "Math",        "repo": "lyang36/IMO25",                      "lang": "Python"},
     {"name": "Math Medalist",     "dir": "agent-math-medalist",  "cat": "Math",        "repo": "MattJBorowski1991/AgentMathOlympiadMedalist", "lang": "Python"},
     {"name": "AI Math Olympiad",  "dir": "ai-math-olympiad",     "cat": "Math",        "repo": "awsaf49/ai-math-olympiad",           "lang": "Python"},
+    {"name": "Lean4",             "dir": "lean4",                "cat": "Math",        "repo": "leanprover/lean4",                   "lang": "Lean"},
+    {"name": "Mathlib4",          "dir": "mathlib4",             "cat": "Math",        "repo": "leanprover-community/mathlib4",      "lang": "Lean"},
+    {"name": "LeRobot",           "dir": "lerobot",              "cat": "Robotics",    "repo": "huggingface/lerobot",                "lang": "Python"},
+    {"name": "Isaac Lab",         "dir": "isaac-lab",            "cat": "Robotics",    "repo": "isaac-sim/IsaacLab",                 "lang": "Python"},
+    {"name": "OpenVLA",           "dir": "openvla",              "cat": "Robotics",    "repo": "openvla/openvla",                    "lang": "Python"},
+    {"name": "Whisper",           "dir": "whisper",              "cat": "Voice",       "repo": "openai/whisper",                     "lang": "Python"},
+    {"name": "Bark",              "dir": "bark",                 "cat": "Voice",       "repo": "suno-ai/bark",                       "lang": "Python"},
+    {"name": "Piper",             "dir": "piper",                "cat": "Voice",       "repo": "rhasspy/piper",                      "lang": "C++"},
 ]
 
 # ═══ Colors ═══
