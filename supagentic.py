@@ -102,6 +102,12 @@ TOOLS = [
     {"name": "Piper",             "dir": "piper",                "cat": "Voice",       "repo": "rhasspy/piper",                      "lang": "C++"},
     {"name": "Manim",             "dir": "manim",                "cat": "Media",       "repo": "3b1b/manim",                         "lang": "Python"},
     {"name": "Rive",              "dir": "rive-runtime",         "cat": "Media",       "repo": "rive-app/rive-runtime",              "lang": "C++/JS"},
+    {"name": "Gaussian Splatting","dir": "gaussian-splatting",   "cat": "Media",       "repo": "graphdeco-inria/gaussian-splatting", "lang": "Python/CUDA"},
+    {"name": "AudioCraft",        "dir": "audiocraft",           "cat": "Media",       "repo": "facebookresearch/audiocraft",        "lang": "Python"},
+    {"name": "SAM",               "dir": "segment-anything",     "cat": "Media",       "repo": "facebookresearch/segment-anything",  "lang": "Python"},
+    {"name": "Taichi",            "dir": "taichi",               "cat": "Simulation",  "repo": "taichi-dev/taichi",                  "lang": "Python/CUDA"},
+    {"name": "AlphaFold",         "dir": "alphafold",            "cat": "Science",     "repo": "google-deepmind/alphafold",          "lang": "Python"},
+    {"name": "Qiskit",            "dir": "qiskit",               "cat": "Science",     "repo": "Qiskit/qiskit",                      "lang": "Python"},
 ]
 
 # ═══ Colors ═══

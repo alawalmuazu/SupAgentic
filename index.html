@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SupAgentic — Unified AI Toolkit</title>
-    <meta name="description" content="SupAgentic — 68 powerful open-source AI tools unified under one roof. Agent orchestration, swarm simulation, browser automation, voice cloning, model serving, and more.">
+    <meta name="description" content="SupAgentic — 75 powerful open-source AI tools unified under one roof. Agent orchestration, swarm simulation, browser automation, voice cloning, model serving, and more.">
     <meta property="og:title" content="SupAgentic — Unified AI Toolkit">
-    <meta property="og:description" content="68 open-source AI tools + 7 curated prompts. Agents, RAG, swarm simulation, browser automation, model serving &amp; more.">
+    <meta property="og:description" content="75 open-source AI tools + 7 curated prompts. Agents, RAG, swarm simulation, browser automation, model serving &amp; more.">
     <meta property="og:image" content="https://alawalmuazu.github.io/SupAgentic/assets/social-preview.png">
     <meta property="og:url" content="https://alawalmuazu.github.io/SupAgentic">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SupAgentic — 68 AI Tools Unified">
+    <meta name="twitter:title" content="SupAgentic — 75 AI Tools Unified">
     <meta name="twitter:description" content="Open-source AI toolkit: agents, RAG, coding, training, media generation & more.">
     <meta name="twitter:image" content="https://alawalmuazu.github.io/SupAgentic/assets/social-preview.png">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
@@ -173,11 +173,11 @@
         <header class="header">
             <div class="header-badge"><span class="pulse"></span> Open Source AI Arsenal</div>
             <h1>SupAgentic</h1>
-            <p>69 powerful open-source AI tools — unified under one roof. From agent orchestration to swarm simulation to voice cloning to model serving.</p>
+            <p>75 powerful open-source AI tools — unified under one roof. From agent orchestration to swarm simulation to voice cloning to model serving.</p>
         </header>
 
         <div class="stats-bar">
-            <div class="stat"><div class="stat-value">69</div><div class="stat-label">Tools</div></div>
+            <div class="stat"><div class="stat-value">75</div><div class="stat-label">Tools</div></div>
             <div class="stat"><div class="stat-value">18</div><div class="stat-label">Categories</div></div>
             <div class="stat"><div class="stat-value">7</div><div class="stat-label">Languages</div></div>
             <div class="stat"><div class="stat-value">∞</div><div class="stat-label">Possibilities</div></div>
@@ -211,6 +211,7 @@
             <button class="filter-btn" data-filter="math">🧮 Math</button>
             <button class="filter-btn" data-filter="robotics">🤖 Robotics</button>
             <button class="filter-btn" data-filter="voice">🎙️ Voice</button>
+            <button class="filter-btn" data-filter="science">🔬 Science</button>
             </div>
         </div>
 
@@ -436,6 +437,44 @@
                 <div class="card-header"><div class="card-icon">📐</div><div><div class="card-title">Manim</div><div class="card-category">Math Animation Engine</div></div></div>
                 <div class="card-desc">3Blue1Brown's animation engine for explanatory math videos — programmatically render equations, geometric transforms, and scenes in Python. 73k+ ⭐.</div>
                 <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">73k ⭐</span><a class="card-link" href="tools/manim/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <!-- SCIENCE -->
+            <div class="card" data-c="emerald" data-cat="science" data-search="alphafold deepmind protein folding structure prediction biology ai science python" onclick="window.open('https://github.com/google-deepmind/alphafold','_blank')">
+                <div class="card-header"><div class="card-icon">🧬</div><div><div class="card-title">AlphaFold</div><div class="card-category">Protein Structure AI</div></div></div>
+                <div class="card-desc">DeepMind's landmark AI — solved the 50-year protein folding problem, predicting 3D protein structures from sequence alone. 200M+ structures released. Nobel Prize-adjacent. 14k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">DeepMind</span><a class="card-link" href="tools/alphafold/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="indigo" data-cat="science" data-search="qiskit ibm quantum computing circuit qubit simulation noise python" onclick="window.open('https://github.com/Qiskit/qiskit','_blank')">
+                <div class="card-header"><div class="card-icon">⚛️</div><div><div class="card-title">Qiskit</div><div class="card-category">Quantum Computing</div></div></div>
+                <div class="card-desc">IBM's open-source quantum computing SDK — build & run quantum circuits on real IBM quantum hardware or simulators. The standard for quantum ML. 5k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">IBM</span><a class="card-link" href="tools/qiskit/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <!-- 3D / VISION MEDIA -->
+            <div class="card" data-c="amber" data-cat="media" data-search="gaussian splatting 3d radiance field nerf real-time rendering splat cuda python" onclick="window.open('https://github.com/graphdeco-inria/gaussian-splatting','_blank')">
+                <div class="card-header"><div class="card-icon">✨</div><div><div class="card-title">Gaussian Splatting</div><div class="card-category">Real-Time 3D Rendering</div></div></div>
+                <div class="card-desc">3D Gaussian Splatting for real-time radiance field rendering — reconstruct photorealistic 3D scenes from photos in minutes. The NeRF successor. 15k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python/CUDA</span><span class="card-tag">15k ⭐</span><a class="card-link" href="tools/gaussian-splatting/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="rose" data-cat="media" data-search="sam segment anything meta facebook image segmentation zero-shot vision python" onclick="window.open('https://github.com/facebookresearch/segment-anything','_blank')">
+                <div class="card-header"><div class="card-icon">🎯</div><div><div class="card-title">SAM</div><div class="card-category">Segment Anything Model</div></div></div>
+                <div class="card-desc">Meta's Segment Anything Model — zero-shot image segmentation that identifies and masks any object in any image with a single click or prompt. 47k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">47k ⭐</span><a class="card-link" href="tools/segment-anything/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="sky" data-cat="media" data-search="audiocraft meta musicgen audiogen sound music generation audio ai python" onclick="window.open('https://github.com/facebookresearch/audiocraft','_blank')">
+                <div class="card-header"><div class="card-icon">🎵</div><div><div class="card-title">AudioCraft</div><div class="card-category">AI Music & Sound Gen</div></div></div>
+                <div class="card-desc">Meta's audio generation library — MusicGen creates full music tracks from text prompts; AudioGen produces sound effects. State-of-the-art generative audio. 22k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">22k ⭐</span><a class="card-link" href="tools/audiocraft/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="lime" data-cat="simulation" data-search="taichi physics simulation gpu parallel computing graphics python cuda" onclick="window.open('https://github.com/taichi-dev/taichi','_blank')">
+                <div class="card-header"><div class="card-icon">🌊</div><div><div class="card-title">Taichi</div><div class="card-category">GPU Physics Simulation</div></div></div>
+                <div class="card-desc">High-performance parallel programming in Python — write GPU-accelerated physics simulations, fluid dynamics, and graphics shaders with Python syntax. 26k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python/CUDA</span><span class="card-tag">26k ⭐</span><a class="card-link" href="tools/taichi/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
             </div>
 
             <div class="card" data-c="teal" data-cat="media" data-search="rive runtime animation interactive state machine simulation realtime c++ javascript webassembly" onclick="window.open('https://github.com/rive-app/rive-runtime','_blank')">
@@ -784,7 +823,7 @@
                 <h3 style="color:#a5b4fc;margin:0 0 0.75rem;font-size:1.1rem;">🤔 What is MCP?</h3>
                 <p style="color:#cbd5e1;margin:0;line-height:1.6;">
                     The <strong style="color:#e2e8f0;">Model Context Protocol</strong> is an open standard that lets AI assistants (Claude, Cursor, Codex, etc.) 
-                    connect to external tools and data sources. SupAgentic's MCP server exposes all 69 tools so any AI agent can 
+                    connect to external tools and data sources. SupAgentic's MCP server exposes all 75 tools so any AI agent can 
                     <strong style="color:#6366f1;">search</strong>, <strong style="color:#14b8a6;">clone</strong>, 
                     <strong style="color:#f59e0b;">run</strong>, <strong style="color:#ec4899;">setup</strong>, and 
                     <strong style="color:#22c55e;">update</strong> your tools — just by asking in natural language.
@@ -795,7 +834,7 @@
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-bottom:1.5rem;">
                 <div style="background:rgba(20,184,166,0.08);border:1px solid rgba(20,184,166,0.2);border-radius:12px;padding:1.25rem;">
                     <div style="font-size:1.5rem;margin-bottom:0.5rem;">🛠️</div>
-                    <h4 style="color:#5eead4;margin:0 0 0.5rem;">69 Tools</h4>
+                    <h4 style="color:#5eead4;margin:0 0 0.5rem;">75 Tools</h4>
                     <p style="color:#94a3b8;margin:0;font-size:0.9rem;">Every tool as a callable action — with real execution. Clone, run, setup, update, open from any AI assistant.</p>
                 </div>
                 <div style="background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);border-radius:12px;padding:1.25rem;">
