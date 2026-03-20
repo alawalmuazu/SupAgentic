@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SupAgentic — Unified AI Toolkit</title>
-    <meta name="description" content="SupAgentic — 75 powerful open-source AI tools unified under one roof. Agent orchestration, swarm simulation, browser automation, voice cloning, model serving, and more.">
+    <meta name="description" content="SupAgentic — 80 powerful open-source AI tools unified under one roof. Agent orchestration, swarm simulation, browser automation, voice cloning, model serving, and more.">
     <meta property="og:title" content="SupAgentic — Unified AI Toolkit">
-    <meta property="og:description" content="75 open-source AI tools + 7 curated prompts. Agents, RAG, swarm simulation, browser automation, model serving &amp; more.">
+    <meta property="og:description" content="80 open-source AI tools + 7 curated prompts. Agents, RAG, swarm simulation, browser automation, model serving &amp; more.">
     <meta property="og:image" content="https://alawalmuazu.github.io/SupAgentic/assets/social-preview.png">
     <meta property="og:url" content="https://alawalmuazu.github.io/SupAgentic">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SupAgentic — 75 AI Tools Unified">
+    <meta name="twitter:title" content="SupAgentic — 80 AI Tools Unified">
     <meta name="twitter:description" content="Open-source AI toolkit: agents, RAG, coding, training, media generation & more.">
     <meta name="twitter:image" content="https://alawalmuazu.github.io/SupAgentic/assets/social-preview.png">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
@@ -173,12 +173,12 @@
         <header class="header">
             <div class="header-badge"><span class="pulse"></span> Open Source AI Arsenal</div>
             <h1>SupAgentic</h1>
-            <p>75 powerful open-source AI tools — unified under one roof. From agent orchestration to swarm simulation to voice cloning to model serving.</p>
+            <p>80 powerful open-source AI tools — unified under one roof. From agent orchestration to swarm simulation to voice cloning to model serving.</p>
         </header>
 
         <div class="stats-bar">
-            <div class="stat"><div class="stat-value">75</div><div class="stat-label">Tools</div></div>
-            <div class="stat"><div class="stat-value">18</div><div class="stat-label">Categories</div></div>
+            <div class="stat"><div class="stat-value">80</div><div class="stat-label">Tools</div></div>
+            <div class="stat"><div class="stat-value">19</div><div class="stat-label">Categories</div></div>
             <div class="stat"><div class="stat-value">7</div><div class="stat-label">Languages</div></div>
             <div class="stat"><div class="stat-value">∞</div><div class="stat-label">Possibilities</div></div>
         </div>
@@ -322,7 +322,13 @@
                 <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">ByteDance</span><a class="card-link" href="tools/openviking/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
             </div>
 
-            <!-- SWARM (mapped to agents for filter) -->
+            <!-- SIMULATION -->
+            <div class="card" data-c="blue" data-cat="simulation" data-search="gymnasium gym openai farama reinforcement learning rl environment atari mujoco python" onclick="window.open('https://github.com/Farama-Foundation/Gymnasium','_blank')">
+                <div class="card-header"><div class="card-icon">🎮</div><div><div class="card-title">Gymnasium</div><div class="card-category">RL Environment Suite</div></div></div>
+                <div class="card-desc">The standard reinforcement learning environment suite (OpenAI Gym successor) — Atari, MuJoCo, CartPole, robotics & custom envs. Foundation for all RL research. 8k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">8k ⭐</span><a class="card-link" href="tools/gymnasium/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
             <div class="card" data-c="pink" data-cat="swarm" data-search="mirofish swarm intelligence prediction knowledge graph graphrag vue python" onclick="window.open('https://github.com/666ghj/MiroFish','_blank')">
                 <div class="card-header"><div class="card-icon">🐟</div><div><div class="card-title">MiroFish</div><div class="card-category">Swarm Intelligence</div></div></div>
                 <div class="card-desc">Knowledge graphs + multi-agent swarm simulation to forecast real-world scenarios — policy outcomes, market trends, and more.</div>
@@ -370,6 +376,12 @@
             </div>
 
             <!-- TRAINING -->
+            <div class="card" data-c="sky" data-cat="training" data-search="deepspeed microsoft deep learning training large model distributed zero optimizer python" onclick="window.open('https://github.com/microsoft/DeepSpeed','_blank')">
+                <div class="card-header"><div class="card-icon">🚀</div><div><div class="card-title">DeepSpeed</div><div class="card-category">Large Model Training</div></div></div>
+                <div class="card-desc">Microsoft's deep learning optimization library — train 100B+ parameter models on limited GPUs with ZeRO optimizer, pipeline parallelism, and 10x speedups. 35k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">35k ⭐</span><a class="card-link" href="tools/deepspeed/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
             <div class="card" data-c="red" data-cat="training" data-search="unsloth fine-tuning fast vram cuda lora qlora llama mistral deepseek python" onclick="window.open('https://github.com/unslothai/unsloth','_blank')">
                 <div class="card-header"><div class="card-icon">🦥</div><div><div class="card-title">Unsloth</div><div class="card-category">Fast Fine-Tuning</div></div></div>
                 <div class="card-desc">2-5x faster LLM fine-tuning with 70-80% less VRAM. Custom CUDA kernels, no accuracy loss. Supports Llama, Mistral, DeepSeek.</div>
@@ -396,6 +408,24 @@
             </div>
 
             <!-- MEDIA -->
+            <div class="card" data-c="pink" data-cat="media" data-search="stable diffusion webui automatic1111 sd txt2img img2img stable diffusion gui web python" onclick="window.open('https://github.com/AUTOMATIC1111/stable-diffusion-webui','_blank')">
+                <div class="card-header"><div class="card-icon">🎨</div><div><div class="card-title">SD WebUI</div><div class="card-category">Stable Diffusion Frontend</div></div></div>
+                <div class="card-desc">The most popular Stable Diffusion web interface — txt2img, img2img, inpainting, extensions ecosystem, and one-click setup. 145k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">145k ⭐</span><a class="card-link" href="tools/sd-webui/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="amber" data-cat="media" data-search="diffusers huggingface stable diffusion sdxl dalle imagen flux pipeline python" onclick="window.open('https://github.com/huggingface/diffusers','_blank')">
+                <div class="card-header"><div class="card-icon">🧨</div><div><div class="card-title">Diffusers</div><div class="card-category">Diffusion Model Library</div></div></div>
+                <div class="card-desc">HuggingFace's diffusion model library — the standard for SDXL, FLUX, Sora-style video, and audio generation. 27k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">27k ⭐</span><a class="card-link" href="tools/diffusers/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="rose" data-cat="media" data-search="flux black forest labs image generation text to image state of the art open model python" onclick="window.open('https://github.com/black-forest-labs/flux','_blank')">
+                <div class="card-header"><div class="card-icon">⚡</div><div><div class="card-title">FLUX</div><div class="card-category">Next-Gen Image Generation</div></div></div>
+                <div class="card-desc">Black Forest Labs' FLUX — currently the best open-source text-to-image model. Outperforms Midjourney v6 on benchmarks. The new standard. 20k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">20k ⭐</span><a class="card-link" href="tools/flux/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
             <div class="card" data-c="pink" data-cat="media" data-search="comfyui comfy ui node graph image video 3d audio stable diffusion flux sdxl python" onclick="window.open('https://github.com/comfyanonymous/ComfyUI','_blank')">
                 <div class="card-header"><div class="card-icon">🖼️</div><div><div class="card-title">ComfyUI</div><div class="card-category">Node-Based AI Art</div></div></div>
                 <div class="card-desc">100% open-source node-based workflow for AI image, video, 3D & audio generation. Supports Flux, SDXL, and custom pipelines.</div>
@@ -823,7 +853,7 @@
                 <h3 style="color:#a5b4fc;margin:0 0 0.75rem;font-size:1.1rem;">🤔 What is MCP?</h3>
                 <p style="color:#cbd5e1;margin:0;line-height:1.6;">
                     The <strong style="color:#e2e8f0;">Model Context Protocol</strong> is an open standard that lets AI assistants (Claude, Cursor, Codex, etc.) 
-                    connect to external tools and data sources. SupAgentic's MCP server exposes all 75 tools so any AI agent can 
+                    connect to external tools and data sources. SupAgentic's MCP server exposes all 80 tools so any AI agent can 
                     <strong style="color:#6366f1;">search</strong>, <strong style="color:#14b8a6;">clone</strong>, 
                     <strong style="color:#f59e0b;">run</strong>, <strong style="color:#ec4899;">setup</strong>, and 
                     <strong style="color:#22c55e;">update</strong> your tools — just by asking in natural language.
@@ -834,7 +864,7 @@
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-bottom:1.5rem;">
                 <div style="background:rgba(20,184,166,0.08);border:1px solid rgba(20,184,166,0.2);border-radius:12px;padding:1.25rem;">
                     <div style="font-size:1.5rem;margin-bottom:0.5rem;">🛠️</div>
-                    <h4 style="color:#5eead4;margin:0 0 0.5rem;">75 Tools</h4>
+                    <h4 style="color:#5eead4;margin:0 0 0.5rem;">80 Tools</h4>
                     <p style="color:#94a3b8;margin:0;font-size:0.9rem;">Every tool as a callable action — with real execution. Clone, run, setup, update, open from any AI assistant.</p>
                 </div>
                 <div style="background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);border-radius:12px;padding:1.25rem;">

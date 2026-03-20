@@ -108,6 +108,11 @@ TOOLS = [
     {"name": "Taichi",            "dir": "taichi",               "cat": "Simulation",  "repo": "taichi-dev/taichi",                  "lang": "Python/CUDA"},
     {"name": "AlphaFold",         "dir": "alphafold",            "cat": "Science",     "repo": "google-deepmind/alphafold",          "lang": "Python"},
     {"name": "Qiskit",            "dir": "qiskit",               "cat": "Science",     "repo": "Qiskit/qiskit",                      "lang": "Python"},
+    {"name": "Diffusers",         "dir": "diffusers",            "cat": "Media",       "repo": "huggingface/diffusers",              "lang": "Python"},
+    {"name": "FLUX",              "dir": "flux",                 "cat": "Media",       "repo": "black-forest-labs/flux",             "lang": "Python"},
+    {"name": "SD WebUI",          "dir": "sd-webui",             "cat": "Media",       "repo": "AUTOMATIC1111/stable-diffusion-webui","lang": "Python"},
+    {"name": "DeepSpeed",         "dir": "deepspeed",            "cat": "Training",    "repo": "microsoft/DeepSpeed",                "lang": "Python"},
+    {"name": "Gymnasium",         "dir": "gymnasium",            "cat": "Simulation",  "repo": "Farama-Foundation/Gymnasium",         "lang": "Python"},
 ]
 
 # ═══ Colors ═══
@@ -318,6 +323,14 @@ PIPELINES = {
             {"tool": "ragflow", "action": "Ingest documents and build RAG pipeline"},
             {"tool": "agentverse", "action": "Run multi-agent debate/analysis on findings"},
             {"tool": "mirofish", "action": "Generate comprehensive prediction report"},
+        ]
+    },
+    "nemotron-compete": {
+        "desc": "NVIDIA Nemotron Kaggle — type-aware SFT + local vLLM validation before submitting",
+        "steps": [
+            {"tool": "unsloth", "action": "Run train_nemotron.py — stratified SFT with rich thought traces (type-aware, LR=2e-4, LoRA r=32)"},
+            {"tool": "vllm",    "action": "Run validate_local.py — exact evaluator replica (temp=1.0, max_tokens=3584, enable_thinking=True)"},
+            {"tool": "unsloth", "action": "Iterate: if per-type score < 0.70, adjust LR/sample size and re-train"},
         ]
     },
 }
