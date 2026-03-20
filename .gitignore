@@ -4,3 +4,7 @@ tools/
 # OS files
 .DS_Store
 Thumbs.db
+__pycache__/
+dist/
+*.egg-info/
+.agent/workflows/*.code-workspace
