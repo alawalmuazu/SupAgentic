@@ -88,6 +88,10 @@ TOOLS = [
     {"name": "Nuclei",           "dir": "nuclei",               "cat": "Security",    "repo": "projectdiscovery/nuclei",            "lang": "Go"},
     {"name": "Caido",            "dir": "caido",                "cat": "Security",    "repo": "caido/caido",                        "lang": "Rust"},
     {"name": "OpenMAIC",          "dir": "openmaic",             "cat": "Simulation",  "repo": "THU-MAIC/OpenMAIC",                  "lang": "TypeScript"},
+    {"name": "NuminaMath",        "dir": "numinamath",           "cat": "Math",        "repo": "project-numina/aimo-progress-prize", "lang": "Python"},
+    {"name": "IMO25",             "dir": "imo25",                "cat": "Math",        "repo": "lyang36/IMO25",                      "lang": "Python"},
+    {"name": "Math Medalist",     "dir": "agent-math-medalist",  "cat": "Math",        "repo": "MattJBorowski1991/AgentMathOlympiadMedalist", "lang": "Python"},
+    {"name": "AI Math Olympiad",  "dir": "ai-math-olympiad",     "cat": "Math",        "repo": "awsaf49/ai-math-olympiad",           "lang": "Python"},
 ]
 
 # ═══ Colors ═══

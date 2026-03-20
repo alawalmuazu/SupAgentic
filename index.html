@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SupAgentic — Unified AI Toolkit</title>
-    <meta name="description" content="SupAgentic — 55 powerful open-source AI tools unified under one roof. Agent orchestration, swarm simulation, browser automation, voice cloning, model serving, and more.">
+    <meta name="description" content="SupAgentic — 59 powerful open-source AI tools unified under one roof. Agent orchestration, swarm simulation, browser automation, voice cloning, model serving, and more.">
     <meta property="og:title" content="SupAgentic — Unified AI Toolkit">
-    <meta property="og:description" content="55 open-source AI tools + 7 curated prompts. Agents, RAG, swarm simulation, browser automation, model serving & more.">
+    <meta property="og:description" content="59 open-source AI tools + 7 curated prompts. Agents, RAG, swarm simulation, browser automation, model serving & more.">
     <meta property="og:image" content="https://alawalmuazu.github.io/SupAgentic/assets/social-preview.png">
     <meta property="og:url" content="https://alawalmuazu.github.io/SupAgentic">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SupAgentic — 55 AI Tools Unified">
+    <meta name="twitter:title" content="SupAgentic — 59 AI Tools Unified">
     <meta name="twitter:description" content="Open-source AI toolkit: agents, RAG, coding, training, media generation & more.">
     <meta name="twitter:image" content="https://alawalmuazu.github.io/SupAgentic/assets/social-preview.png">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
@@ -173,12 +173,12 @@
         <header class="header">
             <div class="header-badge"><span class="pulse"></span> Open Source AI Arsenal</div>
             <h1>SupAgentic</h1>
-            <p>55 powerful open-source AI tools — unified under one roof. From agent orchestration to swarm simulation to voice cloning to model serving.</p>
+            <p>59 powerful open-source AI tools — unified under one roof. From agent orchestration to swarm simulation to voice cloning to model serving.</p>
         </header>
 
         <div class="stats-bar">
-            <div class="stat"><div class="stat-value">55</div><div class="stat-label">Tools</div></div>
-            <div class="stat"><div class="stat-value">15</div><div class="stat-label">Categories</div></div>
+            <div class="stat"><div class="stat-value">59</div><div class="stat-label">Tools</div></div>
+            <div class="stat"><div class="stat-value">16</div><div class="stat-label">Categories</div></div>
             <div class="stat"><div class="stat-value">7</div><div class="stat-label">Languages</div></div>
             <div class="stat"><div class="stat-value">∞</div><div class="stat-label">Possibilities</div></div>
         </div>
@@ -208,6 +208,7 @@
                 <button class="filter-btn" data-filter="serving">🚀 Serving</button>
             <button class="filter-btn" data-filter="data">📊 Data</button>
             <button class="filter-btn" data-filter="security">🔒 Security</button>
+            <button class="filter-btn" data-filter="math">🧮 Math</button>
             </div>
         </div>
 
@@ -556,6 +557,31 @@
                 <div class="card-header"><div class="card-icon">🏫</div><div><div class="card-title">OpenMAIC</div><div class="card-category">AI Classroom</div></div></div>
                 <div class="card-desc">Open Multi-Agent Interactive Classroom from Tsinghua — immersive multi-agent learning with lesson generation, classroom simulation & OpenClaw integration.</div>
                 <div class="card-meta"><span class="card-tag">TypeScript</span><span class="card-tag">Education</span><a class="card-link" href="tools/openmaic/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <!-- MATH/REASONING -->
+            <div class="card" data-c="amber" data-cat="math" data-search="numinamath numina aimo progress prize math olympiad fine-tuned model tool integrated reasoning python" onclick="window.open('https://github.com/project-numina/aimo-progress-prize','_blank')">
+                <div class="card-header"><div class="card-icon">🧠</div><div><div class="card-title">NuminaMath</div><div class="card-category">AIMO Prize Winner</div></div></div>
+                <div class="card-desc">Won the AI Math Olympiad Progress Prize — fine-tuned 7B model with tool-integrated reasoning. Open-source math AI breakthrough.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">🏆 Winner</span><a class="card-link" href="tools/numinamath/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="blue" data-cat="math" data-search="imo25 imo 2025 international math olympiad ai agent gemini openai python" onclick="window.open('https://github.com/lyang36/IMO25','_blank')">
+                <div class="card-header"><div class="card-icon">🏅</div><div><div class="card-title">IMO25</div><div class="card-category">IMO 2025 Solver</div></div></div>
+                <div class="card-desc">AI agent system for solving IMO 2025 problems — uses Gemini, GPT, and XAI APIs with multi-model reasoning chains.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">IMO 2025</span><a class="card-link" href="tools/imo25/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="violet" data-cat="math" data-search="agent math olympiad medalist langgraph self verification pipeline reasoning python" onclick="window.open('https://github.com/MattJBorowski1991/AgentMathOlympiadMedalist','_blank')">
+                <div class="card-header"><div class="card-icon">🧮</div><div><div class="card-title">Math Medalist</div><div class="card-category">Self-Verify Agent</div></div></div>
+                <div class="card-desc">LangGraph-based self-verification pipeline for IMO-level problems — agent reasons, verifies, and corrects its own solutions.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">LangGraph</span><a class="card-link" href="tools/agent-math-medalist/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="emerald" data-cat="math" data-search="ai math olympiad kaggle competition solver aimo python" onclick="window.open('https://github.com/awsaf49/ai-math-olympiad','_blank')">
+                <div class="card-header"><div class="card-icon">📊</div><div><div class="card-title">AI Math Olympiad</div><div class="card-category">Kaggle Solutions</div></div></div>
+                <div class="card-desc">AIMO Kaggle competition solutions — notebooks, fine-tuning recipes, and evaluation pipelines for mathematical reasoning.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">Kaggle</span><a class="card-link" href="tools/ai-math-olympiad/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
             </div>
 
             <!-- TUTORIALS -->
