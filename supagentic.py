@@ -101,6 +101,7 @@ TOOLS = [
     {"name": "Bark",              "dir": "bark",                 "cat": "Voice",       "repo": "suno-ai/bark",                       "lang": "Python"},
     {"name": "Piper",             "dir": "piper",                "cat": "Voice",       "repo": "rhasspy/piper",                      "lang": "C++"},
     {"name": "Manim",             "dir": "manim",                "cat": "Media",       "repo": "3b1b/manim",                         "lang": "Python"},
+    {"name": "Rive",              "dir": "rive-runtime",         "cat": "Media",       "repo": "rive-app/rive-runtime",              "lang": "C++/JS"},
 ]
 
 # ═══ Colors ═══
