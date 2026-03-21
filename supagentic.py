@@ -108,6 +108,7 @@ TOOLS = [
     {"name": "Taichi",            "dir": "taichi",               "cat": "Simulation",  "repo": "taichi-dev/taichi",                  "lang": "Python/CUDA"},
     {"name": "AlphaFold",         "dir": "alphafold",            "cat": "Science",     "repo": "google-deepmind/alphafold",          "lang": "Python"},
     {"name": "Qiskit",            "dir": "qiskit",               "cat": "Science",     "repo": "Qiskit/qiskit",                      "lang": "Python"},
+    {"name": "Attention Residuals","dir": "attention-residuals",  "cat": "Science",     "repo": "MoonshotAI/Attention-Residuals",      "lang": "Python"},
     {"name": "Diffusers",         "dir": "diffusers",            "cat": "Media",       "repo": "huggingface/diffusers",              "lang": "Python"},
     {"name": "FLUX",              "dir": "flux",                 "cat": "Media",       "repo": "black-forest-labs/flux",             "lang": "Python"},
     {"name": "SD WebUI",          "dir": "sd-webui",             "cat": "Media",       "repo": "AUTOMATIC1111/stable-diffusion-webui","lang": "Python"},
