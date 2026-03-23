@@ -133,6 +133,10 @@ TOOLS = [
     {"name": "Exo",               "dir": "exo",                  "cat": "Local-LLM",   "repo": "exo-explore/exo",                   "lang": "Python"},
     {"name": "llama.cpp",         "dir": "llama-cpp",            "cat": "Local-LLM",   "repo": "ggerganov/llama.cpp",               "lang": "C++"},
     {"name": "ComfyUI",           "dir": "comfyui",              "cat": "Media",       "repo": "comfyanonymous/ComfyUI",            "lang": "Python"},
+    {"name": "n8n",               "dir": "n8n",                  "cat": "Automation",  "repo": "n8n-io/n8n",                        "lang": "TypeScript"},
+    {"name": "DeepSeek-R1",       "dir": "deepseek-r1",          "cat": "Science",     "repo": "deepseek-ai/DeepSeek-R1",           "lang": "Python"},
+    {"name": "Open Assistant",    "dir": "open-assistant",       "cat": "Agents",      "repo": "LAION-AI/Open-Assistant",           "lang": "Python"},
+    {"name": "TransformerLab",    "dir": "transformerlab-app",   "cat": "Training",    "repo": "transformerlab/transformerlab-app", "lang": "Python"},
 ]
 
 # ═══ Colors ═══
