@@ -118,6 +118,13 @@ TOOLS = [
     {"name": "Lightpanda",        "dir": "lightpanda",           "cat": "Browser",     "repo": "lightpanda-io/browser",              "lang": "Zig"},
     {"name": "OpenClaw",          "dir": "openclaw-zero-token",  "cat": "Agents",      "repo": "linuxhsj/openclaw-zero-token",       "lang": "TypeScript"},
     {"name": "RandOpt",           "dir": "randopt",              "cat": "Science",     "repo": "sunrainyg/RandOpt",                  "lang": "Python"},
+    {"name": "PhoneInfoga",       "dir": "phoneinfoga",          "cat": "Security",    "repo": "sundowndev/phoneinfoga",             "lang": "Go"},
+    {"name": "Sherlock",          "dir": "sherlock",             "cat": "Security",    "repo": "sherlock-project/sherlock",           "lang": "Python"},
+    {"name": "Social Analyzer",   "dir": "social-analyzer",      "cat": "Security",    "repo": "qeeqbox/social-analyzer",            "lang": "Python"},
+    {"name": "Osintgram",         "dir": "osintgram",            "cat": "Security",    "repo": "Datalux/Osintgram",                  "lang": "Python"},
+    {"name": "WhatsMyName",       "dir": "whatsmyname",          "cat": "Security",    "repo": "WebBreacher/WhatsMyName",            "lang": "Python"},
+    {"name": "Scylla",            "dir": "scylla",               "cat": "Security",    "repo": "cybersecurity-team/scylla",          "lang": "Python"},
+    {"name": "TruecallerJS",      "dir": "truecallerjs",         "cat": "Security",    "repo": "sumithemmadi/truecallerjs",          "lang": "TypeScript"},
 ]
 
 # ═══ Colors ═══
