@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SupAgentic — Unified AI Toolkit</title>
-    <meta name="description" content="SupAgentic — 92 powerful open-source AI tools unified under one roof. Agent orchestration, swarm simulation, browser automation, voice cloning, model serving, and more.">
+    <meta name="description" content="SupAgentic — 100 powerful open-source AI tools unified under one roof. Agent orchestration, swarm simulation, browser automation, voice cloning, model serving, and more.">
     <meta property="og:title" content="SupAgentic — Unified AI Toolkit">
-    <meta property="og:description" content="92 open-source AI tools + 7 curated prompts. Agents, RAG, swarm simulation, browser automation, model serving &amp; more.">
+    <meta property="og:description" content="100 open-source AI tools + 7 curated prompts. Agents, RAG, swarm simulation, browser automation, model serving &amp; more.">
     <meta property="og:image" content="https://alawalmuazu.github.io/SupAgentic/assets/social-preview.png">
     <meta property="og:url" content="https://alawalmuazu.github.io/SupAgentic">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SupAgentic — 92 AI Tools Unified">
+    <meta name="twitter:title" content="SupAgentic — 100 AI Tools Unified">
     <meta name="twitter:description" content="Open-source AI toolkit: agents, RAG, coding, training, media generation & more.">
     <meta name="twitter:image" content="https://alawalmuazu.github.io/SupAgentic/assets/social-preview.png">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
@@ -173,13 +173,13 @@
         <header class="header">
             <div class="header-badge"><span class="pulse"></span> Open Source AI Arsenal</div>
             <h1>SupAgentic</h1>
-            <p>92 powerful open-source AI tools — unified under one roof. From agent orchestration to swarm simulation to voice cloning to model serving.</p>
+            <p>100 powerful open-source AI tools — unified under one roof. From agent orchestration to swarm simulation to voice cloning to model serving.</p>
         </header>
 
         <div class="stats-bar">
-            <div class="stat"><div class="stat-value">92</div><div class="stat-label">Tools</div></div>
+            <div class="stat"><div class="stat-value">100</div><div class="stat-label">Tools</div></div>
             <div class="stat"><div class="stat-value">19</div><div class="stat-label">Categories</div></div>
-            <div class="stat"><div class="stat-value">7</div><div class="stat-label">Languages</div></div>
+            <div class="stat"><div class="stat-value">8</div><div class="stat-label">Languages</div></div>
             <div class="stat"><div class="stat-value">∞</div><div class="stat-label">Possibilities</div></div>
         </div>
 
@@ -212,6 +212,7 @@
             <button class="filter-btn" data-filter="robotics">🤖 Robotics</button>
             <button class="filter-btn" data-filter="voice">🎙️ Voice</button>
             <button class="filter-btn" data-filter="science">🔬 Science</button>
+            <button class="filter-btn" data-filter="osint">🕵️ OSINT</button>
             </div>
         </div>
 
@@ -375,6 +376,19 @@
                 <div class="card-meta"><span class="card-tag">Go</span><span class="card-tag">CLI</span><a class="card-link" href="tools/ollama/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
             </div>
 
+            <!-- LOCAL LLM -->
+            <div class="card" data-c="purple" data-cat="local-llm" data-search="llama cpp ggml gguf quantized inference cpu gpu local c++ cross-platform" onclick="window.open('https://github.com/ggerganov/llama.cpp','_blank')">
+                <div class="card-header"><div class="card-icon">🧬</div><div><div class="card-title">llama.cpp</div><div class="card-category">C++ LLM Inference</div></div></div>
+                <div class="card-desc">The engine that made local LLMs possible — run Llama, Mistral, Phi on CPU/GPU with quantization (GGUF). Powers Ollama, LM Studio, and every local AI tool. 78k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">C++</span><span class="card-tag">78k ⭐</span><a class="card-link" href="tools/llama-cpp/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="amber" data-cat="local-llm" data-search="exo explore cluster inference distributed multi-device laptop phone gpu network python" onclick="window.open('https://github.com/exo-explore/exo','_blank')">
+                <div class="card-header"><div class="card-icon">🌐</div><div><div class="card-title">Exo</div><div class="card-category">Distributed Inference</div></div></div>
+                <div class="card-desc">Run LLM inference across multiple everyday devices — cluster laptops, phones, GPUs into one AI supercomputer. No master node, peer-to-peer. 25k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">25k ⭐</span><a class="card-link" href="tools/exo/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
             <!-- TRAINING -->
             <div class="card" data-c="sky" data-cat="training" data-search="deepspeed microsoft deep learning training large model distributed zero optimizer python" onclick="window.open('https://github.com/microsoft/DeepSpeed','_blank')">
                 <div class="card-header"><div class="card-icon">🚀</div><div><div class="card-title">DeepSpeed</div><div class="card-category">Large Model Training</div></div></div>
@@ -386,6 +400,12 @@
                 <div class="card-header"><div class="card-icon">🦥</div><div><div class="card-title">Unsloth</div><div class="card-category">Fast Fine-Tuning</div></div></div>
                 <div class="card-desc">2-5x faster LLM fine-tuning with 70-80% less VRAM. Custom CUDA kernels, no accuracy loss. Supports Llama, Mistral, DeepSeek.</div>
                 <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">CUDA</span><a class="card-link" href="tools/unsloth/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="violet" data-cat="training" data-search="llama models meta official open weights llama 3 4 download python" onclick="window.open('https://github.com/meta-llama/llama-models','_blank')">
+                <div class="card-header"><div class="card-icon">🦙</div><div><div class="card-title">Llama Models</div><div class="card-category">Meta Official Weights</div></div></div>
+                <div class="card-desc">Meta's official Llama model repository — the most important open-weight LLMs in existence. Llama 3/4, model cards, usage guides, and reference implementations.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">Meta AI</span><a class="card-link" href="tools/llama-models/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
             </div>
 
             <div class="card" data-c="blue" data-cat="training" data-search="nanochat karpathy minimal gpt train from scratch tokenizer pytorch python" onclick="window.open('https://github.com/karpathy/nanochat','_blank')">
@@ -494,6 +514,12 @@
                 <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">MIT CSAIL</span><a class="card-link" href="tools/randopt/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
             </div>
 
+            <div class="card" data-c="rose" data-cat="science" data-search="storm stanford oval research paper writer wikipedia knowledge curation synthesis python" onclick="window.open('https://github.com/stanford-oval/storm','_blank')">
+                <div class="card-header"><div class="card-icon">⛈️</div><div><div class="card-title">STORM</div><div class="card-category">AI Research Writer</div></div></div>
+                <div class="card-desc">Stanford's AI research writing system — generates Wikipedia-quality long-form articles from scratch. Multi-perspective knowledge curation with source citations. 18k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">Stanford</span><a class="card-link" href="tools/storm/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
             <!-- 3D / VISION MEDIA -->
             <div class="card" data-c="amber" data-cat="media" data-search="gaussian splatting 3d radiance field nerf real-time rendering splat cuda python" onclick="window.open('https://github.com/graphdeco-inria/gaussian-splatting','_blank')">
                 <div class="card-header"><div class="card-icon">✨</div><div><div class="card-title">Gaussian Splatting</div><div class="card-category">Real-Time 3D Rendering</div></div></div>
@@ -543,6 +569,18 @@
                 <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">100k ⭐</span><a class="card-link" href="tools/deepseek/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
             </div>
 
+            <div class="card" data-c="cyan" data-cat="media" data-search="comfyui comfy stable diffusion node-based workflow modular gui image generation python" onclick="window.open('https://github.com/comfyanonymous/ComfyUI','_blank')">
+                <div class="card-header"><div class="card-icon">🎨</div><div><div class="card-title">ComfyUI</div><div class="card-category">Node-Based Diffusion</div></div></div>
+                <div class="card-desc">The most powerful node-based Stable Diffusion GUI — modular workflow editor for image/video generation. Supports SDXL, FLUX, ControlNet, LoRA, and custom nodes. 75k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">75k ⭐</span><a class="card-link" href="tools/comfyui/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="indigo" data-cat="browser" data-search="browser use ai agent web automation control autonomous browsing python playwright" onclick="window.open('https://github.com/browser-use/browser-use','_blank')">
+                <div class="card-header"><div class="card-icon">🌐</div><div><div class="card-title">Browser Use</div><div class="card-category">AI Browser Agent</div></div></div>
+                <div class="card-desc">Make AI agents that control web browsers autonomously — navigate, click, fill forms, extract data. Built on Playwright with vision + DOM understanding. 60k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">60k ⭐</span><a class="card-link" href="tools/browser-use/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
             <div class="card" data-c="amber" data-cat="coding" data-search="gemini cli google terminal agentic coding multimodal developer tool typescript" onclick="window.open('https://github.com/google-gemini/gemini-cli','_blank')">
                 <div class="card-header"><div class="card-icon">✨</div><div><div class="card-title">Gemini CLI</div><div class="card-category">Agentic Coding</div></div></div>
                 <div class="card-desc">Google's open-source AI agent — Gemini multimodal model right in your terminal. Code, debug, create. 87k+ ⭐.</div>
@@ -573,6 +611,12 @@
                 <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">175k ⭐</span><a class="card-link" href="tools/autogpt/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
             </div>
 
+            <div class="card" data-c="rose" data-cat="agents" data-search="openhands opendevin ai software developer agent autonomous coding full-stack python" onclick="window.open('https://github.com/All-Hands-AI/OpenHands','_blank')">
+                <div class="card-header"><div class="card-icon">👐</div><div><div class="card-title">OpenHands</div><div class="card-category">AI Software Developer</div></div></div>
+                <div class="card-desc">AI-powered software development agents (formerly OpenDevin) — autonomous coding, debugging, and deployment. Full IDE, terminal, and browser access. 50k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">50k ⭐</span><a class="card-link" href="tools/openhands/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
             <div class="card" data-c="teal" data-cat="agents" data-search="openclaw zero token ai models claude chatgpt gemini deepseek grok qwen no api key free typescript" onclick="window.open('https://github.com/linuxhsj/openclaw-zero-token','_blank')">
                 <div class="card-header"><div class="card-icon">🔓</div><div><div class="card-title">OpenClaw</div><div class="card-category">Zero-Token AI Access</div></div></div>
                 <div class="card-desc">Use ALL major AI models with NO API token — Claude, ChatGPT, Gemini, DeepSeek, Grok, Qwen, Kimi, Manus. Web UI, HTTP API, and CLI/TUI. Tool calling and streaming supported.</div>
@@ -595,6 +639,12 @@
                 <div class="card-header"><div class="card-icon">🌾</div><div><div class="card-title">Haystack</div><div class="card-category">AI Pipeline Framework</div></div></div>
                 <div class="card-desc">Deepset's production-ready framework for building RAG, search, and NLP pipelines. Modular, extensible, enterprise-grade. 42k+ ⭐.</div>
                 <div class="card-meta"><span class="card-tag">Python</span><span class="card-tag">42k ⭐</span><a class="card-link" href="tools/haystack/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
+            </div>
+
+            <div class="card" data-c="lime" data-cat="rag" data-search="jina reader url to markdown llm-friendly web scraping convert fetch api typescript" onclick="window.open('https://github.com/jina-ai/reader','_blank')">
+                <div class="card-header"><div class="card-icon">📰</div><div><div class="card-title">Jina Reader</div><div class="card-category">URL to LLM Markdown</div></div></div>
+                <div class="card-desc">Convert any URL to clean, LLM-friendly markdown — just prefix with r.jina.ai. Handles JS rendering, PDFs, and complex layouts. The simplest RAG data pipeline. 20k+ ⭐.</div>
+                <div class="card-meta"><span class="card-tag">TypeScript</span><span class="card-tag">20k ⭐</span><a class="card-link" href="tools/reader/" target="_blank" onclick="event.stopPropagation()">Open →</a></div>
             </div>
 
             <div class="card" data-c="purple" data-cat="agents" data-search="chainlit chat ui conversational llm agent frontend python copilot 8k stars" onclick="window.open('https://github.com/Chainlit/chainlit','_blank')">
@@ -926,7 +976,7 @@
                 <h3 style="color:#a5b4fc;margin:0 0 0.75rem;font-size:1.1rem;">🤔 What is MCP?</h3>
                 <p style="color:#cbd5e1;margin:0;line-height:1.6;">
                     The <strong style="color:#e2e8f0;">Model Context Protocol</strong> is an open standard that lets AI assistants (Claude, Cursor, Codex, etc.) 
-                    connect to external tools and data sources. SupAgentic's MCP server exposes all 92 tools so any AI agent can 
+                    connect to external tools and data sources. SupAgentic's MCP server exposes all 100 tools so any AI agent can 
                     <strong style="color:#6366f1;">search</strong>, <strong style="color:#14b8a6;">clone</strong>, 
                     <strong style="color:#f59e0b;">run</strong>, <strong style="color:#ec4899;">setup</strong>, and 
                     <strong style="color:#22c55e;">update</strong> your tools — just by asking in natural language.
@@ -937,7 +987,7 @@
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-bottom:1.5rem;">
                 <div style="background:rgba(20,184,166,0.08);border:1px solid rgba(20,184,166,0.2);border-radius:12px;padding:1.25rem;">
                     <div style="font-size:1.5rem;margin-bottom:0.5rem;">🛠️</div>
-                    <h4 style="color:#5eead4;margin:0 0 0.5rem;">92 Tools</h4>
+                    <h4 style="color:#5eead4;margin:0 0 0.5rem;">100 Tools</h4>
                     <p style="color:#94a3b8;margin:0;font-size:0.9rem;">Every tool as a callable action — with real execution. Clone, run, setup, update, open from any AI assistant.</p>
                 </div>
                 <div style="background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);border-radius:12px;padding:1.25rem;">

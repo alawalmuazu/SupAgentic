@@ -125,6 +125,14 @@ TOOLS = [
     {"name": "WhatsMyName",       "dir": "whatsmyname",          "cat": "Security",    "repo": "WebBreacher/WhatsMyName",            "lang": "Python"},
     {"name": "Scylla",            "dir": "scylla",               "cat": "Security",    "repo": "cybersecurity-team/scylla",          "lang": "Python"},
     {"name": "TruecallerJS",      "dir": "truecallerjs",         "cat": "Security",    "repo": "sumithemmadi/truecallerjs",          "lang": "TypeScript"},
+    {"name": "Browser Use",       "dir": "browser-use",          "cat": "Browser",     "repo": "browser-use/browser-use",           "lang": "Python"},
+    {"name": "OpenHands",         "dir": "openhands",            "cat": "Agents",      "repo": "All-Hands-AI/OpenHands",            "lang": "Python"},
+    {"name": "Jina Reader",       "dir": "reader",               "cat": "RAG",         "repo": "jina-ai/reader",                    "lang": "TypeScript"},
+    {"name": "STORM",             "dir": "storm",                "cat": "Science",     "repo": "stanford-oval/storm",               "lang": "Python"},
+    {"name": "Llama Models",      "dir": "llama-models",         "cat": "Training",    "repo": "meta-llama/llama-models",           "lang": "Python"},
+    {"name": "Exo",               "dir": "exo",                  "cat": "Local-LLM",   "repo": "exo-explore/exo",                   "lang": "Python"},
+    {"name": "llama.cpp",         "dir": "llama-cpp",            "cat": "Local-LLM",   "repo": "ggerganov/llama.cpp",               "lang": "C++"},
+    {"name": "ComfyUI",           "dir": "comfyui",              "cat": "Media",       "repo": "comfyanonymous/ComfyUI",            "lang": "Python"},
 ]
 
 # ═══ Colors ═══
