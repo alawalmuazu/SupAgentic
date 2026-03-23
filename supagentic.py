@@ -114,6 +114,10 @@ TOOLS = [
     {"name": "SD WebUI",          "dir": "sd-webui",             "cat": "Media",       "repo": "AUTOMATIC1111/stable-diffusion-webui","lang": "Python"},
     {"name": "DeepSpeed",         "dir": "deepspeed",            "cat": "Training",    "repo": "microsoft/DeepSpeed",                "lang": "Python"},
     {"name": "Gymnasium",         "dir": "gymnasium",            "cat": "Simulation",  "repo": "Farama-Foundation/Gymnasium",         "lang": "Python"},
+    {"name": "Voicebox",          "dir": "voicebox",             "cat": "Voice",       "repo": "jamiepine/voicebox",                 "lang": "TypeScript"},
+    {"name": "Lightpanda",        "dir": "lightpanda",           "cat": "Browser",     "repo": "lightpanda-io/browser",              "lang": "Zig"},
+    {"name": "OpenClaw",          "dir": "openclaw-zero-token",  "cat": "Agents",      "repo": "linuxhsj/openclaw-zero-token",       "lang": "TypeScript"},
+    {"name": "RandOpt",           "dir": "randopt",              "cat": "Science",     "repo": "sunrainyg/RandOpt",                  "lang": "Python"},
 ]
 
 # ═══ Colors ═══
