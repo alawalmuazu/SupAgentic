@@ -1,19 +1,30 @@
 #!/usr/bin/env python3
 """
-AI Threat Monitor — Backend System Monitor
+AI Threat Monitor — Backend System Monitor v3.0
 Provides real CPU, memory, temperature, process, and network data
 to the AI Threat Monitor dashboard via REST API.
+
+Features: Historical CSV logging, Windows toast notifications,
+process kill, network traffic recording.
 
 Based on: Ivan Barbato — "The Hidden Architecture of AI Platforms"
 """
 
 import json
 import time
+import os
+import csv
+import threading
+import subprocess
+import signal
+from datetime import datetime
 import psutil
 from http.server import HTTPServer, BaseHTTPRequestHandler
-from urllib.parse import urlparse
+from urllib.parse import urlparse, parse_qs
 
 PORT = 8092
+DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'monitor_data')
+os.makedirs(DATA_DIR, exist_ok=True)
 
 # AI platform processes to watch for
 AI_PROCESSES = [
@@ -32,6 +43,146 @@ AI_DOMAINS = [
 ]
 
 
+# ═══════════════════════════════════════════
+# Historical CSV Logger
+# ═══════════════════════════════════════════
+class HistoryLogger:
+    """Logs system metrics to CSV for forensic analysis."""
+
+    def __init__(self):
+        self.csv_path = os.path.join(DATA_DIR, f'metrics_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv')
+        self.net_log_path = os.path.join(DATA_DIR, f'network_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv')
+        self.sample_count = 0
+        self._init_csv()
+        self._init_net_csv()
+
+    def _init_csv(self):
+        with open(self.csv_path, 'w', newline='') as f:
+            w = csv.writer(f)
+            w.writerow(['timestamp', 'cpu_percent', 'cpu_level', 'mem_percent', 'mem_used_gb',
+                        'mem_total_gb', 'battery_percent', 'battery_charging', 'drain_rate',
+                        'thermal_estimate', 'ai_process_count', 'active_connections',
+                        'fps_estimate', 'total_processes'])
+
+    def _init_net_csv(self):
+        with open(self.net_log_path, 'w', newline='') as f:
+            w = csv.writer(f)
+            w.writerow(['timestamp', 'local_addr', 'remote_addr', 'pid', 'process_name',
+                        'ai_related', 'bytes_sent_mb', 'bytes_recv_mb'])
+
+    def log_metrics(self, snapshot):
+        """Append a row to the metrics CSV."""
+        self.sample_count += 1
+        try:
+            cpu = snapshot.get('cpu', {})
+            mem = snapshot.get('memory', {})
+            batt = snapshot.get('battery', {})
+            procs = snapshot.get('processes', {})
+            net = snapshot.get('network', {})
+
+            with open(self.csv_path, 'a', newline='') as f:
+                w = csv.writer(f)
+                w.writerow([
+                    datetime.now().isoformat(),
+                    cpu.get('overall', 0),
+                    cpu.get('level', ''),
+                    mem.get('percent', 0),
+                    mem.get('used_gb', 0),
+                    mem.get('total_gb', 0),
+                    batt.get('percent', ''),
+                    batt.get('charging', ''),
+                    batt.get('drain_rate', ''),
+                    batt.get('thermal_estimate', ''),
+                    procs.get('ai_count', 0),
+                    net.get('active_connections', 0),
+                    '',
+                    procs.get('total_processes', 0),
+                ])
+        except Exception:
+            pass
+
+    def log_network(self, connections, io_stats):
+        """Append network connections to the network log."""
+        try:
+            ts = datetime.now().isoformat()
+            with open(self.net_log_path, 'a', newline='') as f:
+                w = csv.writer(f)
+                for conn in connections:
+                    proc_name = ''
+                    if conn.get('pid'):
+                        try:
+                            proc_name = psutil.Process(conn['pid']).name()
+                        except Exception:
+                            pass
+                    w.writerow([
+                        ts, conn.get('local', ''), conn.get('remote', ''),
+                        conn.get('pid', ''), proc_name,
+                        conn.get('ai_related', False),
+                        io_stats.get('bytes_sent_mb', 0),
+                        io_stats.get('bytes_recv_mb', 0),
+                    ])
+        except Exception:
+            pass
+
+    def get_status(self):
+        metrics_size = os.path.getsize(self.csv_path) if os.path.exists(self.csv_path) else 0
+        net_size = os.path.getsize(self.net_log_path) if os.path.exists(self.net_log_path) else 0
+        return {
+            'metrics_file': self.csv_path,
+            'network_file': self.net_log_path,
+            'samples': self.sample_count,
+            'metrics_size_kb': round(metrics_size / 1024, 1),
+            'network_size_kb': round(net_size / 1024, 1),
+        }
+
+
+# ═══════════════════════════════════════════
+# Windows Toast Notifications
+# ═══════════════════════════════════════════
+class NotificationEngine:
+    """Sends Windows toast notifications for critical alerts."""
+
+    def __init__(self):
+        self.last_alerts = {}
+        self.cooldown = 60  # seconds between repeated alerts
+        self.history = []
+        self.enabled = True
+
+    def notify(self, title, message, level='warning'):
+        if not self.enabled:
+            return
+        key = title
+        now = time.time()
+        if key in self.last_alerts and (now - self.last_alerts[key]) < self.cooldown:
+            return
+        self.last_alerts[key] = now
+        self.history.append({'time': datetime.now().isoformat(), 'title': title, 'message': message, 'level': level})
+        if len(self.history) > 50:
+            self.history.pop(0)
+
+        try:
+            ps_cmd = f'''[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] > $null
+$template = [Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent([Windows.UI.Notifications.ToastTemplateType]::ToastText02)
+$text = $template.GetElementsByTagName("text")
+$text.Item(0).AppendChild($template.CreateTextNode("{title}")) > $null
+$text.Item(1).AppendChild($template.CreateTextNode("{message}")) > $null
+$toast = [Windows.UI.Notifications.ToastNotification]::new($template)
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("AI Threat Monitor").Show($toast)'''
+            subprocess.Popen(
+                ['powershell', '-WindowStyle', 'Hidden', '-Command', ps_cmd],
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                creationflags=subprocess.CREATE_NO_WINDOW if hasattr(subprocess, 'CREATE_NO_WINDOW') else 0
+            )
+        except Exception:
+            pass
+
+    def get_history(self):
+        return {'enabled': self.enabled, 'notifications': self.history[-20:], 'total': len(self.history)}
+
+
+# ═══════════════════════════════════════════
+# System Monitor
+# ═══════════════════════════════════════════
 class SystemMonitor:
     """Collects real system metrics using psutil."""
 
@@ -39,6 +190,8 @@ class SystemMonitor:
         self.start_time = time.time()
         self.cpu_history = []
         self.battery_history = []
+        self.logger = HistoryLogger()
+        self.notifier = NotificationEngine()
 
     def get_cpu(self):
         """Real CPU usage per-core and overall."""
@@ -252,9 +405,25 @@ class SystemMonitor:
             'partitions': partitions,
         }
 
+    def kill_process(self, pid):
+        """Kill a process by PID."""
+        try:
+            proc = psutil.Process(pid)
+            name = proc.name()
+            proc.terminate()
+            proc.wait(timeout=3)
+            self.notifier.notify('Process Killed', f'{name} (PID {pid}) terminated', 'info')
+            return {'success': True, 'pid': pid, 'name': name, 'message': f'{name} terminated'}
+        except psutil.NoSuchProcess:
+            return {'success': False, 'error': f'Process {pid} not found'}
+        except psutil.AccessDenied:
+            return {'success': False, 'error': f'Access denied for PID {pid}'}
+        except Exception as e:
+            return {'success': False, 'error': str(e)}
+
     def get_all(self):
         """Complete system snapshot."""
-        return {
+        snapshot = {
             'timestamp': time.time(),
             'uptime_seconds': round(time.time() - self.start_time),
             'boot_time': psutil.boot_time(),
@@ -265,7 +434,29 @@ class SystemMonitor:
             'processes': self.get_processes(),
             'network': self.get_network(),
             'disk': self.get_disk(),
+            'logging': self.logger.get_status(),
         }
+
+        # Log to CSV
+        self.logger.log_metrics(snapshot)
+
+        # Log network connections
+        net = snapshot['network']
+        self.logger.log_network(net.get('top_connections', []), net)
+
+        # Check alerts and send notifications
+        cpu = snapshot['cpu']
+        if cpu['overall'] > 90:
+            self.notifier.notify('CPU CRITICAL', f'CPU at {cpu["overall"]}% - possible AI compute offload', 'critical')
+        batt = snapshot.get('battery', {})
+        drain = batt.get('drain_rate', 0)
+        if drain and drain > 1.5:
+            self.notifier.notify('Battery Drain Alert', f'Drain rate: {drain}%/min - catastrophic', 'critical')
+        procs = snapshot['processes']
+        if procs['ai_count'] > 5:
+            self.notifier.notify('AI Processes', f'{procs["ai_count"]} AI processes running', 'warning')
+
+        return snapshot
 
 
 monitor = SystemMonitor()
@@ -280,10 +471,12 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
-        path = urlparse(self.path).path
+        parsed = urlparse(self.path)
+        path = parsed.path
+        params = parse_qs(parsed.query)
 
         if path == '/api/health':
-            self._json({'status': 'ok', 'version': '2.0', 'uptime': round(time.time() - monitor.start_time)})
+            self._json({'status': 'ok', 'version': '3.0', 'uptime': round(time.time() - monitor.start_time)})
         elif path == '/api/cpu':
             self._json(monitor.get_cpu())
         elif path == '/api/memory':
@@ -300,6 +493,19 @@ class Handler(BaseHTTPRequestHandler):
             self._json(monitor.get_disk())
         elif path == '/api/all':
             self._json(monitor.get_all())
+        elif path == '/api/logging':
+            self._json(monitor.logger.get_status())
+        elif path == '/api/notifications':
+            self._json(monitor.notifier.get_history())
+        elif path == '/api/notifications/toggle':
+            monitor.notifier.enabled = not monitor.notifier.enabled
+            self._json({'enabled': monitor.notifier.enabled})
+        elif path == '/api/kill':
+            pid = params.get('pid', [None])[0]
+            if pid:
+                self._json(monitor.kill_process(int(pid)))
+            else:
+                self._json({'success': False, 'error': 'Missing pid parameter'})
         else:
             self.send_response(404)
             self._cors()
@@ -315,7 +521,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def _cors(self):
         self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
 
     def log_message(self, format, *args):
@@ -350,17 +556,23 @@ def main():
     else:
         print(f"  [*] Battery: Not available")
 
+    print(f"  [*] Data dir: {DATA_DIR}")
+    print(f"  [*] CSV log: {monitor.logger.csv_path}")
+    print(f"  [*] Net log: {monitor.logger.net_log_path}")
     print()
     print(f"  API Routes:")
-    print(f"    GET /api/all          - Complete system snapshot")
-    print(f"    GET /api/cpu          - CPU pressure & per-core usage")
-    print(f"    GET /api/memory       - RAM & swap usage")
-    print(f"    GET /api/battery      - Battery drain rate & thermal")
-    print(f"    GET /api/temperature  - System temperature sensors")
-    print(f"    GET /api/processes    - AI process detection")
-    print(f"    GET /api/network      - Connections & traffic")
-    print(f"    GET /api/disk         - Disk I/O & partitions")
-    print(f"    GET /api/health       - Health check")
+    print(f"    GET /api/all              - Complete system snapshot")
+    print(f"    GET /api/cpu              - CPU pressure & per-core usage")
+    print(f"    GET /api/memory           - RAM & swap usage")
+    print(f"    GET /api/battery          - Battery drain & thermal")
+    print(f"    GET /api/temperature      - System temperature sensors")
+    print(f"    GET /api/processes        - AI process detection")
+    print(f"    GET /api/network          - Connections & traffic")
+    print(f"    GET /api/disk             - Disk I/O & partitions")
+    print(f"    GET /api/kill?pid=1234    - Kill process by PID")
+    print(f"    GET /api/logging          - CSV logging status")
+    print(f"    GET /api/notifications    - Toast notification history")
+    print(f"    GET /api/health           - Health check")
     print()
     print(f"  Press Ctrl+C to stop")
     print()
