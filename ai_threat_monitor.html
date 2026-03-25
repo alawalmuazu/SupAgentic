@@ -801,6 +801,56 @@
         </div>
 
         <!-- ═══ Forensic Logging Status ═══ -->
+        <!-- ═══ Antigravity IDE Monitor ═══ -->
+        <div class="section-title" style="margin-top:32px;">🔬 Antigravity IDE Resource Impact</div>
+        <div class="dashboard" style="grid-template-columns:repeat(3,1fr);">
+            <div class="metric-card">
+                <div class="metric-label">Antigravity CPU</div>
+                <div class="metric-value" id="agCpuTotal" style="color:var(--accent);">—</div>
+                <div class="metric-detail" id="agProcCount">Scanning...</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Power Share</div>
+                <div class="metric-value" id="agPowerPct" style="color:var(--warning);">—</div>
+                <div class="metric-detail">% of total system power</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">IDE Total CPU</div>
+                <div class="metric-value" id="ideCpuTotal" style="color:var(--text-muted);">—</div>
+                <div class="metric-detail" id="ideProcCount">All dev tools</div>
+            </div>
+        </div>
+        <div class="card" style="margin-top:0;">
+            <div class="card-header">
+                <div class="card-icon" style="background:var(--accent-dim);">🔬</div>
+                <div class="card-title">Antigravity Processes</div>
+            </div>
+            <div id="antigravityList" class="threat-list">
+                <div class="threat-item"><span class="threat-icon">⏳</span><span class="threat-text">Waiting for backend data...</span></div>
+            </div>
+        </div>
+
+        <!-- ═══ Battery Drain Attribution ═══ -->
+        <div class="section-title" style="margin-top:24px;">🔋 Battery Drain Attribution</div>
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon" style="background:rgba(255,193,7,0.15);">⚡</div>
+                <div class="card-title">Power Consumption by Category</div>
+            </div>
+            <div id="drainCategories" class="threat-list">
+                <div class="threat-item"><span class="threat-icon">⏳</span><span class="threat-text">Sampling power data...</span></div>
+            </div>
+        </div>
+        <div class="card" style="margin-top:0;">
+            <div class="card-header">
+                <div class="card-icon" style="background:rgba(255,82,82,0.15);">🔥</div>
+                <div class="card-title">Top Battery Drainers</div>
+            </div>
+            <div id="topDrainers" class="threat-list">
+                <div class="threat-item"><span class="threat-icon">⏳</span><span class="threat-text">Waiting for backend...</span></div>
+            </div>
+        </div>
+
         <div class="section-title" style="margin-top:32px;">📝 Forensic Data Logging &amp; Alerts</div>
         <div class="dashboard" style="grid-template-columns:repeat(4,1fr);">
             <div class="log-stat">
@@ -1568,6 +1618,54 @@
                         document.getElementById('logSamples').textContent = d.logging.samples;
                         document.getElementById('logSizeKB').textContent = d.logging.metrics_size_kb + ' KB';
                         document.getElementById('netLogSizeKB').textContent = d.logging.network_size_kb + ' KB';
+                    }
+
+                    // Antigravity IDE Monitor
+                    if (d.processes && d.processes.antigravity) {
+                        var ag = d.processes.antigravity;
+                        document.getElementById('agCpuTotal').textContent = ag.total_cpu + '%';
+                        document.getElementById('agCpuTotal').style.color = ag.total_cpu > 200 ? 'var(--danger)' : ag.total_cpu > 50 ? 'var(--warning)' : 'var(--accent)';
+                        document.getElementById('agPowerPct').textContent = ag.total_power_pct + '%';
+                        document.getElementById('agProcCount').textContent = ag.count + ' Antigravity processes';
+
+                        var agList = document.getElementById('antigravityList');
+                        if (ag.processes.length > 0) {
+                            agList.innerHTML = ag.processes.map(function(p) {
+                                return '<div class="threat-item"><span class="threat-icon">\ud83d\udd2c</span><span class="threat-text"><b>' + p.name + '</b> (PID ' + p.pid + ') \u2014 CPU: ' + p.cpu + '% | RAM: ' + p.memory + '% | sig: ' + p.matched + '</span><button class="btn-kill" onclick="killProcess(' + p.pid + ',\'' + p.name.replace(/'/g, '') + '\')">\u26d4 KILL</button></div>';
+                            }).join('');
+                        } else {
+                            agList.innerHTML = '<div class="threat-item"><span class="threat-icon">\u2705</span><span class="threat-text">No Antigravity processes detected</span></div>';
+                        }
+                    }
+                    if (d.processes && d.processes.ide_total) {
+                        document.getElementById('ideCpuTotal').textContent = d.processes.ide_total.total_cpu + '%';
+                        document.getElementById('ideProcCount').textContent = d.processes.ide_total.count + ' IDE processes';
+                    }
+
+                    // Battery Drain Attribution
+                    if (d.battery_drain && d.battery_drain.available) {
+                        var bd = d.battery_drain;
+                        var catEl = document.getElementById('drainCategories');
+                        var cats = bd.categories;
+                        if (cats) {
+                            var catOrder = Object.keys(cats).sort(function(a,b) { return (cats[b].power_pct||0) - (cats[a].power_pct||0); });
+                            catEl.innerHTML = catOrder.map(function(c) {
+                                var cd = cats[c];
+                                var icon = c === 'antigravity' ? '\ud83d\udd2c' : c === 'ai' ? '\ud83e\udd16' : c === 'ide' ? '\ud83d\udcbb' : '\u2699\ufe0f';
+                                var sev = cd.power_pct > 40 ? 'critical' : cd.power_pct > 20 ? 'high' : cd.power_pct > 5 ? 'medium' : 'low';
+                                var bar = '<div style="height:4px;background:var(--bg-secondary);border-radius:2px;margin-top:4px;"><div style="height:100%;width:' + cd.power_pct + '%;background:' + (sev==='critical'?'var(--danger)':sev==='high'?'var(--warning)':'var(--accent)') + ';border-radius:2px;transition:width 1s;"></div></div>';
+                                return '<div class="threat-item"><span class="threat-icon">' + icon + '</span><span class="threat-text"><b>' + c.toUpperCase() + '</b> \u2014 ' + cd.cpu + '% CPU | ' + cd.count + ' procs | <b>' + cd.power_pct + '% power</b>' + bar + '</span><span class="threat-severity sev-' + sev + '">' + cd.power_pct + '%</span></div>';
+                            }).join('');
+                        }
+
+                        var drainEl = document.getElementById('topDrainers');
+                        if (bd.top_drainers && bd.top_drainers.length > 0) {
+                            drainEl.innerHTML = bd.top_drainers.map(function(p) {
+                                var icon = p.category === 'antigravity' ? '\ud83d\udd2c' : p.category === 'ai' ? '\ud83e\udd16' : p.category === 'ide' ? '\ud83d\udcbb' : '\u2699\ufe0f';
+                                var sev = p.cpu > 100 ? 'critical' : p.cpu > 30 ? 'high' : p.cpu > 5 ? 'medium' : 'low';
+                                return '<div class="threat-item"><span class="threat-icon">' + icon + '</span><span class="threat-text"><b>' + p.name + '</b> [' + p.category + '] \u2014 CPU: ' + p.cpu + '%</span><button class="btn-kill" onclick="killProcess(' + p.pid + ',\'' + p.name.replace(/'/g, '') + '\')">\u26d4 KILL</button></div>';
+                            }).join('');
+                        }
                     }
 
                 } catch(e) {

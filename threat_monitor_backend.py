@@ -35,6 +35,23 @@ AI_PROCESSES = [
     'python',    # ML/AI Python processes
 ]
 
+# IDE and development tool processes
+IDE_PROCESSES = [
+    'antigravity', 'gemini', 'code', 'vscode', 'devenv',
+    'idea64', 'pycharm', 'webstorm', 'rider', 'cursor',
+    'windsurf', 'zed', 'sublime_text', 'atom',
+    'chrome', 'msedge', 'firefox',  # browsers running IDE web clients
+    'copilot', 'github desktop', 'git',
+    'typescript-language-server', 'eslint', 'prettier',
+    'rust-analyzer', 'clangd', 'gopls',
+]
+
+# Antigravity IDE specific signatures
+ANTIGRAVITY_SIGNATURES = [
+    'antigravity', 'cortex', 'gemini', 'pyre2',
+    'google-ai', 'ai-status', 'brain',
+]
+
 # Suspicious network domains
 AI_DOMAINS = [
     'openai.com', 'anthropic.com', 'claude.ai', 'chatgpt.com',
@@ -297,43 +314,162 @@ class SystemMonitor:
         """Detect AI-related processes and top CPU consumers."""
         ai_procs = []
         top_procs = []
+        ide_procs = []
+        antigravity_procs = []
 
-        for proc in psutil.process_iter(['pid', 'name', 'cpu_percent', 'memory_percent', 'status']):
+        for proc in psutil.process_iter(['pid', 'name', 'cpu_percent', 'memory_percent', 'status', 'cmdline']):
             try:
                 info = proc.info
                 name_lower = info['name'].lower() if info['name'] else ''
+                cmdline_str = ' '.join(info.get('cmdline') or []).lower()
 
                 # Collect top CPU processes
-                if info['cpu_percent'] and info['cpu_percent'] > 1:
-                    top_procs.append({
+                if info['cpu_percent'] and info['cpu_percent'] > 0.5:
+                    proc_entry = {
                         'pid': info['pid'],
                         'name': info['name'],
                         'cpu': round(info['cpu_percent'], 1),
                         'memory': round(info['memory_percent'], 1) if info['memory_percent'] else 0,
-                    })
+                    }
+                    top_procs.append(proc_entry)
 
-                # Check for AI-related processes
-                for ai_name in AI_PROCESSES:
-                    if ai_name in name_lower:
-                        ai_procs.append({
+                # Check for Antigravity IDE signatures
+                is_antigravity = False
+                for sig in ANTIGRAVITY_SIGNATURES:
+                    if sig in name_lower or sig in cmdline_str:
+                        is_antigravity = True
+                        antigravity_procs.append({
                             'pid': info['pid'],
                             'name': info['name'],
                             'cpu': round(info['cpu_percent'], 1) if info['cpu_percent'] else 0,
                             'memory': round(info['memory_percent'], 1) if info['memory_percent'] else 0,
-                            'matched': ai_name,
+                            'matched': sig,
+                            'cmdline': (cmdline_str[:120] + '...') if len(cmdline_str) > 120 else cmdline_str,
                         })
                         break
+
+                # Check for IDE processes
+                for ide_name in IDE_PROCESSES:
+                    if ide_name in name_lower:
+                        ide_procs.append({
+                            'pid': info['pid'],
+                            'name': info['name'],
+                            'cpu': round(info['cpu_percent'], 1) if info['cpu_percent'] else 0,
+                            'memory': round(info['memory_percent'], 1) if info['memory_percent'] else 0,
+                            'matched': ide_name,
+                        })
+                        break
+
+                # Check for AI-related processes
+                if not is_antigravity:
+                    for ai_name in AI_PROCESSES:
+                        if ai_name in name_lower:
+                            ai_procs.append({
+                                'pid': info['pid'],
+                                'name': info['name'],
+                                'cpu': round(info['cpu_percent'], 1) if info['cpu_percent'] else 0,
+                                'memory': round(info['memory_percent'], 1) if info['memory_percent'] else 0,
+                                'matched': ai_name,
+                            })
+                            break
             except (psutil.NoSuchProcess, psutil.AccessDenied):
                 continue
 
         top_procs.sort(key=lambda x: x['cpu'], reverse=True)
+        ide_procs.sort(key=lambda x: x['cpu'], reverse=True)
+        antigravity_procs.sort(key=lambda x: x['cpu'], reverse=True)
+
+        # Power impact estimation (CPU% proportional to power draw)
+        total_cpu = sum(p['cpu'] for p in top_procs) or 1
+        for p in top_procs:
+            p['power_pct'] = round((p['cpu'] / total_cpu) * 100, 1)
+
+        antigravity_cpu_total = sum(p['cpu'] for p in antigravity_procs)
+        ide_cpu_total = sum(p['cpu'] for p in ide_procs)
 
         return {
             'ai_processes': ai_procs[:20],
-            'top_cpu': top_procs[:10],
+            'top_cpu': top_procs[:15],
+            'ide_processes': ide_procs[:15],
+            'antigravity': {
+                'processes': antigravity_procs[:10],
+                'count': len(antigravity_procs),
+                'total_cpu': round(antigravity_cpu_total, 1),
+                'total_power_pct': round((antigravity_cpu_total / total_cpu) * 100, 1) if total_cpu > 1 else 0,
+            },
+            'ide_total': {
+                'count': len(ide_procs),
+                'total_cpu': round(ide_cpu_total, 1),
+                'total_power_pct': round((ide_cpu_total / total_cpu) * 100, 1) if total_cpu > 1 else 0,
+            },
             'total_processes': len(list(psutil.process_iter())),
             'ai_count': len(ai_procs),
             'alert': len(ai_procs) > 0,
+        }
+
+    def get_battery_drain_attribution(self):
+        """Attribute battery drain to specific processes."""
+        batt = psutil.sensors_battery()
+        if not batt:
+            return {'available': False}
+
+        # Get all processes sorted by CPU
+        drain_procs = []
+        for proc in psutil.process_iter(['pid', 'name', 'cpu_percent', 'memory_percent']):
+            try:
+                info = proc.info
+                if info['cpu_percent'] and info['cpu_percent'] > 0.5:
+                    name_lower = (info['name'] or '').lower()
+                    category = 'system'
+                    if any(s in name_lower for s in ANTIGRAVITY_SIGNATURES):
+                        category = 'antigravity'
+                    elif any(s in name_lower for s in AI_PROCESSES):
+                        category = 'ai'
+                    elif any(s in name_lower for s in IDE_PROCESSES):
+                        category = 'ide'
+                    drain_procs.append({
+                        'pid': info['pid'],
+                        'name': info['name'],
+                        'cpu': round(info['cpu_percent'], 1),
+                        'memory': round(info['memory_percent'], 1) if info['memory_percent'] else 0,
+                        'category': category,
+                    })
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                continue
+
+        drain_procs.sort(key=lambda x: x['cpu'], reverse=True)
+        total_cpu = sum(p['cpu'] for p in drain_procs) or 1
+
+        # Category breakdown
+        categories = {}
+        for p in drain_procs:
+            cat = p['category']
+            if cat not in categories:
+                categories[cat] = {'cpu': 0, 'count': 0, 'top_process': p['name']}
+            categories[cat]['cpu'] += p['cpu']
+            categories[cat]['count'] += 1
+
+        for cat in categories:
+            categories[cat]['power_pct'] = round((categories[cat]['cpu'] / total_cpu) * 100, 1)
+            categories[cat]['cpu'] = round(categories[cat]['cpu'], 1)
+
+        # Estimated drain rate per category
+        drain_rate = 0
+        if len(self.battery_history) >= 2 and not batt.power_plugged:
+            first = self.battery_history[0]
+            last = self.battery_history[-1]
+            mins = (last['time'] - first['time']) / 60
+            if mins > 0.5:
+                drain_rate = (first['level'] - last['level']) / mins
+
+        return {
+            'available': True,
+            'battery_percent': batt.percent,
+            'charging': batt.power_plugged,
+            'drain_rate_per_min': round(drain_rate, 3) if drain_rate else 0,
+            'total_drain_processes': len(drain_procs),
+            'top_drainers': drain_procs[:10],
+            'categories': categories,
         }
 
     def get_network(self):
@@ -434,6 +570,7 @@ class SystemMonitor:
             'processes': self.get_processes(),
             'network': self.get_network(),
             'disk': self.get_disk(),
+            'battery_drain': self.get_battery_drain_attribution(),
             'logging': self.logger.get_status(),
         }
 
@@ -493,6 +630,8 @@ class Handler(BaseHTTPRequestHandler):
             self._json(monitor.get_disk())
         elif path == '/api/all':
             self._json(monitor.get_all())
+        elif path == '/api/battery-drain':
+            self._json(monitor.get_battery_drain_attribution())
         elif path == '/api/logging':
             self._json(monitor.logger.get_status())
         elif path == '/api/notifications':
