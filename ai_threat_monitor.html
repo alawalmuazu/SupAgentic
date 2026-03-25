@@ -566,6 +566,69 @@
             </div>
         </div>
 
+        <!-- ═══ Real System Metrics (Backend) ═══ -->
+        <div class="section-title" style="margin-top:32px;">🖥️ Real System Metrics (Backend: psutil)</div>
+        <div id="backendStatus" class="status-bar" style="margin-bottom:16px;">
+            <div class="status-indicator">
+                <div class="status-dot yellow" id="backendDot"></div>
+                <span id="backendLabel">Connecting to backend...</span>
+            </div>
+        </div>
+        <div class="dashboard">
+            <div class="card" id="realCpuCard">
+                <div class="card-header">
+                    <div class="card-icon" style="background:var(--danger-dim);">🔥</div>
+                    <div class="card-title">Real CPU Usage</div>
+                </div>
+                <div class="metric-value" id="realCpuValue" style="color:var(--text-muted);">--</div>
+                <div class="metric-unit">% overall</div>
+                <div class="metric-bar"><div class="metric-bar-fill" id="realCpuBar" style="width:0%;background:var(--success);"></div></div>
+                <div class="metric-label" id="realCpuDetail">Waiting for backend...</div>
+                <div id="realCpuCores" style="margin-top:10px;display:flex;gap:4px;flex-wrap:wrap;"></div>
+            </div>
+            <div class="card" id="realMemCard">
+                <div class="card-header">
+                    <div class="card-icon" style="background:var(--purple-dim);">🧠</div>
+                    <div class="card-title">Real RAM Usage</div>
+                </div>
+                <div class="metric-value" id="realMemValue" style="color:var(--text-muted);">--</div>
+                <div class="metric-unit">GB used</div>
+                <div class="metric-bar"><div class="metric-bar-fill" id="realMemBar" style="width:0%;background:var(--success);"></div></div>
+                <div class="metric-label" id="realMemDetail">Waiting for backend...</div>
+            </div>
+            <div class="card" id="realTempCard">
+                <div class="card-header">
+                    <div class="card-icon" style="background:var(--warning-dim);">🌡️</div>
+                    <div class="card-title">Temperature</div>
+                </div>
+                <div class="metric-value" id="realTempValue" style="color:var(--text-muted);">--</div>
+                <div class="metric-unit" id="realTempUnit">sensor data</div>
+                <div class="metric-label" id="realTempDetail">Waiting for backend...</div>
+            </div>
+        </div>
+
+        <!-- Process Table -->
+        <div class="dashboard two-col" style="margin-top:0;">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon" style="background:var(--danger-dim);">🤖</div>
+                    <div class="card-title">AI Process Detection</div>
+                </div>
+                <div id="aiProcessList" class="threat-list">
+                    <div class="threat-item"><span class="threat-icon">⏳</span><span class="threat-text">Scanning processes...</span></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon" style="background:var(--accent-dim);">📊</div>
+                    <div class="card-title">Top CPU Consumers</div>
+                </div>
+                <div id="topCpuList" class="threat-list">
+                    <div class="threat-item"><span class="threat-icon">⏳</span><span class="threat-text">Scanning...</span></div>
+                </div>
+            </div>
+        </div>
+
         <!-- ═══ Live Log ═══ -->
         <div class="section-title">📟 System Event Log</div>
         <div class="card">
@@ -1337,6 +1400,94 @@
             log('OK', 'Report exported: threat_report_' + ts + '.md');
         }
 
+        // ═══ Backend Integration ═══
+        const BACKEND = 'http://127.0.0.1:8092';
+        let backendConnected = false;
+
+        async function initBackend() {
+            async function poll() {
+                try {
+                    const res = await fetch(BACKEND + '/api/all');
+                    const d = await res.json();
+
+                    if (!backendConnected) {
+                        backendConnected = true;
+                        document.getElementById('backendDot').className = 'status-dot green';
+                        document.getElementById('backendLabel').textContent = 'Backend connected (psutil)';
+                        log('OK', 'Backend connected - real system metrics active');
+                    }
+
+                    // Real CPU
+                    const cpu = d.cpu;
+                    document.getElementById('realCpuValue').textContent = cpu.overall;
+                    document.getElementById('realCpuValue').style.color = getColor(cpu.overall);
+                    document.getElementById('realCpuBar').style.width = cpu.overall + '%';
+                    document.getElementById('realCpuBar').style.background = getColor(cpu.overall);
+                    document.getElementById('realCpuDetail').textContent = cpu.level + ' | ' + cpu.physical_cores + ' physical / ' + cpu.core_count + ' logical cores | ' + (cpu.freq_current || '?') + ' MHz';
+
+                    // Per-core bars
+                    const coresEl = document.getElementById('realCpuCores');
+                    coresEl.innerHTML = cpu.per_core.map(function(c, i) {
+                        return '<div style="flex:1;min-width:20px;text-align:center;"><div style="height:30px;background:var(--bg-secondary);border-radius:3px;overflow:hidden;position:relative;"><div style="position:absolute;bottom:0;width:100%;height:' + c + '%;background:' + getColor(c) + ';border-radius:3px;transition:height 1s;"></div></div><div style="font-size:9px;color:var(--text-muted);margin-top:2px;">' + Math.round(c) + '%</div></div>';
+                    }).join('');
+
+                    if (cpu.overall > 80) addThreat('🖥️', 'Real CPU at ' + cpu.overall + '% — ' + cpu.level + ' (psutil)', cpu.overall > 90 ? 'critical' : 'high');
+
+                    // Real Memory
+                    const mem = d.memory;
+                    document.getElementById('realMemValue').textContent = mem.used_gb;
+                    document.getElementById('realMemValue').style.color = getColor(mem.percent, [40, 65, 85]);
+                    document.getElementById('realMemBar').style.width = mem.percent + '%';
+                    document.getElementById('realMemBar').style.background = getColor(mem.percent, [40, 65, 85]);
+                    document.getElementById('realMemDetail').textContent = mem.used_gb + 'GB / ' + mem.total_gb + 'GB (' + mem.percent + '%) | Swap: ' + mem.swap_used_gb + 'GB';
+
+                    if (mem.percent > 80) addThreat('🧠', 'Real RAM at ' + mem.percent + '% (' + mem.used_gb + '/' + mem.total_gb + 'GB) — system under pressure', mem.percent > 90 ? 'critical' : 'high');
+
+                    // Temperature
+                    const temp = d.temperature;
+                    if (temp.available) {
+                        document.getElementById('realTempValue').textContent = temp.max_temp + '°C';
+                        document.getElementById('realTempValue').style.color = temp.level === 'COOL' ? 'var(--success)' : temp.level === 'WARM' ? 'var(--accent)' : temp.level === 'HOT' ? 'var(--warning)' : 'var(--danger)';
+                        document.getElementById('realTempUnit').textContent = temp.level;
+                        if (temp.max_temp > 75) addThreat('🌡️', 'CPU temperature: ' + temp.max_temp + '°C — thermal throttling zone', 'critical');
+                    } else {
+                        document.getElementById('realTempValue').textContent = 'N/A';
+                        document.getElementById('realTempDetail').textContent = temp.note || 'Sensors not available';
+                    }
+
+                    // AI Processes
+                    const procs = d.processes;
+                    const aiList = document.getElementById('aiProcessList');
+                    if (procs.ai_processes.length > 0) {
+                        aiList.innerHTML = procs.ai_processes.map(function(p) {
+                            return '<div class="threat-item"><span class="threat-icon">🤖</span><span class="threat-text"><b>' + p.name + '</b> (PID ' + p.pid + ') — CPU: ' + p.cpu + '% | RAM: ' + p.memory + '%</span><span class="threat-severity sev-high">' + p.matched + '</span></div>';
+                        }).join('');
+                        addThreat('🤖', procs.ai_count + ' AI-related process(es) detected: ' + procs.ai_processes.map(function(p){return p.name;}).join(', '), 'high');
+                    } else {
+                        aiList.innerHTML = '<div class="threat-item"><span class="threat-icon">✅</span><span class="threat-text">No AI platform processes detected (' + procs.total_processes + ' total processes scanned)</span><span class="threat-severity sev-low">clear</span></div>';
+                    }
+
+                    // Top CPU
+                    const topList = document.getElementById('topCpuList');
+                    topList.innerHTML = procs.top_cpu.slice(0, 6).map(function(p) {
+                        var sev = p.cpu > 50 ? 'critical' : p.cpu > 20 ? 'high' : p.cpu > 5 ? 'medium' : 'low';
+                        return '<div class="threat-item"><span class="threat-icon">📊</span><span class="threat-text"><b>' + p.name + '</b> — CPU: ' + p.cpu + '% | RAM: ' + p.memory + '%</span><span class="threat-severity sev-' + sev + '">' + p.cpu + '%</span></div>';
+                    }).join('');
+
+                } catch(e) {
+                    if (backendConnected) {
+                        log('WARN', 'Backend connection lost');
+                        backendConnected = false;
+                    }
+                    document.getElementById('backendDot').className = 'status-dot red';
+                    document.getElementById('backendLabel').textContent = 'Backend offline — run: python threat_monitor_backend.py';
+                }
+            }
+
+            poll();
+            setInterval(poll, 3000);
+        }
+
         // ═══ Initialize ═══
         (async () => {
             log('INFO', '═══ AI Threat Monitor v2.0 ═══');
@@ -1354,6 +1505,7 @@
             initKeystroke();
             initWebRTC();
             initFingerprint();
+            initBackend();
             updateThreatLevel();
 
             log('OK', '═══ All sensors active — monitoring for hidden architecture ═══');
