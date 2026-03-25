@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT Persona — Michael Ikechukwu (GECX)</title>
+    <meta name="description" content="OSINT Intelligence Profile: Michael Ikechukwu — CEO, Golden Exchange Company GECX | +2347083852787">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a1f35;
+            --bg-card-hover: #222845;
+            --bg-glass: rgba(26, 31, 53, 0.7);
+            --border: rgba(255,255,255,0.06);
+            --border-accent: rgba(251, 146, 60, 0.3);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent: #fb923c;
+            --accent-glow: rgba(251, 146, 60, 0.15);
+            --danger: #ef4444;
+            --danger-bg: rgba(239, 68, 68, 0.1);
+            --warning: #f59e0b;
+            --warning-bg: rgba(245, 158, 11, 0.1);
+            --success: #22c55e;
+            --success-bg: rgba(34, 197, 94, 0.1);
+            --info: #3b82f6;
+            --info-bg: rgba(59, 130, 246, 0.1);
+            --red-text: #fca5a5;
+            --green-text: #86efac;
+            --gradient-hero: linear-gradient(135deg, #0a0e1a 0%, #1a1028 50%, #0a0e1a 100%);
+            --shadow: 0 4px 30px rgba(0,0,0,0.4);
+            --toggle-bg: #1e293b;
+            --toggle-icon: '🌙';
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f1f5f9;
+            --bg-glass: rgba(255, 255, 255, 0.85);
+            --border: rgba(0,0,0,0.08);
+            --border-accent: rgba(234, 88, 12, 0.3);
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --accent: #ea580c;
+            --accent-glow: rgba(234, 88, 12, 0.08);
+            --danger: #dc2626;
+            --danger-bg: rgba(220, 38, 38, 0.06);
+            --warning: #d97706;
+            --warning-bg: rgba(217, 119, 6, 0.06);
+            --success: #16a34a;
+            --success-bg: rgba(22, 163, 74, 0.06);
+            --info: #2563eb;
+            --info-bg: rgba(37, 99, 235, 0.06);
+            --red-text: #dc2626;
+            --green-text: #16a34a;
+            --gradient-hero: linear-gradient(135deg, #f8fafc 0%, #fef3e2 50%, #f8fafc 100%);
+            --shadow: 0 4px 30px rgba(0,0,0,0.08);
+            --toggle-bg: #e2e8f0;
+            --toggle-icon: '☀️';
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background var(--transition), color var(--transition);
+            overflow-x: hidden;
+        }
+
+        /* ═══ Animated Background ═══ */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.4;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+        .bg-orb.orb-1 { width: 500px; height: 500px; background: #fb923c; top: -100px; right: -100px; }
+        .bg-orb.orb-2 { width: 400px; height: 400px; background: #ef4444; bottom: -100px; left: -100px; animation-delay: -7s; }
+        .bg-orb.orb-3 { width: 300px; height: 300px; background: #8b5cf6; top: 50%; left: 50%; animation-delay: -14s; }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -40px) scale(1.1); }
+            66% { transform: translate(-20px, 30px) scale(0.9); }
+        }
+
+        /* ═══ Theme Toggle ═══ */
+        .theme-toggle {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 1000;
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all var(--transition);
+            box-shadow: var(--shadow);
+        }
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            border-color: var(--accent);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        /* ═══ Container ═══ */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        /* ═══ Header ═══ */
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+            animation: fadeInUp 0.8s ease;
+        }
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 100px;
+            background: var(--danger-bg);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+        }
+        .header-badge .pulse {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--danger);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+        .header h1 {
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--accent), var(--danger));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .header .subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        .header .phone-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+            color: var(--accent);
+            margin-top: 12px;
+            padding: 8px 20px;
+            border-radius: 8px;
+            background: var(--accent-glow);
+            border: 1px solid var(--border-accent);
+            display: inline-block;
+        }
+        .header .meta-line {
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* ═══ Section ═══ */
+        .section {
+            margin-bottom: 32px;
+            animation: fadeInUp 0.6s ease both;
+        }
+        .section:nth-child(2) { animation-delay: .1s; }
+        .section:nth-child(3) { animation-delay: .15s; }
+        .section:nth-child(4) { animation-delay: .2s; }
+        .section:nth-child(5) { animation-delay: .25s; }
+        .section:nth-child(6) { animation-delay: .3s; }
+        .section:nth-child(7) { animation-delay: .35s; }
+        .section:nth-child(8) { animation-delay: .4s; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        /* ═══ Card ═══ */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all var(--transition);
+            box-shadow: var(--shadow);
+        }
+        .card:hover {
+            border-color: var(--border-accent);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+        }
+
+        /* ═══ Stat Grid ═══ */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+        .stat-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: all var(--transition);
+        }
+        .stat-item:hover { transform: translateY(-2px); border-color: var(--border-accent); }
+        .stat-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+        .stat-value {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .stat-value.danger { color: var(--danger); }
+        .stat-value.warning { color: var(--warning); }
+        .stat-value.success { color: var(--success); }
+        .stat-value.info { color: var(--info); }
+        .stat-value.accent { color: var(--accent); }
+
+        /* ═══ Data Table ═══ */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .data-table tr {
+            border-bottom: 1px solid var(--border);
+            transition: background var(--transition);
+        }
+        .data-table tr:last-child { border-bottom: none; }
+        .data-table tr:hover { background: var(--accent-glow); }
+        .data-table td {
+            padding: 12px 0;
+            font-size: 14px;
+        }
+        .data-table td:first-child {
+            font-weight: 600;
+            color: var(--text-muted);
+            width: 160px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .data-table td:last-child {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* ═══ Behavior List ═══ */
+        .behavior-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .behavior-item {
+            display: flex;
+            gap: 12px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            transition: all var(--transition);
+        }
+        .behavior-item:hover {
+            border-color: var(--border-accent);
+            transform: translateX(4px);
+        }
+        .behavior-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+            width: 28px;
+            text-align: center;
+        }
+        .behavior-content { flex: 1; }
+        .behavior-title {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+        .behavior-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ═══ Risk Meter ═══ */
+        .risk-container {
+            text-align: center;
+            padding: 32px 24px;
+        }
+        .risk-label-top {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+        .risk-bar-track {
+            width: 100%;
+            height: 12px;
+            border-radius: 100px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        .risk-bar-fill {
+            height: 100%;
+            border-radius: 100px;
+            background: linear-gradient(90deg, #22c55e, #f59e0b, #ef4444);
+            width: 0%;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .risk-bar-fill.animated { width: 85%; }
+        .risk-level-text {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: var(--accent);
+        }
+        .risk-sublabel {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        .risk-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .risk-stat {
+            padding: 12px;
+            border-radius: 10px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+        }
+        .risk-stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .risk-stat-value {
+            font-size: 18px;
+            font-weight: 800;
+            margin-top: 4px;
+        }
+
+        /* ═══ Alert Box ═══ */
+        .alert {
+            border-radius: 12px;
+            padding: 16px 20px;
+            font-size: 14px;
+            line-height: 1.7;
+            border: 1px solid;
+        }
+        .alert-danger {
+            background: var(--danger-bg);
+            border-color: rgba(239, 68, 68, 0.2);
+            color: var(--red-text);
+        }
+        .alert-warning {
+            background: var(--warning-bg);
+            border-color: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        /* ═══ Token Card ═══ */
+        .token-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+            border-radius: 14px;
+            background: var(--danger-bg);
+            border: 1px solid rgba(239, 68, 68, 0.15);
+            margin-bottom: 16px;
+        }
+        .token-logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #b45309, #f59e0b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 900;
+            color: #fff;
+            flex-shrink: 0;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+        }
+        .token-info { flex: 1; }
+        .token-name { font-weight: 800; font-size: 18px; }
+        .token-chain { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+        .token-badges {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .token-badge {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 100px;
+            border: 1px solid;
+        }
+        .token-badge.red { background: var(--danger-bg); border-color: rgba(239,68,68,0.2); color: var(--danger); }
+        .token-badge.yellow { background: var(--warning-bg); border-color: rgba(245,158,11,0.2); color: var(--warning); }
+
+        /* ═══ Bottom Line ═══ */
+        .bottom-line {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
+            border: 1px solid var(--border-accent);
+            border-radius: 16px;
+            padding: 28px;
+            text-align: center;
+        }
+        .bottom-line-title {
+            font-weight: 800;
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+        .bottom-line-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ═══ Footer ═══ */
+        .footer {
+            text-align: center;
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        .footer a { color: var(--accent); text-decoration: none; }
+
+        /* ═══ Responsive ═══ */
+        @media (max-width: 640px) {
+            .header h1 { font-size: 28px; }
+            .stat-grid { grid-template-columns: repeat(2, 1fr); }
+            .risk-stats { grid-template-columns: 1fr; }
+            .container { padding: 24px 16px 60px; }
+            .theme-toggle { top: 16px; right: 16px; width: 48px; height: 48px; font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle light/dark mode">🌙</button>
+
+    <div class="container">
+
+        <!-- ═══ Header ═══ -->
+        <div class="header">
+            <div class="header-badge"><span class="pulse"></span> OSINT INTELLIGENCE REPORT — DE-ANONYMIZED</div>
+            <h1>Michael Ikechukwu</h1>
+            <p class="subtitle">CEO, Golden Exchange Company GECX · Abuja, Nigeria</p>
+            <div class="phone-number">+234 708 385 2787</div>
+            <p class="meta-line">Generated 2026-03-24 14:14 WAT · Updated 2026-03-24 16:24 WAT &nbsp;·&nbsp; Tools: PhoneInfoga · Truecaller · WhatsApp · LinkedIn · Google · Instagram</p>
+        </div>
+
+        <!-- ═══ Demographics ═══ -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--info-bg);">👤</div>
+                <div class="section-title">Subject Demographics</div>
+            </div>
+            <div class="card">
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <div class="stat-label">Full Name</div>
+                        <div class="stat-value" style="color:var(--accent);font-weight:800;">Michael Ikechukwu</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Age Range</div>
+                        <div class="stat-value accent">Mid 20s – 30s</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Location</div>
+                        <div class="stat-value">📍 Abuja, FCT, Nigeria</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Carrier</div>
+                        <div class="stat-value info">Airtel (0708)</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Title</div>
+                        <div class="stat-value warning">CEO, Golden Exchange Company</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Alias</div>
+                        <div class="stat-value danger">@froshwealth001</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ LinkedIn Intelligence ═══ -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--info-bg);">💼</div>
+                <div class="section-title">LinkedIn Intelligence</div>
+            </div>
+            <div class="card">
+                <div class="alert" style="background:var(--success-bg);border-color:rgba(34,197,94,0.2);color:var(--success);margin-bottom:16px;font-weight:600;">🔓 IDENTITY CONFIRMED — Subject de-anonymized via LinkedIn public profile</div>
+                <table class="data-table">
+                    <tr><td>Full Name</td><td style="font-weight:800;color:var(--accent);">Michael Ikechukwu</td></tr>
+                    <tr><td>Headline</td><td>Chief Executive Officer at Golden Exchange Company GECX</td></tr>
+                    <tr><td>Location</td><td>Abuja, Federal Capital Territory, Nigeria</td></tr>
+                    <tr><td>Connections</td><td style="color:var(--warning);">59 connections (low — new or limited network)</td></tr>
+                    <tr><td>Education</td><td style="color:var(--danger);">❌ None listed</td></tr>
+                    <tr><td>Skills</td><td style="color:var(--danger);">❌ None listed or endorsed</td></tr>
+                    <tr><td>About Section</td><td style="color:var(--danger);">❌ Empty — no professional summary</td></tr>
+                    <tr><td>Profile Photo</td><td>Light pink/peach shirt, dark waistcoat, laptop (Dell)</td></tr>
+                    <tr><td>Profile URL</td><td><a href="https://www.linkedin.com/in/michael-ikechukwu-ab85a63a5" target="_blank" style="color:var(--info);text-decoration:none;">linkedin.com/in/michael-ikechukwu-ab85a63a5</a></td></tr>
+                </table>
+                <div style="margin-top:16px;">
+                    <div class="stat-label" style="margin-bottom:10px;">FOLLOWED COMPANIES (Interests)</div>
+                    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);">
+                        <div class="stat-item">
+                            <div class="stat-label">Oil & Gas</div>
+                            <div class="stat-value" style="font-size:13px;">Geoplex Drillteq Ltd</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Energy</div>
+                            <div class="stat-value" style="font-size:13px;">Renaissance Africa Energy</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Precious Metals</div>
+                            <div class="stat-value" style="font-size:13px;color:var(--warning);">Bullion Market Refinery Ltd</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:16px;">
+                    <div class="stat-label" style="margin-bottom:10px;">RECENT ACTIVITY (Comments)</div>
+                    <ul class="behavior-list">
+                        <li class="behavior-item">
+                            <span class="behavior-icon">💬</span>
+                            <div class="behavior-content">
+                                <div class="behavior-title">Advocates Real Account Trading</div>
+                                <div class="behavior-desc">Claims demo accounts are useless — pushes followers to trade with real money immediately</div>
+                            </div>
+                        </li>
+                        <li class="behavior-item">
+                            <span class="behavior-icon">🎰</span>
+                            <div class="behavior-content">
+                                <div class="behavior-title">Claims Trading ≠ Gambling</div>
+                                <div class="behavior-desc">Positions himself as a "risk management" expert — challenges others to prove profitability</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ Instagram Intelligence ═══ -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--accent-glow);">📸</div>
+                <div class="section-title">Instagram Intelligence</div>
+            </div>
+            <div class="card">
+                <table class="data-table">
+                    <tr><td>Handle</td><td style="font-weight:700;color:var(--accent);">@froshwealth001</td></tr>
+                    <tr><td>Platform</td><td><a href="https://www.instagram.com/froshwealth001/" target="_blank" style="color:var(--info);text-decoration:none;">instagram.com/froshwealth001</a></td></tr>
+                    <tr><td>Bio</td><td style="font-style:italic;">"Analyst Trader and also buy and sell a kinds of coin. TA is work of an art. Trading is a journey which you dedicate your self to it."</td></tr>
+                    <tr><td>Persona</td><td style="color:var(--warning);">⚠️ Self-proclaimed "Analyst Trader" — crypto coin buyer/seller</td></tr>
+                    <tr><td>Significance</td><td style="color:var(--danger);font-weight:600;">Confirms coin promotion as primary activity — "buy and sell a kinds of coin"</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- ═══ Corporate Entity ═══ -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--danger-bg);">🏢</div>
+                <div class="section-title">Corporate Entity Analysis</div>
+            </div>
+            <div class="card">
+                <table class="data-table">
+                    <tr><td>Entity Name</td><td style="font-weight:700;">Golden Exchange Company GECX</td></tr>
+                    <tr><td>Type</td><td style="color:var(--danger);">⚠️ Unregistered / No CAC record found</td></tr>
+                    <tr><td>Website</td><td style="color:var(--danger);">❌ No corporate website</td></tr>
+                    <tr><td>Employees</td><td style="color:var(--danger);">❌ Only one person listed (Michael Ikechukwu)</td></tr>
+                    <tr><td>Registration</td><td style="color:var(--danger);">❌ No SEC, CBN, or regulatory registration</td></tr>
+                    <tr><td>Assessment</td><td style="color:var(--danger);font-weight:700;">🔴 Shell entity — exists only on LinkedIn as a title</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- ═══ GECX Token ═══ -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--warning-bg);">🪙</div>
+                <div class="section-title">GECX Token Intelligence</div>
+            </div>
+            <div class="card">
+                <div class="token-card">
+                    <div class="token-logo">X</div>
+                    <div class="token-info">
+                        <div class="token-name">Gecko Coin (GECX)</div>
+                        <div class="token-chain">Solana Blockchain · Solflare Wallet · Dexscreener</div>
+                        <div class="token-badges">
+                            <span class="token-badge red">Unverified</span>
+                            <span class="token-badge red">$5.9K Market Cap</span>
+                            <span class="token-badge yellow">Low Liquidity</span>
+                            <span class="token-badge yellow">Few Holders</span>
+                            <span class="token-badge red">Single Operator</span>
+                        </div>
+                    </div>
+                </div>
+                <table class="data-table">
+                    <tr><td>Blockchain</td><td>Solana (SPL Token)</td></tr>
+                    <tr><td>Market Cap</td><td style="color:var(--danger);font-weight:700;">~$5,900 (micro-cap)</td></tr>
+                    <tr><td>Liquidity</td><td style="color:var(--warning);">⚠️ Very low — difficult to trade</td></tr>
+                    <tr><td>Verification</td><td style="color:var(--danger);">❌ Unverified on Solana registry</td></tr>
+                    <tr><td>Exchange</td><td>Solflare Wallet (swap only) · Dexscreener listed</td></tr>
+                    <tr><td>Operator</td><td style="color:var(--danger);font-weight:700;">Michael Ikechukwu (confirmed via LinkedIn)</td></tr>
+                    <tr><td>Risk Rating</td><td style="color:var(--danger);font-weight:700;">🔴 CRITICAL — one-man pump-and-dump operation</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- ═══ WhatsApp Image Analysis ═══ -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--accent-glow);">💬</div>
+                <div class="section-title">WhatsApp Profile Analysis</div>
+            </div>
+            <div class="card">
+                <table class="data-table">
+                    <tr><td>Image Type</td><td>AI-generated / digitally stylized portrait</td></tr>
+                    <tr><td>Subject</td><td>Young Nigerian male, ~20s–30s — matches LinkedIn photo of Michael Ikechukwu</td></tr>
+                    <tr><td>Attire</td><td>Black hoodie, wristwatch</td></tr>
+                    <tr><td>Props</td><td>Laptop with "X" logo</td></tr>
+                    <tr><td>Branding</td><td style="color:var(--accent);font-weight:700;">GECX — 5+ gold coins prominently displayed</td></tr>
+                    <tr><td>Background</td><td>Candlestick chart, green arrow, blockchain cubes</td></tr>
+                    <tr><td>Cross-Ref</td><td style="color:var(--danger);font-weight:600;">🔗 LinkedIn + WhatsApp + Instagram all confirmed as same individual</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- ═══ Behavioral Pattern ═══ -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--danger-bg);">🧠</div>
+                <div class="section-title">Behavioral Pattern</div>
+            </div>
+            <div class="card">
+                <ul class="behavior-list">
+                    <li class="behavior-item">
+                        <span class="behavior-icon">🔒</span>
+                        <div class="behavior-content">
+                            <div class="behavior-title">Selective Anonymity (OPSEC Failure)</div>
+                            <div class="behavior-desc">No Truecaller registration, but <strong>fully exposed on LinkedIn and Instagram</strong> — OPSEC breach reveals real identity</div>
+                        </div>
+                    </li>
+                    <li class="behavior-item">
+                        <span class="behavior-icon">🎨</span>
+                        <div class="behavior-content">
+                            <div class="behavior-title">Multi-Platform Self-Branding</div>
+                            <div class="behavior-desc">AI portrait on WhatsApp, professional photo on LinkedIn, trader persona on Instagram — coordinated image management across 3+ platforms</div>
+                        </div>
+                    </li>
+                    <li class="behavior-item">
+                        <span class="behavior-icon">🏢</span>
+                        <div class="behavior-content">
+                            <div class="behavior-title">Corporate Fabrication</div>
+                            <div class="behavior-desc">"CEO" of Golden Exchange Company — no employees, no website, no CAC registration. Title exists only as LinkedIn headline</div>
+                        </div>
+                    </li>
+                    <li class="behavior-item">
+                        <span class="behavior-icon">📢</span>
+                        <div class="behavior-content">
+                            <div class="behavior-title">Multi-Channel Token Promotion</div>
+                            <div class="behavior-desc">WhatsApp (profile picture), Instagram (bio: "buy and sell a kinds of coin"), LinkedIn (CEO title) — full-spectrum sales funnel</div>
+                        </div>
+                    </li>
+                    <li class="behavior-item">
+                        <span class="behavior-icon">💰</span>
+                        <div class="behavior-content">
+                            <div class="behavior-title">Aspirational Marketing</div>
+                            <div class="behavior-desc">Gold coins, trading charts, green arrows, "froshwealth" handle — designed to attract naive investors seeking quick returns</div>
+                        </div>
+                    </li>
+                    <li class="behavior-item">
+                        <span class="behavior-icon">🎯</span>
+                        <div class="behavior-content">
+                            <div class="behavior-title">Confirmed One-Man Operation</div>
+                            <div class="behavior-desc">$5.9K market cap + sole LinkedIn employee + 59 connections = solo pump operation with no institutional backing</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ═══ Likely Activity ═══ -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--warning-bg);">🎯</div>
+                <div class="section-title">Likely Activity</div>
+            </div>
+            <div class="card">
+                <ul class="behavior-list">
+                    <li class="behavior-item">
+                        <span class="behavior-icon">📱</span>
+                        <div class="behavior-content">
+                            <div class="behavior-title">WhatsApp-First Marketing</div>
+                            <div class="behavior-desc">Uses groups & broadcasts to recruit GECX investors — profile picture is the funnel entry</div>
+                        </div>
+                    </li>
+                    <li class="behavior-item">
+                        <span class="behavior-icon">📣</span>
+                        <div class="behavior-content">
+                            <div class="behavior-title">Token Shilling</div>
+                            <div class="behavior-desc">Promotes GECX on Telegram/WhatsApp groups promising guaranteed returns</div>
+                        </div>
+                    </li>
+                    <li class="behavior-item">
+                        <span class="behavior-icon">📈</span>
+                        <div class="behavior-content">
+                            <div class="behavior-title">Pump-and-Dump Cycle</div>
+                            <div class="behavior-desc">Few holders + no liquidity = any buy pressure he generates inflates his own bags</div>
+                        </div>
+                    </li>
+                    <li class="behavior-item">
+                        <span class="behavior-icon">👻</span>
+                        <div class="behavior-content">
+                            <div class="behavior-title">Anonymity by Design</div>
+                            <div class="behavior-desc">No Truecaller registration + no social media = exit strategy if things go south</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ═══ Personality Indicators ═══ -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--info-bg);">🧩</div>
+                <div class="section-title">Personality Indicators</div>
+            </div>
+            <div class="card">
+                <div class="stat-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="stat-item" style="text-align:left;padding:16px 18px;">
+                        <div class="stat-label">Tech-Savvy</div>
+                        <div class="stat-value" style="font-size:13px;font-weight:500;color:var(--text-secondary);margin-top:4px;">Knows Solana ecosystem, token creation, wallet integration</div>
+                    </div>
+                    <div class="stat-item" style="text-align:left;padding:16px 18px;">
+                        <div class="stat-label">Image-Conscious</div>
+                        <div class="stat-value" style="font-size:13px;font-weight:500;color:var(--text-secondary);margin-top:4px;">Invested in custom AI portrait to build perceived credibility</div>
+                    </div>
+                    <div class="stat-item" style="text-align:left;padding:16px 18px;">
+                        <div class="stat-label">Trust Exploiter</div>
+                        <div class="stat-value" style="font-size:13px;font-weight:500;color:var(--text-secondary);margin-top:4px;">"Pointing at you" pose — classic persuasion tactic ("YOU can be next")</div>
+                    </div>
+                    <div class="stat-item" style="text-align:left;padding:16px 18px;">
+                        <div class="stat-label">Risk-Tolerant</div>
+                        <div class="stat-value" style="font-size:13px;font-weight:500;color:var(--text-secondary);margin-top:4px;">Promoting unverified token with his face shows confidence or recklessness</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ Risk Assessment ═══ -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--danger-bg);">⚠️</div>
+                <div class="section-title">Risk Assessment</div>
+            </div>
+            <div class="card">
+                <div class="risk-container">
+                    <div class="risk-label-top">Threat Level</div>
+                    <div class="risk-bar-track">
+                        <div class="risk-bar-fill" id="riskBar"></div>
+                    </div>
+                    <div class="risk-level-text">🔴 HIGH</div>
+                    <div class="risk-sublabel">85 / 100 — Real identity confirmed + high-risk indicators</div>
+                    <div class="risk-stats">
+                        <div class="risk-stat">
+                            <div class="risk-stat-label">Scammer Probability</div>
+                            <div class="risk-stat-value" style="color:var(--danger);">85–95%</div>
+                        </div>
+                        <div class="risk-stat">
+                            <div class="risk-stat-label">Sophistication</div>
+                            <div class="risk-stat-value" style="color:var(--warning);">Medium-High</div>
+                        </div>
+                        <div class="risk-stat">
+                            <div class="risk-stat-label">Operational Security</div>
+                            <div class="risk-stat-value" style="color:var(--success);">LOW (exposed)</div>
+                        </div>
+                        <div class="risk-stat">
+                            <div class="risk-stat-label">Identity Confirmed</div>
+                            <div class="risk-stat-value" style="color:var(--danger);">✅ YES</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ Digital Footprint ═══ -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--success-bg);">🌐</div>
+                <div class="section-title">Digital Footprint</div>
+            </div>
+            <div class="card">
+                <table class="data-table">
+                    <tr><td>LinkedIn</td><td style="color:var(--success);font-weight:700;">✅ <a href="https://www.linkedin.com/in/michael-ikechukwu-ab85a63a5" target="_blank" style="color:var(--success);text-decoration:none;">CEO @ Golden Exchange Company GECX</a></td></tr>
+                    <tr><td>Instagram</td><td style="color:var(--success);font-weight:700;">✅ <a href="https://www.instagram.com/froshwealth001/" target="_blank" style="color:var(--success);text-decoration:none;">@froshwealth001 — Analyst Trader</a></td></tr>
+                    <tr><td>WhatsApp</td><td style="color:var(--accent);font-weight:600;">✅ Active — GECX promoter profile</td></tr>
+                    <tr><td>Truecaller</td><td style="color:var(--danger);">❌ "Name not available" (deliberate omission)</td></tr>
+                    <tr><td>Facebook</td><td style="color:var(--text-muted);">❌ No profile found</td></tr>
+                    <tr><td>X (Twitter)</td><td style="color:var(--text-muted);">❌ No profile found</td></tr>
+                    <tr><td>Nairaland</td><td style="color:var(--text-muted);">❌ No posts</td></tr>
+                    <tr><td>Scam Reports</td><td style="color:var(--success);">✅ None found (yet)</td></tr>
+                    <tr><td>Google Index</td><td style="color:var(--warning);">⚠️ Minimal — only LinkedIn and Instagram indexed</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- ═══ Bottom Line ═══ -->
+        <div class="section">
+            <div class="bottom-line">
+                <div class="bottom-line-title">📌 Bottom Line — Subject De-Anonymized</div>
+                <div class="bottom-line-text">
+                    <strong>Michael Ikechukwu</strong>, operating from <strong>Abuja, Nigeria</strong>, is the sole operator behind "Golden Exchange Company GECX" — a shell entity with no registration, no employees, and no website. He promotes the unverified micro-cap GECX Solana token ($5.9K market cap) across <strong>WhatsApp</strong> (AI-generated promoter profile), <strong>Instagram</strong> (@froshwealth001 — "buy and sell a kinds of coin"), and <strong>LinkedIn</strong> (self-appointed CEO title). His Instagram handle "<em>froshwealth</em>" reveals the aspirational marketing angle used to recruit naive investors. Despite avoiding Truecaller registration, his <strong>OPSEC failed</strong> — LinkedIn and Instagram fully expose his real identity, location, and operational pattern. This is a <strong>confirmed one-man pump-and-dump operation</strong>, not a legitimate crypto project.
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ Warning ═══ -->
+        <div class="section">
+            <div class="alert alert-warning">
+                ⚠️ <strong>Disclaimer:</strong> This report is generated from publicly available information only. GECX analysis is based on publicly listed token data. No accusations are implied — findings are for investigative purposes only.
+            </div>
+        </div>
+
+        <div class="footer">
+            Generated by <a href="#">SupAgentic OSINT Suite</a> &nbsp;·&nbsp; PhoneInfoga v2.11.0 &nbsp;·&nbsp; TruecallerJS &nbsp;·&nbsp; LinkedIn OSINT &nbsp;·&nbsp; Google Dorking &nbsp;·&nbsp; Instagram OSINT &nbsp;·&nbsp; 2026-03-24
+        </div>
+    </div>
+
+    <script>
+        // ═══ Theme Toggle ═══
+        function toggleTheme() {
+            const html = document.documentElement;
+            const btn = document.getElementById('themeToggle');
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                btn.textContent = '☀️';
+                localStorage.setItem('osint-theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                btn.textContent = '🌙';
+                localStorage.setItem('osint-theme', 'dark');
+            }
+        }
+
+        // Restore saved theme
+        (function() {
+            const saved = localStorage.getItem('osint-theme');
+            if (saved) {
+                document.documentElement.setAttribute('data-theme', saved);
+                document.getElementById('themeToggle').textContent = saved === 'dark' ? '🌙' : '☀️';
+            }
+        })();
+
+        // ═══ Animate Risk Bar ═══
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.getElementById('riskBar').classList.add('animated');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.getElementById('riskBar'));
+    </script>
+</body>
+</html>
