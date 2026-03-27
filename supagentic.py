@@ -137,6 +137,12 @@ TOOLS = [
     {"name": "DeepSeek-R1",       "dir": "deepseek-r1",          "cat": "Science",     "repo": "deepseek-ai/DeepSeek-R1",           "lang": "Python"},
     {"name": "Open Assistant",    "dir": "open-assistant",       "cat": "Agents",      "repo": "LAION-AI/Open-Assistant",           "lang": "Python"},
     {"name": "TransformerLab",    "dir": "transformerlab-app",   "cat": "Training",    "repo": "transformerlab/transformerlab-app", "lang": "Python"},
+    {"name": "GStack",            "dir": "gstack",               "cat": "Coding",      "repo": "garrytan/gstack",                   "lang": "Markdown/JS"},
+    {"name": "Hermes Agent",      "dir": "hermes-agent",         "cat": "Agents",      "repo": "NousResearch/hermes-agent",          "lang": "Python"},
+    {"name": "Superpowers",       "dir": "superpowers",          "cat": "Coding",      "repo": "obra/superpowers",                   "lang": "Markdown/Shell"},
+    {"name": "Paperclip",         "dir": "paperclip",            "cat": "Automation",  "repo": "paperclipai/paperclip",              "lang": "TypeScript"},
+    {"name": "Agent Skills",      "dir": "agent-skills",         "cat": "Coding",      "repo": "anthropics/skills",                  "lang": "Python"},
+    {"name": "OpenCode",          "dir": "opencode",             "cat": "Coding",      "repo": "opencode-ai/opencode",               "lang": "Go"},
 ]
 
 # ═══ Colors ═══
