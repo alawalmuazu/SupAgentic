@@ -1,10 +1,10 @@
 # 🚀 SupAgentic
 
-> A unified collection of **54 powerful open-source AI tools** + **7 curated prompts** — from agent orchestration to swarm simulation to voice cloning to model serving.
+> A unified collection of **104 powerful open-source AI tools** + **7 curated prompts** — from agent orchestration to swarm simulation to OSINT investigations to voice cloning to model serving.
 
 [![Dashboard](https://img.shields.io/badge/Dashboard-Live-6366f1?style=for-the-badge)](https://alawalmuazu.github.io/SupAgentic)
-[![Tools](https://img.shields.io/badge/Tools-54-14b8a6?style=for-the-badge)](.)
-[![Categories](https://img.shields.io/badge/Categories-15-f59e0b?style=for-the-badge)](.)
+[![Tools](https://img.shields.io/badge/Tools-104-14b8a6?style=for-the-badge)](.)
+[![Categories](https://img.shields.io/badge/Categories-20-f59e0b?style=for-the-badge)](.)
 [![Prompts](https://img.shields.io/badge/Prompts-7-ec4899?style=for-the-badge)](prompts/)
 [![PyPI](https://img.shields.io/badge/PyPI-v2.0.0-blue?style=for-the-badge)](https://pypi.org/project/supagentic/)
 
@@ -155,7 +155,7 @@ python supagentic.py <command> [args]
 
 | Command | Description | Example |
 |---------|-------------|---------|
-| `list` | List all 54 tools by category | `supagentic list` |
+| `list` | List all 104 tools by category | `supagentic list` |
 | `search <query>` | Search by name/category/language | `supagentic search swarm` |
 | `info <tool>` | Show tool details, repo, & README | `supagentic info mirofish` |
 | `health` | Check repo freshness (days since commit) | `supagentic health` |
@@ -240,7 +240,7 @@ Services included: Ollama, vLLM, RAGFlow, Dify, Langflow, ComfyUI, Dashboard
 
 ## 🔌 MCP Server
 
-Full [Model Context Protocol](https://modelcontextprotocol.io/) server — any AI agent can discover and use all 54 tools:
+Full [Model Context Protocol](https://modelcontextprotocol.io/) server — any AI agent can discover and use all 104 tools:
 
 ```bash
 # stdio mode (for Claude Desktop, Cursor, Trae, Codex)
@@ -259,7 +259,7 @@ python mcp_server.py --health
 ### Capabilities
 | Feature | Count | Details |
 |---------|-------|---------|
-| **tools/call** | 55 | All tools + search + pipeline — with real action execution |
+| **tools/call** | 104+ | All tools + search + pipeline — with real action execution |
 | **resources** | 14 | README, INTEGRATIONS, CHANGELOG, 7 prompts, 3 pipelines |
 | **prompts** | 7 | Prompt templates with argument substitution |
 

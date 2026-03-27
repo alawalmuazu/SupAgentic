@@ -1,0 +1,1 @@
+timestamp,cpu_percent,cpu_level,mem_percent,mem_used_gb,mem_total_gb,battery_percent,battery_charging,drain_rate,thermal_estimate,ai_process_count,active_connections,fps_estimate,total_processes
