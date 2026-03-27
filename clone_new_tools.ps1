@@ -8,7 +8,8 @@ $tools = @(
     @{ name = "superpowers";  repo = "https://github.com/obra/superpowers.git" },
     @{ name = "paperclip";    repo = "https://github.com/paperclipai/paperclip.git" },
     @{ name = "agent-skills"; repo = "https://github.com/anthropics/skills.git" },
-    @{ name = "opencode";     repo = "https://github.com/opencode-ai/opencode.git" }
+    @{ name = "opencode";     repo = "https://github.com/opencode-ai/opencode.git" },
+    @{ name = "aletheia";     repo = "https://github.com/google-deepmind/superhuman.git" }
 )
 
 $toolsDir = Join-Path $PSScriptRoot "tools"

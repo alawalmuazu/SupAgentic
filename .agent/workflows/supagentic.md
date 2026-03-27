@@ -1,20 +1,20 @@
 ---
-description: Access the SupAgentic AI toolkit — 60 tools for agents, security, RAG, training, media, data, automation, simulation, and more. List, search, run, setup, clone, browse, and orchestrate tools via the CLI or MCP server.
+description: Access the SupAgentic AI toolkit — 61 tools for agents, security, RAG, training, media, data, automation, simulation, and more. List, search, run, setup, clone, browse, and orchestrate tools via the CLI or MCP server.
 ---
 
 # SupAgentic Toolkit — Unified AI Tool Management
 
-Use this workflow to interact with the SupAgentic collection of 60 open-source AI tools.
+Use this workflow to interact with the SupAgentic collection of 61 open-source AI tools.
 
 ## Toolkit Location
 - **Root**: `C:\Users\OMEN\Documents\SupAgentic`
-- **Tools**: `C:\Users\OMEN\Documents\SupAgentic\tools\` (60 subdirectories)
+- **Tools**: `C:\Users\OMEN\Documents\SupAgentic\tools\` (61 subdirectories)
 - **CLI**: `C:\Users\OMEN\Documents\SupAgentic\supagentic.py`
 - **MCP Server**: `C:\Users\OMEN\Documents\SupAgentic\mcp_server.py`
 - **Prompts**: `C:\Users\OMEN\Documents\SupAgentic\prompts\` (7 prompt files)
 - **Dashboard**: https://alawalmuazu.github.io/SupAgentic
 
-## Available Tools (60) — 15 Categories
+## Available Tools (61) — 15 Categories
 
 ### Agent Frameworks
 - CrewAI, AutoGen, LangGraph, Dify, Langflow, MetaGPT, AutoGPT, LangChain, Chainlit, Phidata, The Agency, Hermes Agent

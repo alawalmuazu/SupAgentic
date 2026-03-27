@@ -143,6 +143,7 @@ TOOLS = [
     {"name": "Paperclip",         "dir": "paperclip",            "cat": "Automation",  "repo": "paperclipai/paperclip",              "lang": "TypeScript"},
     {"name": "Agent Skills",      "dir": "agent-skills",         "cat": "Coding",      "repo": "anthropics/skills",                  "lang": "Python"},
     {"name": "OpenCode",          "dir": "opencode",             "cat": "Coding",      "repo": "opencode-ai/opencode",               "lang": "Go"},
+    {"name": "Aletheia",          "dir": "aletheia",             "cat": "Science",     "repo": "google-deepmind/superhuman",         "lang": "Python/TeX"},
 ]
 
 # ═══ Colors ═══
