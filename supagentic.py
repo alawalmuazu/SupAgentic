@@ -144,6 +144,9 @@ TOOLS = [
     {"name": "Agent Skills",      "dir": "agent-skills",         "cat": "Coding",      "repo": "anthropics/skills",                  "lang": "Python"},
     {"name": "OpenCode",          "dir": "opencode",             "cat": "Coding",      "repo": "opencode-ai/opencode",               "lang": "Go"},
     {"name": "Aletheia",          "dir": "aletheia",             "cat": "Science",     "repo": "google-deepmind/superhuman",         "lang": "Python/TeX"},
+    {"name": "ClaudeMem",         "dir": "claude-mem",           "cat": "Memory",      "repo": "thedotmack/claude-mem",              "lang": "TypeScript"},
+    {"name": "Awesome Claude",    "dir": "awesome-claude-code",  "cat": "Coding",      "repo": "hesreallyhim/awesome-claude-code",   "lang": "Markdown"},
+    {"name": "UI/UX Pro Max",     "dir": "ui-ux-pro-max-skill",  "cat": "Coding",      "repo": "nextlevelbuilder/ui-ux-pro-max-skill","lang": "Markdown/JS"},
 ]
 
 # ═══ Colors ═══

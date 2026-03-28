@@ -9,7 +9,10 @@ $tools = @(
     @{ name = "paperclip";    repo = "https://github.com/paperclipai/paperclip.git" },
     @{ name = "agent-skills"; repo = "https://github.com/anthropics/skills.git" },
     @{ name = "opencode";     repo = "https://github.com/opencode-ai/opencode.git" },
-    @{ name = "aletheia";     repo = "https://github.com/google-deepmind/superhuman.git" }
+    @{ name = "aletheia";     repo = "https://github.com/google-deepmind/superhuman.git" },
+    @{ name = "claude-mem";   repo = "https://github.com/thedotmack/claude-mem.git" },
+    @{ name = "awesome-claude-code"; repo = "https://github.com/hesreallyhim/awesome-claude-code.git" },
+    @{ name = "ui-ux-pro-max-skill"; repo = "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git" }
 )
 
 $toolsDir = Join-Path $PSScriptRoot "tools"
