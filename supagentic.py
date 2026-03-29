@@ -147,6 +147,7 @@ TOOLS = [
     {"name": "ClaudeMem",         "dir": "claude-mem",           "cat": "Memory",      "repo": "thedotmack/claude-mem",              "lang": "TypeScript"},
     {"name": "Awesome Claude",    "dir": "awesome-claude-code",  "cat": "Coding",      "repo": "hesreallyhim/awesome-claude-code",   "lang": "Markdown"},
     {"name": "UI/UX Pro Max",     "dir": "ui-ux-pro-max-skill",  "cat": "Coding",      "repo": "nextlevelbuilder/ui-ux-pro-max-skill","lang": "Markdown/JS"},
+    {"name": "TurboQuant",        "dir": "turboquant",           "cat": "Training",    "repo": "0xSero/turboquant",                  "lang": "Python"},
 ]
 
 # ═══ Colors ═══

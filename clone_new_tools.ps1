@@ -12,7 +12,8 @@ $tools = @(
     @{ name = "aletheia";     repo = "https://github.com/google-deepmind/superhuman.git" },
     @{ name = "claude-mem";   repo = "https://github.com/thedotmack/claude-mem.git" },
     @{ name = "awesome-claude-code"; repo = "https://github.com/hesreallyhim/awesome-claude-code.git" },
-    @{ name = "ui-ux-pro-max-skill"; repo = "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git" }
+    @{ name = "ui-ux-pro-max-skill"; repo = "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git" },
+    @{ name = "turboquant";  repo = "https://github.com/0xSero/turboquant.git" }
 )
 
 $toolsDir = Join-Path $PSScriptRoot "tools"
