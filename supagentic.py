@@ -148,6 +148,7 @@ TOOLS = [
     {"name": "Awesome Claude",    "dir": "awesome-claude-code",  "cat": "Coding",      "repo": "hesreallyhim/awesome-claude-code",   "lang": "Markdown"},
     {"name": "UI/UX Pro Max",     "dir": "ui-ux-pro-max-skill",  "cat": "Coding",      "repo": "nextlevelbuilder/ui-ux-pro-max-skill","lang": "Markdown/JS"},
     {"name": "TurboQuant",        "dir": "turboquant",           "cat": "Training",    "repo": "0xSero/turboquant",                  "lang": "Python"},
+    {"name": "Network-AI",        "dir": "network-ai",           "cat": "Agents",      "repo": "Jovancoding/Network-AI",              "lang": "TypeScript"},
 ]
 
 # ═══ Colors ═══
