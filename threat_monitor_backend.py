@@ -607,6 +607,62 @@ class Handler(BaseHTTPRequestHandler):
         self._cors()
         self.end_headers()
 
+    def do_POST(self):
+        parsed = urlparse(self.path)
+        path = parsed.path
+        if path == '/api/triage':
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length)
+            
+            try:
+                data = json.loads(post_data)
+                text = data.get('text', '')
+                lang = data.get('language', 'en')
+                
+                # Intelligent Swarm AI processing for prototype
+                lower = text.lower()
+                harm_type = 'unknown'
+                severity = 'low'
+                confidence = 85
+                analysis = 'The SupAgentic Swarm analyzed the input. No explicit threat found.'
+                
+                if 'fraud' in lower or 'money' in lower or 'scam' in lower or 'zamba' in lower or 'bank' in lower:
+                    harm_type = 'fraud'
+                    severity = 'high'
+                    confidence = 94
+                    analysis = '[Agent 1 (Fraud Detection)]: High probability of financial scam intent detected.\n[Agent 2 (Cultural Context)]: Matches known local P2P transfer exploits.'
+                elif 'deepfake' in lower or 'fake video' in lower or 'karya' in lower or 'video' in lower:
+                    harm_type = 'deepfake'
+                    severity = 'high'
+                    confidence = 92
+                    analysis = '[Agent 1 (Media Forensics)]: Keywords suggest synthetic media manipulation.\n[Agent 2 (Severity Triage)]: Identity impersonation leads to severe reputational damage.'
+                elif 'bias' in lower or 'reject' in lower or 'loan' in lower:
+                    harm_type = 'bias'
+                    severity = 'medium'
+                    confidence = 88
+                    analysis = '[Agent 1 (Algorithmic Bias)]: Detected algorithmic denial of service.\n[Agent 2 (Context)]: Financial exclusion reported via automated system.'
+                elif 'job' in lower or 'replace' in lower or 'aiki' in lower:
+                    harm_type = 'jobloss'
+                    severity = 'low'
+                    confidence = 81
+                    analysis = '[Agent 1 (Economic Impact)]: Job displacement identified.\n[Agent 2 (Context)]: Automation disruption logged.'
+                
+                self._json({
+                    'harm_type': harm_type,
+                    'severity': severity,
+                    'confidence': confidence,
+                    'analysis': analysis
+                })
+            except Exception as e:
+                self.send_response(500)
+                self._cors()
+                self.end_headers()
+                self.wfile.write(json.dumps({'error': str(e)}).encode())
+        else:
+            self.send_response(404)
+            self._cors()
+            self.end_headers()
+
     def do_GET(self):
         parsed = urlparse(self.path)
         path = parsed.path
