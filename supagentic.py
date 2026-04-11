@@ -149,6 +149,19 @@ TOOLS = [
     {"name": "UI/UX Pro Max",     "dir": "ui-ux-pro-max-skill",  "cat": "Coding",      "repo": "nextlevelbuilder/ui-ux-pro-max-skill","lang": "Markdown/JS"},
     {"name": "TurboQuant",        "dir": "turboquant",           "cat": "Training",    "repo": "0xSero/turboquant",                  "lang": "Python"},
     {"name": "Network-AI",        "dir": "network-ai",           "cat": "Agents",      "repo": "Jovancoding/Network-AI",              "lang": "TypeScript"},
+    {"name": "ZeptoClaw",         "dir": "zeptoclaw",            "cat": "Agents",      "repo": "qhkm/zeptoclaw",                     "lang": "Rust"},
+    {"name": "Robin",             "dir": "robin",                "cat": "Security",    "repo": "apurvsinghgautam/robin",             "lang": "Python"},
+    {"name": "System Prompts",    "dir": "system-prompts-leaks", "cat": "Security",    "repo": "asgeirtj/system_prompts_leaks",      "lang": "Markdown"},
+    {"name": "AI Prompt Models",  "dir": "system-prompts-models","cat": "Security",    "repo": "x1xhlol/system-prompts-and-models-of-ai-tools", "lang": "Markdown"},
+    {"name": "Recon Search",      "dir": "recon-search-assistant","cat": "Security",   "repo": "Boopath1/Recon-Search-Assistant",    "lang": "HTML"},
+    {"name": "PDFMathTranslate",  "dir": "PDFMathTranslate",     "cat": "Math",        "repo": "Byaidu/PDFMathTranslate",            "lang": "Python"},
+    {"name": "OpenFishh",         "dir": "OpenFishh",            "cat": "Swarm",       "repo": "MohdTalib0/OpenFishh",               "lang": "Python"},
+    {"name": "Career-Ops",        "dir": "career-ops",           "cat": "Automation",  "repo": "santifer/career-ops",                "lang": "TypeScript/Go"},
+    {"name": "CV-Santiago",       "dir": "cv-santiago",          "cat": "Agents",      "repo": "santifer/cv-santiago",               "lang": "TypeScript"},
+    {"name": "GitHub Viral Rank", "dir": "github-viral-ranking", "cat": "Data",        "repo": "santifer/github-viral-ranking",      "lang": "Python"},
+    {"name": "Jacobo Workflows",  "dir": "jacobo-workflows",     "cat": "Automation",  "repo": "santifer/jacobo-workflows",          "lang": "JSON/TS"},
+    {"name": "Claudeable",        "dir": "claudeable",           "cat": "Coding",      "repo": "santifer/claudeable",                "lang": "Markdown"},
+    {"name": "Watermark Remover", "dir": "watermark-remover",    "cat": "Media",       "repo": "santifer/watermark-remover",         "lang": "Python"},
 ]
 
 # ═══ Colors ═══
@@ -333,6 +346,11 @@ DEPS = {
     "open-webui": {"needs": ["ollama"], "ports": "3000", "start": "docker compose up -d"},
     "gemini-cli": {"needs": [], "ports": None, "start": "npx @anthropic-ai/claude-code"},
     "claude-code": {"needs": [], "ports": None, "start": "npx @anthropic-ai/claude-code"},
+    "zeptoclaw": {"needs": [], "ports": None, "start": "cargo run"},
+    "robin":     {"needs": [], "ports": "8501", "start": "docker run -p 8501:8501 apurvsg/robin:latest"},
+    "system-prompts-leaks":  {"needs": [], "ports": None, "start": None},
+    "system-prompts-models": {"needs": [], "ports": None, "start": None},
+    "recon-search-assistant": {"needs": [], "ports": None, "start": "python -m http.server"},
 }
 
 # ═══ Orchestration Pipelines ═══
@@ -845,6 +863,19 @@ def cmd_mcp_register(args):
     server_path = SCRIPT_DIR / "mcp_server.py"
     subprocess.run([sys.executable, str(server_path), "--register"])
 
+def cmd_daemon(args):
+    """Start the KAIROS autonomous background daemon"""
+    daemon_path = SCRIPT_DIR / "kairos_daemon.py"
+    if not daemon_path.exists():
+        print(f"  {C.RED}KAIROS Daemon script not found at {daemon_path}{C.END}")
+        return
+    print(f"\n  {C.BOLD}{C.CYAN}🚀 Launching KAIROS Daemon{C.END}")
+    print(f"  {C.DIM}Running in background... (Press Ctrl+C to stop){C.END}")
+    try:
+        subprocess.run([sys.executable, str(daemon_path)])
+    except KeyboardInterrupt:
+        pass
+
 # ═══ Command Router ═══
 COMMANDS = {
     "list": cmd_list, "ls": cmd_list,
@@ -865,6 +896,7 @@ COMMANDS = {
     "mcp-register": cmd_mcp_register,
     "deps": cmd_deps, "dependencies": cmd_deps,
     "pipeline": cmd_pipeline, "pipe": cmd_pipeline,
+    "daemon": cmd_daemon,
 }
 
 def main():
@@ -888,6 +920,7 @@ def main():
         print(f"    {C.CYAN}mcp-serve{C.END}         Launch MCP server (stdio or --sse)")
         print(f"    {C.CYAN}mcp-register{C.END}      Register with Claude Desktop / Cursor")
         print(f"    {C.CYAN}serve [port]{C.END}      Start dashboard server")
+        print(f"    {C.CYAN}daemon{C.END}            Start the KAIROS background daemon")
         print(f"    {C.CYAN}open <tool>{C.END}       Open tool directory")
         print()
         return
