@@ -1,0 +1,57 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+Open Source AI Arsenal
+SupAgentic
+7 powerful, under-the-radar AI tools — unified under one roof. From agent orchestration to LLM training from scratch.
+7
+Tools
+6
+Categories
+4
+Languages
+∞
+Possibilities
+[0] (252,759)<div class='card' />
+	[1] (252,662)<div  />
+		[2] (164,662)<div >🤖 />
+		[3] (233,662)<div  />
+			[4] (233,652)<div >The Agency />
+			[5] (233,678)<div >Agent Orchestration />
+	[6] (252,771)<div >A collection of personality-driven AI agents — Frontend Dev, Backend Architect, Growth Hacker, Rapid Prototyper & Reality Checker — designed to act like a real dev team. />
+	[7] (252,870)<div  />
+		[8] (180,870)<span >LLM Prompts />
+		[9] (248,870)<span >Multi-Agent />
+		[10] (326,870)<a class='card-link' href='tools/agency-agents/'>Open Locally />
+[11] (500,759)<div class='card' />
+	[12] (500,662)<div  />
+		[13] (413,662)<div >🛡️ />
+		[14] (492,662)<div  />
+			[15] (492,652)<div >Promptfoo />
+			[16] (492,678)<div >LLM Security & Evaluation />
+	[17] (500,771)<div >CLI and library for systematically evaluating and red-teaming LLM applications. Tests against OWASP LLM Top 10 and NIST AI RMF for prompt injection, PII leaks & more. />
+	[18] (500,870)<div  />
+		[19] (426,870)<span >TypeScript />
+		[20] (475,870)<span >CLI />
+		[21] (574,870)<a class='card-link' href='tools/promptfoo/'>Open Locally />
+[22] (748,759)<div class='card' />
+	[23] (748,662)<div  />
+		[24] (661,662)<div >🐟 />
+		[25] (726,662)<div  />
+			[26] (726,652)<div >MiroFish />
+			[27] (726,678)<div >Swarm Intelligence />
+	[28] (748,771)<div >A prediction engine that uses knowledge graphs and multi-agent swarm simulation to forecast real-world scenarios — from policy outcomes to market trends. />
+	[29] (748,870)<div  />
+		[30] (666,870)<span >Python />
+		[31] (707,870)<span >Vue />
+		[32] (752,870)<span >GraphRAG />
+		[33] (823,870)<a class='card-link' href='tools/mirofish/'>Open Locally />
+🎨
+Impeccable
+🧠
+OpenViking
+⚡
+Heretic
+
+</current_dom>

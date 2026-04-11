@@ -1,0 +1,35 @@
+{
+  "alias": "Phantom_Cards",
+  "tier": 2,
+  "platforms": [
+    "Dread"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/Phantom_Cards",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/Phantom_Cards/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@Phantom_Cards",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/Phantom_Cards/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/Phantom_Cards",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

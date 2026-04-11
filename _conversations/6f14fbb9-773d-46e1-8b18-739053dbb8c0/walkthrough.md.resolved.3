@@ -1,0 +1,44 @@
+# SupAgentic Phase 3 — Final Walkthrough
+
+## Summary
+Expanded SupAgentic from 20 → **25 tools** + **7 prompts**, with full infrastructure (CLI, CI/CD, Docker, contributing guide).
+
+## New Tools Added (Phase 3)
+
+| Tool | Category | Repo |
+|------|----------|------|
+| LLaMA-Factory | Training | hiyouga/LLaMA-Factory |
+| Fabric | Coding | danielmiessler/fabric |
+| Anything-LLM | RAG | Mintplex-Labs/anything-llm |
+| Tabby | Coding | TabbyML/tabby |
+| Claude Engineer | Coding | Doriandarko/claude-engineer |
+
+## New Prompts Added
+
+| Prompt | Purpose |
+|--------|---------|
+| Chain-of-Thought | Structured reasoning |
+| Data Analysis | Dataset deep-dive |
+| Resume Generator | ATS-optimized CV |
+
+## Infrastructure Created
+
+| File | Purpose |
+|------|---------|
+| [supagentic.py](file:///c:/Users/OMEN/Documents/SupAgentic/supagentic.py) | CLI: list, search, health, update, serve, open |
+| [docker-compose.local-stack.yml](file:///c:/Users/OMEN/Documents/SupAgentic/docker-compose.local-stack.yml) | Ollama + RAGFlow local stack |
+| [CONTRIBUTING.md](file:///c:/Users/OMEN/Documents/SupAgentic/CONTRIBUTING.md) | Contribution guidelines |
+| [.github/workflows/health-check.yml](file:///c:/Users/OMEN/Documents/SupAgentic/.github/workflows/health-check.yml) | Weekly tool staleness check |
+| [.github/workflows/deploy-pages.yml](file:///c:/Users/OMEN/Documents/SupAgentic/.github/workflows/deploy-pages.yml) | Auto-deploy dashboard to GitHub Pages |
+
+## Dashboard Features
+- **25 tool cards** with color-coded categories
+- **Search bar** (press `/` to focus, `Esc` to clear)
+- **10 category filter buttons**
+- **7 prompt cards** in Prompt Library section
+- **Result count** + no-results empty state
+
+## Verification
+- ✅ 25 directories confirmed in `tools/`
+- ✅ All files committed and pushed to GitHub
+- ✅ GitHub Actions workflows will auto-activate

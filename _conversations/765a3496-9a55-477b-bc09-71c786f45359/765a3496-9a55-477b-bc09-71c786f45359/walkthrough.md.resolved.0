@@ -1,0 +1,35 @@
+# Remita Breach Intelligence Package — Walkthrough
+
+## Context
+On April 4, 2026, threat actor **bytetobreach** published ~3TB of stolen Remita data on a dark web forum, including KYC documents, database backups, source code, admin credentials, and government HSM keys.
+
+## Deliverables Created
+
+### 1. [Incident Analysis Report](file:///C:/Users/OMEN/.gemini/antigravity/brain/765a3496-9a55-477b-bc09-71c786f45359/01_incident_analysis_report.md)
+- Threat actor profiling, evidence analysis with embedded screenshots
+- MITRE ATT&CK mapping (6 techniques)
+- CVSS-like severity scoring (🔴 CRITICAL)
+- Regulatory obligations (NDPC, CBN, NCC, NITDA, EFCC)
+
+### 2. [KDSG/SIFMIS Impact Assessment](file:///C:/Users/OMEN/.gemini/antigravity/brain/765a3496-9a55-477b-bc09-71c786f45359/02_kdsg_sifmis_impact_assessment.md)
+- Risk mapping across all 5 SIFMIS modules (Finance, Payroll, Procurement, Budget, Pension)
+- Stakeholder exposure matrix (Ministry of Finance, HoS, KADIRS, 23 LGAs, all MDAs)
+- 4 critical risk scenarios (TSA forgery, identity theft, ghost workers, revenue diversion)
+- Integration dependency diagram (Mermaid)
+
+### 3. [Remediation Checklist](file:///C:/Users/OMEN/.gemini/antigravity/brain/765a3496-9a55-477b-bc09-71c786f45359/03_remediation_checklist.md)
+- 5-phase actionable checklist with checkboxes
+- Phase 1: Emergency (0-24h) — credential rotation, MFA, monitoring
+- Phase 2-5: Forensics → Hardening → Governance → Continuous improvement
+
+### 4. [Public Advisory](file:///C:/Users/OMEN/.gemini/antigravity/brain/765a3496-9a55-477b-bc09-71c786f45359/04_public_advisory.md)
+- Plain-language guidance for citizens, businesses, and MDAs
+- Step-by-step self-protection actions (passwords, 2FA, BVN checks)
+- Fraud warning signs table
+- Regulatory contact directory
+
+## Source Evidence
+Three screenshots analyzed from DarkWebInformer.com:
+- Forum post with data categories and attacker claims
+- Exposed KYC documents (driver's licenses, passports, voter's cards)
+- Database tables (business owners, interbanking, admins, personal info)

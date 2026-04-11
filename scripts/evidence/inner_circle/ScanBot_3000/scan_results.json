@@ -1,0 +1,35 @@
+{
+  "alias": "ScanBot_3000",
+  "tier": 3,
+  "platforms": [
+    "Telegram"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/ScanBot_3000",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/ScanBot_3000/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@ScanBot_3000",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/ScanBot_3000/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/ScanBot_3000",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

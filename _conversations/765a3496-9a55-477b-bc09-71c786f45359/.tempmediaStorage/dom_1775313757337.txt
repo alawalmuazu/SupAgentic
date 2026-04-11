@@ -1,0 +1,40 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+BREACH
+INTEL
+TLP:RED — CRITICAL
+04 Apr 2026, 15:42:36
+● ACTIVE INCIDENT
+Remita Core DB
+Data Extracted
+➔
+🏴‍☠️
+BytetoBreach VPS
+3TB Exfiltrated
+🧮 Dynamic Triage Calculator
+Select your active Remita integrations to calculate your organizational exposure risk.
+[0] (184,343)<label class='calc-checkbox'>SIFMIS Payroll / HRMIS Integration />
+	[1] (55,341)<input  />
+[2] (488,343)<label class='calc-checkbox'>Treasury Single Account (TSA) Sweeping />
+	[3] (333,341)<input  />
+[4] (792,343)<label class='calc-checkbox'>E-Procurement / Vendor Payments />
+	[5] (661,341)<input  />
+[6] (498,357)<label class='calc-checkbox'>Identity / BVN / KYC Data Sync />
+	[7] (941,341)<input  />
+[8] (424,371)<label class='calc-checkbox'>Basic Invoicing / Revenue Collection />
+	[9] (288,369)<input  />
+[10] (500,427)<button class='btn btn-calc' id='run-triage-btn'>Run Impact Analysis />
+📊 Exposure Risk:
+55
+%
+⚡ Generated Action Plan
+> sudo rotate-api-keys --all
+> Freeze HRMIS API sync tokens
+> Audit routing numbers against nominal roll
+> SECURE Govt HSM Signing Keys IMMEDIATELY
+> Pause automated sweeping rules
+BREACH INTELLIGENCE DASHBOARD • Classification: TLP:RED • Prepared April 4, 2026 • For authorized personnel only
+
+</current_dom>

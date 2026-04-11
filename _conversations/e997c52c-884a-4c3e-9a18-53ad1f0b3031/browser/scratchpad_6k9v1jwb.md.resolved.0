@@ -1,0 +1,9 @@
+# Task: Verifying the presentation dashboard and individual decks.
+
+## Plan:
+- [/] Open `file:///c:/Users/OMEN/Documents/kibx/dashboard.html`
+- [ ] Verify 9 cards and take a screenshot.
+- [ ] Click the theme toggle and take a screenshot (light mode).
+- [ ] Click the "Executive Pitch" card and verify navigation to `presentation.html`.
+- [ ] Verify the "← Dashboard" back button and take a screenshot.
+- [ ] Report conclusion.

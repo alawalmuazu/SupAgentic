@@ -1,0 +1,35 @@
+{
+  "alias": "DataBroker_NG",
+  "tier": 4,
+  "platforms": [
+    "Telegram"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/DataBroker_NG",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/DataBroker_NG/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@DataBroker_NG",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/DataBroker_NG/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/DataBroker_NG",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

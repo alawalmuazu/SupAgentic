@@ -1,0 +1,35 @@
+{
+  "alias": "WHOIS_Ghost",
+  "tier": 3,
+  "platforms": [
+    "Session"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/WHOIS_Ghost",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/WHOIS_Ghost/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@WHOIS_Ghost",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/WHOIS_Ghost/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/WHOIS_Ghost",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

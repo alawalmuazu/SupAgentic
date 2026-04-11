@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta-Harness Deep Dive</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Highlight.js theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/tokyo-night-dark.min.css">
+
+    <!-- Markdown Parser & Mermaid & Highlight.js -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --container-bg: rgba(31, 33, 41, 0.6);
+            --border-color: rgba(69, 250, 222, 0.15);
+            --accent-glow: rgba(69, 250, 222, 0.3);
+            --text-primary: #e0e6ed;
+            --text-secondary: #8b9eb5;
+            --accent: #45fade;
+            --accent-secondary: #fc466b;
+            --code-bg: #1a1b26;
+            --quote-bg: rgba(69, 250, 222, 0.05);
+            --table-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            padding: 2rem 1rem;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(69, 250, 222, 0.04), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(252, 70, 107, 0.04), transparent 25%);
+            color: var(--text-primary);
+            line-height: 1.7;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: var(--container-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+        }
+
+        h1, h2, h3, h4 {
+            color: #ffffff;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #ffffff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 0;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+        }
+
+        h2 { font-size: 1.8rem; border-bottom: 1px solid var(--table-border); padding-bottom: 0.5em; }
+        h3 { font-size: 1.4rem; color: var(--accent); }
+
+        p { margin-bottom: 1.5em; color: var(--text-secondary); font-size: 1.05rem; }
+
+        a { color: var(--accent); text-decoration: none; font-weight: 600; transition: all 0.2s ease;}
+        a:hover { color: #ffffff; text-shadow: 0 0 8px var(--accent); }
+
+        blockquote {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--accent);
+            margin: 1.5em 0;
+            padding: 1rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            color: #ffffff;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: var(--table-border);
+            margin: 3rem 0;
+        }
+
+        ul, ol { color: var(--text-secondary); padding-left: 1.5rem; margin-bottom: 1.5em; }
+        li { margin-bottom: 0.5rem; }
+
+        /* Code & Pre */
+        pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            overflow-x: auto;
+            box-shadow: inset 0 4px 6px rgba(0,0,0,0.2);
+            margin: 1.5em 0;
+        }
+        
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9em;
+        }
+
+        p > code, li > code {
+            background: rgba(255,255,255,0.1);
+            color: #ffffff;
+            padding: 0.2em 0.4em;
+            border-radius: 6px;
+            font-size: 0.85em;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 2em 0;
+            border: 1px solid var(--table-border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--table-border);
+            color: var(--text-secondary);
+        }
+        th {
+            background: rgba(255,255,255,0.03);
+            color: #ffffff;
+            font-weight: 600;
+        }
+        tr:last-child td { border-bottom: none; }
+        
+        .mermaid {
+            background: rgba(255,255,255,0.02);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+        }
+        
+        /* Important/Tip alerts */
+        .markdown-alert {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            background: rgba(69, 250, 222, 0.05);
+            border: 1px solid rgba(69, 250, 222, 0.2);
+        }
+        
+        .markdown-alert-important, .markdown-alert-tip {
+            border-left: 4px solid var(--accent);
+        }
+        
+        .markdown-alert-title {
+            font-weight: bold;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 2rem 1.5rem; }
+            h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="content">
+    <!-- Markdown content will be injected here -->
+</div>
+
+<!-- Raw Markdown Document -->
+<script type="text/markdown" id="markdown-source">
+# Meta-Harness: Deep Dive & Self-Optimizing Harness Blueprint
+
+> **Paper:** [Meta-Harness: End-to-End Optimization of Model Harnesses](https://arxiv.org/abs/2603.28052)
+> **Authors:** Yoonho Lee, Roshen Nair, Qizheng Zhang (Stanford), Kangwook Lee (KRAFTON), Omar Khattab (MIT), Chelsea Finn (Stanford)
+> **Repo:** [stanford-iris-lab/meta-harness-tbench2-artifact](file:///c:/Users/OMEN/Documents/SupAgentic/meta-harness-tbench2-artifact)
+
+---
+
+## 1. Core Thesis
+
+> **The harness — not the model — is the primary bottleneck in LLM system performance.**
+
+A "harness" is the code that decides: what to store, what to retrieve, what to pass to the model, and what to throw away. The same model (e.g., Claude Haiku 3.5) can show a **6× performance gap** depending on harness quality.
+
+## 2. The Meta-Harness Architecture
+
+```mermaid
+graph TB
+    FS["📁 Filesystem<br/>(Code + Scores + Traces)"] --> P["🐙 Proposer Agent<br/>(Claude Code)"]
+    P -->|"generates"| H["⬛ Harness Code"]
+    H --> E["🔄 Evaluate<br/>(Harness + LLM on Tasks)"]
+    E -->|"logs, traces,<br/>scores"| FS
+    
+    style P fill:#ff6b35,color:white
+    style FS fill:#1a1a2e,color:white
+    style H fill:#555,color:white
+    style E fill:#16213e,color:white
+```
+
+### The Loop
+| Step | What Happens |
+|------|-------------|
+| **1. Propose** | Proposer agent reads the full filesystem (source code, all prior scores, raw execution traces) via `grep`, `cat`, etc. — up to **10M tokens** of context per step |
+| **2. Evaluate** | New harness runs against task suite, producing pass/fail scores + full execution traces |
+| **3. Store** | All code, scores, and traces are written back to the filesystem |
+| **Repeat** | Proposer reads failure traces, performs **counterfactual diagnosis**, proposes targeted fixes |
+
+### Why 10M Tokens Matters
+Prior methods (OpenEvolve, TTT-Discover, PUCT) compress feedback into **≤26K tokens** — short summaries, scalar scores, or sliding windows. Meta-Harness gives the proposer the *raw* execution trace, so it can trace a failure to the **specific harness decision** that caused it.
+
+## 3. Results
+
+| Benchmark | Result | Notes |
+|-----------|--------|-------|
+| **TerminalBench-2** | **76.4%** (Opus 4.6) | #2 overall, **#1 among all Haiku 4.5 agents** |
+| **Text Classification** | +7.7 pts over SOTA | Using 4× fewer context tokens |
+| **Math Reasoning (IMO)** | +4.7 pts avg | Single harness transfers across 5 unseen models |
+| **Harness Search** | 10× fewer evaluations | Matches OpenEvolve/PUCT final accuracy in 1/10th the budget |
+
+## 4. The Actual Harness Code (Reverse-Engineered)
+
+The released artifact (`agent.py` — 1,322 lines) reveals exact harness techniques the automated search discovered:
+
+### 4a. Environment Bootstrapping (Lines 873-969)
+Before the agent loop starts, a single compound shell command gathers:
+- Working directory, file listing
+- Available languages (Python, GCC, Node, Java, Rust, Go)
+- Package managers (pip, apt-get)
+- Memory info
+
+This **eliminates 2-5 early exploration turns** the agent would normally waste on `ls`, `which python3`, etc.
+
+### 4b. Marker-Based Command Polling (Lines 237-289)
+Instead of waiting the full `duration_sec` for every command:
+1. An echo marker (`__CMDEND__N__`) is sent after each command
+2. The harness polls for the marker in 0.5s intervals
+3. If found early → **move on immediately**, saving cumulative seconds
+
+### 4c. Native Tool Calling (Lines 142-215)
+Three tools defined as structured function calls:
+- `execute_commands` — with `analysis`, `plan`, and `commands` fields
+- `task_complete` — binary completion signal
+- `image_read` — multimodal file analysis via base64
+
+<div class="markdown-alert markdown-alert-important">
+<div class="markdown-alert-title">⚠ IMPORTANT</div>
+The <code>analysis</code> + <code>plan</code> fields in <code>execute_commands</code> <strong>force the model to think before acting</strong> — a form of structured chain-of-thought built into the tool schema itself.
+</div>
+
+### 4d. Double-Confirmation Completion (Lines 317-332)
+Task completion requires **two consecutive `task_complete` calls**. On the first call, the harness presents a verification checklist:
+- Does the solution meet requirements?
+- Does it account for variable values?
+- Has it been verified from test engineer, QA, and user perspectives?
+
+### 4e. Prompt Template (12 lines)
+The `prompt-templates/terminus-kira.txt` is remarkably minimal — it simply sets the Linux task context and injects `{instruction}` + `{terminal_state}`. The **real intelligence is entirely in the harness code**.
+
+## 5. Self-Optimizing Harness Prototype for SupAgentic
+
+### Architecture
+
+```mermaid
+graph LR
+    subgraph "Meta Layer"
+        O["🧠 Observer<br/>(Trace Analyzer)"]
+        P["🔧 Proposer<br/>(Harness Patcher)"]
+    end
+    
+    subgraph "Harness Layer"
+        TC["Tool Calling"]
+        CM["Context Manager"]
+        R["RAG / Retrieval"]
+        M["Memory"]
+    end
+    
+    subgraph "LLM Layer"
+        L["Model API"]
+    end
+    
+    L --> TC
+    TC --> CM --> R --> M
+    M -->|"traces + scores"| O
+    O -->|"diagnosis"| P
+    P -->|"code patches"| TC
+    
+    style O fill:#ff6b35,color:white
+    style P fill:#ff6b35,color:white
+```
+
+### Implementation Plan
+
+| Component | Purpose | Inspired By |
+|-----------|---------|-------------|
+| **Trace Logger** | Captures every tool call, context window state, retrieval result, and score | Meta-Harness filesystem approach |
+| **Failure Detector** | Identifies wrong tool calls, lost context, bad retrieval, task failures | Counterfactual diagnosis from paper |
+| **Harness Patcher** | LLM agent that reads traces and generates targeted code fixes | The proposer agent |
+| **Evaluation Runner** | Runs patched harness against task suite, scores results | The evaluation loop |
+| **Version Store** | Git-based storage of all harness versions with scores | Filesystem-based history |
+
+### Key Design Decisions
+
+<div class="markdown-alert markdown-alert-tip">
+<div class="markdown-alert-title">💡 TIP</div>
+<strong>Start small.</strong> The paper shows that even 4 evaluation iterations can match prior art. You don't need a massive compute budget — you need <strong>rich trace data</strong>.
+</div>
+
+1. **Trace everything** — Don't compress feedback. Store raw execution logs.
+2. **Use the filesystem** — Give the proposer `grep`/`cat` access, not summarized prompts.
+3. **Structured tool schemas** — Force `analysis` + `plan` before `commands` (as Meta-Harness does).
+4. **Double-confirm completions** — Prevent premature task marking.
+5. **Environment bootstrapping** — Pre-gather system state before agent loop starts.
+
+## 6. Key Takeaway
+
+> The model is becoming a commodity. **The harness is the moat.**
+> Teams that automate harness optimization will outperform manual engineering every time — and the gap will only widen as models become more capable but harness complexity grows.
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Init mermaid and set dark theme
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            securityLevel: 'loose',
+            fontFamily: 'Inter, sans-serif'
+        });
+
+        // Set marked.js renderer to handle code blocks and mermaid
+        const renderer = new marked.Renderer();
+        const originalCode = renderer.code.bind(renderer);
+        
+        renderer.code = function(code, language) {
+            if (language === 'mermaid') {
+                return '<div class="mermaid">' + code + '</div>';
+            }
+            return originalCode(code, language);
+        };
+
+        marked.setOptions({
+            renderer: renderer,
+            highlight: function(code, lang) {
+                if (lang && hljs.getLanguage(lang)) {
+                    return hljs.highlight(code, { language: lang }).value;
+                }
+                return hljs.highlightAuto(code).value;
+            },
+            langPrefix: 'hljs language-',
+        });
+
+        // Render Markdown
+        const mdSource = document.getElementById('markdown-source').textContent;
+        const html = marked.parse(mdSource);
+        document.getElementById('content').innerHTML = html;
+
+        // Render Mermaid Diagrams
+        mermaid.run({
+            querySelector: '.mermaid'
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{
+  "alias": "AnimeShield_01",
+  "tier": 5,
+  "platforms": [
+    "Steam",
+    "Discord"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/AnimeShield_01",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/AnimeShield_01/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@AnimeShield_01",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/AnimeShield_01/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/AnimeShield_01",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

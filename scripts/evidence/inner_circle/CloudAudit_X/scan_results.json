@@ -1,0 +1,35 @@
+{
+  "alias": "CloudAudit_X",
+  "tier": 3,
+  "platforms": [
+    "Discord"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/CloudAudit_X",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/CloudAudit_X/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@CloudAudit_X",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/CloudAudit_X/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/CloudAudit_X",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

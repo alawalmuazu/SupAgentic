@@ -1,0 +1,35 @@
+{
+  "alias": "AirMiles_UZ",
+  "tier": 4,
+  "platforms": [
+    "BreachForums"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/AirMiles_UZ",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/AirMiles_UZ/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@AirMiles_UZ",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/AirMiles_UZ/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/AirMiles_UZ",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

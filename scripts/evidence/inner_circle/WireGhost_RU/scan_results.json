@@ -1,0 +1,36 @@
+{
+  "alias": "WireGhost_RU",
+  "tier": 2,
+  "platforms": [
+    "VK",
+    "Telegram"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/WireGhost_RU",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/WireGhost_RU/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@WireGhost_RU",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/WireGhost_RU/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/WireGhost_RU",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

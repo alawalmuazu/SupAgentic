@@ -1,0 +1,35 @@
+{
+  "alias": "DarkVortex_IL",
+  "tier": 1,
+  "platforms": [
+    "Exploit.in"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/DarkVortex_IL",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/DarkVortex_IL/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@DarkVortex_IL",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/DarkVortex_IL/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/DarkVortex_IL",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

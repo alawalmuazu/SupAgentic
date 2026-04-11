@@ -1,0 +1,12 @@
+{
+  "step": 4,
+  "platform": "Yandex",
+  "search_url": "https://yandex.com/images/search?text=%D0%98%D0%BB%D1%8C%D1%8F+%D0%94%D0%B6%D0%B8%D0%BD%D0%B5%D0%BB%D0%B8",
+  "status": "MANUAL_REQUIRED",
+  "targets": [
+    "Odnoklassniki",
+    "Mail.ru",
+    "LiveJournal",
+    "VK extended network"
+  ]
+}

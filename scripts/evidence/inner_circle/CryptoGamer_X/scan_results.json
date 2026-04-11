@@ -1,0 +1,36 @@
+{
+  "alias": "CryptoGamer_X",
+  "tier": 5,
+  "platforms": [
+    "Steam",
+    "Telegram"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/CryptoGamer_X",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/CryptoGamer_X/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@CryptoGamer_X",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/CryptoGamer_X/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/CryptoGamer_X",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

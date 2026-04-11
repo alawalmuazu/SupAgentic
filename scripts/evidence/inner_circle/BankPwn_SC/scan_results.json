@@ -1,0 +1,35 @@
+{
+  "alias": "BankPwn_SC",
+  "tier": 4,
+  "platforms": [
+    "Session"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/BankPwn_SC",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/BankPwn_SC/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@BankPwn_SC",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/BankPwn_SC/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/BankPwn_SC",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

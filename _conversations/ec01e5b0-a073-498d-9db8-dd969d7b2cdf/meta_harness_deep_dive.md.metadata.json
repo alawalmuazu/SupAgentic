@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_OTHER",
+  "summary": "Deep technical analysis of Stanford's Meta-Harness paper and the TerminalBench-2 artifact codebase. Documents the core thesis (harness > model), the 3-step meta-loop architecture with 10M-token filesystem-based diagnosis, benchmark results (76.4% on TBench2), and a reverse-engineering of the released harness code covering environment bootstrapping, marker-based polling, native tool calling with structured CoT, and double-confirmation completion. Includes a blueprint for a self-optimizing harness prototype for SupAgentic.",
+  "updatedAt": "2026-04-09T13:25:45.633762500Z"
+}

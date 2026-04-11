@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary": "Implementation plan for building a self-optimizing LLM harness prototype, inspired by Stanford's Meta-Harness paper. Details the core modules, evaluation loop, and testing strategy.",
+  "updatedAt": "2026-04-09T13:35:22.228008700Z"
+}

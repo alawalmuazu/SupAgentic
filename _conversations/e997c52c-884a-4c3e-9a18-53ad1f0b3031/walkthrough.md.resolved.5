@@ -1,0 +1,43 @@
+# NIBMX Vault & Blockchain — Walkthrough
+
+## What Was Done
+
+### 1. Vault & Blockchain Feature Audit
+Analyzed 5 source files to map the complete feature set:
+- [vault.mjs](file:///c:/Users/OMEN/Documents/kibx/api/_routes/vault.mjs) (527 LOC) — Vault CRUD, deposit, withdraw, transfer, admin controls
+- [tokens.mjs](file:///c:/Users/OMEN/Documents/kibx/api/_routes/tokens.mjs) (189 LOC) — Maker-Checker token governance
+- [blockchain.mjs](file:///c:/Users/OMEN/Documents/kibx/api/_routes/blockchain.mjs) (59 LOC) — Provenance chain, escrow events, QR verification
+- [VaultDashboard.jsx](file:///c:/Users/OMEN/Documents/kibx/web/src/pages/VaultDashboard.jsx) (449 LOC) — React vault UI with 6 tabs
+- [Blockchain.jsx](file:///c:/Users/OMEN/Documents/kibx/web/src/pages/Blockchain.jsx) (355 LOC) — React blockchain explorer with 4 tabs
+- [migrate-vault-blockchain.mjs](file:///c:/Users/OMEN/Documents/kibx/scripts/migrate-vault-blockchain.mjs) — 7 database tables + indexes
+
+### 2. Competitor Blockchain Stack Research
+Researched 8 competitor platforms:
+| Platform | Blockchain | Token |
+|----------|-----------|-------|
+| **Minespider** | Public-permissioned (custom) | Digital Product Passports |
+| **Paxos Gold** | Ethereum ERC-20 | PAXG |
+| **Tether Gold** | Ethereum ERC-20 | XAUT |
+| **Kinesis** | Stellar fork | KAU |
+| **AABB Gold** | Ethereum ERC-20 | AABBG |
+| **BullionVault** | None (traditional) | N/A |
+| **Dukia Gold** | None (ICT-driven) | N/A |
+| **Sanu Coin** | Platform-native (app) | SNG |
+
+### 3. index.html Updates
+Updated [index.html](file:///c:/Users/OMEN/Documents/kibx/index.html) with:
+- **Sidebar:** Added "Competitor Stacks" nav link
+- **Vault section:** Added vault-to-vault transfer, Maker-Checker governance, CSV export, allocation bar
+- **Database schema table:** 7 tables documented (vault_accounts → token_balances)
+- **Blockchain events:** Added `vault_withdrawal`, `escrow_*` events
+- **Chain Properties table:** Name, algorithm, network, structure, block numbering, QR verification
+- **New section `#blockchain-stacks`:** Full competitor comparison with:
+  - Minespider architecture deep-dive (DPPs, AWS, Hyperledger Aries interop)
+  - 9-platform stack comparison table (Blockchain, Token Standard, Consensus, Vault, Focus)
+  - 8-feature capability matrix (NIBMX vs 5 competitors)
+  - NIBMX positioning callout (combines Minespider + Paxos + BullionVault + Dukia + AABB)
+  - Future consideration: Stellar/XLM Merkle root anchoring
+- **Footer:** Updated to March 24, 2026, fixed duplicate "Nigeria International" text
+
+### 4. Analysis Artifact
+Created [vault_blockchain_analysis.md](file:///C:/Users/OMEN/.gemini/antigravity/brain/e997c52c-884a-4c3e-9a18-53ad1f0b3031/vault_blockchain_analysis.md) with production-readiness assessment and stack recommendations.

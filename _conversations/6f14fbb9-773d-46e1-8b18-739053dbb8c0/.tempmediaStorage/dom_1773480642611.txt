@@ -1,0 +1,71 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (252,0)<div class='card' />
+	[1] (252,12)<div >A collection of personality-driven AI agents — Frontend Dev, Backend Architect, Growth Hacker, Rapid Prototyper & Reality Checker — designed to act like a real dev team. />
+	[2] (252,112)<div  />
+		[3] (180,112)<span >LLM Prompts />
+		[4] (248,112)<span >Multi-Agent />
+		[5] (326,112)<a class='card-link' href='tools/agency-agents/'>Open Locally />
+[6] (500,0)<div class='card' />
+	[7] (500,12)<div >CLI and library for systematically evaluating and red-teaming LLM applications. Tests against OWASP LLM Top 10 and NIST AI RMF for prompt injection, PII leaks & more. />
+	[8] (500,112)<div  />
+		[9] (426,112)<span >TypeScript />
+		[10] (475,112)<span >CLI />
+		[11] (574,112)<a class='card-link' href='tools/promptfoo/'>Open Locally />
+[12] (748,0)<div class='card' />
+	[13] (748,12)<div >A prediction engine that uses knowledge graphs and multi-agent swarm simulation to forecast real-world scenarios — from policy outcomes to market trends. />
+	[14] (748,112)<div  />
+		[15] (666,112)<span >Python />
+		[16] (707,112)<span >Vue />
+		[17] (752,112)<span >GraphRAG />
+		[18] (823,112)<a class='card-link' href='tools/mirofish/'>Open Locally />
+[19] (252,371)<div class='card' />
+	[20] (252,255)<div  />
+		[21] (164,255)<div >🎨 />
+		[22] (230,255)<div  />
+			[23] (230,246)<div >Impeccable />
+			[24] (230,272)<div >UI Design Prompting />
+	[25] (252,364)<div >A design skill for Claude that fights "AI slop" — uses 17 commands and curated anti-patterns to force unique, custom frontend code instead of generic purple-button UIs. />
+	[26] (252,483)<div  />
+		[27] (182,464)<span >Claude Skill />
+		[28] (256,464)<span >Design System />
+		[29] (326,508)<a class='card-link' href='tools/impeccable/'>Open Locally />
+[30] (500,371)<div class='card' />
+	[31] (500,255)<div  />
+		[32] (413,255)<div >🧠 />
+		[33] (485,255)<div  />
+			[34] (485,246)<div >OpenViking />
+			[35] (485,272)<div >Agent Context Memory />
+	[36] (500,364)<div >A context database for AI agents with hierarchical retrieval (L0→L1→L2). Manages memory like a file system via the
+protocol — resources, user prefs & agent skills. />
+		[37] (477,379)<code >viking:// />
+	[38] (500,464)<div  />
+		[39] (417,464)<span >Python />
+		[40] (471,464)<span >ByteDance />
+		[41] (574,464)<a class='card-link' href='tools/openviking/'>Open Locally />
+[42] (748,371)<div class='card' />
+	[43] (748,255)<div  />
+		[44] (661,255)<div >⚡ />
+		[45] (726,255)<div  />
+			[46] (726,246)<div >Heretic />
+			[47] (726,272)<div >Model Modification />
+	[48] (748,364)<div >Automated abliteration — uses directional ablation to mathematically suppress refusal vectors in local LLMs, removing safety alignment while preserving intelligence. />
+	[49] (748,464)<div  />
+		[50] (666,464)<span >Python />
+		[51] (726,464)<span >Transformers />
+		[52] (823,464)<a class='card-link' href='tools/heretic/'>Open Locally />
+[53] (252,742)<div class='card' />
+	[54] (252,645)<div  />
+		[55] (164,645)<div >📚 />
+		[56] (239,645)<div  />
+			[57] (239,635)<div >NanoChat />
+			[58] (239,662)<div >LLM Training Framework />
+	[59] (252,754)<div >Andrej Karpathy's minimal framework for building, training & running a small language model from scratch — tokenizer, GPT transformer, synthetic data gen & chat UI included. />
+	[60] (252,853)<div  />
+		[61] (169,853)<span >Python />
+		[62] (218,853)<span >PyTorch />
+		[63] (326,853)<a class='card-link' href='tools/nanochat/'>Open Locally />
+
+</current_dom>

@@ -1,0 +1,82 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (496,531)<div  />
+	[1] (70,46)<a class='sidebar__brand' href='/' />
+		[2] (22,48)<div >Au />
+		[3] (53,48)<div >KIG />
+			[4] (63,48)<span >X />
+	[5] (70,462)<nav class='sidebar__nav' scrollable='true' />
+		Main
+		[6] (67,184)<a class='sidebar__link ' href='/' />
+			[7] (23,184)<span >🏠 />
+			[8] (46,184)<span >Home />
+		[9] (67,240)<a class='sidebar__link ' href='/marketplace' />
+			[10] (23,240)<span >🏪 />
+			[11] (58,240)<span >Marketplace />
+		[12] (67,297)<a class='sidebar__link ' href='/pricing' />
+			[13] (23,297)<span >📈 />
+			[14] (56,297)<span >Live Pricing />
+		Trading
+		[15] (67,406)<a class='sidebar__link ' href='/chat' />
+			[16] (23,406)<span >💬 />
+			[17] (44,406)<span >Chat />
+		[18] (67,463)<a class='sidebar__link ' href='/cart' />
+			[19] (23,463)<span >🛒 />
+			[20] (43,462)<span >Cart />
+		[21] (67,519)<a class='sidebar__link ' href='/orders' />
+			[22] (23,519)<span >📦 />
+			[23] (48,519)<span >Orders />
+		Assets
+		[24] (67,628)<a class='sidebar__link ' href='/vault' />
+			[25] (23,628)<span >🏦 />
+			[26] (44,628)<span >Vault />
+		[27] (67,685)<a class='sidebar__link ' href='/blockchain' />
+			[28] (23,685)<span >⛓️ />
+			[29] (46,685)<span >Chain />
+		Account
+		[30] (67,794)<a class='sidebar__link ' href='/kyc' />
+			[31] (23,794)<span >🪪 />
+			[32] (43,794)<span >KYC />
+		📊
+		Seller Dashboard
+		👤
+		Profile
+		Management
+	[33] (41,873)<button aria-label='Toggle theme' class='sidebar__footer-btn'>🌙 />
+	[34] (104,873)<button aria-label='Language' class='sidebar__footer-btn'>🇬🇧 />
+	N
+	NIBMX
+	admin
+	[35] (115,947)<button aria-label='Sign out' class='sidebar__logout' title='Sign out'>🚪 />
+	404
+	Page not found
+	[36] (566,343)<a class='btn btn--primary' href='/'>Go Home />
+	Au
+	KIG
+	X
+	Nigeria International Nigeria International — a secure digital gold trading marketplace connecting verified sellers and buyers across Nigeria and the world.
+	Platform
+	[37] (521,671)<a href='/marketplace'>Marketplace />
+	[38] (521,709)<a href='/pricing'>Live Pricing />
+	[39] (521,747)<a href='#'>Register as Seller />
+	[40] (521,784)<a href='#'>Register as Buyer />
+	Resources
+	[41] (678,671)<a href='#'>FAQ />
+	[42] (678,709)<a href='#'>Gold Trading Guide />
+	[43] (678,747)<a href='#'>API Documentation />
+	[44] (678,784)<a href='#'>Contact Support />
+	Compliance
+	[45] (836,671)<a href='#'>KYC/AML Policy />
+	[46] (836,709)<a href='#'>Terms of Service />
+	[47] (836,747)<a href='#'>Privacy Policy />
+	[48] (836,784)<a href='#'>Anti-Fraud Framework />
+	Trusted Partners
+	BMR
+	LBMA
+	CBN
+	ASMN
+	© 2026 NIBMX — Nigeria International Nigeria International. All rights reserved.
+
+</current_dom>

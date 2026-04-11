@@ -1,0 +1,36 @@
+{
+  "alias": "inesslopez",
+  "tier": 1,
+  "platforms": [
+    "Exploit.in",
+    "Telegram"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/inesslopez",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/inesslopez/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@inesslopez",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/inesslopez/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/inesslopez",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

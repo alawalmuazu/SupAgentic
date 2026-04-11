@@ -1,0 +1,36 @@
+{
+  "alias": "TarkovRat_42",
+  "tier": 5,
+  "platforms": [
+    "Steam",
+    "Discord"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/TarkovRat_42",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/TarkovRat_42/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@TarkovRat_42",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/TarkovRat_42/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/TarkovRat_42",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

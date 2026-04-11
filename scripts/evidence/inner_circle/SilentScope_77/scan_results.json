@@ -1,0 +1,36 @@
+{
+  "alias": "SilentScope_77",
+  "tier": 5,
+  "platforms": [
+    "Steam",
+    "Faceit"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/SilentScope_77",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/SilentScope_77/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@SilentScope_77",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/SilentScope_77/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/SilentScope_77",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

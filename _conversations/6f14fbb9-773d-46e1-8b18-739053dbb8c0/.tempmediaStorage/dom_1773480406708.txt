@@ -1,0 +1,47 @@
+[0] (93,60)<a class='navbar__brand' href='#' />
+	[1] (44,60)<div >Au />
+	[2] (115,60)<div >NIBM
+Docs />
+		[3] (114,59)<span >X />
+[4] (947,60)<button aria-label='Toggle light/dark mode' class='theme-toggle' id='themeToggle' />
+	[5] (936,60)<div  />
+		[6] (936,60)<span >🌙 />
+[7] (114,561)<aside class='sidebar' id='sidebar' scrollable='true'>Risk & Investment
+Investment Module
+Security & Infra />
+	Risk & Investment
+	Investment Module
+	[8] (110,144)<a class='sidebar__link' href='#risk-financials'>Financial Statements />
+	[9] (110,216)<a class='sidebar__link active' href='#risk-stress'>Stress Testing />
+	[10] (110,288)<a class='sidebar__link' href='#risk-calculators'>Calculators />
+	[11] (110,361)<a class='sidebar__link' href='#risk-capital'>Capital & Equity />
+	[12] (110,433)<a class='sidebar__link' href='#risk-api'>Risk API />
+	Security & Infra
+	[13] (110,630)<a class='sidebar__link' href='#security-overview'>Security Overview />
+	[14] (110,703)<a class='sidebar__link' href='#security-app'>App Security />
+	[15] (110,775)<a class='sidebar__link' href='#security-fintech'>Fintech Protection />
+	[16] (110,847)<a class='sidebar__link' href='#security-traffic'>Traffic & Scale />
+	[17] (110,920)<a class='sidebar__link' href='#security-hosting'>Hosting & Costs />
+💡
+How Reverse Stress Works:
+Given a minimum runway threshold (e.g. 3 months), the engine
+          calculates exactly how much revenue can decline or costs can increase before the business fails. Essential for
+          board reporting and investor confidence.
+🧮
+Financial Calculators
+Calculator
+Endpoint
+Inputs
+Outputs
+Value at Risk (VaR)
+POST /api/risk/var
+Portfolio value, volatility, confidence level, time horizon
+Parametric VaR amount, %, 99% VaR comparison
+WACC & CAPM
+POST /api/risk/wacc
+Equity/debt weights, cost of equity/debt, tax rate, beta, risk-free rate
+WACC %, CAPM cost of equity, after-tax debt cost
+DCF / NPV
+POST /api/risk/dcf
+Initial investment, projected cash flows, discount rate, terminal growth
+NPV, profitability index, payback years, accept/reject decision

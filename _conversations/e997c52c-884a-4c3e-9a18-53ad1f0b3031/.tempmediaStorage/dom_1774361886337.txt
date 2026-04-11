@@ -1,0 +1,63 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (500,531)<div  />
+	[1] (70,46)<a class='sidebar__brand' href='/' />
+		[2] (22,48)<div >Au />
+		[3] (53,48)<div >KIG />
+			[4] (63,48)<span >X />
+	Main
+	[5] (70,184)<a class='sidebar__link ' href='/' />
+		[6] (23,184)<span >🏠 />
+		[7] (46,184)<span >Home />
+	[8] (70,240)<a class='sidebar__link ' href='/marketplace' />
+		[9] (23,240)<span >🏪 />
+		[10] (58,240)<span >Marketplace />
+	[11] (70,297)<a class='sidebar__link ' href='/pricing' />
+		[12] (23,297)<span >📈 />
+		[13] (56,297)<span >Live Pricing />
+	Assets
+	[14] (70,406)<a class='sidebar__link ' href='/blockchain' />
+		[15] (23,406)<span >⛓️ />
+		[16] (46,406)<span >Chain />
+	Community
+	[17] (70,516)<a class='sidebar__link ' href='/agents' />
+		[18] (23,516)<span >🌍 />
+		[19] (48,516)<span >Agents />
+	[20] (70,572)<a class='sidebar__link ' href='/api-docs' />
+		[21] (23,572)<span >📄 />
+		[22] (41,572)<span >API />
+	[23] (41,903)<button aria-label='Toggle theme' class='sidebar__footer-btn'>☀️ />
+	[24] (104,903)<button aria-label='Language' class='sidebar__footer-btn'>🇬🇧 />
+	[25] (70,962)<button class='sidebar__signin-btn'>Sign In />
+	404
+	Page not found
+	[26] (570,343)<a class='btn btn--primary' href='/'>Go Home />
+	Au
+	KIG
+	X
+	Nigeria International Nigeria International — a secure digital gold trading marketplace connecting verified sellers and buyers across Nigeria and the world.
+	Platform
+	[27] (525,671)<a href='/marketplace'>Marketplace />
+	[28] (525,709)<a href='/pricing'>Live Pricing />
+	[29] (525,747)<a href='#'>Register as Seller />
+	[30] (525,784)<a href='#'>Register as Buyer />
+	Resources
+	[31] (683,671)<a href='#'>FAQ />
+	[32] (683,709)<a href='#'>Gold Trading Guide />
+	[33] (683,747)<a href='#'>API Documentation />
+	[34] (683,784)<a href='#'>Contact Support />
+	Compliance
+	[35] (841,671)<a href='#'>KYC/AML Policy />
+	[36] (841,709)<a href='#'>Terms of Service />
+	[37] (841,747)<a href='#'>Privacy Policy />
+	[38] (841,784)<a href='#'>Anti-Fraud Framework />
+	Trusted Partners
+	BMR
+	LBMA
+	CBN
+	ASMN
+	© 2026 NIBMX — Nigeria International Nigeria International. All rights reserved.
+
+</current_dom>

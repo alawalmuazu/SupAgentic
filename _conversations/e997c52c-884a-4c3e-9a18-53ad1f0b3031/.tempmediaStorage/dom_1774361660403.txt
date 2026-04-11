@@ -1,0 +1,86 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (70,46)<a class='sidebar__brand' href='/' />
+	[1] (22,48)<div >Au />
+	[2] (53,48)<div >KIG />
+		[3] (63,48)<span >X />
+Main
+[4] (70,184)<a class='sidebar__link sidebar__link--active' href='/' />
+	[5] (23,184)<span >🏠 />
+	[6] (46,184)<span >Home />
+[7] (70,240)<a class='sidebar__link ' href='/marketplace' />
+	[8] (23,240)<span >🏪 />
+	[9] (58,240)<span >Marketplace />
+[10] (70,297)<a class='sidebar__link ' href='/pricing' />
+	[11] (23,297)<span >📈 />
+	[12] (56,297)<span >Live Pricing />
+Assets
+[13] (70,406)<a class='sidebar__link ' href='/blockchain' />
+	[14] (23,406)<span >⛓️ />
+	[15] (46,406)<span >Chain />
+Community
+[16] (70,516)<a class='sidebar__link ' href='/agents' />
+	[17] (23,516)<span >🌍 />
+	[18] (48,516)<span >Agents />
+[19] (70,572)<a class='sidebar__link ' href='/api-docs' />
+	[20] (23,572)<span >📄 />
+	[21] (41,572)<span >API />
+[22] (41,903)<button aria-label='Toggle theme' class='sidebar__footer-btn'>🌙 />
+[23] (104,903)<button aria-label='Language' class='sidebar__footer-btn'>🇬🇧 />
+[24] (70,962)<button class='sidebar__signin-btn'>Sign In />
+XAU
+Gold
+$
+2,892.45
+/oz
+▲
+1.32
+%
+XAG
+Silver
+$
+32.18
+/oz
+▼
+0.45
+%
+AU₦
+Gold (NGN)
+$
+13,842,500
+/kg
+▲
+2.10
+%
+XPT
+Platinum
+$
+978.30
+/oz
+▲
+0.78
+%
+999
+Gold 24K
+$
+92.94
+/g
+▲
+1.32
+%
+916
+Gold 22K
+$
+85.19
+/g
+Nigeria International Nigeria International
+Trade Gold with Confidence
+—
+From Nigeria to the World
+Nigeria's premier secure digital gold trading marketplace — connecting verified sellers and buyers nationally and internationally.
+[25] (300,869)<a class='btn btn--primary btn--lg' href='/marketplace'>Browse Marketplace />
+[26] (424,869)<a class='btn btn--secondary btn--lg' href='/kyc'>Start Selling />
+
+</current_dom>

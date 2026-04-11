@@ -1,0 +1,12 @@
+# NIBMX Vault & Blockchain — Implementation Tasks
+
+## Phase 1: Code Fixes (API)
+- [/] **1. Race condition protection** — Add `SELECT FOR UPDATE` to vault balance operations in [vault.mjs](file:///c:/Users/OMEN/Documents/kibx/api/_routes/vault.mjs)
+- [/] **2. DB transaction wrapping** — Wrap multi-table ops in `BEGIN...COMMIT` in [vault.mjs](file:///c:/Users/OMEN/Documents/kibx/api/_routes/vault.mjs) + [tokens.mjs](file:///c:/Users/OMEN/Documents/kibx/api/_routes/tokens.mjs)
+- [/] **3. Input validation (zod)** — Add zod schemas for all vault/token mutation endpoints
+- [ ] **4. Rate limiting** — Add `express-rate-limit` middleware for vault mutation routes
+- [ ] **5. Route deduplication** — Consolidate duplicate token routes between [vault.mjs](file:///c:/Users/OMEN/Documents/kibx/api/_routes/vault.mjs) and [tokens.mjs](file:///c:/Users/OMEN/Documents/kibx/api/_routes/tokens.mjs)
+- [ ] **6. API versioning** — Not implementing (breaking change, deferred)
+
+## Phase 2: Internal Docs Update
+- [ ] **7. Add remaining analysis to index.html** — Race condition warnings, stack recommendations table, production-readiness status

@@ -1,0 +1,186 @@
+# NIBMX Vault & Blockchain — Features & Stack Analysis
+
+## Current Architecture
+
+| Layer | Tech | Files |
+|-------|------|-------|
+| **API** | Express 5 (ESM) | `vault.mjs` (527 LOC), `blockchain.mjs` (59 LOC), `tokens.mjs` (189 LOC) |
+| **Frontend** | React 19 + Vite | `VaultDashboard.jsx` (449 LOC), `Blockchain.jsx` (355 LOC) |
+| **Database** | PostgreSQL (Neon) | 5 tables, 7 indexes, 1 sequence |
+| **Crypto** | Node.js `crypto` | SHA-256 hashing for immutable records |
+| **Auth** | JWT + Middleware | `authRequired`, `adminRequired`, `sellerRequired` |
+
+---
+
+## Feature Matrix
+
+### 🏦 Vault Management (`vault.mjs`)
+
+| Feature | Endpoint | Status |
+|---------|----------|--------|
+| Get/Create vault account | `GET/POST /vault/account` | ✅ Built |
+| Deposit gold | `POST /vault/deposit` | ✅ Built |
+| Withdraw (pending approval) | `POST /vault/withdraw` | ✅ Built |
+| Transfer gold between users | `POST /vault/transfer` | ✅ Built |
+| Transaction history (paginated) | `GET /vault/transactions` | ✅ Built |
+| Portfolio summary (balance + value) | `GET /vault/summary` | ✅ Built |
+| Admin: vault stats | `GET /admin/vault/stats` | ✅ Built |
+| Admin: list all accounts | `GET /admin/vault/accounts` | ✅ Built |
+| Admin: approve/reject withdrawals | `PUT /admin/vault/withdrawals/:id` | ✅ Built (2 versions) |
+
+**Storage Types:** `allocated` (individual bars) or `pool` (fractional, BullionVault-style)
+**Vault Location:** Default `BMR Kano`, configurable
+**Insurance:** Optional flag + value field
+
+---
+
+### 🪙 NIBMX-Au Tokenization (`vault.mjs` + `tokens.mjs`)
+
+Two token systems exist in the codebase:
+
+#### System A — User Self-Service (`vault.mjs` lines 152-287)
+| Feature | Endpoint |
+|---------|----------|
+| Mint token from vault balance | `POST /tokens/mint` |
+| Transfer token to user (by email) | `POST /tokens/transfer` |
+| Redeem token → vault gold | `POST /tokens/redeem` |
+| Token balance | `GET /tokens/balance` |
+| Token market info (public) | `GET /tokens/market` |
+
+- **Token ID format:** `NIBMX-Au-{base36_timestamp}-{random}`
+- **Backing:** 1:1 gold-backed (deducted from vault on mint, credited on redeem)
+- **Token lifecycle:** `active` → `transferred` / `redeemed` / `burned`
+
+#### System B — Maker-Checker Governance (`tokens.mjs`)
+| Feature | Endpoint |
+|---------|----------|
+| Initiate mint (Maker — Officer 1) | `POST /tokens/mint` or `/mint` |
+| Review mint (Checker — Officer 2) | `PUT /tokens/mint/:id/review` or `/mint/:id/review` |
+| Burn tokens (physical gold redemption) | `POST /tokens/burn` or `/burn` |
+| List mints (admin/user scoped) | `GET /tokens/mints` or `/mints` |
+| Token balance | `GET /tokens/balance` or `/balance` |
+| Token overview (admin dashboard) | `GET /tokens/overview` or `/overview` |
+
+- **Dual-control:** Maker ≠ Checker enforced (403 if same person)
+- **Separate balance tracking:** `token_balances` table (balance, total_minted, total_burned, total_traded)
+
+> [!IMPORTANT]
+> There are duplicate route definitions between `vault.mjs` and `tokens.mjs` — both define `/tokens/mint`, `/tokens/burn`, `/tokens/balance`, etc. These should be consolidated into a single router.
+
+---
+
+### ⛓️ Blockchain / Provenance Chain (`vault.mjs` + `blockchain.mjs`)
+
+| Feature | Endpoint | Access |
+|---------|----------|--------|
+| Create gold passport (provenance record) | `POST /gold-passport` | Seller |
+| Record blockchain event | `POST /blockchain/record` | Seller |
+| Record escrow event | `POST /blockchain/escrow-event` | Auth |
+| Get gold passport (lookup) | `GET /blockchain/passport/:listingId` | Public |
+| Verify hash | `GET /blockchain/verify/:hash` | Public |
+| QR code verification | `GET /blockchain/qr/:hash` | Public |
+| Full audit chain for listing | `GET /blockchain/chain/:listingId` | Public |
+| Blockchain stats | `GET /blockchain/stats` | Public |
+
+**Chain Properties:**
+- **Name:** NIBMX Provenance Chain
+- **Algorithm:** SHA-256
+- **Network:** NIBMX Private Ledger
+- **Linking:** Each record stores `previous_hash` (linked-list blockchain)
+- **Block numbering:** PostgreSQL sequence `blockchain_block_seq`
+
+**Event Types Tracked:**
+`vault_deposit`, `vault_withdrawal`, `token_mint`, `token_transfer`, `token_redeem`, `passport_created`, `escrow_*`
+
+---
+
+### 📜 Gold Passports (Chain of Custody)
+
+Tracks the full provenance lifecycle:
+
+```
+Mining → Refining → Assay & Certification → Listed on NIBMX
+```
+
+**Fields captured:** origin mine, state, LGA, miner name & license, refiner & certificate, assay lab & date & purity, gold type, karat, weight, LBMA compliance flag, chain of custody (JSONB).
+
+---
+
+## Database Schema
+
+| Table | Purpose | Key Columns |
+|-------|---------|-------------|
+| `vault_accounts` | User vault accounts | `user_id`, `balance_grams`, `storage_type`, `vault_location`, `is_insured` |
+| `vault_transactions` | Deposit/withdraw/transfer log | `type` (8 types), `amount_grams`, `balance_after`, `blockchain_hash`, `status` |
+| `gold_tokens` | NIBMX-Au token registry | `token_id`, `owner_id`, `weight_grams`, `backing_vault_id`, `mint_hash`, `status` |
+| `gold_passports` | Gold provenance records | `passport_hash`, `origin_*`, `miner_*`, `refiner`, `assay_*`, `chain_of_custody` (JSONB) |
+| `blockchain_records` | Immutable audit trail | `record_hash`, `previous_hash`, `event_type`, `event_data` (JSONB), `block_number` |
+| `token_mints` | Maker-Checker mint log | `miner_id`, `weight_grams`, `purity_percentage`, `maker_id`, `checker_id`, `status` |
+| `token_balances` | Aggregated token balances | `user_id`, `balance`, `total_minted`, `total_burned`, `total_traded` |
+
+---
+
+## Stack Recommendations — Best Fit for the Codebase
+
+> [!TIP]
+> These recommendations align with your existing Express 5 + React 19 + Neon DB stack and are the best fit for production-grade vault & blockchain features.
+
+### 1. Vault Storage Engine
+| Component | Current | Recommended |
+|-----------|---------|-------------|
+| Database | Neon PostgreSQL | ✅ **Keep** — ACID transactions are critical for financial ledger integrity |
+| Balance precision | `DECIMAL(14,4)` | ✅ **Keep** — 4 decimal places for sub-gram precision |
+| Concurrency | No locking | ⚠️ **Add** `SELECT FOR UPDATE` on balance changes to prevent race conditions |
+
+### 2. Blockchain Layer
+| Component | Current | Recommended |
+|-----------|---------|-------------|
+| Hash function | SHA-256 (`crypto.createHash`) | ✅ **Keep** — industry standard, LBMA-compatible |
+| Chain structure | DB-backed linked list | ✅ **Keep** for private chain, but add **Merkle tree verification** for audit |
+| Hash weakness | `Date.now()` in hash input | ⚠️ **Fix** — use `crypto.randomUUID()` for nonce, not timestamp |
+| Public blockchain | None | 🆕 **Optional** — anchor weekly Merkle roots to **Stellar/XLM** (best fit for asset tokenization, used by SureRemit, already popular in Nigeria) |
+
+### 3. Token System
+| Component | Current | Recommended |
+|-----------|---------|-------------|
+| Token standard | Custom DB-backed | ✅ **Keep** for internal NIBMX-Au |
+| Maker-Checker | Built, but duplicate routes | ⚠️ **Consolidate** `vault.mjs` tokens + `tokens.mjs` into single `tokens.mjs` |
+| API-first standard | Custom | 🆕 Consider **ERC-1155 compatible metadata** format for future interop |
+
+### 4. Security Hardening
+| Area | Recommendation |
+|------|---------------|
+| **Rate limiting** | Add `express-rate-limit` to vault deposit/withdraw/transfer (10 req/min) |
+| **Audit logging** | Use existing `logAudit` middleware on ALL vault mutation endpoints |
+| **Input validation** | Add `zod` schemas for weight/amount validation (positive, max limits) |
+| **Transaction atomicity** | Wrap multi-table vault ops in `BEGIN...COMMIT` (PostgreSQL transactions) |
+| **API versioning** | Prefix `/api/v1/vault/*` for future breaking changes |
+
+### 5. Frontend Enhancements
+| Feature | Recommendation |
+|---------|---------------|
+| **Real-time price** | Connect to **Gold API** or **MetalpriceAPI** for live XAU/NGN spot |
+| **Chart library** | Add **Recharts** (already React-compatible) for vault balance graphs |
+| **QR codes** | Use **qrcode.react** for printing gold passport QR tags |
+| **PDF export** | Use **@react-pdf/renderer** for vault statement / passport certificates |
+| **Push notifs** | Use existing notification system, add **Web Push API** for real-time alerts |
+
+---
+
+## Summary — What's Production-Ready vs. What Needs Work
+
+| Area | Status | Priority |
+|------|--------|----------|
+| Vault CRUD (deposit/withdraw/transfer) | ✅ Production-ready | — |
+| NIBMX-Au token lifecycle | ✅ Complete | Low — consolidate duplicates |
+| Blockchain provenance chain | ✅ Complete | Medium — add Merkle verification |
+| Gold passport system | ✅ Complete | Low |
+| Maker-Checker governance | ✅ Complete | Low |
+| Admin vault management | ✅ Complete | — |
+| Race condition protection | ⚠️ Missing | **High** |
+| DB transactions (atomicity) | ⚠️ Missing | **High** |
+| Input validation (zod) | ⚠️ Missing | **High** |
+| Rate limiting | ⚠️ Missing | Medium |
+| Route deduplication | ⚠️ Needed | Medium |
+| Public chain anchoring (Stellar) | 🆕 Not started | Low (future) |
+| Real-time gold pricing | 🆕 Not started | Medium |

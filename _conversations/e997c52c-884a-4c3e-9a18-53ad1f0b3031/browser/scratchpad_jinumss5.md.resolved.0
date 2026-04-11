@@ -1,0 +1,15 @@
+# Task Plan: Verify Presentation
+
+- [ ] Open `file:///c:/Users/OMEN/Documents/kibx/presentation.html`
+- [ ] Wait for 3 seconds
+- [ ] Take screenshot of the first slide
+- [ ] Click next button (›) 1st time
+- [ ] Wait 1 second
+- [ ] Take screenshot of the second slide
+- [ ] Click next button (›) 2nd time
+- [ ] Wait 1 second
+- [ ] Take screenshot of the third slide
+- [ ] Click next button (›) 3rd time
+- [ ] Wait 1 second
+- [ ] Take screenshot of the fourth slide
+- [ ] Report results

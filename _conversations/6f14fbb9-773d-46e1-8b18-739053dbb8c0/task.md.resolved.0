@@ -1,0 +1,9 @@
+# SupAgentic — Unified AI Toolkit
+
+## Tasks
+- [/] Research and identify all 7 GitHub repositories
+- [/] Create implementation plan
+- [ ] Clone all 7 repos into SupAgentic workspace
+- [ ] Create unified project structure (README, launcher, shared config)
+- [ ] Build a unified landing page / dashboard
+- [ ] Verify all repos cloned and project structure is correct

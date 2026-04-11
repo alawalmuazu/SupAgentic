@@ -1,0 +1,36 @@
+{
+  "alias": "FraudKing_234",
+  "tier": 4,
+  "platforms": [
+    "Telegram",
+    "DarkForums"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/FraudKing_234",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/FraudKing_234/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@FraudKing_234",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/FraudKing_234/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/FraudKing_234",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

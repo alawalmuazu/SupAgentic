@@ -1,0 +1,36 @@
+{
+  "alias": "CvHNWwEG",
+  "tier": 1,
+  "platforms": [
+    "BreachForums",
+    "Telegram"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/CvHNWwEG",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/CvHNWwEG/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@CvHNWwEG",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/CvHNWwEG/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/CvHNWwEG",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

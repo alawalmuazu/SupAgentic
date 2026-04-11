@@ -1,0 +1,55 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (252,202)<div class='card' />
+	[1] (252,87)<div  />
+		[2] (164,87)<div >🎨 />
+		[3] (230,87)<div  />
+			[4] (230,77)<div >Impeccable />
+			[5] (230,103)<div >UI Design Prompting />
+	[6] (252,196)<div >A design skill for Claude that fights "AI slop" — uses 17 commands and curated anti-patterns to force unique, custom frontend code instead of generic purple-button UIs. />
+	[7] (252,314)<div  />
+		[8] (182,295)<span >Claude Skill />
+		[9] (256,295)<span >Design System />
+		[10] (326,340)<a class='card-link' href='tools/impeccable/'>Open Locally />
+[11] (500,202)<div class='card' />
+	[12] (500,87)<div  />
+		[13] (413,87)<div >🧠 />
+		[14] (485,87)<div  />
+			[15] (485,77)<div >OpenViking />
+			[16] (485,103)<div >Agent Context Memory />
+	[17] (500,196)<div >A context database for AI agents with hierarchical retrieval (L0→L1→L2). Manages memory like a file system via the
+protocol — resources, user prefs & agent skills. />
+		[18] (477,210)<code >viking:// />
+	[19] (500,295)<div  />
+		[20] (417,295)<span >Python />
+		[21] (471,295)<span >ByteDance />
+		[22] (574,295)<a class='card-link' href='tools/openviking/'>Open Locally />
+[23] (748,202)<div class='card' />
+	[24] (748,87)<div  />
+		[25] (661,87)<div >⚡ />
+		[26] (726,87)<div  />
+			[27] (726,77)<div >Heretic />
+			[28] (726,103)<div >Model Modification />
+	[29] (748,196)<div >Automated abliteration — uses directional ablation to mathematically suppress refusal vectors in local LLMs, removing safety alignment while preserving intelligence. />
+	[30] (748,295)<div  />
+		[31] (666,295)<span >Python />
+		[32] (726,295)<span >Transformers />
+		[33] (823,295)<a class='card-link' href='tools/heretic/'>Open Locally />
+[34] (252,573)<div class='card' />
+	[35] (252,477)<div  />
+		[36] (164,477)<div >📚 />
+		[37] (239,477)<div  />
+			[38] (239,467)<div >NanoChat />
+			[39] (239,493)<div >LLM Training Framework />
+	[40] (252,586)<div >Andrej Karpathy's minimal framework for building, training & running a small language model from scratch — tokenizer, GPT transformer, synthetic data gen & chat UI included. />
+	[41] (252,685)<div  />
+		[42] (169,685)<span >Python />
+		[43] (218,685)<span >PyTorch />
+		[44] (326,685)<a class='card-link' href='tools/nanochat/'>Open Locally />
+SupAgentic — Curated from
+[45] (427,889)<a href='https://www.youtube.com/@Fireship'>Fireship />
+'s open-source AI tools spotlight. Each tool retains its original license.
+
+</current_dom>

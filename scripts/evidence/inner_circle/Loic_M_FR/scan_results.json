@@ -1,0 +1,35 @@
+{
+  "alias": "Loic_M_FR",
+  "tier": 1,
+  "platforms": [
+    "Session"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/Loic_M_FR",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/Loic_M_FR/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@Loic_M_FR",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/Loic_M_FR/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/Loic_M_FR",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

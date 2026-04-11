@@ -1,0 +1,223 @@
+# KIBX / NIBMX — Codebase Analysis
+
+**Nigeria International Bullion Market Exchange** — A full-stack digital gold trading marketplace headquartered in Kano, Nigeria.
+
+---
+
+## Architecture Overview
+
+```mermaid
+graph TB
+    subgraph "Clients"
+        WEB["Web App<br/>(Vite + React)"]
+        MOB["Mobile App<br/>(React Native / Expo)"]
+    end
+    subgraph "Backend"
+        API["Express 5 API<br/>(27 route modules)"]
+        MW["Middleware Layer<br/>(Auth, CSRF, Rate Limit)"]
+    end
+    subgraph "Infrastructure"
+        DB["PostgreSQL<br/>(Neon DB)"]
+        PAY["Paystack<br/>(Payments)"]
+        KYC_SVC["Veriff<br/>(KYC)"]
+        GOLD["Gold API<br/>(Live Pricing)"]
+        EMAIL["Nodemailer<br/>(Email)"]
+    end
+
+    WEB --> API
+    MOB --> API
+    API --> MW
+    API --> DB
+    API --> PAY
+    API --> KYC_SVC
+    API --> GOLD
+    API --> EMAIL
+```
+
+---
+
+## Project Structure
+
+| Directory | Purpose |
+|-----------|---------|
+| `api/` | Express 5 backend — serverless on Vercel |
+| `api/_routes/` | 27 route modules (auth, KYC, escrow, etc.) |
+| `api/_lib/` | Shared libs: DB pool, middleware, security, gold pricing, KYC |
+| `web/` | Vite + React frontend (62 pages, 15 components) |
+| `mobile/` | React Native / Expo mobile app (9 screens) |
+| `scripts/` | 18 migration, seed, and utility scripts |
+| `__tests__/` | Jest + Supertest API tests |
+
+---
+
+## Backend (Express 5 API)
+
+### Core Modules
+
+The API entrypoint [index.mjs](file:///c:/Users/OMEN/Documents/kibx/api/index.mjs) bootstraps Express with:
+- **Helmet** security headers (CSP, HSTS, frameguard, XSS filter)
+- **CORS** whitelist (localhost, `kibx.vercel.app`, `nibmx.ng`)
+- **Rate limiting** — 30 req/15min for auth, 60 for admin, 100 for general API
+- **CSRF** double-submit cookie pattern
+- **Feature flags** table (p2p_chat, price_alerts, escrow, kyc_upload, etc.)
+- Auto-seeding of 14 staff accounts on startup
+
+### Route Modules (27 files)
+
+| Module | Responsibility |
+|--------|---------------|
+| `auth.mjs` | Register, login, JWT token flow |
+| `2fa.mjs` | TOTP-based two-factor authentication |
+| `kyc.mjs` | KYC document upload & verification (Veriff) |
+| `aml.mjs` | Anti-money-laundering checks |
+| `profile.mjs` | User profile management |
+| `listings.mjs` | Gold listing CRUD |
+| `marketplace.mjs` | Marketplace browsing, search, filters |
+| `orders.mjs` | Order creation & management |
+| `escrow.mjs` | Escrow payment holding & release |
+| `payments.mjs` | Paystack payment initiation |
+| `webhooks.mjs` | Paystack webhook handling |
+| `gold.mjs` | Live gold pricing (24K, 22K, 18K) |
+| `seller.mjs` | Seller dashboard & analytics |
+| `buyer.mjs` | Buyer operations |
+| `vault.mjs` | Gold vault storage management |
+| `blockchain.mjs` | On-chain gold provenance tracking |
+| `tokens.mjs` | Gold-backed token management |
+| `tiers.mjs` | Cooperative tier system (5–50 members) |
+| `agent.mjs` | Field agent management & commissions |
+| `risk.mjs` | Risk scoring & analysis engine |
+| `investment.mjs` | Investment portfolio management |
+| `admin-lite.mjs` | Basic admin operations |
+| `admin-super.mjs` | Full superadmin panel |
+| `superadmin.mjs` | Platform-wide admin controls |
+| `executive.mjs` | Executive-level reporting |
+| `notifications.mjs` | Push notification delivery |
+
+### Shared Libraries (`api/_lib/`)
+
+| File | Purpose |
+|------|---------|
+| `db.mjs` | PostgreSQL connection pool (via `pg`) |
+| `middleware.mjs` | JWT auth, role guards, CSRF, input sanitization, validation, feature flags, audit logging |
+| `security.mjs` | CSRF token generation, 2FA enforcement, security event logging |
+| `gold-pricing.mjs` | Real-time gold spot price fetching from external API |
+| `kyc.mjs` | Veriff KYC integration |
+
+---
+
+## Database (PostgreSQL / Neon DB)
+
+### Core Tables
+
+**`users`** — Full user accounts with:
+- Email, phone, password hash, full name
+- `user_type` (buyer/seller/admin), `staff_role` (14 roles)
+- KYC fields: `nin_verified`, `kyc_status`, `veriff_session_id`
+- Location: state, company, avatar
+
+**`listings`** — Gold marketplace listings with:
+- Gold type: `Bullion`, `Nugget`, `Coin`, `Dust`, `Bar`
+- Karat: `24K`, `22K`, `21K`, `18K`, `14K`
+- Pricing: per-gram, total, currency (3-char)
+- Assay: certified flag, lab name, report URL, purity %
+- Shipping: `FOB`, `CIF`, `EXW`, `DDP`
+- Status: `active`, `sold`, `reserved`, `expired`, `delisted`
+- Origin: Nigerian state + LGA
+
+### Additional Tables (via migrations)
+
+The `scripts/` directory reveals many more tables:
+- **`orders`**, **`escrow_transactions`** — Order & payment flow
+- **`cooperative_tiers`**, **`tier_members`** — Cooperative membership
+- **`agents`** — Field agent network
+- **`vault_holdings`**, **`blockchain_records`** — Vault + provenance
+- **`risk_scores`**, **`audit_log`** — Risk engine & audit trail
+- **`feature_flags`** — Runtime feature toggles
+
+---
+
+## Web Frontend (Vite + React)
+
+### Stack
+- **Vite** build tool, **React Router** for SPA routing
+- **Lazy-loaded** code splitting for all 62 pages
+- **i18n** — Full internationalization (English, Hausa, Arabic, French, Yoruba)
+- **AuthContext** — JWT-based auth state management
+
+### Page Categories
+
+**Public pages:**
+`Home`, `Marketplace`, `ListingDetail`, `LivePricing`, `MiningMap`, `AgentDirectory`, `Blockchain`
+
+**Authenticated user pages:**
+`Dashboard`, `BuyerDashboard`, `Orders`, `Cart`, `KYC`, `Profile`, `Chat`, `VaultDashboard`
+
+**Staff role-based dashboards (14 roles):**
+
+| Route | Dashboard | Role |
+|-------|-----------|------|
+| `/staff` | StaffDashboard | General staff |
+| `/staff/md` | MDDashboard | Managing Director |
+| `/staff/ceo` | CEODashboard | CEO |
+| `/staff/cto` | CTODashboard | CTO |
+| `/staff/investor` | InvestorDashboard | Investor |
+| `/staff/ops` | OpsDashboard | Ops Manager |
+| `/staff/accountant` | AccountantDashboard | Accountant |
+| `/staff/logistics` | LogisticsDashboard | Logistics |
+| `/staff/assay` | AssayDashboard | Assay Specialist |
+| `/staff/kyc` | KYCOfficerDashboard | KYC Officer |
+| `/staff/support` | SupportDashboard | Support Lead |
+| `/staff/secretary` | SecretaryDashboard | Secretary |
+| `/staff/tier-officer` | TierOfficerDashboard | Tier Officer |
+| `/staff/mobilization` | MobilizationDashboard | Dir. Mobilization |
+
+**Admin pages:**
+`NormalAdmin`, `AdminPanel` (superadmin), `TierAdminDashboard`
+
+**Specialized pages:**
+`RiskAnalysis` (151KB — largest page), `StrategyHub`, `AgentDashboard`, `ApiDocs`
+
+### Components (15 reusable)
+`Navbar`, `Footer`, `AuthModal`, `BuyModal`, `ListingCard`, `ListingFormModal`, `GoldPriceTicker`, `MiniChart`
+
+---
+
+## Mobile App (React Native / Expo)
+
+### 9 Screens
+`HomeScreen`, `MarketScreen`, `LoginScreen`, `ProfileScreen`, `SellerScreen`, `OrdersScreen`, `ChatScreen`, `KYCScreen`, `NotificationsScreen`
+
+### Features
+- Shared API client (`src/api.js`) pointing to the same backend
+- Theme system (`src/theme.js`) with gold-accent branding
+- Multi-language translations (English, Hausa, Arabic)
+- Push notification support via Expo
+
+---
+
+## Deployment
+
+- **Hosting**: Vercel (serverless)
+- **API**: Single serverless function at `api/index.mjs` (10s max duration)
+- **Frontend**: Vite build output from `web/dist/`
+- **Rewrites**: `/api/*` → serverless function, `/*` → SPA fallback
+- **Security headers**: HSTS, X-Frame-Options DENY, nosniff, strict referrer
+
+---
+
+## Key Business Features
+
+1. **Multi-seller gold marketplace** with BMR/LBMA-standard assay certification
+2. **Escrow payments** via Paystack — funds held until gold verified & shipped
+3. **KYC/AML compliance** — Veriff identity verification + anti-money-laundering checks
+4. **Cooperative tier system** — Group buying (5–50 members per tier)
+5. **Gold vault storage** with blockchain-backed provenance tracking
+6. **Gold-backed tokens** — Tokenized gold ownership
+7. **Live gold pricing** — Real-time 24K/22K/18K spot prices
+8. **Risk analysis engine** — Comprehensive risk scoring
+9. **Field agent network** — Commission-based agent recruitment
+10. **Investment portfolios** — Gold investment management
+11. **14 staff role dashboards** — Full organizational hierarchy
+12. **P2P chat** between buyers and sellers
+13. **Mining map** — Nigerian gold mining locations
+14. **Strategy hub** — Business intelligence & planning

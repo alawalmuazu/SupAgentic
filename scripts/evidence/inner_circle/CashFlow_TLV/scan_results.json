@@ -1,0 +1,35 @@
+{
+  "alias": "CashFlow_TLV",
+  "tier": 2,
+  "platforms": [
+    "Telegram"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/CashFlow_TLV",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/CashFlow_TLV/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@CashFlow_TLV",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/CashFlow_TLV/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/CashFlow_TLV",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

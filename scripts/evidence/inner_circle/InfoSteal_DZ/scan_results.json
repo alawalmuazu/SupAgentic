@@ -1,0 +1,35 @@
+{
+  "alias": "InfoSteal_DZ",
+  "tier": 3,
+  "platforms": [
+    "Exploit.in"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/InfoSteal_DZ",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/InfoSteal_DZ/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@InfoSteal_DZ",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/InfoSteal_DZ/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/InfoSteal_DZ",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

@@ -1,0 +1,36 @@
+{
+  "alias": "MoneroMixer99",
+  "tier": 2,
+  "platforms": [
+    "Dread",
+    "FixedFloat"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/MoneroMixer99",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/MoneroMixer99/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@MoneroMixer99",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/MoneroMixer99/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/MoneroMixer99",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

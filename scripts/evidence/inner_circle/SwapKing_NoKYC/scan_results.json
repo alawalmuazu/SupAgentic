@@ -1,0 +1,35 @@
+{
+  "alias": "SwapKing_NoKYC",
+  "tier": 2,
+  "platforms": [
+    "Session"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/SwapKing_NoKYC",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/SwapKing_NoKYC/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@SwapKing_NoKYC",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/SwapKing_NoKYC/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/SwapKing_NoKYC",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

@@ -1,0 +1,7 @@
+[2026-04-07T14:41:48.542519] Heartbeat context check - CPU: 83.0%, User State: ACTIVE (Listening)
+[2026-04-07T14:42:48.643235] Heartbeat context check - CPU: 37.4%, User State: ACTIVE (Listening)
+[2026-04-07T14:43:48.740254] Heartbeat context check - CPU: 22.2%, User State: ACTIVE (Listening)
+[2026-04-07T14:43:58.759947] Detected notable load shift, proactively alerting user.
+[2026-04-07T14:44:48.848417] Heartbeat context check - CPU: 18.0%, User State: ACTIVE (Listening)
+[2026-04-07T14:45:48.952054] Heartbeat context check - CPU: 20.9%, User State: ACTIVE (Listening)
+[2026-04-07T14:46:49.057549] Heartbeat context check - CPU: 21.3%, User State: ACTIVE (Listening)

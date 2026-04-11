@@ -1,0 +1,15 @@
+# SupAgentic Dashboard Verification
+
+## Progress Tracking
+- [ ] Navigate to localhost:8899/index.html
+- [ ] Capture screenshots of the dashboard
+- [ ] Verify header and stats bar
+- [ ] Verify 7 tool cards:
+    - [ ] The Agency
+    - [ ] OpenViking
+    - [ ] Impeccable
+    - [ ] Promptfoo
+    - [ ] MiroFish
+    - [ ] NanoChat
+    - [ ] Heretic
+- [ ] Report overall visual quality and findings

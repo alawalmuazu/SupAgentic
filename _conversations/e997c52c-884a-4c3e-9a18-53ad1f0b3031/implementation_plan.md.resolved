@@ -1,0 +1,125 @@
+# Vault & Blockchain Security Fixes — Implementation Plan
+
+## Goal
+Implement 6 production-hardening fixes for the NIBMX vault and blockchain API, plus update the internal [index.html](file:///c:/Users/OMEN/Documents/kibx/index.html) documentation with the remaining analysis items.
+
+---
+
+## Proposed Changes
+
+### 1. Core API Security ([vault.mjs](file:///c:/Users/OMEN/Documents/kibx/api/_routes/vault.mjs))
+
+#### [MODIFY] [vault.mjs](file:///c:/Users/OMEN/Documents/kibx/api/_routes/vault.mjs)
+
+**Fix 1 — DB Transactions:** Wrap all multi-table vault operations in `BEGIN...COMMIT...ROLLBACK`:
+- `POST /vault/deposit` (3 writes: vault_accounts + vault_transactions + blockchain_records + notifications)
+- `POST /vault/withdraw` (2 writes: vault_transactions + notifications)
+- `POST /tokens/mint` (4 writes: vault_accounts + gold_tokens + vault_transactions + blockchain_records)
+- `POST /tokens/transfer` (3 writes: gold_tokens update + insert + blockchain_records + notifications)
+- `POST /tokens/redeem` (4 writes: gold_tokens + vault_accounts + vault_transactions + blockchain_records)
+- `POST /vault/transfer` (existing transfer endpoint)
+- Admin withdrawal approval endpoint
+
+Pattern:
+```js
+const client = await pool.connect();
+try {
+    await client.query('BEGIN');
+    // ... all queries use client instead of pool ...
+    await client.query('COMMIT');
+} catch (err) {
+    await client.query('ROLLBACK');
+    throw err;
+} finally {
+    client.release();
+}
+```
+
+**Fix 2 — Row-Level Locking:** Add `FOR UPDATE` to balance reads before mutations:
+```sql
+SELECT * FROM vault_accounts WHERE user_id=$1 FOR UPDATE
+```
+This prevents concurrent requests from reading stale balances. Applied to: deposit, withdraw, mint, redeem, transfer.
+
+**Fix 3 — Input Validation (zod):** Add validation schemas at the top of [vault.mjs](file:///c:/Users/OMEN/Documents/kibx/api/_routes/vault.mjs):
+- `depositSchema`: `amount_grams` (positive number, max 50000), `listing_id` (optional int), `assay_reference` (optional string), `notes` (optional string max 500)
+- `withdrawSchema`: `amount_grams` (positive number), `delivery_address` (string min 5), `notes` (optional)
+- `mintSchema`: `weight_grams` (positive number, max 50000)
+- `transferSchema`: `token_id` (string), `recipient_email` (valid email)
+- `redeemSchema`: `token_id` (string)
+
+---
+
+### 2. Rate Limiting ([index.mjs](file:///c:/Users/OMEN/Documents/kibx/api/index.mjs))
+
+#### [MODIFY] [index.mjs](file:///c:/Users/OMEN/Documents/kibx/api/index.mjs)
+
+Add a `vaultLimiter` specifically for vault mutation endpoints (stricter than the global 100/15min):
+```js
+const vaultLimiter = rateLimit({
+    windowMs: 60 * 1000,  // 1 minute window
+    max: 10,              // 10 mutations per minute per IP
+    message: { error: 'Vault rate limit exceeded. Max 10 operations per minute.' },
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+app.use('/api/vault/deposit', vaultLimiter);
+app.use('/api/vault/withdraw', vaultLimiter);
+app.use('/api/vault/transfer', vaultLimiter);
+app.use('/api/tokens/mint', vaultLimiter);
+app.use('/api/tokens/redeem', vaultLimiter);
+app.use('/api/tokens/transfer', vaultLimiter);
+```
+
+---
+
+### 3. Route Deduplication ([tokens.mjs](file:///c:/Users/OMEN/Documents/kibx/api/_routes/tokens.mjs))
+
+#### [MODIFY] [tokens.mjs](file:///c:/Users/OMEN/Documents/kibx/api/_routes/tokens.mjs)
+
+Add comments documenting that [vault.mjs](file:///c:/Users/OMEN/Documents/kibx/api/_routes/vault.mjs) handles user-facing token self-service routes (`/tokens/mint`, `/tokens/balance`, `/tokens/transfer`, `/tokens/redeem`, `/tokens/market`), while [tokens.mjs](file:///c:/Users/OMEN/Documents/kibx/api/_routes/tokens.mjs) handles the **Maker-Checker governance** routes (`/tokens/mint` initiation by Officer 1, `/tokens/mint/:id/review` by Officer 2, `/tokens/burn`, `/tokens/mints`, `/tokens/overview`).
+
+Since both are mounted at `/api` and `/api/tokens` respectively, the **existing mounting order** in `index.mjs` (line 128: `app.use('/api/tokens', tokenRoutes)` before line 142: `app.use('/api', vaultRoutes)`) means `tokens.mjs` routes take precedence for `/api/tokens/*`. This is actually correct — the Maker-Checker governance routes should override the simpler self-service ones for production.
+
+**Action:** Add clear comments to both files indicating which handles what, and mark the vault.mjs token routes as "self-service fallback" for when Maker-Checker is not required.
+
+---
+
+### 4. Dependencies
+
+#### [MODIFY] [package.json](file:///c:/Users/OMEN/Documents/kibx/package.json)
+
+Add `zod` dependency:
+```json
+"zod": "^3.24.0"
+```
+
+---
+
+### 5. Internal Documentation (`index.html`)
+
+#### [MODIFY] [index.html](file:///c:/Users/OMEN/Documents/kibx/index.html)
+
+Add a new section `#vault-security` (with sidebar link) after the `#blockchain-stacks` section containing:
+- **Production Readiness Status** table (what's ready vs. what needs work)
+- **Stack Recommendations** table (keep/add/fix)
+- **Security Hardening** checklist (race conditions, DB transactions, input validation, rate limiting)
+
+---
+
+## Verification Plan
+
+### Existing Tests
+Run the existing test suite to confirm no regressions:
+```bash
+cd c:\Users\OMEN\Documents\kibx
+npm test
+```
+The test at `__tests__/api.test.mjs` covers 26 route modules including `GET /api/tokens/balance` (line 186) and protected route auth checks.
+
+### Manual Verification
+1. After changes, run `npm run dev` and test:
+   - `POST /api/vault/deposit` with valid and invalid payloads (zod should reject bad input)
+   - `POST /api/vault/deposit` rapidly 11 times — the 11th should be rate-limited
+   - Check that deposits still work correctly with the transaction wrapping
+2. Open `index.html` locally and verify the new `#vault-security` section renders correctly under the Vault & Blockchain sidebar

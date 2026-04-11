@@ -1,0 +1,57 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+BREACH
+INTEL
+TLP:RED — CRITICAL
+04 Apr 2026, 15:08:58
+● ACTIVE INCIDENT
+[0] (41,91)<button class='tab-btn'>◉ Overview />
+[1] (111,91)<button class='tab-btn'>⚠ Incident Analysis />
+[2] (189,91)<button class='tab-btn active'>🏛 KDSG Impact />
+[3] (259,91)<button class='tab-btn'>🛡 Remediation />
+[4] (335,91)<button class='tab-btn'>📢 Public Advisory />
+⚠️ KDSG-Specific Threat Level
+If government HSM keys in the dump belong to or are shared with KDSG's payment signing infrastructure, the state's entire Treasury Single Account (TSA) payment authorization chain is compromised.
+🏛️ Impact by SIFMIS Module
+💰 Finance & Accounting
+CRITICAL
+Payment authorization bypass via HSM keys
+CRITICAL
+Revenue reconciliation tampering
+HIGH
+Audit trail integrity compromise
+👥 Payroll & HRMIS
+CRITICAL
+Employee PII / BVN exposure
+CRITICAL
+Salary diversion via routing data
+HIGH
+Ghost worker injection
+📋 Procurement
+CRITICAL
+Vendor payment fraud
+HIGH
+Contract award intelligence
+HIGH
+Double-payment exploitation
+📊 Budget & Planning
+MEDIUM
+Budget allocation intelligence
+HIGH
+Release mechanism compromise
+🏦 Pension Management
+CRITICAL
+Pensioner identity theft
+CRITICAL
+Pension payment diversion
+🎯 Affected KDSG Stakeholders
+Stakeholder
+Exposure
+Impact
+Ministry of Finance
+TSA payment authorization
+Direct
+
+</current_dom>

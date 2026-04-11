@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_OTHER",
+  "summary": "Impact assessment specific to Kaduna State Government's SIFMIS (Dynamics NAV) infrastructure. Maps the Remita breach to each SIFMIS module (Finance, Payroll/HRMIS, Procurement, Budget, Pension), identifies affected state stakeholders (Ministry of Finance, KADIRS, 23 LGAs, all MDAs), models four critical risk scenarios (TSA forgery, identity theft, ghost workers, revenue diversion), and provides prioritized action items.",
+  "updatedAt": "2026-04-04T13:42:08.228343100Z"
+}

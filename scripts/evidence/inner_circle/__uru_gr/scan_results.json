@@ -1,0 +1,36 @@
+{
+  "alias": "__uru_gr",
+  "tier": 1,
+  "platforms": [
+    "Dread",
+    "Greeksec"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/__uru_gr",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/__uru_gr/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@__uru_gr",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/__uru_gr/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/__uru_gr",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

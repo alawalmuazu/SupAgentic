@@ -1,0 +1,9 @@
+{
+  "step": 3,
+  "searches": [],
+  "name_image_searches": {
+    "google": "https://www.google.com/search?q=Ilya+Dzhineli+photo&tbm=isch",
+    "google_cyrillic": "https://www.google.com/search?q=%D0%98%D0%BB%D1%8C%D1%8F+%D0%94%D0%B6%D0%B8%D0%BD%D0%B5%D0%BB%D0%B8+\u0444\u043e\u0442\u043e&tbm=isch",
+    "yandex_name": "https://yandex.com/images/search?text=%D0%98%D0%BB%D1%8C%D1%8F+%D0%94%D0%B6%D0%B8%D0%BD%D0%B5%D0%BB%D0%B8"
+  }
+}

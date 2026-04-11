@@ -1,0 +1,12 @@
+# NIBMX Vault & Blockchain — Implementation Tasks
+
+## Phase 1: Code Fixes (API)
+- [x] **1. Race condition protection** — Added `SELECT FOR UPDATE` to vault balance operations in `vault.mjs`
+- [x] **2. DB transaction wrapping** — Wrapped all 8 mutation endpoints in `BEGIN...COMMIT...ROLLBACK` in `vault.mjs`
+- [x] **3. Input validation (zod)** — Added 6 zod schemas for all vault/token mutation endpoints
+- [x] **4. Rate limiting** — Added `vaultLimiter` (10/min) for 6 vault mutation routes in `index.mjs`
+- [x] **5. Route deduplication** — Documented in implementation plan (tokens.mjs takes precedence via mount order)
+- [ ] **6. API versioning** — Deferred (breaking change)
+
+## Phase 2: Internal Docs Update
+- [x] **7. Added `#vault-security` section to index.html** — Production readiness table, stack recommendations, security audit summary

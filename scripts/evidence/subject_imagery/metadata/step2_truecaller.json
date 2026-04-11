@@ -1,0 +1,15 @@
+{
+  "step": 2,
+  "platform": "Truecaller",
+  "target": "+972526103354",
+  "status": "MANUAL_REQUIRED",
+  "search_urls": [
+    "https://www.truecaller.com/search/il/526103354"
+  ],
+  "alt_services": [
+    "Eyecon",
+    "Sync.ME",
+    "GetContact",
+    "Whoscall"
+  ]
+}

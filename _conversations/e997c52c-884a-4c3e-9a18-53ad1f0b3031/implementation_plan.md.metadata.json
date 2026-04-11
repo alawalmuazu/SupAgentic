@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary": "Implementation plan for 6 vault/blockchain security and architecture fixes: (1) DB transactions with BEGIN/COMMIT around all vault mutations, (2) Row-level locking with SELECT FOR UPDATE, (3) Zod input validation schemas, (4) Vault-specific rate limiting, (5) Route deduplication between vault.mjs and tokens.mjs, (6) Adding remaining analysis to internal index.html. Includes verification plan with existing test suite and proposed new tests.",
+  "updatedAt": "2026-03-24T13:45:16.691840400Z"
+}

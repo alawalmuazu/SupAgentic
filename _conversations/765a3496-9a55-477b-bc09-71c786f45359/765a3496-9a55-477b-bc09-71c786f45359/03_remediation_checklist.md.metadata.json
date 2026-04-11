@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_OTHER",
+  "summary": "Phased remediation and security hardening checklist for organizations integrated with the Remita payment platform. Five phases: Emergency Response (0-24h), Forensic Assessment (24-72h), Hardening (1-2 weeks), Governance & Compliance (2-4 weeks), and Continuous Improvement (ongoing). Covers credential rotation, access control, transaction auditing, network/application/data security, regulatory notifications (NDPC, CBN), and third-party risk management.",
+  "updatedAt": "2026-04-04T13:42:46.226011200Z"
+}

@@ -1,0 +1,36 @@
+{
+  "alias": "N1ght_Cr4wl3r",
+  "tier": 3,
+  "platforms": [
+    "Dread",
+    "Discord"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/N1ght_Cr4wl3r",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/N1ght_Cr4wl3r/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@N1ght_Cr4wl3r",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/N1ght_Cr4wl3r/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/N1ght_Cr4wl3r",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}

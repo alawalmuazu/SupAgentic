@@ -1,0 +1,35 @@
+{
+  "alias": "EU_Privacy_Leak",
+  "tier": 4,
+  "platforms": [
+    "Dread"
+  ],
+  "sherlock_hits": [
+    {
+      "platform": "reddit",
+      "url": "https://www.reddit.com/user/EU_Privacy_Leak",
+      "status": "FOUND"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/EU_Privacy_Leak/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@EU_Privacy_Leak",
+      "status": "FOUND"
+    },
+    {
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/EU_Privacy_Leak/",
+      "status": "FOUND"
+    },
+    {
+      "platform": "steam",
+      "url": "https://steamcommunity.com/id/EU_Privacy_Leak",
+      "status": "FOUND"
+    }
+  ],
+  "images_found": []
+}
