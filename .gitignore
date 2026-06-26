@@ -8,3 +8,8 @@ __pycache__/
 dist/
 *.egg-info/
 .agent/workflows/*.code-workspace
+
+# Generated Caches & AI Logs
+.understand-anything/
+.vite/
+_conversations/
