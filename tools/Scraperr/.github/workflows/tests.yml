@@ -1,0 +1,42 @@
+name: Reusable PR Tests
+
+on:
+  workflow_call:
+    secrets:
+      openai_key:
+        required: true
+      discord_webhook_url:
+        required: true
+
+
+jobs:
+  pytest:
+    uses: ./.github/workflows/pytest.yml
+
+  cypress-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Cypress Tests
+        uses: ./.github/actions/run-cypress-tests
+        with:
+          openai_key: ${{ secrets.openai_key }}
+
+  success-message:
+    runs-on: ubuntu-latest
+    needs:
+      - pytest
+      - cypress-tests
+    steps:
+      - name: Send Discord Message
+        uses: jaypyles/discord-webhook-action@v1.0.0
+        with:
+          webhook-url: ${{ secrets.discord_webhook_url }}
+          content: "Scraperr Successfully Passed Tests"
+          username: "Scraperr CI"
+          embed-title: "✅ Deployment Status"
+          embed-description: "Scraperr successfully passed all tests."
+          embed-color: 3066993
+          embed-footer-text: "Scraperr CI"
+          embed-timestamp: ${{ github.event.head_commit.timestamp }}

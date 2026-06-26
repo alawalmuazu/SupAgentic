@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupAgentic V2 Masterpiece Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --bg-body: #f8fafc;
+            --bg-sidebar: rgba(255, 255, 255, 0.7);
+            --bg-card: rgba(255, 255, 255, 0.6);
+            --border: rgba(0, 0, 0, 0.05);
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --text-heading: #0f172a;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --accent1: #10b981;
+            --accent2: #8b5cf6;
+            --sidebar-width: 320px;
+            --glass-blur: blur(20px);
+            --bg-gradient: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 50%, #faf5ff 100%);
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #050505;
+            --bg-sidebar: rgba(15, 15, 20, 0.6);
+            --bg-card: rgba(20, 20, 25, 0.5);
+            --border: rgba(255, 255, 255, 0.05);
+            --text-main: #cbd5e1;
+            --text-muted: #94a3b8;
+            --text-heading: #ffffff;
+            --primary: #60a5fa;
+            --primary-hover: #93c5fd;
+            --accent1: #34d399;
+            --accent2: #a78bfa;
+            --bg-gradient: radial-gradient(circle at 0% 0%, #0d1b2a 0%, #000000 50%, #1a1025 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-gradient); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; transition: all 0.5s ease; }
+        
+        /* Sidebar */
+        .sidebar { width: var(--sidebar-width); background: var(--bg-sidebar); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow-y: auto; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10; backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); box-shadow: 4px 0 24px rgba(0,0,0,0.02); }
+        .sidebar-header { padding: 32px 24px; border-bottom: 1px solid var(--border); }
+        .sidebar-header h2 { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, var(--primary), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; }
+        .sidebar-badge { display: inline-flex; align-items: center; background: rgba(59, 130, 246, 0.1); color: var(--primary); padding: 4px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; margin-top: 12px; border: 1px solid rgba(59, 130, 246, 0.2); box-shadow: 0 0 10px rgba(59,130,246,0.1); }
+        .nav-links { padding: 24px 0; }
+        .nav-item { display: block; padding: 14px 32px; color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: all 0.3s ease; border-left: 4px solid transparent; position: relative; }
+        .nav-item::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(59,130,246,0.1) 0%, transparent 100%); opacity: 0; transition: opacity 0.3s ease; z-index: -1; }
+        .nav-item:hover { color: var(--text-heading); padding-left: 36px; }
+        .nav-item:hover::before { opacity: 1; }
+        .nav-item.active { border-left-color: var(--primary); color: var(--primary); padding-left: 36px; }
+        .nav-item.active::before { opacity: 1; background: linear-gradient(90deg, rgba(59,130,246,0.15) 0%, transparent 100%); }
+
+        /* Main Content */
+        .main-content { flex: 1; overflow-y: auto; scroll-behavior: smooth; position: relative; scrollbar-width: thin; scrollbar-color: var(--primary) transparent; }
+        .main-content::-webkit-scrollbar { width: 6px; }
+        .main-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+        .content-inner { max-width: 960px; margin: 0 auto; padding: 56px; }
+        
+        /* Top Navigation */
+        .top-bar { display: flex; justify-content: flex-end; padding: 24px 56px 0; position: sticky; top: 0; z-index: 5; background: linear-gradient(to bottom, var(--bg-body) 20%, transparent); backdrop-filter: blur(4px); }
+        .theme-toggle { background: var(--bg-card); border: 1px solid var(--border); width: 44px; height: 44px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); color: var(--text-main); backdrop-filter: var(--glass-blur); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .theme-toggle:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(0,0,0,0.1); border-color: var(--primary); color: var(--primary); }
+
+        /* Typography */
+        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; color: var(--text-heading); font-weight: 700; margin-top: 3.5rem; margin-bottom: 1.5rem; line-height: 1.2; }
+        h1 { font-size: 3.5rem; margin-top: 0; font-weight: 800; background: linear-gradient(135deg, var(--text-heading) 40%, var(--primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -1px; }
+        h2 { font-size: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        p { line-height: 1.8; margin-bottom: 1.75rem; font-size: 1.05rem; }
+        ul, ol { margin-bottom: 1.75rem; padding-left: 1.5rem; }
+        li { margin-bottom: 0.75rem; line-height: 1.7; font-size: 1.05rem; }
+
+        /* Code & Pre */
+        pre { background: rgba(0, 0, 0, 0.6); color: #e2e8f0; padding: 1.75rem; border-radius: 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; overflow-x: auto; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 2px 4px rgba(0,0,0,0.2), 0 10px 30px -10px rgba(0,0,0,0.3); backdrop-filter: blur(10px); }
+        code { font-family: 'JetBrains Mono', monospace; background: rgba(150, 150, 150, 0.1); padding: 0.2rem 0.4rem; border-radius: 6px; font-size: 0.9em; color: var(--primary); border: 1px solid var(--border); }
+
+        /* Cards/Callouts */
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; margin-bottom: 32px; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1); border-color: rgba(59, 130, 246, 0.3); }
+        
+        /* Mermaid Containers */
+        .mermaid { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; margin: 3rem 0; display: flex; justify-content: center; overflow-x: auto; box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); transition: all 0.3s ease; }
+        .mermaid:hover { box-shadow: 0 0 30px rgba(59,130,246,0.15); border-color: rgba(59,130,246,0.5); }
+
+        hr { border: 0; border-top: 1px solid var(--border); margin: 4rem 0; }
+
+        @media (max-width: 768px) {
+            .sidebar { position: fixed; transform: translateX(-100%); bottom: 0; top: 0; }
+            .sidebar.open { transform: translateX(0); }
+            .content-inner { padding: 32px 24px; }
+            .top-bar { padding: 16px 24px 0; justify-content: space-between; }
+            h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <h2>SupAgentic V2</h2>
+        <div class="sidebar-badge">Masterpiece Vision</div>
+    </div>
+    <nav class="nav-links">
+        <a href="#overview" class="nav-item active">Architecture Overview</a>
+        <a href="#compose" class="nav-item">Declarative Swarm (Compose)</a>
+        <a href="#phantom" class="nav-item">Phantom Context Engine</a>
+        <a href="#memory" class="nav-item">Unified Memory Tissue</a>
+        <a href="#forge" class="nav-item">Recursive Expansion (Forge)</a>
+        <a href="#ui" class="nav-item">Ephemeral Glass UIs</a>
+        <div style="margin: 16px 24px 8px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); font-weight: 700;">V3: The Zenith</div>
+        <a href="#v3-sentinel" class="nav-item">Pre-Cognitive Sentinel</a>
+        <a href="#v3-fusion" class="nav-item">Genetic Tool Fusion</a>
+        <a href="#v3-matrix" class="nav-item">3D Swarm Matrix</a>
+        <div style="margin: 20px 32px 10px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent1); font-weight: 800;">V4: The Epiphany</div>
+        <a href="#v4-mcp" class="nav-item">Global MCP Mesh</a>
+        <a href="#v4-optical" class="nav-item">The Optical Override</a>
+        <a href="#v4-genesis" class="nav-item">Genesis Protocol</a>
+        <a href="#v4-binary" class="nav-item">The <code style="background:transparent;border:none;padding:0;color:inherit;font-size:1em;">sup</code> Binary</a>
+    </nav>
+</aside>
+
+<main class="main-content">
+    <div class="top-bar">
+        <button class="theme-toggle" id="themeToggle" title="Toggle Theme">☀️</button>
+    </div>
+
+    <div class="content-inner">
+        <section id="overview">
+            <h1>SupAgentic V2 Architecture</h1>
+            <p>Welcome to the autonomous Masterpiece. SupAgentic V2 transforms the platform from a reactive CLI router into an <strong>Autonomous AI Operating System</strong>. The architecture consists of 5 interlocking pillars that solve tool amnesia, deployment overhead, and cross-agent interoperability.</p>
+            
+            <div class="card">
+                <h3>The 5 Core Pillars</h3>
+                <ul>
+                    <li><strong>Compose Engine:</strong> YAML-driven Directed Acyclic Graph (DAG) for chaining agent scripts.</li>
+                    <li><strong>Phantom Context:</strong> Silent clipboard & terminal history injection for <i>zero-shot</i> context.</li>
+                    <li><strong>Unified Memory:</strong> Global SQLite FTS5 database acting as the swarm subconscious.</li>
+                    <li><strong>Forge Daemon:</strong> Autonomous GitHub scraping and self-patching router mechanism.</li>
+                    <li><strong>Ephemeral UIs:</strong> Dynamic HTML payload renderers over localhost HTTP bypasses.</li>
+                </ul>
+            </div>
+            <hr>
+        </section>
+
+        <section id="compose">
+            <h2>Declarative Swarm Orchestration (Compose)</h2>
+            <p>The Compose engine represents the critical bridge between fragmented Python, TypeScript, and Go tools. Rather than building API wrappers for all 171 tools, the Compose engine relies on standard I/O streams configured via a <code>.yaml</code> dependency matrix.</p>
+            
+            <div class="mermaid">
+graph TD
+    classDef user fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
+    classDef engine fill:#b91c1c,stroke:#991b1b,stroke-width:2px,color:#fff
+    classDef agent fill:#047857,stroke:#065f46,stroke-width:2px,color:#fff
+    classDef memory fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
+
+    User((User YAML)):::user --> |pipeline.yaml| Parser(YAML Parser/Validator)
+    Parser --> DAG(DAG Execution Matrix)
+    DAG --> |Node 1| C1[OpenFishh<br>Web Scraper]:::agent
+    C1 --> |stdout JSON| Map(Schema Mapper/Adapter)
+    Map --> |stdin structured| C2[Jacobo Workflows<br>n8n Automation]:::agent
+    C2 --> |stdout Markdown| C3[Claudeable<br>HTML Generator]:::agent
+    
+    C1 -.-> |logs| Mem(Unified Memory Tissue):::memory
+    C2 -.-> |logs| Mem
+    C3 -.-> |logs| Mem
+
+    C3 --> |Rendered Output| UI((Glass UI Node)):::user
+            </div>
+
+            <h3>The Subprocess IPC Moat</h3>
+            <p>We execute legacy tools in complete isolation. <code>supagentic_compose.py</code> acts as the DAG orchestrator, passing process buffers logically downward.</p>
+
+            <div class="mermaid">
+sequenceDiagram
+    participant CLI as supagentic.py
+    participant Cmp as Compose Engine
+    participant ToolA as Tool: OpenFishh
+    participant ToolB as Tool: Claudeable
+
+    CLI->>Cmp: execute(pipeline.yaml)
+    Cmp->>ToolA: spawn(supagentic run OpenFishh)
+    activate ToolA
+    ToolA-->>Cmp: yield chunks of stdout (JSON)
+    deactivate ToolA
+    
+    Cmp->>Cmp: Parse JSON -> Extract target fields
+    
+    Cmp->>ToolB: spawn(supagentic run claudeable)
+    activate ToolB
+    Cmp-->>ToolB: write to stdin (Target Fields)
+    ToolB-->>Cmp: yield final result (HTML)
+    deactivate ToolB
+    
+    Cmp->>CLI: Return finalized pipeline artifact
+            </div>
+            <hr>
+        </section>
+
+        <section id="phantom">
+            <h2>Phantom Context Engine</h2>
+            <p>To establish fluid human-AI bridging, the Phantom Daemon constantly rotates an active local state capturing standard clipboard arrays and raw Windows PowerShell API histories into a secured <code>phantom_cache.json</code>.</p>
+            <p>At execution onset, tools receive <code>PHANTOM_CONTEXT_CLIPBOARD</code> and <code>PHANTOM_CONTEXT_HISTORY</code> directly injected into their shell <code>ENV</code> footprint.</p>
+            <hr>
+        </section>
+
+        <section id="memory">
+            <h2>Unified Memory Tissue</h2>
+            <p>To resolve tool context amnesia, every active node within the Compose Matrix and independent CLI execution passes structural data into <code>memory_bus.py</code>—a frictionless <code>SQLite</code> layer heavily accelerated by <code>FTS5</code> (Full Text Search).</p>
+<pre><code>import memory_bus
+
+# The silent subconscious write at the end of tool executions
+memory_bus.store_memory(
+    tool_name="Compose:recon_node",
+    action_type="Execution Output",
+    payload=json.dumps(process.stdout)
+)</code></pre>
+            <hr>
+        </section>
+
+        <section id="forge">
+            <h2>Recursive Self-Expansion (Forge)</h2>
+            <p>The system is inherently self-replicating. Upon deploying <code>supagentic forge "tool idea"</code>, the V2 Router executes a programmatic multi-step loop:</p>
+            <ol>
+                <li>Triggers unauthenticated HTTPS GitHub queries sorting by stargazer count.</li>
+                <li>Forks the optimal repository instantly to the user's local matrix.</li>
+                <li>Taps the OpenAI APIs dynamically strictly for <i>classification and parameter routing</i>.</li>
+                <li>Safely synthetically appends the registry dictionary to its own parent codebase <code>supagentic.py</code>.</li>
+            </ol>
+            <hr>
+        </section>
+
+        <section id="ui">
+            <h2>Ephemeral Glass UIs</h2>
+            <p>For data sets that scale beyond standard terminal bounds, V2 hooks outputs straight to <code>supagentic_ui.py</code>. This overrides raw CLI dumps with threaded web servers deploying 15-second lifespan HTML documents styled with cutting-edge CSS Glassmorphism logic.</p>
+            <div class="card" style="background: rgba(59, 130, 246, 0.05); border-color: rgba(59, 130, 246, 0.2);">
+                <p style="margin:0; font-family: 'JetBrains Mono', monospace; font-size: 0.9em;">$ python supagentic.py run openfishh --ui</p>
+            </div>
+            <hr>
+        </section>
+
+        <section id="v3-sentinel">
+            <h1>SupAgentic V3: The Zenith</h1>
+            <p>Phase 3 shifts the paradigm entirely from <strong>reactive execution</strong> to <strong>proactive reality distortion</strong>. The toolkit stops waiting for commands and begins predicting workflow needs.</p>
+            
+            <h2>The Pre-Cognitive Sentinel</h2>
+            <p>An aggressive iteration of the Phantom Engine. The Sentinel daemon sits at the lowest level of the OS, watching for friction points (like stack traces copied to the clipboard). It autonomously executes fixes and pushes Ephemeral UIs before the user even opens a terminal.</p>
+            <div class="mermaid">
+graph TD
+    classDef system fill:#0f172a,stroke:#334155,stroke-width:2px,color:#fff
+    classDef engine fill:#b91c1c,stroke:#991b1b,stroke-width:2px,color:#fff
+    classDef action fill:#047857,stroke:#065f46,stroke-width:2px,color:#fff
+
+    OS((Target OS<br>Clipboard/Window)):::system --> |Copy Stack Trace| P[Phantom Context]
+    P --> |Pattern Match: Error| S{Sentinel Engine}:::engine
+    S --> |Threat detected| F[Forge Autonomy]:::action
+    F -.-> |Search GitHub| Repo[(GitHub)]
+    F -.-> |Clone & Compile| T[Debugging Tool]
+    T --> |Execute background fix| U((Ephemeral Glass UI<br>Slide-in Notification)):::system
+            </div>
+            <hr>
+        </section>
+
+        <section id="v3-fusion">
+            <h2>Genetic Tool Fusion</h2>
+            <p>Why just pipe data when you can synthesize DNA? Genetic Tool Fusion allows the Compose Engine to tear down multiple diverse repositories via Abstract Syntax Tree (AST) extraction. An LLM acts as the compiler, rewriting Rust and Python tools into a hybridized, ultra-optimized monolith.</p>
+            <div class="mermaid">
+graph LR
+    classDef repo fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
+    classDef core fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
+    
+    R1[GitHub: Rust Scraper]:::repo --> |AST Extraction| C((LLM Fusion Core)):::core
+    R2[GitHub: Python NLP]:::repo --> |AST Extraction| C
+    C --> |Intelligent Rewriting| C
+    C --> |Compilation| H[Hybrid Autonomous Binary]
+    H --> |Injection| Reg(SupAgentic Registry)
+            </div>
+            <hr>
+        </section>
+
+        <section id="v3-matrix">
+            <h2>The 3D Swarm Matrix (God-Mode UI)</h2>
+            <p>A leap over static YAML architectures. Swarms execute in a WebGL-powered 3D space. You physically observe light beacons symbolizing data packets flowing from node to node. When a dependency fails, users can right-click the node to trigger an instantaneous AI-driven code patch.</p>
+            <div class="mermaid">
+graph TD
+    classDef webgl fill:#7e22ce,stroke:#581c87,stroke-width:2px,color:#fff
+    classDef error fill:#991b1b,stroke:#7f1d1d,stroke-width:2px,color:#fff
+    
+    Y[pipeline.yaml] --> W[3D WebGL Render Engine]:::webgl
+    W --> |Visualizes| N1((Node: Crawler))
+    W --> |Visualizes| N2((Node: RAG))
+    N1 -.-> |Data Pulse| N2
+    N2 -.-> |Crash exception| E((Failed Node)):::error
+    User((User)) --> |Right-click Self-Heal| E
+    E --> |Wake| A[Coding Agent]
+    A --> |Hot-swap patch| N2
+            </div>
+            <br><br>
+        </section>
+
+        <section id="v4-mcp">
+            <h1>SupAgentic V4: The Epiphany</h1>
+            <p>Phase 4 ascends beyond local CLI execution, pushing SupAgentic into an omnipresent autonomic nervous system that writes its own code and serves as a global backbone for external LLMs.</p>
+
+            <h2>The Dynamic MCP Mesh</h2>
+            <p>Instead of manually loading 171+ individual tools into Claude or Cursor, SupAgentic routes them dynamically via an Model Context Protocol Overlord Hub. When new tools are forged from GitHub, they are instantaneously exposed as live endpoints to your IDEs.</p>
+            <div class="mermaid">
+graph TD
+    classDef hub fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
+    classDef client fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
+    
+    Tools[(171+ OS Tools)] --> Hub((SupAgentic MCP Overlord)):::hub
+    Forge[Autoforge Daemon] --> |Injects new endpoints| Hub
+    Hub <--> |Standardized Context| Claude(Claude Desktop):::client
+    Hub <--> |Standardized Context| Cursor(Cursor IDE):::client
+            </div>
+            <hr>
+        </section>
+
+        <section id="v4-optical">
+            <h2>The Optical Override</h2>
+            <p>A WebAssembly browser extension that injects a fluid, glowing SupAgentic orb directly into the DOM space of your active browsing sessions. It anticipates needs—tapping the Sentinel if you are on an error page, or triggering Forge if you are browsing a GitHub repo.</p>
+            <div class="mermaid">
+sequenceDiagram
+    participant B as Browser DOM
+    participant O as SupAgentic Orb
+    participant D as Python Daemon
+    
+    B->>O: User navigates to OpenSource Repo
+    O->>D: Intercepts URL via WebSocket
+    D-->>O: "Auto-Forge target detected"
+    D->>D: Runs git clone & binds registry
+    O->>B: Pushes Ephemeral Glass UI Notification Notification
+            </div>
+            <hr>
+        </section>
+
+        <section id="v4-genesis">
+            <h2>Reverse Forge (The Genesis Protocol)</h2>
+            <p>The ultimate breakthrough. The Phantom Daemon logs your manual human sequences (e.g., grepping logs, cleaning text). The Genesis Protocol wakes up, turns your behavior into a highly-optimized standalone Python script, and registers you as an internal agent.</p>
+            <div class="mermaid">
+graph TD
+    classDef behavior fill:#7e22ce,stroke:#581c87,stroke-width:2px,color:#fff
+    
+    U((User CLI routines)) --> |Records| P[Phantom Input Logger]
+    P --> |Identifies Recursion| G{Genesis Logic Compiler}:::behavior
+    G --> |Writes code| T[New Python Binary]
+    G --> |Writes YAML| Y[Compose Descriptor]
+    T --> R(SupAgentic Registry)
+            </div>
+            <hr>
+        </section>
+
+        <section id="v4-binary">
+            <h2>Epic Polish: The <code>sup</code> Binary</h2>
+            <p>Phase 4 solidifies the User Experience by fundamentally deleting the friction of <code>python supagentic.py ...</code>. We compiled the entire orchestration matrix behind a lightning-fast, globally bound <code>sup</code> command proxy.</p>
+            <div class="card" style="position: relative; overflow: hidden;">
+                <div style="position: absolute; top:0; left:0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--primary), var(--accent2));"></div>
+                <h3 style="margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                    <span style="background: rgba(59,130,246,0.1); padding: 8px 12px; border-radius: 8px; color: var(--primary);">⚡</span> 
+                    Zero-Latency Invocation
+                </h3>
+                <p style="margin-bottom: 0;">Execute workflows instantaneously from any directory. Connect to the Swarm Matrix via <code>sup matrix</code>, assimilate tools via <code>sup forge</code>, or synthesize human loops with <code>sup genesis</code>.</p>
+            </div>
+            <br><br><br>
+        </section>
+    </div>
+</main>
+
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: document.body.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+        fontFamily: 'Outfit, sans-serif'
+    });
+
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+        const body = document.body;
+        const currentTheme = body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        body.setAttribute('data-theme', newTheme);
+        themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        
+        // Re-init mermaid with new theme
+        mermaid.initialize({ theme: newTheme === 'dark' ? 'dark' : 'default' });
+        location.reload(); // Quick refresh for mermaid diagrams to recolor
+    });
+
+    // Intersection Observer for Sidebar highlighting
+    const sections = document.querySelectorAll('section');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href').substring(1) === entry.target.id) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+</script>
+</body>
+</html>

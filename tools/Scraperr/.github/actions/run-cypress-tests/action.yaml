@@ -1,0 +1,80 @@
+name: Run Cypress Tests
+
+description: Run Cypress tests
+
+inputs:
+  openai_key:
+    description: "OpenAI API key"
+    required: true
+    default: ""
+    
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
+
+    - name: Setup yarn
+      shell: bash
+      run: npm install -g yarn
+
+    - name: Install xvfb for headless testing
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y xvfb libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2t64 libpango-1.0-0 libcairo2 libgtk-3-0 libgdk-pixbuf2.0-0 libx11-6 libx11-xcb1 libxcb1 libxss1 libxtst6 libnspr4
+
+    - name: Setup Docker project
+      shell: bash
+      run: |
+        export OPENAI_KEY="${{ inputs.openai_key }}"
+        make build-ci up-ci
+
+    - name: Install dependencies
+      shell: bash
+      run: yarn install
+
+    - name: Wait for frontend to be ready
+      shell: bash
+      run: |
+        for i in {1..10}; do
+          curl -s http://127.0.0.1:80 && echo "Frontend is ready" && exit 0
+          echo "Waiting for frontend to be ready... attempt $i"
+          sleep 1
+        done
+        echo "Frontend failed to be ready after 10 retries"
+        exit 1
+
+    - name: Wait for backend to be ready
+      shell: bash
+      run: |
+        for i in {1..10}; do
+          curl -s http://127.0.0.1:8000 && echo "Backend is ready" && exit 0
+          echo "Waiting for backend to be ready... attempt $i"
+          sleep 1
+        done
+        echo "Backend failed to be ready after 10 retries"
+        exit 1
+
+    - name: Show backend logs on failure
+      if: failure()
+      shell: bash
+      run: |
+        echo "== Docker Containers =="
+        docker ps -a
+        echo "== Backend Logs =="
+        docker logs $(docker ps -a --filter "name=scraperr_api" --format "{{.Names}}") || echo "Could not get backend logs"
+
+    - name: Run Cypress tests
+      shell: bash
+      run: |
+        set -e
+        npm run cy:run
+
+

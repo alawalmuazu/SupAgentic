@@ -1,0 +1,89 @@
+name: Version
+
+on:
+  workflow_call:
+    secrets:
+      git_token:
+        required: true
+    outputs:
+      version:
+        description: "The new version number"
+        value: ${{ jobs.version.outputs.version }}
+      version_bump:
+        description: "Whether the version was bumped"
+        value: ${{ jobs.version.outputs.version_bump }}
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+
+    outputs:
+      version: ${{ steps.set_version.outputs.version }}
+      version_bump: ${{ steps.check_version_bump.outputs.version_bump }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get version bump
+        id: get_version_type
+        run: |
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+
+          if [[ $COMMIT_MSG =~ ^feat\(breaking\) ]]; then
+            VERSION_TYPE="major"
+          elif [[ $COMMIT_MSG =~ ^feat! ]]; then
+            VERSION_TYPE="minor"
+          elif [[ $COMMIT_MSG =~ ^(feat|fix|chore): ]]; then
+            VERSION_TYPE="patch"
+          else
+            VERSION_TYPE="patch"
+          fi
+
+          echo "VERSION_TYPE=$VERSION_TYPE" >> $GITHUB_ENV
+
+      - name: Check for version bump
+        id: check_version_bump
+        run: |
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+
+          if [[ $COMMIT_MSG =~ .*\[no\ bump\].* ]]; then
+            echo "version_bump=false" >> $GITHUB_OUTPUT
+          else
+            echo "version_bump=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Skip version bump
+        if: steps.check_version_bump.outputs.version_bump == 'false'
+        run: |
+          echo "Skipping version bump as requested"
+          gh run cancel ${{ github.run_id }}
+          exit 0
+        env:
+          GITHUB_TOKEN: ${{ secrets.git_token }}
+
+      - name: Set version
+        if: steps.check_version_bump.outputs.version_bump != 'false'
+        id: set_version
+        run: |
+          VERSION=$(./scripts/version.sh "$VERSION_TYPE")
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "Version is $VERSION"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+        env:
+          VERSION_TYPE: ${{ env.VERSION_TYPE }}
+
+      - name: Update chart file
+        if: steps.check_version_bump.outputs.version_bump != 'false'
+        run: |
+          sed -i "s/^version: .*/version: $VERSION/" helm/Chart.yaml
+
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add helm/Chart.yaml
+          git commit -m "chore: bump version to $VERSION"
+          git push
+        env:
+          VERSION: ${{ env.VERSION }}

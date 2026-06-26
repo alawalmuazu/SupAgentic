@@ -77,6 +77,15 @@ TOOLS = [
     {"name": "AutoGPT",          "dir": "autogpt",             "cat": "Agents",      "repo": "Significant-Gravitas/AutoGPT",       "lang": "Python"},
     {"name": "LangChain",        "dir": "langchain",           "cat": "Agents",      "repo": "langchain-ai/langchain",             "lang": "Python"},
     {"name": "Cursor Rules",     "dir": "cursor-rules",        "cat": "Coding",      "repo": "PatrickJS/awesome-cursorrules",      "lang": "Markdown"},
+    {"name": "Multica Codex Hybrid", "dir": "multica-codex-hybrid",   "cat": "Hybrids",     "repo": "local/fused",                        "lang": "Python"},
+    {"name": "Oh My Codex",         "dir": "oh-my-codex",             "cat": "Coding",      "repo": "Yeachan-Heo/oh-my-codex",            "lang": "TypeScript"},
+    {"name": "Karpathy Skills",     "dir": "andrej-karpathy-skills",  "cat": "Coding",      "repo": "forrestchang/andrej-karpathy-skills","lang": "Markdown"},
+    {"name": "Multica",             "dir": "multica",                 "cat": "Agents",      "repo": "multica-ai/multica",                 "lang": "TypeScript"},
+    {"name": "OpenScreen",          "dir": "openscreen",              "cat": "Media",       "repo": "siddharthvaddem/openscreen",         "lang": "TypeScript"},
+    {"name": "Personaplex",         "dir": "personaplex",             "cat": "Voice",       "repo": "NVIDIA/personaplex",                 "lang": "Python"},
+    {"name": "Onyx",                "dir": "onyx",                    "cat": "RAG",         "repo": "onyx-dot-app/onyx",                  "lang": "Python"},
+    {"name": "Archon",              "dir": "Archon",                  "cat": "Agents",      "repo": "coleam00/Archon",                    "lang": "Python"},
+    {"name": "OpenFishh",           "dir": "OpenFishh",               "cat": "Security",    "repo": "MohdTalib0/OpenFishh",               "lang": "Python"},
     {"name": "Haystack",         "dir": "haystack",            "cat": "RAG",         "repo": "deepset-ai/haystack",                "lang": "Python"},
     {"name": "Chainlit",         "dir": "chainlit",            "cat": "Agents",      "repo": "Chainlit/chainlit",                  "lang": "Python/TS"},
     {"name": "Mem0",             "dir": "mem0",                "cat": "Memory",      "repo": "mem0ai/mem0",                        "lang": "Python"},
@@ -162,6 +171,66 @@ TOOLS = [
     {"name": "Jacobo Workflows",  "dir": "jacobo-workflows",     "cat": "Automation",  "repo": "santifer/jacobo-workflows",          "lang": "JSON/TS"},
     {"name": "Claudeable",        "dir": "claudeable",           "cat": "Coding",      "repo": "santifer/claudeable",                "lang": "Markdown"},
     {"name": "Watermark Remover", "dir": "watermark-remover",    "cat": "Media",       "repo": "santifer/watermark-remover",         "lang": "Python"},
+    {"name": "AgentMemory",       "dir": "agentmemory",          "cat": "Memory",      "repo": "rohitg00/agentmemory",               "lang": "TypeScript"},
+    {"name": "CodeGraph",         "dir": "codegraph",            "cat": "Coding",      "repo": "colbymchenry/codegraph",             "lang": "TypeScript"},
+    {"name": "Scraperr",          "dir": "Scraperr",             "cat": "Data",        "repo": "jaypyles/Scraperr",                  "lang": "TS/Python"},
+    {"name": "AI Project Gallery","dir": "ai-project-gallery",   "cat": "Tutorials",   "repo": "KalyanM45/AI-Project-Gallery",       "lang": "Markdown"},
+    {"name": "MoneyPrinterTurbo", "dir": "moneyprinterturbo",    "cat": "Media",       "repo": "harry0703/MoneyPrinterTurbo",        "lang": "Python/Vue"},
+    {"name": "Headroom",          "dir": "headroom",             "cat": "Tools",       "repo": "chopratejas/headroom",               "lang": "Python"},
+    {"name": "MarkItDown",        "dir": "markitdown",           "cat": "Data",        "repo": "microsoft/markitdown",               "lang": "Python"},
+    {"name": "Odysseus",          "dir": "odysseus",             "cat": "Security",    "repo": "pewdiepie-archdaemon/odysseus",      "lang": "Unknown"},
+    {"name": "gbrain",            "dir": "gbrain",               "cat": "Agents",      "repo": "garrytan/gbrain",                    "lang": "Python"},
+    {"name": "Webwright",         "dir": "webwright",            "cat": "Browser",     "repo": "microsoft/webwright",                "lang": "TS"},
+    {"name": "LiteParse",         "dir": "liteparse",            "cat": "RAG",         "repo": "run-llama/liteparse",                "lang": "Python"},
+    {"name": "Compound Plugin",   "dir": "compound-engineering-plugin", "cat": "Tools", "repo": "EveryInc/compound-engineering-plugin", "lang": "TS"},
+    {"name": "Stop Slop",         "dir": "stop-slop",            "cat": "Tools",       "repo": "hardikpandya/stop-slop",             "lang": "Unknown"},
+    {"name": "Supermemory",       "dir": "supermemory",          "cat": "Memory",      "repo": "supermemoryai/supermemory",          "lang": "TypeScript"},
+    {"name": "ECC",               "dir": "ecc",                  "cat": "Security",    "repo": "affaan-m/ECC",                       "lang": "Unknown"},
+    {"name": "Taste Skill",       "dir": "taste-skill",          "cat": "Agents",      "repo": "Leonxlnx/taste-skill",               "lang": "Unknown"},
+    {"name": "Understand Anything","dir": "understand-anything", "cat": "Tools",       "repo": "Lum1104/Understand-Anything",        "lang": "Python"},
+    {"name": "VoxCPM",            "dir": "voxcpm",               "cat": "Voice",       "repo": "OpenBMB/VoxCPM",                     "lang": "Python"},
+    {"name": "Anthropic Skills",  "dir": "anthropic-cybersecurity-skills", "cat": "Security", "repo": "mukul975/Anthropic-Cybersecurity-Skills", "lang": "Markdown"},
+    {"name": "AutoHedge",         "dir": "AutoHedge",            "cat": "Agents",      "repo": "The-Swarm-Corporation/AutoHedge",    "lang": "Python"},
+    {"name": "Vibe-Trading",      "dir": "Vibe-Trading",         "cat": "Agents",      "repo": "HKUDS/Vibe-Trading",                 "lang": "Python"},
+    {"name": "FinceptTerminal",   "dir": "FinceptTerminal",      "cat": "Data",        "repo": "Fincept-Corporation/FinceptTerminal","lang": "Python"},
+    {"name": "LibreChat",         "dir": "LibreChat",            "cat": "Local LLM",   "repo": "danny-avila/LibreChat",              "lang": "TypeScript"},
+    {"name": "Open-Generative-AI","dir": "Open-Generative-AI",   "cat": "Media",       "repo": "Anil-matcha/Open-Generative-AI",     "lang": "TypeScript"},
+    {"name": "Open-LLM-VTuber",   "dir": "Open-LLM-VTuber",      "cat": "Media",       "repo": "Open-LLM-VTuber/Open-LLM-VTuber",    "lang": "Python"},
+    {"name": "Claude Ads",        "dir": "claude-ads",           "cat": "Agents",      "repo": "AgriciDaniel/claude-ads",            "lang": "Markdown"},
+    {"name": "Agentic Inbox",     "dir": "agentic-inbox",        "cat": "Automation",  "repo": "cloudflare/agentic-inbox",           "lang": "TypeScript"},
+    {"name": "Camofox",           "dir": "camofox-browser",      "cat": "Browser",     "repo": "jo-inc/camofox-browser",             "lang": "Python"},
+    {"name": "Hyperframes",       "dir": "hyperframes",          "cat": "Media",       "repo": "heygen-com/hyperframes",             "lang": "TypeScript"},
+    {"name": "Last30Days Skill",  "dir": "last30days-skill",     "cat": "Agents",      "repo": "mvanhorn/last30days-skill",          "lang": "Python"},
+    {"name": "Open Notebook",     "dir": "open-notebook",        "cat": "Data",        "repo": "lfnovo/open-notebook",               "lang": "TypeScript"},
+    {"name": "Xiaohei Art",       "dir": "ian-xiaohei-illustrations", "cat": "Agents", "repo": "helloianneo/ian-xiaohei-illustrations", "lang": "Markdown"},
+    {"name": "Tolaria",           "dir": "tolaria",              "cat": "Memory",      "repo": "refactoringhq/tolaria",              "lang": "TypeScript"},
+    {"name": "Rilable",           "dir": "rilable",              "cat": "Coding",      "repo": "rbrown101010/rilable",               "lang": "Swift"},
+    {"name": "PM Skills",         "dir": "pm-skills",            "cat": "Agents",      "repo": "phuryn/pm-skills",                   "lang": "Markdown"},
+    {"name": "OpenAI Plugins",    "dir": "openai-plugins",       "cat": "Agents",      "repo": "openai/plugins",                     "lang": "JavaScript"},
+    {"name": "Agent Reach",       "dir": "Agent-Reach",          "cat": "Browser",     "repo": "Panniantong/Agent-Reach",            "lang": "Python"},
+    {"name": "NVIDIA Cosmos",     "dir": "cosmos",               "cat": "Simulation",  "repo": "NVIDIA/cosmos",                      "lang": "Jupyter Notebook"},
+    {"name": "Apple Container",   "dir": "container",            "cat": "Simulation",  "repo": "apple/container",                    "lang": "Swift"},
+    # ── Batch 9: Trending Repos ──
+    {"name": "Codebase Memory MCP","dir": "codebase-memory-mcp",  "cat": "Memory",      "repo": "DeusData/codebase-memory-mcp",       "lang": "C"},
+    {"name": "OpenMontage",        "dir": "OpenMontage",          "cat": "Media",       "repo": "calesthio/OpenMontage",              "lang": "Python/JS"},
+    {"name": "TimesFM",            "dir": "timesfm",              "cat": "Science",     "repo": "google-research/timesfm",            "lang": "Python"},
+    {"name": "Matt Pocock Skills", "dir": "mattpocock-skills",    "cat": "Agents",      "repo": "mattpocock/skills",                  "lang": "TypeScript"},
+    {"name": "SkillSpector",       "dir": "SkillSpector",         "cat": "Security",    "repo": "NVIDIA/SkillSpector",                "lang": "Python"},
+    # ── Batch 10: Infrastructure & Media ──
+    {"name": "Deer Flow",          "dir": "deer-flow",            "cat": "Automation",  "repo": "bytedance/deer-flow",                "lang": "Python/TS"},
+    {"name": "Unlimited OCR",      "dir": "Unlimited-OCR",        "cat": "Media",       "repo": "baidu/Unlimited-OCR",                "lang": "Python"},
+    {"name": "Palmier Pro",        "dir": "palmier-pro",          "cat": "Media",       "repo": "palmier-io/palmier-pro",             "lang": "Swift"},
+    # ── Batch 11: Enterprise Stacks ──
+    {"name": "Supabase",           "dir": "supabase",             "cat": "Enterprise",  "repo": "supabase/supabase",                  "lang": "TypeScript"},
+    {"name": "Cal.com",            "dir": "cal.com",              "cat": "Enterprise",  "repo": "calcom/cal.com",                     "lang": "TypeScript"},
+    {"name": "RustDesk",           "dir": "rustdesk",             "cat": "Enterprise",  "repo": "rustdesk/rustdesk",                  "lang": "Rust"},
+    {"name": "Strapi",             "dir": "strapi",               "cat": "Enterprise",  "repo": "strapi/strapi",                      "lang": "JavaScript"},
+    {"name": "Gitea",              "dir": "gitea",                "cat": "Enterprise",  "repo": "go-gitea/gitea",                     "lang": "Go"},
+    {"name": "Nextcloud",          "dir": "nextcloud",            "cat": "Enterprise",  "repo": "nextcloud/server",                   "lang": "PHP"},
+    {"name": "Medusa",             "dir": "medusa",               "cat": "Enterprise",  "repo": "medusajs/medusa",                    "lang": "TypeScript"},
+    {"name": "PostHog",            "dir": "posthog",              "cat": "Enterprise",  "repo": "PostHog/posthog",                    "lang": "Python/TS"},
+    {"name": "Keycloak",           "dir": "keycloak",             "cat": "Enterprise",  "repo": "keycloak/keycloak",                  "lang": "Java"},
+    {"name": "ERPNext",            "dir": "erpnext",              "cat": "Enterprise",  "repo": "frappe/erpnext",                     "lang": "Python/JS"},
 ]
 
 # ═══ Colors ═══
@@ -351,6 +420,29 @@ DEPS = {
     "system-prompts-leaks":  {"needs": [], "ports": None, "start": None},
     "system-prompts-models": {"needs": [], "ports": None, "start": None},
     "recon-search-assistant": {"needs": [], "ports": None, "start": "python -m http.server"},
+    "agentmemory": {"needs": [], "ports": None, "start": "npm run dev"},
+    "codegraph":   {"needs": [], "ports": None, "start": "npm run dev"},
+    "Scraperr":    {"needs": [], "ports": None, "start": "make up-dev"},
+    "codebase-memory-mcp": {"needs": [], "ports": None, "start": None},
+    "OpenMontage":   {"needs": [], "ports": None, "start": "python render_demo.py"},
+    "timesfm":       {"needs": [], "ports": None, "start": None},
+    "deer-flow":     {"needs": [], "ports": "3000/8000", "start": "make dev"},
+    "Unlimited-OCR": {"needs": [], "ports": None, "start": "python infer.py"},
+    "palmier-pro":   {"needs": [], "ports": None, "start": "swift run"},
+    "supabase":      {"needs": [], "ports": "8000/5432", "start": "docker compose up -d"},
+    "cal.com":       {"needs": [], "ports": "3000", "start": "docker compose up -d"},
+    "rustdesk":      {"needs": [], "ports": "21115-21119", "start": "docker compose up -d"},
+    "strapi":        {"needs": [], "ports": "1337", "start": "docker compose up -d"},
+    "gitea":         {"needs": [], "ports": "3000/22", "start": "docker compose up -d"},
+    "nextcloud":     {"needs": [], "ports": "80/443", "start": "docker compose up -d"},
+    "medusa":        {"needs": [], "ports": "9000/7001", "start": "docker compose up -d"},
+    "posthog":       {"needs": [], "ports": "8000", "start": "docker compose up -d"},
+    "keycloak":      {"needs": [], "ports": "8080", "start": "docker compose up -d"},
+    "erpnext":       {"needs": [], "ports": "80", "start": "docker compose up -d"},
+    "Anthropic-Cybersecurity-Skills": {"needs": [], "ports": None, "start": "npx skills add tools/Anthropic-Cybersecurity-Skills"},
+    "mattpocock-skills": {"needs": [], "ports": None, "start": "npx skills add tools/mattpocock-skills"},
+    "SkillSpector":      {"needs": [], "ports": None, "start": "npx skills add tools/SkillSpector"},
+    "hyperframes":       {"needs": [], "ports": None, "start": "npx skills add tools/hyperframes"},
 }
 
 # ═══ Orchestration Pipelines ═══
@@ -439,8 +531,54 @@ def cmd_run(args):
     print(f"  {C.DIM}Command: {cmd}{C.END}")
     print(f"  {C.DIM}Working dir: {path}{C.END}\n")
 
+    import os, json
+    run_env = os.environ.copy()
+    phantom_cache_path = SCRIPT_DIR / "phantom_cache.json"
+    if phantom_cache_path.exists():
+        try:
+            with open(phantom_cache_path, 'r', encoding='utf-8') as f:
+                p_cache = json.load(f)
+                clip = p_cache.get("clipboard", [])
+                hist = p_cache.get("history", [])
+                if clip and len(clip) > 0:
+                    run_env["PHANTOM_CONTEXT_CLIPBOARD"] = clip[-1]["content"]
+                    print(f"  {C.DIM}[Phantom Engine] Injected {len(clip[-1]['content'])}b of zero-shot clipboard context.{C.END}")
+                if hist and len(hist) > 0:
+                    run_env["PHANTOM_CONTEXT_HISTORY"] = hist[-1]["content"]
+                    print(f"  {C.DIM}[Phantom Engine] Injected terminal history context.{C.END}")
+        except Exception:
+            pass
+
     try:
-        subprocess.run(cmd, shell=True, cwd=str(path))
+        ui_mode = "--ui" in sys.argv
+        if ui_mode:
+            print(f"  {C.CYAN}✨ UI Mode Active. Hijacking standard output to render Ephemeral UI...{C.END}")
+            proc = subprocess.run(cmd, shell=True, cwd=str(path), env=run_env, capture_output=True, text=True)
+            output_payload = proc.stdout if proc.stdout else proc.stderr
+            
+            # Send to Ephemeral Glass Renderer
+            import tempfile
+            fd, tmp_path = tempfile.mkstemp(suffix=".txt")
+            with os.fdopen(fd, 'w', encoding='utf-8') as f:
+                f.write(output_payload)
+            ui_script = SCRIPT_DIR / "supagentic_ui.py"
+            subprocess.run([sys.executable, str(ui_script), tmp_path])
+        else:
+            subprocess.run(cmd, shell=True, cwd=str(path), env=run_env)
+        
+        try:
+            sys.path.append(str(SCRIPT_DIR))
+            import memory_bus
+            memory_bus.init_db()
+            memory_bus.store_memory(tool['name'], "CLI Direct Run", {
+                "command": cmd,
+                "working_dir": str(path),
+                "injected_clipboard": run_env.get("PHANTOM_CONTEXT_CLIPBOARD", ""),
+                "injected_terminal": run_env.get("PHANTOM_CONTEXT_HISTORY", "")
+            })
+        except Exception:
+            pass
+
     except KeyboardInterrupt:
         print(f"\n  {C.YELLOW}Stopped {tool['name']}{C.END}")
 
@@ -605,7 +743,7 @@ def cmd_mcp(args):
     manifest = {
         "name": "supagentic",
         "version": "1.0.0",
-        "description": "SupAgentic AI Toolkit — 35 tools across 13 categories",
+        "description": "SupAgentic AI Toolkit — 171 tools across 20 categories",
         "tools_count": len(tools_manifest),
         "categories": sorted(set(t["cat"] for t in TOOLS)),
         "tools": tools_manifest,
@@ -876,8 +1014,66 @@ def cmd_daemon(args):
     except KeyboardInterrupt:
         pass
 
+def cmd_compose(args):
+    """Run a declarative YAML pipeline"""
+    if len(args) < 1:
+        print(f"  {C.RED}Usage: supagentic compose <pipeline.yaml>{C.END}")
+        return
+    compose_script = SCRIPT_DIR / "supagentic_compose.py"
+    try:
+        subprocess.run([sys.executable, str(compose_script), args[0]])
+    except KeyboardInterrupt:
+        pass
+
+def cmd_forge(args):
+    """Autonomously discover, clone, and integrate a new tool from GitHub"""
+    if len(args) < 1:
+        print(f"  {C.RED}Usage: supagentic forge <tool concept or name>{C.END}")
+        return
+    forge_script = SCRIPT_DIR / "supagentic_forge.py"
+    try:
+        subprocess.run([sys.executable, str(forge_script)] + args)
+    except KeyboardInterrupt:
+        pass
+
+def cmd_sentinel(args):
+    """Launch the Pre-Cognitive Sentinel Daemon"""
+    script = SCRIPT_DIR / "supagentic_sentinel.py"
+    try:
+        subprocess.run([sys.executable, str(script)])
+    except KeyboardInterrupt:
+        pass
+
+def cmd_fusion(args):
+    """Genetic Tool Fusion"""
+    if len(args) < 3:
+        print(f"  {C.RED}Usage: supagentic fusion <pathA> <pathB> \"goal\"{C.END}")
+        return
+    script = SCRIPT_DIR / "supagentic_fusion.py"
+    try:
+        subprocess.run([sys.executable, str(script)] + args)
+    except KeyboardInterrupt:
+        pass
+
+def cmd_matrix(args):
+    """Launch the 3D WebGL Swarm Matrix Holodeck"""
+    script = SCRIPT_DIR / "supagentic_matrix.py"
+    try:
+        subprocess.run([sys.executable, str(script)])
+    except KeyboardInterrupt:
+        pass
+
+def cmd_genesis(args):
+    """The Genesis Protocol: Extrapolate your manual input into an autonomous Python tool."""
+    script = SCRIPT_DIR / "supagentic_genesis.py"
+    try:
+        subprocess.run([sys.executable, str(script)] + args)
+    except KeyboardInterrupt:
+        pass
+
 # ═══ Command Router ═══
 COMMANDS = {
+    "genesis": cmd_genesis,
     "list": cmd_list, "ls": cmd_list,
     "search": cmd_search, "find": cmd_search,
     "info": cmd_info,
@@ -896,6 +1092,8 @@ COMMANDS = {
     "mcp-register": cmd_mcp_register,
     "deps": cmd_deps, "dependencies": cmd_deps,
     "pipeline": cmd_pipeline, "pipe": cmd_pipeline,
+    "compose": cmd_compose,
+    "forge": cmd_forge,
     "daemon": cmd_daemon,
 }
 
