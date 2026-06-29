@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupAgentic V2: Declarative Swarm Architecture</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --text-color: #0f172a;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --primary: #2563eb;
+            --accent: #f59e0b;
+            --code-bg: #f1f5f9;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --primary: #3b82f6;
+            --accent: #fbbf24;
+            --code-bg: #0f172a;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 2rem;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 { font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; }
+        p { margin-bottom: 1rem; font-size: 1.05rem; }
+
+        pre {
+            background-color: var(--code-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+        }
+
+        .mermaid-container {
+            background: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin: 1.5rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            background: var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <span id="theme-icon">🌙</span> <span id="theme-text">Dark Mode</span>
+    </button>
+
+    <div class="container">
+        <h1>SupAgentic V2: Declarative Swarm Architecture</h1>
+        <p>This document blueprints the "Compose" pillar of the SupAgentic V2 masterpiece vision. The goal is to move from running isolated tools to running declarative AI supply chains defined in <code>.yaml</code> manifests.</p>
+
+        <h2>1. The Core Architecture</h2>
+        <p>The Compose engine transforms SupAgentic from a simple CLI runner into a DAG (Directed Acyclic Graph) executor. It solves the critical bottleneck of interoperability by acting as the unified standard IO pipe between fundamentally diverse open-source scripts.</p>
+
+        <div class="mermaid-container">
+            <div class="mermaid">
+graph TD
+    classDef user fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
+    classDef engine fill:#b91c1c,stroke:#991b1b,stroke-width:2px,color:#fff
+    classDef agent fill:#047857,stroke:#065f46,stroke-width:2px,color:#fff
+    classDef memory fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
+
+    User((User YAML)):::user --> |pipeline.yaml| Parser(YAML Parser/Validator)
+    Parser --> DAG(DAG Execution Matrix):::engine
+    DAG --> |Node 1| C1[OpenFishh<br>Web Scraper]:::agent
+    C1 --> |stdout JSON| Map(Schema Mapper/Adapter):::engine
+    Map --> |stdin structured| C2[Jacobo Workflows<br>n8n Automation]:::agent
+    C2 --> |stdout Markdown| C3[Claudeable<br>HTML Generator]:::agent
+    
+    C1 -.-> |logs| Mem(Unified Memory Tissue):::memory
+    C2 -.-> |logs| Mem
+    C3 -.-> |logs| Mem
+
+    C3 --> |Rendered Output| UI((Glass UI Node)):::user
+            </div>
+        </div>
+
+        <h2>2. Pipeline Definition (YAML Chassis)</h2>
+        <p>Instead of human DevOps routing the data, users define a declarative matrix. <code>supagentic_compose.py</code> handles tracking dependencies, extracting specific regex out of unstructured logs, and converting payloads.</p>
+
+        <pre><code>version: '1.0'
+name: "Competitive Intelligence Drip"
+
+nodes:
+  recon_node:
+    tool: OpenFishh
+    args: ["--target", "competitor.com", "--depth", "3"]
+    extract:
+      type: json
+      keys: ["findings", "vulnerabilities"]
+
+  report_gen:
+    tool: claudeable
+    depends_on: [recon_node]
+    input_mapping: 
+      # Feeds JSON extracted from OpenFishh to Claudeable as STDIN
+      stdin: ${recon_node.extracted_data}
+    args: ["--task", "Summarize findings into a sleek HTML dossier"]
+
+  alert_node:
+    tool: jacobo-workflows
+    depends_on: [report_gen]
+    input_mapping:
+      env:
+        WHATSAPP_PAYLOAD: ${report_gen.stdout}
+</code></pre>
+
+        <h2>3. The Inter-Process Communication (IPC) Moat</h2>
+        <p>The challenge with piecing together 48+ isolated GitHub repos is that they don't share schemas. To make them compose gracefully, we build a <strong>Subprocess Isolation Wrapper</strong>.</p>
+
+        <div class="mermaid-container">
+            <div class="mermaid">
+sequenceDiagram
+    participant CLI as supagentic.py
+    participant Cmp as Compose Engine
+    participant ToolA as Tool: OpenFishh (Python)
+    participant ToolB as Tool: Claudeable (Go/TS)
+
+    CLI->>Cmp: execute(pipeline.yaml)
+    Cmp->>ToolA: spawn(supagentic run OpenFishh)
+    activate ToolA
+    ToolA-->>Cmp: yield chunks of stdout (JSON)
+    deactivate ToolA
+    
+    Cmp->>Cmp: Parse JSON -> Extract target fields
+    
+    Cmp->>ToolB: spawn(supagentic run claudeable)
+    activate ToolB
+    Cmp-->>ToolB: write to stdin (Target Fields)
+    ToolB-->>Cmp: yield final result (HTML)
+    deactivate ToolB
+    
+    Cmp->>CLI: Return finalized pipeline artifact
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute("data-theme");
+            const newTheme = currentTheme === "dark" ? "light" : "dark";
+            
+            html.setAttribute("data-theme", newTheme);
+            
+            document.getElementById("theme-icon").innerText = newTheme === "dark" ? "🌙" : "☀️";
+            document.getElementById("theme-text").innerText = newTheme === "dark" ? "Dark Mode" : "Light Mode";
+            
+            // Re-render mermaid slightly to match theme (mermaid requires global config update or re-init, keeping it simple here)
+        }
+    </script>
+</body>
+</html>

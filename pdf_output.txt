@@ -1,0 +1,96 @@
+SWAP
+The GitHub
+URL-Swap Cheat Sheet
+13 w a ys t o giv e an y r epo a super po w er — without inst alling, cloning,  or
+typing a single command.  You just change t he domain in t he URL. Learn
+the move once; it w orks on every repo on Git Hub.
+https:// gitingest.com /owner/repo
+Hyperautomation Labs  ·  verified June 2026  ·  comment SWAP for this sheet
+THE ONE MOVE
+Change the domain. Keep the /owner/repo. Get a
+superpower.
+github.com → [ swap this ]/karpathy/nanoGPT
+Every GitHub link is github.com / owner / repo. A whole ecosyst em of tools copied that e xact
+path shape — so y ou leave the /o wner /r epo where it is and just change the domain. Y ouʼre not
+learning 13 t ools. Youʼre learning one mo v e,  13 times.  The examples belo w all use
+karpathy/nanoGPT — swap in an y repo you like.
+READ & EDIT — instant VS Code
+press . Opens t he repo in a full VS Code edit or in your browser.
+Best f or: Quick pok e-around, se arch across files.
+TRY On any repo page, tap the period key.
+github.dev Same VS Code edit or, as a shar eable URL.
+Best f or: Linking someone straight int o the code.
+TRY github.dev/karpathy/nanoGPT
+github1s.com VS Code vie w, classic fla vor.
+Best f or: Reading an unf amiliar codeb ase fast.
+TRY github1s.com/karpathy/nanoGPT
+FEED IT TO AI — the payoff
+gitingest.com Flattens the WHOLE r epo into one pr ompt-friendly text + token count.
+Best f or: Asking an AI about a whole codeb ase. One cop y, one paste.
+TRY gitingest.com/karpathy/nanoGPT
+gitingest (CLI)Same flat ten, from your terminal — pipe a r epo straight int o a prompt.
+Best f or: Terminal-first w orkflows, scripting.
+TRY pipx run gitingest (or pip install gitingest)
+gitmcp.io Turns the repo into a live MCP ser ver your AI can query in real time.
+Best f or: Stopping AI fr om inventing functions that don ʼt exist.
+TRY Paste gitmcp.io/karpathy/nanoGPT into your editor’s MCP
+settings.
+MORE SWAPS
+Same move. Different superpower.
+UNDERSTAND IT — in plain English
+gitdiagram.comReads the repo and dr aws an int eractive architecture diagram. Click a bo x →
+jump to that folder.
+Best f or: Getting or iented in a brand-ne w repo.
+TRY gitdiagram.com/karpathy/nanoGPT
+deepwiki.com Auto-gener ates a Wikipedia-st yle wiki + an A sk box that answ ers questions and
+cites files.
+Best f or: Underst anding without r eading code.
+TRY deepwiki.com/karpathy/nanoGPT
+github.gg A control panel for the repo: one-click cop y-for-AI, security scan, quality score,
+diagrams.
+Best f or: Repo intelligence at a glance.
+TRY github.gg/karpathy/nanoGPT
+RUN IT — zero setup
+stackblitz.comBoots the project in a r eal, working dev environment in y our browser.
+Best f or: Running a r epo without cloning or inst alling.
+TRY stackblitz.com/github/karpathy/nanoGPT
+bolt.new Imports the entire repo into an AI builder , agent st anding b y to edit & ship.
+Best f or: Editing a r epo with an AI, inst antly.
+TRY bolt.new/github.com/karpathy/nanoGPT
+READ THE SIGNAL
+star-
+history.comCharts the repoʼs stars over time. Steady climb = he althy; flat/clif f = careful.
+Best f or: A lie-det ector for open-sour ce momentum.
+TRY star-history.com →  paste karpathy/nanoGPT
+gitpodcast.comTurns a repo into an audio podc ast — two hosts explaining t he project.
+Best f or: Underst anding b y listening. (And itʼ s wild.)
+TRY gitpodcast.com/karpathy/nanoGPT
+THE HONEST RANKING
+Donʼt memorize 13. Burn the top three into muscle memory.
+SUse it THIS w eek
+press .  ·  gitingest  ·  gitmcp
+AWhen y ou ʼ r e lost in a codeb ase
+deepwiki  ·  gitdiagram
+BHand y no w and t hen
+github1s / github.dev  ·  github.gg  ·  stackblitz  ·  bolt.new  ·  star-
+history
+FT r y once,  gr in,  shar e
+gitpodcast
+!THE CATCH (read before you swap)
+Most ar e t hir d-p ar t y t ools,  public r epos onl y . Never paste private code, secr ets, or API k eys into a
+random sit e to feed an AI.
+T ools come and go.  The mechanic — swapping the domain — is f orever. Any single t ool, no
+guarantees.
+✓ Saf e f or pr iv at e/sensitiv e w or k: the first -party moves — the per iod k e y and git hub.de v — are just
+GitHubʼs own editor. Nothing le aves their walls.
+GO DEEPER
+Now go make your first swap.
+Grab any repo youʼre curious about, change github.com to gitingest.com, and wat ch the
+whole thing tur n into one message y ou can paste into any AI. Thatʼ s the whole ide a — every other
+swap is a v ariation on it.
+Want this sheet + ne w AI mo ves every day?
+SWAP
+Comment SW AP and Iʼll send it o ver. Daily moves on Inst agr am & F acebook ; full deep div es on
+Y ou T ube — H yper aut omation Labs.
+The GitHub URL-Swap Cheat Sheet · A Hyperautomation Labs Field Guide · 2026 ·
+hyperautomationlabs.co/free/swap

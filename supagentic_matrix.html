@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupAgentic | 3D Swarm Matrix</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #000; color: #fff; font-family: 'Courier New', Courier, monospace; user-select: none; }
+        canvas { display: block; width: 100vw; height: 100vh; }
+        #overlay { position: absolute; top: 20px; left: 20px; pointer-events: none; }
+        h1 { font-size: 24px; letter-spacing: 2px; color: #0df; text-shadow: 0 0 10px #0df; margin: 0; }
+        p { font-size: 14px; color: #aaa; margin-top: 5px; }
+
+        /* Context Menu */
+        #context-menu {
+            position: absolute; display: none; background: rgba(10, 20, 30, 0.9);
+            border: 1px solid #0df; padding: 10px; border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 221, 255, 0.3); z-index: 100;
+        }
+        .menu-item { padding: 8px 12px; cursor: pointer; color: #fff; font-size: 14px; transition: background 0.2s; }
+        .menu-item:hover { background: rgba(0, 221, 255, 0.2); color: #0df; }
+        .menu-item.danger { color: #f43f5e; }
+        .menu-item.danger:hover { background: rgba(244, 63, 94, 0.2); color: #f43f5e; }
+        
+        #status-log { position: absolute; bottom: 20px; left: 20px; background: rgba(0,0,0,0.5); padding: 10px; border-left: 2px solid #0df; font-size: 12px; max-height: 200px; overflow-y: auto; pointer-events: none; width: 300px; }
+        .log-entry { margin-bottom: 4px; color: #a3e635; }
+        .log-entry.error { color: #f43f5e; }
+        .log-entry.heal { color: #8b5cf6; }
+    </style>
+    <!-- Use Three.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+    <div id="overlay">
+        <h1>SWARM MATRIX</h1>
+        <p>Live Compose Topology & Telemetry</p>
+    </div>
+
+    <div id="status-log"></div>
+
+    <div id="context-menu">
+        <div class="menu-item" id="btn-inspect">Inspect Node State</div>
+        <div class="menu-item danger" id="btn-heal">⚡ Trigger Self-Heal Agent</div>
+    </div>
+
+    <script>
+        // Setup Three.js
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x000000, 0.002);
+        
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 100;
+        camera.position.y = 30;
+        camera.lookAt(0, 0, 0);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        document.body.appendChild(renderer.domElement);
+
+        // Grid plane
+        const grid = new THREE.GridHelper(200, 40, 0x0ddfff, 0x0ddfff);
+        grid.material.opacity = 0.1;
+        grid.material.transparent = true;
+        scene.add(grid);
+
+        // Nodes
+        const nodes = [];
+        const edges = [];
+        let pulses = [];
+        
+        const nodeMaterialBlue = new THREE.MeshBasicMaterial({ color: 0x0df, wireframe: true });
+        const nodeMaterialRed = new THREE.MeshBasicMaterial({ color: 0xf43f5e, wireframe: true });
+        const nodeMaterialHeal = new THREE.MeshBasicMaterial({ color: 0x8b5cf6, wireframe: true });
+
+        // Add dummy nodes for the swarm
+        const nodeData = [
+            { id: "OpenFishh", pos: [-40, 10, -20], state: 'ok' },
+            { id: "DataMapper", pos: [0, 15, -10], state: 'ok' },
+            { id: "JacoboWorkflows", pos: [40, 10, -20], state: 'error' },
+            { id: "Claudeable", pos: [0, -10, 20], state: 'ok' }
+        ];
+
+        nodeData.forEach(d => {
+            const geo = new THREE.IcosahedronGeometry(4, 1);
+            const mesh = new THREE.Mesh(geo, d.state === 'error' ? nodeMaterialRed : nodeMaterialBlue);
+            mesh.position.set(d.pos[0], d.pos[1], d.pos[2]);
+            mesh.userData = { id: d.id, state: d.state };
+            scene.add(mesh);
+            nodes.push(mesh);
+        });
+
+        // Add Edges
+        const edgeMaterial = new THREE.LineBasicMaterial({ color: 0x0df, opacity: 0.2, transparent: true });
+        const connections = [
+            [0, 1], [1, 2], [1, 3]
+        ];
+
+        connections.forEach(conn => {
+            const n1 = nodes[conn[0]];
+            const n2 = nodes[conn[1]];
+            const points = [n1.position, n2.position];
+            const geo = new THREE.BufferGeometry().setFromPoints(points);
+            const line = new THREE.Line(geo, edgeMaterial);
+            scene.add(line);
+            edges.push({ line, p1: n1.position, p2: n2.position });
+        });
+
+        // Add Log
+        const log = document.getElementById("status-log");
+        function addLog(msg, type="normal") {
+            const el = document.createElement("div");
+            el.className = "log-entry " + type;
+            el.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+            log.appendChild(el);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        addLog("Telemetry Established.");
+        addLog("Node 'JacoboWorkflows' encountered Exception.", "error");
+
+        // Context Menu & Raycaster
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+        const contextMenu = document.getElementById("context-menu");
+        let selectedNode = null;
+
+        window.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+            raycaster.setFromCamera(mouse, camera);
+            
+            const intersects = raycaster.intersectObjects(nodes);
+            if (intersects.length > 0) {
+                selectedNode = intersects[0].object;
+                contextMenu.style.display = "block";
+                contextMenu.style.left = e.clientX + 'px';
+                contextMenu.style.top = e.clientY + 'px';
+            } else {
+                contextMenu.style.display = "none";
+            }
+        });
+
+        window.addEventListener('click', () => { contextMenu.style.display = "none"; });
+
+        document.getElementById("btn-heal").addEventListener('click', () => {
+            if (selectedNode) {
+                addLog(`Spawned Self-Heal Agent for ${selectedNode.userData.id}...`, "heal");
+                // Animate heal
+                selectedNode.material = nodeMaterialHeal;
+                setTimeout(() => {
+                    selectedNode.material = nodeMaterialBlue;
+                    selectedNode.userData.state = 'ok';
+                    addLog(`Node healed. Resuming data pipeline.`);
+                }, 3000);
+            }
+        });
+
+        document.getElementById("btn-inspect").addEventListener('click', () => {
+            if (selectedNode) {
+                addLog(`State of ${selectedNode.userData.id}: ${selectedNode.userData.state.toUpperCase()}`);
+            }
+        });
+
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Rotate nodes
+            nodes.forEach(n => {
+                n.rotation.x += 0.01;
+                n.rotation.y += 0.015;
+                if (n.userData.state === 'error') {
+                    n.scale.set(1 + Math.sin(Date.now() * 0.01)*0.2, 1 + Math.sin(Date.now() * 0.01)*0.2, 1);
+                } else if (n.userData.state === 'ok') {
+                    n.scale.set(1, 1, 1);
+                }
+            });
+
+            // Pan camera slowly
+            camera.position.x = Math.sin(Date.now() * 0.0005) * 50;
+            camera.lookAt(0, 0, 0);
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Responsive resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>

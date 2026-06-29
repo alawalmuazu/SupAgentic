@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT Persona — Alex Rivers (Simulated)</title>
+    <meta name="description" content="OSINT Intelligence Profile (SIMULATED): Alex Rivers | @arivers_dev">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a1f35;
+            --bg-card-hover: #222845;
+            --bg-glass: rgba(26, 31, 53, 0.7);
+            --border: rgba(255,255,255,0.06);
+            --border-accent: rgba(139, 92, 246, 0.3);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent: #8b5cf6; /* Purple */
+            --accent-glow: rgba(139, 92, 246, 0.15);
+            --danger: #ef4444;
+            --danger-bg: rgba(239, 68, 68, 0.1);
+            --warning: #f59e0b;
+            --warning-bg: rgba(245, 158, 11, 0.1);
+            --success: #22c55e;
+            --success-bg: rgba(34, 197, 94, 0.1);
+            --info: #3b82f6;
+            --info-bg: rgba(59, 130, 246, 0.1);
+            --red-text: #fca5a5;
+            --green-text: #86efac;
+            --gradient-hero: linear-gradient(135deg, #0a0e1a 0%, #1a1028 50%, #0a0e1a 100%);
+            --shadow: 0 4px 30px rgba(0,0,0,0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background var(--transition), color var(--transition);
+            overflow-x: hidden;
+        }
+
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.4;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 100px;
+            background: var(--accent-glow);
+            border: 1px solid var(--border-accent);
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--accent), #d946ef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section {
+            margin-bottom: 32px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .stat-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .stat-value {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .data-table tr {
+            border-bottom: 1px solid var(--border);
+        }
+        .data-table td {
+            padding: 12px 0;
+            font-size: 14px;
+        }
+        .data-table td:first-child {
+            font-weight: 600;
+            color: var(--text-muted);
+            width: 160px;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        .platform-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            border-radius: 12px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            margin-bottom: 12px;
+        }
+        
+        .platform-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+
+        .platform-info {
+            flex: 1;
+        }
+
+        .platform-name {
+            font-weight: 800;
+            font-size: 16px;
+        }
+
+        .platform-handle {
+            font-size: 13px;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .alert {
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            margin-bottom: 16px;
+            border: 1px solid;
+        }
+        .alert-info { background: var(--info-bg); border-color: rgba(59, 130, 246, 0.2); color: var(--info); }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="container">
+        <div class="header">
+            <div class="header-badge">SIMULATED OSINT DEMONSTRATION</div>
+            <h1>Alex Rivers</h1>
+            <p class="subtitle">@arivers_dev · Senior DevOps Engineer · San Francisco, CA</p>
+            <p class="meta-line">Generated via simulated Social-Analyzer Logic (Fictional Data)</p>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">Execution Log (Simulated)</div>
+            </div>
+            <div class="card">
+                <pre style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-secondary); line-height: 1.4;">
+[Init] Selected websites: 482
+[Checking] github.com... FOUND
+[Checking] linkedin.com... FOUND
+[Checking] twitter.com... FOUND
+[Checking] instagram.com... NOT FOUND
+[Extracting] Metadata from github.com/arivers_dev... 
+[Extracting] Metadata from linkedin.com/in/arivers-dev...
+[Success] Scan complete. 3 verified profiles discovered.
+                </pre>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">Verified Profiles</div>
+            </div>
+            <div class="card">
+                <!-- GitHub -->
+                <div class="platform-card">
+                    <div class="platform-icon" style="background: #24292e;"><i class="fa-brands fa-github"></i></div>
+                    <div class="platform-info">
+                        <div class="platform-name">GitHub</div>
+                        <div class="platform-handle">github.com/arivers_dev</div>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Bio: "Automation enthusiast | Rust & Go | Kubernetes" · Stars: 120 · Followers: 45</p>
+                    </div>
+                </div>
+
+                <!-- LinkedIn -->
+                <div class="platform-card">
+                    <div class="platform-icon" style="background: #0077b5;"><i class="fa-brands fa-linkedin"></i></div>
+                    <div class="platform-info">
+                        <div class="platform-name">LinkedIn</div>
+                        <div class="platform-handle">linkedin.com/in/arivers-dev</div>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Title: "Senior DevOps at TechFlow Solutions" · Connections: 500+ · Location: San Francisco Bay Area</p>
+                    </div>
+                </div>
+
+                <!-- Twitter -->
+                <div class="platform-card">
+                    <div class="platform-icon" style="background: #1da1f2;"><i class="fa-brands fa-twitter"></i></div>
+                    <div class="platform-info">
+                        <div class="platform-name">Twitter (X)</div>
+                        <div class="platform-handle">twitter.com/arivers_dev</div>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Bio: "Tweeting about Kubernetes and K8s security. Views are my own." · Followers: 1.2k</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">Deep Metadata Analysis</div>
+            </div>
+            <div class="card">
+                <div class="alert alert-info">
+                    <i class="fa-solid fa-microscope"></i> HEURISTIC ANALYSIS: Subject demonstrates strong technical alignment across 3 platforms. Handle '@arivers_dev' is consistent.
+                </div>
+                <table class="data-table">
+                    <tr><td>Primary Language</td><td>English (US) - 98% Confidence</td></tr>
+                    <tr><td>Operating System</td><td>macOS (Assumed from GitHub setup scripts)</td></tr>
+                    <tr><td>Interests</td><td>Cloud Native, DevSecOps, Infrastructure as Code</td></tr>
+                    <tr><td>Active Since</td><td>2016 (First GitHub commit)</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

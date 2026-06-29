@@ -43,7 +43,7 @@ SERVER_INFO = {
 }
 
 CAPABILITIES = {
-    "tools": {"listChanged": False},
+    "tools": {"listChanged": True},
     "resources": {"subscribe": False, "listChanged": False},
     "prompts": {"listChanged": False},
 }
@@ -294,6 +294,14 @@ def handle_request(request):
         return None  # Notification, no response
 
     elif method == "tools/list":
+        # Hot-reload registry natively on every request
+        import importlib
+        import supagentic
+        importlib.reload(supagentic)
+        global TOOLS, DEPS, PIPELINES
+        TOOLS = supagentic.TOOLS
+        DEPS = supagentic.DEPS
+        PIPELINES = supagentic.PIPELINES
         return {"jsonrpc": "2.0", "id": req_id, "result": {"tools": build_tools()}}
 
     elif method == "tools/call":
@@ -393,6 +401,21 @@ def run_stdio():
     sys.stderr.write(f"SupAgentic MCP Server v{SERVER_INFO['version']} — stdio mode\n")
     sys.stderr.write(f"Tools: {len(build_tools())} | Resources: {len(build_resources())} | Prompts: {len(build_prompts())}\n")
     sys.stderr.flush()
+
+    def watch_registry():
+        sup_path = SCRIPT_DIR / "supagentic.py"
+        last_mtime = os.path.getmtime(sup_path) if sup_path.exists() else 0
+        while True:
+            import time
+            time.sleep(2)
+            if sup_path.exists():
+                curr = os.path.getmtime(sup_path)
+                if curr > last_mtime:
+                    last_mtime = curr
+                    sys.stdout.write(json.dumps({"jsonrpc": "2.0", "method": "notifications/tools/list_changed"}) + "\n")
+                    sys.stdout.flush()
+    
+    threading.Thread(target=watch_registry, daemon=True).start()
 
     while True:
         try:

@@ -1,0 +1,24 @@
+version: '1.0'
+name: "Viral Repos Report Generation"
+
+nodes:
+  viral_check:
+    tool: GitHub Viral Rank
+    args: ["--user", "santifer", "--repo", "career-ops"]
+    extract:
+      type: json
+      keys: ["percentile", "projected_stars", "viral_score"]
+
+  report_gen:
+    tool: Claudeable
+    depends_on: [viral_check]
+    input_mapping: 
+      stdin: ${viral_check.extracted_data}
+    args: ["--task", "Summarize these viral ranking metrics into a stunning standalone HTML report card."]
+
+  alert:
+    tool: Jacobo Workflows
+    depends_on: [report_gen]
+    input_mapping:
+      env:
+        WHATSAPP_UPDATE: "Career-Ops ranking updated! Checkout the generated HTML."
